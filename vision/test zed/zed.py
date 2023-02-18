@@ -471,7 +471,7 @@ def process_objects(frame: np.ndarray, objects: dict) -> tuple:
         obj["rotations"] = {}
         obj["rotations"]["z"] = angle
 
-        cv2.imshow("debug",frame)
+        #cv2.imshow("debug",frame)
 
     return objects, image
 
