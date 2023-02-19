@@ -246,9 +246,9 @@ def detect_objects(img: np.ndarray, threshold: float = 0.8, render: bool = False
                 "x": center[0],
                 "y": center[1],
                 "z": center[2],
-                "roll": None,
-                "pitch": None,
-                "yaw": None
+                "roll": 0,
+                "pitch": 0,
+                "yaw": 0
             },
             "box": box
         })
@@ -275,6 +275,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     """
 
     frame = img.copy()
+    image = None
 
     for obj in objects:
         
@@ -358,8 +359,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         if math.degrees(angle) > 90:
             angle = angle % (math.pi / 2)
 
-        obj["rotations"] = {}
-        obj["rotations"]["z"] = angle
+        obj["position"]["yaw"] = angle
 
         #cv2.imshow("debug",frame)
 
