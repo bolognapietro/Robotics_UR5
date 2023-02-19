@@ -124,7 +124,7 @@ def get_zed_position(zed_path: str = "ros_ws/install/share/ur_description/sensor
         if name not in zed.keys():
             continue
 
-        zed[name] = default
+        zed[name] = float(default)
 
         if all([zed[key] != None for key in zed.keys()]):
             break
@@ -179,7 +179,7 @@ def convert_to_gazebo_world_frame(point: tuple, precision: int = 2) -> tuple:
     Ry = np.matrix([[ 0., -0.49948, 0.86632],[-1., 0., 0.],[-0., -0.86632, -0.49948]])
     pos_zed = np.array([zed_position["cam_pos_x"], zed_position["cam_pos_y"], zed_position["cam_pos_z"]])
     pos_base_link = np.array([base_link_position["spawn_x"],base_link_position["spawn_y"],base_link_position["spawn_z"]])
-    
+
     data_world = Ry.dot(zed_point) + pos_zed + pos_base_link
     data_world = np.array(data_world)
     
