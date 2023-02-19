@@ -47,12 +47,17 @@ def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 1
         position = obj["position"]
 
         msg = Pose()
-        msg.position.x = position[0]
-        msg.position.y = position[1]
-        msg.position.z = position[2]
 
-        #q = tf.transformations.quaternion_from_euler(rx, ry, rz)
-        #msg.orientation
+        msg.position.x = position["x"]
+        msg.position.y = position["y"]
+        msg.position.z = position["z"]
+
+        angles = tf.transformations.quaternion_from_euler(position["roll"], position["pitch"], position["yaw"])
+
+        msg.orientation.x = angles[0]
+        msg.orientation.y = angles[1]
+        msg.orientation.z = angles[2]
+        msg.orientation.w = angles[3]
 
         pub.publish(msg)
 
@@ -237,7 +242,14 @@ def detect_objects(img: np.ndarray, threshold: float = 0.8, render: bool = False
             "label_name": result.names[item[5]],
             "label_index": item[5],
             "score": round(item[4]*100,2),
-            "position": center,
+            "position": {
+                "x": center[0],
+                "y": center[1],
+                "z": center[2],
+                "roll": None,
+                "pitch": None,
+                "yaw": None
+            },
             "box": box
         })
 
