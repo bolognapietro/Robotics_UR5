@@ -178,9 +178,9 @@ def convert_to_gazebo_world_frame(point: tuple, precision: int = 2) -> tuple:
 
     Ry = np.matrix([[ 0., -0.49948, 0.86632],[-1., 0., 0.],[-0., -0.86632, -0.49948]])
     pos_zed = np.array([zed_position["cam_pos_x"], zed_position["cam_pos_y"], zed_position["cam_pos_z"]])
-    pos_base_link = np.array([base_link_position["spawn_x"],base_link_position["spawn_y"],base_link_position["spawn_z"]])
+    #pos_base_link = np.array([base_link_position["spawn_x"],base_link_position["spawn_y"],base_link_position["spawn_z"]])
 
-    data_world = Ry.dot(zed_point) + pos_zed + pos_base_link
+    data_world = Ry.dot(zed_point) + pos_zed #+ pos_base_link
     data_world = np.array(data_world)
     
     data_world = data_world.tolist()[0]
@@ -359,7 +359,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         if math.degrees(angle) > 90:
             angle = angle % (math.pi / 2)
 
-        obj["position"]["yaw"] = angle
+        objects[objects.index(obj)]["position"]["yaw"] = angle
 
         #cv2.imshow("debug",frame)
 
