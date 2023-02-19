@@ -264,12 +264,7 @@ def right_side(img: np.ndarray) -> list:
             distances = []
 
             for point in points:
-
-                try:
-                    distance = geometric_utils.point_to_line_distance(point,point2,point1)
-                except:
-                    distance = geometric_utils.point_to_line_distance(point,point1,point2)
-
+                distance = geometric_utils.point_to_line_distance(point,point1,point2)
                 distances.append(distance)
 
             points.append(point1)
@@ -345,12 +340,7 @@ def left_side(img: np.ndarray) -> list:
             distances = []
 
             for point in points:
-
-                try:
-                    distance = geometric_utils.point_to_line_distance(point,point2,point1)
-                except:
-                    distance = geometric_utils.point_to_line_distance(point,point1,point2)
-
+                distance = geometric_utils.point_to_line_distance(point,point1,point2)
                 distances.append(distance)
 
             points.append(point1)
@@ -423,5 +413,45 @@ def extract_table(img: np.ndarray, resolution: tuple = (1920,1080), table: list 
 
     # apply the mask
     image = cv2.bitwise_and(image, image, mask = mask_background)
+
+    return image
+
+def extract_obj(img: np.ndarray, box: list = None, tolerance: int = 75) -> np.ndarray:
+    """
+    Fill the entire image except for the main object
+
+    Input parameters:
+    - ``img`` the array of the image to be processed
+    - ``box`` (optional, ``default = None``) bounding box of the object. If None, it will be considered the entire image
+    - ``tolerance`` (optional, ``default = 75``) each color with a difference >= tolerance from the main color, will be converted in black
+
+    Output parameter (``np.ndarray``):
+    - ``img`` (``np.ndarray``):
+        - the processed image
+    """
+
+    image = img.copy()
+
+    if box == None:
+        box = [[0,image.shape[0]],[image.shape[1],image.shape[0]],[image.shape[1],0],[0,0]]
+
+    img_min_x = min(box, key=lambda x:x[0])[0]
+    img_max_x = max(box, key=lambda x:x[0])[0]
+
+    img_min_y = min(box, key=lambda x:x[1])[1]
+    img_max_y = max(box, key=lambda x:x[1])[1]
+
+    image = image[img_min_y:img_max_y+1,img_min_x:img_max_x+1]
+
+    mc = main_color(image, True, True)
+
+    for y in range(image.shape[0]):
+        for x in range(image.shape[1]):
+            pixel = list(image[y][x])
+            
+            distance = geometric_utils.point_distance(mc, pixel)
+
+            if distance >= tolerance:
+                image[y][x] = 0
 
     return image
