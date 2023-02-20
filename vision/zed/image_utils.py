@@ -232,7 +232,7 @@ def right_side(img: np.ndarray) -> list:
     bottom = [bottom[0],bottom[-1]]
 
     if bottom[0][0] < int(image.shape[1] * 0.25) and bottom[1][0] > int(image.shape[1] * 0.75):
-        return cv2.line(image,bottom[0],bottom[1],(0,255,0)), bottom
+        return [bottom[0],bottom[1]]
     
     points = []
     end_point = None
@@ -271,14 +271,23 @@ def right_side(img: np.ndarray) -> list:
 
             if len(distances):
                 
-                if max(distances) > 1.5:
+                if max(distances) > 2:
                     end_point = points[-2]
                     break
     
-    if end_point == None:
-        end_point = []
+    column = []
+
+    for y in range(image.shape[0]):
+        pixel = image[y][end_point[0]].tolist()
+
+        if pixel == [0,0,0]:
+            continue
+
+        column.append([pixel,(end_point[0],y)])
+
+    end_point = column[-1][1]
         
-    return [list(bottom[0]),list(end_point)]
+    return [list(bottom[1]),list(end_point)]
 
 def left_side(img: np.ndarray) -> list:
     """
@@ -309,7 +318,7 @@ def left_side(img: np.ndarray) -> list:
     bottom = [bottom[0],bottom[-1]]
 
     if bottom[0][0] < int(image.shape[1] * 0.25) and bottom[1][0] > int(image.shape[1] * 0.75):
-        return cv2.line(image,bottom[0],bottom[1],(0,255,0)), bottom
+        return [bottom[0],bottom[1]]
     
     points = []
     end_point = None
@@ -347,12 +356,21 @@ def left_side(img: np.ndarray) -> list:
 
             if len(distances):
                 
-                if max(distances) > 1.5:
+                if max(distances) > 2:
                     end_point = points[-2]
                     break
     
-    if end_point == None:
-        end_point = []
+    column = []
+
+    for y in range(image.shape[0]):
+        pixel = image[y][end_point[0]].tolist()
+
+        if pixel == [0,0,0]:
+            continue
+
+        column.append([pixel,(end_point[0],y)])
+
+    end_point = column[-1][1]
 
     return [list(bottom[0]),list(end_point)]
 
@@ -449,7 +467,7 @@ def extract_obj(img: np.ndarray, box: list = None, tolerance: int = 75) -> np.nd
         for x in range(image.shape[1]):
             pixel = list(image[y][x])
             
-            distance = geometric_utils.point_distance(mc, pixel)
+            distance = math.dist(mc, pixel)
 
             if distance >= tolerance:
                 image[y][x] = 0

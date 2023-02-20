@@ -176,15 +176,19 @@ def convert_to_gazebo_world_frame(point: tuple, precision: int = 2) -> tuple:
     for point in points:
         zed_point = point[:3]
 
-    Ry = np.matrix([[ 0., -0.49948, 0.86632],[-1., 0., 0.],[-0., -0.86632, -0.49948]])
-    pos_zed = np.array([zed_position["cam_pos_x"], zed_position["cam_pos_y"], zed_position["cam_pos_z"]])
+    #Ry = np.matrix([[ 0., -0.49948, 0.86632],[-1., 0., 0.],[-0., -0.86632, -0.49948]])
+    #pos_zed = np.array([zed_position["cam_pos_x"], zed_position["cam_pos_y"], zed_position["cam_pos_z"]])
     #pos_base_link = np.array([base_link_position["spawn_x"],base_link_position["spawn_y"],base_link_position["spawn_z"]])
 
-    data_world = Ry.dot(zed_point) + pos_zed #+ pos_base_link
+    Ry = np.array([[ 0.     , -0.49948,  0.86632],[-1.     ,  0.     ,  0.     ],[-0.     , -0.86632, -0.49948]])
+    pos_zed = np.array([-0.9 ,  0.24, -0.35])
+    transl_offset = np.array([0.01, 0.00, 0.1])
+
+    data_world = Ry.dot(zed_point) + pos_zed + transl_offset #+ pos_base_link
     data_world = np.array(data_world)
     
-    data_world = data_world.tolist()[0]
-    data_world = tuple(data_world)
+    #data_world = data_world.tolist()[0]
+    #data_world = tuple(data_world)
 
     return (round(data_world[0],precision), round(data_world[1],precision), round(data_world[2],precision))
 
@@ -275,6 +279,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     """
 
     frame = img.copy()
+    frame = cv2.fastNlMeansDenoisingColored(frame, None, 3, 3, 7, 21)
+
     image = None
 
     for obj in objects:
@@ -286,30 +292,32 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         left_points = image_utils.left_side(img = image)
         right_points = image_utils.right_side(img = image)
 
-        # bug fix
-        if len(left_points) > 1:
-            if type(left_points[0]) == np.ndarray:
-                left_points = left_points[1]
-        
-        if len(right_points) > 1:
-            if type(right_points[0]) == np.ndarray:
-                right_points = right_points[1]
-
         # vertices
-        v1, v2, v3 = left_points[1], [int((left_points[0][0] + right_points[0][0])/2),min(left_points[0][1],right_points[0][1])], right_points[1]
+        v1 = left_points[1]
+        v3 = right_points[1]
+
+        m1, q1 = geometric_utils.calculate_line(left_points[0], left_points[1])
+        m2, q2 = geometric_utils.calculate_line(right_points[0], right_points[1])
+
+        v2 = ((q2-q1) / (m1 - m2), m1*((q2-q1) / (m1 - m2)) + q1)
+        v2 = [int(v2[0]),int(v2[1])]
+        #v2[1] = left_points[0][1] #v2[1] if v2[1] < image.shape[0] else image.shape[0]
 
         # calculate the height of the object (in pixel)
         column = [image[y][v2[0]].tolist() for y in range(image.shape[0])]
         column.reverse()
 
         height = 0
-        tolerance = 30
-        main_color = image[min([v1[1],v2[1]])][v2[0]]
+        tolerance = 40
+        main_color = image[v2[1]][v2[0]].tolist()
 
         # iterate over the column with v2 as end point
         for pixel in column:
 
-            distance = geometric_utils.point_distance(main_color, pixel)
+            if pixel == [0,0,0]:
+                continue
+
+            distance = math.dist(main_color, pixel)
 
             if distance > tolerance and height > 1:
                 break
@@ -350,8 +358,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         else:
             angle = 0
         
-        d12 = geometric_utils.point_distance(v1,v2)
-        d23 = geometric_utils.point_distance(v2,v3)
+        d12 = math.dist(v1,v2)
+        d23 = math.dist(v2,v3)
 
         if(d12 > d23):
             angle = angle + math.pi/2
@@ -361,7 +369,10 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         objects[objects.index(obj)]["position"]["yaw"] = angle
 
-        #cv2.imshow("debug",frame)
+        frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
+        
+        #cv2.imshow(f"Debug - {angle}",frame)
+        #cv2.waitKey(0)
 
     return objects, image
 
