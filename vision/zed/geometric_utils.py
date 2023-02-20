@@ -2,33 +2,16 @@ import math
 
 def point_to_line_distance(point: tuple, line_start: tuple, line_end: tuple) -> float:
     """
-    Calculates the distance between a point and a line
+    Calculates the distance between a point and a line.
 
-    Input parameters:
-    - ``point``
-    - ``line_start``
-    - ``line_end``
+    Args:
+        point (tuple): Point.
+        line_start (tuple): End point of the line.
+        line_end (tuple): End point of the line
 
-    Output parameter (``float``):
-    - ``distance`` (``np.ndarray``):
-        - the distance between the point and the line
+    Returns:
+        float: Distance.
     """
-
-    '''p1 = line_start
-    p2 = line_end
-    p3 = point
-
-    try:
-        x = (p3[1] - p3[0]*((p2[0] - p1[0]) / (p2[1] - p1[1])) - p1[1] + p1[0]*((p2[1] - p1[1]) / (p2[0] - p1[0])))
-        x = x / (((p2[1] - p1[1]) / (p2[0] - p1[0])) - ((p2[0] - p1[0]) / (p2[1] - p1[1])))
-
-        y = (x*((p2[1] - p1[1]) / (p2[0] - p1[0])) + p1[1] - p1[0]*((p2[1] - p1[1]) / (p2[0] - p1[0])))
-
-        p4 = (x,y)
-
-        distance =  math.dist(p3,p4)
-    except:
-        distance = 0'''
 
     # Check if the line segment is a point
     if line_start == line_end:

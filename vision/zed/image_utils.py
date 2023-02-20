@@ -15,20 +15,6 @@ import geometric_utils
 
 def add_background(img: np.ndarray, width: int, height: int, color: tuple = (0,0,0,255)) -> np.ndarray:
     """
-    Increases the size of the image by adding some background as contours
-
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    - ``width`` new width
-    - ``height`` new height
-    - ``color`` (optional, ``default = (0,0,0,255)``) background color
-
-    Output parameter (``np.ndarray``):
-    - ``img`` (``np.ndarray``):
-        - the processed image
-    """
-
-    """
     Increases the size of the image by adding some background as contours.
 
     Args:
@@ -56,7 +42,17 @@ def add_background(img: np.ndarray, width: int, height: int, color: tuple = (0,0
 
     return background
 
-def all_black(img: np.ndarray) -> bool:
+def all_black(img: np.ndarray, tolerance: int = 30) -> bool:
+    """
+    Checks if the image has black pixels for more than a certain percentage.
+
+    Args:
+        img (np.ndarray): Image to be processed.
+        tolerance (int, optional): Black pixel percentage. Defaults to 30.
+
+    Returns:
+        bool: True if the number of black pixels is greater or equal then tolerance value. False otherwise.
+    """
 
     image = img.copy()
     
@@ -67,20 +63,19 @@ def all_black(img: np.ndarray) -> bool:
             if image[y][x].tolist() != [0,0,0]:
                 counter = counter + 1
             
-    return ((100 * counter) / (image.shape[0]*image.shape[1])) < 30
+    return ((100 * counter) / (image.shape[0]*image.shape[1])) < tolerance
 
 def main_color(img: np.ndarray, noblack: bool = False, notable: bool = False) -> tuple:
     """
-    Retrieves the main color of the image
+    Retrieves the main color of the image.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    - ``noblack`` (optional, ``default = False``) if true discards black color
-    - ``notable`` (optional, ``default = False``) if true discards table color
+    Args:
+        img (np.ndarray): Image to be processed.
+        noblack (bool, optional): If True discards black color. Defaults to False.
+        notable (bool, optional): If True discards table color. Defaults to False.
 
-    Output parameter (``tuple``):
-    - ``color`` (``tuple``):
-        - the retrieved color
+    Returns:
+        tuple: Main color
     """
 
     image = img.copy()
@@ -105,15 +100,14 @@ def main_color(img: np.ndarray, noblack: bool = False, notable: bool = False) ->
 
 def one_color(img: np.ndarray,color: tuple = None) -> np.ndarray:
     """
-    Fills the image with one color (excluding the black background)
+    Fills the image with one color. The color can be specified or retrieved automatically excluding the black color.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    - ``color`` fill color
+    Args:
+        img (np.ndarray): Image to be processed.
+        color (tuple, optional): Fill color. Defaults to None.
 
-    Output parameter (``np.ndarray``):
-    - ``img`` (``np.ndarray``):
-        - the processed image
+    Returns:
+        np.ndarray: Processed image.
     """
 
     image = img.copy()
@@ -133,17 +127,14 @@ def one_color(img: np.ndarray,color: tuple = None) -> np.ndarray:
 
 def crop_img(img: np.ndarray, points: list = []) -> tuple:
     """
-    Crops the image so as to remove any black borders
+    Crops the image so as to remove any black borders.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    - ``points`` (optional, ``default = []``) list of the zed camera points of the bounding box of the object
+    Args:
+        img (np.ndarray): Image to be processed.
+        optional (list, optional): List of the bounding box of the object. Defaults to [].
 
-    Output parameter (``tuple``):
-    - ``img`` (``np.ndarray``):
-        - the processed image
-    - ``points`` (``list``):
-        - the list of the processed points array
+    Returns:
+        tuple: The processed image and the list of the processed points array.
     """
 
     image = img.copy()
@@ -218,14 +209,13 @@ def crop_img(img: np.ndarray, points: list = []) -> tuple:
 
 def right_side(img: np.ndarray) -> list:
     """
-    Retrieves the right side of the object
+    Retrieves the right side of the object.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    
-    Output parameter (``list``):
-    - ``points`` (``list``):
-        - the end points of the side
+    Args:
+        img (np.ndarray): Image to be processed.
+
+    Returns:
+        list: The end points of the right side.
     """
 
     image = img.copy()
@@ -304,14 +294,13 @@ def right_side(img: np.ndarray) -> list:
 
 def left_side(img: np.ndarray) -> list:
     """
-    Retrieves the left side of the object
+    Retrieves the left side of the object.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    
-    Output parameter (``list``):
-    - ``points`` (``list``):
-        - the end points of the side
+    Args:
+        img (np.ndarray): Image to be processed.
+
+    Returns:
+        list: The end points of the left side.
     """
 
     image = img.copy()
@@ -449,16 +438,15 @@ def extract_table(img: np.ndarray, resolution: tuple = (1920,1080), table: list 
 
 def extract_obj(img: np.ndarray, box: list = None, tolerance: int = 75) -> np.ndarray:
     """
-    Fill the entire image except for the main object
+    Fill the entire image except for the main object.
 
-    Input parameters:
-    - ``img`` the array of the image to be processed
-    - ``box`` (optional, ``default = None``) bounding box of the object. If None, it will be considered the entire image
-    - ``tolerance`` (optional, ``default = 75``) each color with a difference >= tolerance from the main color, will be converted in black
+    Args:
+        img (np.ndarray): Image to be processed.
+        box (list): Bounding box of the object. If None, it will be considered the entire image. Defaults to None.
+        tolerance (int): Each color with a difference >= tolerance from the main color, will be converted in black. Defaults to 45.
 
-    Output parameter (``np.ndarray``):
-    - ``img`` (``np.ndarray``):
-        - the processed image
+    Returns:
+        np.ndarray: The processed image.
     """
 
     image = img.copy()

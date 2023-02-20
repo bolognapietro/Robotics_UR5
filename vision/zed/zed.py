@@ -293,6 +293,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         if image_utils.all_black(image):
             continue 
         
+        # check
         left_points = image_utils.left_side(img = image)
         right_points = image_utils.right_side(img = image)
 
