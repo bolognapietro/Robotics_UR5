@@ -56,6 +56,19 @@ def add_background(img: np.ndarray, width: int, height: int, color: tuple = (0,0
 
     return background
 
+def all_black(img: np.ndarray) -> bool:
+
+    image = img.copy()
+    
+    counter = 0
+
+    for y in range(image.shape[0]):
+        for x in range(image.shape[1]):
+            if image[y][x].tolist() != [0,0,0]:
+                counter = counter + 1
+            
+    return ((100 * counter) / (image.shape[0]*image.shape[1])) < 30
+
 def main_color(img: np.ndarray, noblack: bool = False, notable: bool = False) -> tuple:
     """
     Retrieves the main color of the image

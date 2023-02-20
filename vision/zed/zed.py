@@ -221,8 +221,10 @@ def detect_objects(img: np.ndarray, threshold: float = 0.8, render: bool = False
         # load the model (only once)
         function.model = torch.hub.load(yolo_path, 'custom', path=model_path, source='local')
 
+    image = img.copy()
+
     # process input image
-    result = function.model([img], size = 640)
+    result = function.model([image], size = 640)
 
     # keep valid prediction(s) (e.g. score >= threshold)
     thresholded_result = torch.Tensor([item.tolist() for item in result.xyxy[0] if item[-2] >= threshold])
@@ -279,7 +281,6 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     """
 
     frame = img.copy()
-    frame = cv2.fastNlMeansDenoisingColored(frame, None, 3, 3, 7, 21)
 
     image = None
 
@@ -288,7 +289,10 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         box = obj["box"]
 
         image = image_utils.extract_obj(img = frame, box = box)
-
+        
+        if image_utils.all_black(image):
+            continue 
+        
         left_points = image_utils.left_side(img = image)
         right_points = image_utils.right_side(img = image)
 
@@ -296,33 +300,25 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         v1 = left_points[1]
         v3 = right_points[1]
 
-        m1, q1 = geometric_utils.calculate_line(left_points[0], left_points[1])
-        m2, q2 = geometric_utils.calculate_line(right_points[0], right_points[1])
+        if left_points == right_points:
+            v2 = left_points[0]
+        else:
+            m1, q1 = geometric_utils.calculate_line(left_points[0], left_points[1])
+            m2, q2 = geometric_utils.calculate_line(right_points[0], right_points[1])
 
-        v2 = ((q2-q1) / (m1 - m2), m1*((q2-q1) / (m1 - m2)) + q1)
-        v2 = [int(v2[0]),int(v2[1])]
+            v2 = ((q2-q1) / (m1 - m2), m1*((q2-q1) / (m1 - m2)) + q1)
+            v2 = [int(v2[0]),int(v2[1])]
+
         #v2[1] = left_points[0][1] #v2[1] if v2[1] < image.shape[0] else image.shape[0]
 
         # calculate the height of the object (in pixel)
-        column = [image[y][v2[0]].tolist() for y in range(image.shape[0])]
-        column.reverse()
+        if v1 == v3:
+            v4 = v1
+        else:
+            m, q = geometric_utils.calculate_line(v1,v3)
+            v4 = (int(v2[0]),int(v2[0]*m + q))
 
-        height = 0
-        tolerance = 40
-        main_color = image[v2[1]][v2[0]].tolist()
-
-        # iterate over the column with v2 as end point
-        for pixel in column:
-
-            if pixel == [0,0,0]:
-                continue
-
-            distance = math.dist(main_color, pixel)
-
-            if distance > tolerance and height > 1:
-                break
-            
-            height = height + 1
+        height = abs(v4[1] - v2[1])
 
         # convert points coordinates to frame coordinates
         min_x = min(box, key=lambda x: x[0])[0]
@@ -336,16 +332,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         v3[0], v3[1] = v3[0] + min_x, v3[1] + min_y
 
         v1, v2, v3 = tuple(v1), tuple(v2), tuple(v3)
-
-        # draw object main axes
-        cv2.line(frame, v1, v2, (0,255,0))
-        cv2.line(frame, v3, v2, (0,0,255))
-        cv2.line(frame, (v2[0],v2[1] - height), (v2[0],v2[1]), (255,0,0))
-
-        cv2.line(frame, v1, v1, (0,0,255),3)
-        cv2.line(frame, v2, v2, (0,0,255),3)
-        cv2.line(frame, v3, v3, (0,0,255),3)
-        cv2.line(frame, (v2[0],v2[1] - height), (v2[0],v2[1] - height), (0,0,255),3)
+        v1_2D, v2_2D, v3_2D = v1, v2, v3
 
         # convert points
         v1 = convert_to_gazebo_world_frame(point = v1)
@@ -369,12 +356,33 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         objects[objects.index(obj)]["position"]["yaw"] = angle
 
+        # draw object main axes and display angle
+        cv2.line(frame, v1_2D, v2_2D, (0,255,0))
+        cv2.line(frame, v3_2D, v2_2D, (0,0,255))
+        cv2.line(frame, (v2_2D[0],v2_2D[1] - height), (v2_2D[0],v2_2D[1]), (255,0,0))
+
+        cv2.line(frame, v1_2D, v1_2D, (0,0,255),3)
+        cv2.line(frame, v2_2D, v2_2D, (0,0,255),3)
+        cv2.line(frame, v3_2D, v3_2D, (0,0,255),3)
+        cv2.line(frame, (v2_2D[0],v2_2D[1] - height), (v2_2D[0],v2_2D[1] - height), (0,0,255),3)
+
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        text = str(round(angle,5))
+        textSize = cv2.getTextSize(text,font, 1, 2)[0]
+        textPos = (int((v1_2D[0] + v3_2D[0]) / 2 - textSize[0] / 2),v2_2D[1] + 40)
+
+        top_left = (int(textPos[0] - 1),int(textPos[1] - textSize[1] - 2))
+        bottom_right = (int(textPos[0] + textSize[0] + 1),int(textPos[1] + textSize[1]/2 - 8))
+
+        frame = cv2.rectangle(frame, top_left, bottom_right, (0,0,255), -1)
+        frame = cv2.putText(frame, text, textPos, font, 1, (255,255,255), 2, cv2.LINE_AA)
+
         frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
         
-        #cv2.imshow(f"Debug - {angle}",frame)
+        #cv2.imshow(f"Debug",frame)
         #cv2.waitKey(0)
 
-    return objects, image
+    return objects, frame
 
 def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
     """
