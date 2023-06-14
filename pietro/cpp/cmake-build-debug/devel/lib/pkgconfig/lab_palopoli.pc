@@ -1,0 +1,8 @@
+prefix=/home/pietro/ros_ws/src/locosim/robot_control/lab_exercises/lab_palopoli/cpp/cmake-build-debug/devel
+
+Name: lab_palopoli
+Description: Description of lab_palopoli
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
