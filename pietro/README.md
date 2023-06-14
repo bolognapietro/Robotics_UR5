@@ -1,3 +1,4 @@
+# H1 Come avviare tutto il baradandan 
 1. Avvia ur5_generic.py da un terminale
 2. In un secondo terminale avvia CLion usando il comando "clion main.cpp"
 3. Compila ed esegui il file main.cpp da CLion
