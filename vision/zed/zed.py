@@ -2,8 +2,9 @@
 
 # Standard library modules
 import os
-from os.path import join
+from os.path import join, isfile
 import pickle
+import json
 import inspect
 import math
 import xml.etree.ElementTree as ET
@@ -284,22 +285,18 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     """
 
     frame = img.copy()
-    frame = cv2.fastNlMeansDenoisingColored(frame, None, 3, 3, 7, 21)
 
     image = None
 
     for obj in objects:
         
         box = obj["box"]
-
+        
         image = image_utils.extract_obj(img = frame, box = box)
         
         if image_utils.all_black(image):
             continue 
-        
-        with open("crash.pkl","wb+") as f:
-            pickle.dump(image, f)
-            
+
         # check
         left_points = image_utils.left_side(img = image)
         right_points = image_utils.right_side(img = image)
@@ -307,14 +304,6 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         # vertices
         v1 = left_points[1]
         v3 = right_points[1]
-
-        '''if left_points == right_points:
-            v2 = left_points[0]
-
-        elif left_points[0] == left_points[1]:
-            v2 = [int((left_points[0][0] + right_points[0][0]) / 2), left_points[0][1]]
-
-        else:'''
 
         # Calculate the middle point v2 given by the intersection between r1 and r3
         try:
@@ -327,7 +316,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
             if v2[1] > image.shape[0]:
                 v2[1] = image.shape[0]
 
-        except:
+        except Exception as e:
             v2 = deepcopy(left_points[0])
 
         # offset
@@ -386,21 +375,20 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         frame = cv2.rectangle(frame, top_left, bottom_right, (0,0,255), -1)
         frame = cv2.putText(frame, text, textPos, font, 1, (255,255,255), 2, cv2.LINE_AA)
 
-        frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
-        
-        cv2.imshow(f"Debug",frame)
-        #cv2.waitKey(0)
+    frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
+
+    #cv2.imshow(f"Debug",frame)
 
     return objects, frame
 
-def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
+def process_image(img: np.ndarray, render: bool = False, threshold: float = 6) -> np.ndarray:
     """
     Process the image captured by the zed camera
 
     Args:
         img (np.ndarray): Captured image.
         render (bool, optional): Specifies if the image with the bounding box of the detected objects has to be rendered. Defaults to False.
-
+        threshold (float, optional): If the difference between the previous frame and the current one is greater or equal than the threshold, the frame will be processed. Otherwise, the old frame will be returned. Defaults to 6
     Returns:
         dict: Updated objects.
     """
@@ -410,21 +398,58 @@ def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
     # extract table from image
     image = image_utils.extract_table(img = image)
 
-    # half table
-    for y in range(int(image.shape[0]*zed_params.TABLE_PERCENTAGE)):
-        image[y] = 0
+    function = eval(inspect.stack()[0][3])
 
-    # detect objects
-    objects, image_detected_objects = detect_objects(img = image, render = render)
-    
-    # process objects
-    objects, image_processed_objects = process_objects(img = image, objects = objects)
+    process = True
 
-    # send detected objects
-    send_objects(objects = objects)
+    try:
+        
+        # calculate the difference % between the previous frame and the current one
+        diff = cv2.absdiff(function.img, image)
+        diff_gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
+        diff_gray = cv2.convertScaleAbs(diff_gray, alpha=5, beta=0)
+        intensity = cv2.mean(diff_gray)[0]
 
-    # print detected objects
-    #debug.print_objects(objects = objects)
+        diff = abs((function.intensity - intensity) / intensity * 100)
+        diff = round(diff,2)
+        process = diff >= threshold
+
+        # the current intensity becomes the previous one
+        function.intensity = intensity
+    except:
+
+        # if this is the first time the function is called, initialize the parameters
+        function.intensity = 0
+        function.image_detected_objects = None
+
+    # the current frame becomes the previous one
+    function.img = image.copy()
+
+    # if the current frame is different from the previous or if there is no previous processed image
+    if process or function.image_detected_objects is None:
+        #print("Updating...")
+
+        # half table
+        for y in range(int(image.shape[0]*zed_params.TABLE_PERCENTAGE)):
+            image[y] = 0
+
+        # detect objects
+        objects, image_detected_objects = detect_objects(img = image, render = render)
+        
+        # process objects
+        objects, image_processed_objects = process_objects(img = image, objects = objects)
+
+        # send detected objects
+        send_objects(objects = objects)
+
+        # print detected objects
+        #debug.print_objects(objects = objects)
+
+        function.image_detected_objects = image_detected_objects
+
+    else:
+        # if the two frames are similar, then return the last processed image
+        image_detected_objects = function.image_detected_objects
 
     return image_detected_objects
 
@@ -481,10 +506,8 @@ def live_detection(msg: Image) -> None:
 
     # process image
     frame = process_image(img = img, render = True)
-
+    
     # display processed image
-    frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
-
     cv2.imshow("Live detection",frame)
 
     # q for exit

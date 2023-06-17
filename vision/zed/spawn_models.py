@@ -87,7 +87,7 @@ def create_spawnmodel_request(name: str, model: str, position: tuple):
     req.initial_pose.position.y = position[1]
     req.initial_pose.position.z = position[2]
 
-    q = quaternion_from_euler(0,0,0)#(random_angle(),random_angle(),random_angle())
+    q = quaternion_from_euler(0,0,0) #(random_angle(),random_angle(),random_angle())
     req.initial_pose.orientation.x = q[0]
     req.initial_pose.orientation.y = q[1]
     req.initial_pose.orientation.z = q[2]
@@ -252,6 +252,9 @@ if __name__ == '__main__':
                 if not len(models):
                     input(colored("No model found"))
                     continue
+                
+                if option == 4:
+                    print(f"0) Delete all models")
 
                 for i, model in enumerate(models):
                     print(f"{i+1}) {model}")
@@ -263,16 +266,27 @@ if __name__ == '__main__':
 
                 op = int(op) - 1
 
-                if op > len(models) or op < 0:
+                if op >= len(models) or (op < 0 and (op < -1 and option == 4)):
                     continue
-
-                name = models[op]
 
                 if option == 4:
-                    print(colored(f"\nDeleting {name}...","yellow"))
-                    delete_model(name = name)
+
+                    if op == -1:
+
+                        print("\n")
+
+                        for name in models:
+                            print(colored(f"Deleting {name}...","yellow"))
+                            delete_model(name = name)
+                        
+                    else:
+                        print(colored(f"\nDeleting {name}...","yellow"))
+                        delete_model(name = models[op])
+
                     continue
                 
+                name = models[op]
+
                 print(colored(f"\nRetrieving {name}...","yellow"))
                 position, orientation = get_model_state(name = name)
 
