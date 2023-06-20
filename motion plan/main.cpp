@@ -10,7 +10,7 @@
 #include "std_msgs/Float64MultiArray.h"
 #include "sensor_msgs/JointState.h"
 #include "boost/shared_ptr.hpp"
-
+#include "geometry_msgs/Pose.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ typedef Eigen::Matrix<double,Eigen::Dynamic,8> Matrix8d;
 typedef Matrix<double, 1, 6> RowVector6d;
 typedef Matrix<double, 1, 8> RowVector8d;
 
-bool real_robot = true;
+bool real_robot = false;
 
 RowVector8d getJointState();
 RowVector6d getJointBraccio();
@@ -30,8 +30,14 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "motion_plan");
     ros::NodeHandle n;
 
-    RowVector3d posStandard {{0.4, 0.2, -0.6}};
+    RowVector3d posFinal {{-0.15, 0.19, -0.50}};
+    RowVector3d posDrop {{0.4, 0.2, -0.72}};
     RowVector3d phiZero {{0, 0, 0}};
+
+    int start = 0;
+    Eigen::RowVector3d pos;
+    Eigen::RowVector3d phiEf{{0, 0, 0}};
+    int maxT = 6;       // movement time ( 3 -> fast, 6 -> slow)
 
     /*
     while(1){
@@ -43,42 +49,60 @@ int main(int argc, char **argv) {
     }
     */
 
+    // START POSITION
+    {
+        Matrix8d Th;
+        bool cond[3] = {true, true, true};
+        RowVector6d jointBraccio = getJointBraccio();
+
+        cout << "Moving to START position " << endl;
+        RowVector3d posInit {{0.4, 0.2, -0.5}};
+        cond[0] = p2pMotionPlan(jointBraccio, posInit, phiEf, 0, maxT, Th);
+        closeGripper(Th);
+        jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond[1] = p2pMotionPlan(jointBraccio, posFinal, phiEf, 0, maxT, Th);
+        openGripper(Th);
+        start = 1;
+
+        if (cond[0] and cond[1] and cond[2]) {  // MOVEMENT OK
+            //PUBLISH
+            publish(Th);
+        }
+    }
+
 
     while(ros::ok()) {
+        boost::shared_ptr<geometry_msgs::Pose const> sharedMsg;
 
-        Eigen::RowVector3d pos;
-        cout << "input pos_final: x= ";
+        cout << "Waiting for messages " << endl;
+        sharedMsg = ros::topic::waitForMessage<geometry_msgs::Pose>("/objects_info");
+        if (sharedMsg != NULL) {
+            pos(0) = sharedMsg->position.x - 0.5;
+            pos(1) = sharedMsg->position.y - 0.35;
+            //pos(2) = sharedMsg->position.z;
+        }
+
+        pos(2) = -0.73;
+        ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
+
+        /* To manually insert the coordinates
+        cout << "pos: [x]";
         cin >> pos(0);
+        cout << "pos: [y]";
+        cin >> pos(1);
+        cout << "pos: [z]";
+        cin >> pos(2);
+        pos(0) = pos(0) - 0.5;
+        pos(1) = pos(1) -0.35;
+        */
 
-        if(pos(0) ==  99) {
+        bool rot;
 
-            boost::shared_ptr<std_msgs::Float32MultiArray const> sharedMsg;
-            cout << "Waiting for messages ";
-            sharedMsg = ros::topic::waitForMessage<std_msgs::Float32MultiArray>("/prova");
-
-            //Eigen::RowVector3d pos;
-            if (sharedMsg != NULL) {
-                std_msgs::Float32MultiArray msg = *sharedMsg;
-                for (int i = 0; i < 3; i++) {
-                    pos(i) = msg.data[i];
-                }
-            }
-            pos(2) = -0.6;
-            ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
-        }
-        else
-        {
-            cout << " y= ";
-            cin >> pos(1);
-            cout << " z= ";
-            cin >> pos(2);
-        }
-
-        //cout << pos << endl;
-
-        int fZ;
-        double frameInizialeZ;
-        cout << "Frame iniziale [z]: ";
+        double frameInizialeZ = 0;
+        //double frameInizialeZ;
+        //frameInizialeZ = sharedMsg->orientation.w;
+        cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
+        /*
         cin >> fZ;  // 90 - 180 - -90
         switch (fZ) {
             case 90:
@@ -94,38 +118,46 @@ int main(int argc, char **argv) {
                 frameInizialeZ = 0;
                 break;
         }
-        bool rot;
-        cout << "Rotazione? [0 = no, 1 = si]";
+        */
+
+        cout << "Rotazione? [0 = no, 1 = si] ";
         cin >> rot;
-        Eigen::RowVector3d phiEf{{frameInizialeZ, 0, 0}};
+
+        phiEf(0) = frameInizialeZ;
 
         RowVector6d jointBraccio = getJointBraccio();
 
         Matrix8d Th;
-        bool cond[2] = {true, true};
+        bool cond[3] = {true, true, true};
         if (check_point(pos, jointBraccio)) {
             ROS_INFO("Posizione raggiungibile dal braccio!\n");
-            //cout << "Posizione raggiungibile dal braccio!" << endl;
-            // moveTrajectory(pos, [frameIniziale, 0, 0], 0, 3, rate, rot, dir)
+
             if (!rot) {
-                cond[0] = threep2p(jointBraccio, pos, phiEf, 0, 3, Th);
+                cond[0] = threep2p(jointBraccio, pos, phiEf, 0, maxT, Th);
                 // CLOSE GRIPPER
                 closeGripper(Th);
-                jointBraccio = Th.row(Th.rows()-1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointBraccio, posStandard, phiZero, 0, 3, Th);
-                //OPEN GRIPPER
-                openGripper(Th);
-            } else {
-                cond[0] = ruota(jointBraccio, pos, phiEf, 0, 3, Th);
-                // ROTAZIONI NELLA RUOTA
-                jointBraccio = Th.row(Th.rows()-1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointBraccio, posStandard, phiZero, 0, 3, Th);
+                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[1] = threep2p(jointBraccio, posDrop, phiZero, 0, maxT, Th);
                 // OPEN GRIPPER
-                //openGripper(Th);
+                openGripper(Th);
+                // TORNO ALLA HOME
+                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[2] = threep2p(jointBraccio, posFinal, phiZero, 0, maxT, Th);
+            } else {
+                cout << phiEf << endl;
+                cond[0] = ruota(jointBraccio, pos, phiEf, 0, maxT, Th);
+                // ROTAZIONI NELLA RUOTA
+                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[1] = threep2p(jointBraccio, posDrop, phiZero, 0, maxT, Th);
+                // OPEN GRIPPER
+                openGripper(Th);
+                // TORNO ALLA HOME
+                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[2] = threep2p(jointBraccio, posFinal, phiZero, 0, maxT, Th);
             }
 
             //PUBLISH
-            if (cond[0] and cond[1]) {  //MOVIMENTO OK
+            if (cond[0] and cond[1] and cond[2]) {  //MOVIMENTO OK
                 //PUBLISH
                 publish(Th);
             } else {
@@ -174,7 +206,7 @@ void publish(Matrix8d& Th){
     ros::NodeHandle n;
     ros::Publisher pub = n.advertise<std_msgs::Float64MultiArray>("/ur5/joint_group_pos_controller/command", 10);
 
-    ros::Rate loop_rate(50);
+    ros::Rate loop_rate(125);
 
     Matrix6d realTh;
 
