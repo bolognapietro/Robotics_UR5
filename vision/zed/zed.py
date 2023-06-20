@@ -187,7 +187,6 @@ def convert_to_gazebo_world_frame(point: tuple, precision: int = 2) -> tuple:
 
     Ry = np.array([[ 0.     , -0.49948,  0.86632],[-1.     ,  0.     ,  0.     ],[-0.     , -0.86632, -0.49948]])
     pos_zed = np.array([-0.4 ,  0.59,  1.4 ])
-    #pos_zed = np.array([-0.9 ,  0.24, -0.35])
 
     data_world = Ry.dot(zed_point) + pos_zed #+ transl_offset #+ pos_base_link
     data_world = np.array(data_world)
