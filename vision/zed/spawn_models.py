@@ -11,7 +11,7 @@ from os.path import join
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from termcolor import colored
 
-BLENDER_MODELS_PATH = "/home/chri/Scrivania/Zed/Models"
+BLENDER_MODELS_PATH = "./models"
 clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 
