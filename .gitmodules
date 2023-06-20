@@ -1,3 +1,6 @@
 [submodule "locosim"]
 	path = locosim
 	url = https://github.com/mfocchi/locosim.git
+[submodule "vision/zed/yolov5"]
+	path = vision/zed/yolov5
+	url = git@github.com:https://github.com/ultralytics/yolov5
