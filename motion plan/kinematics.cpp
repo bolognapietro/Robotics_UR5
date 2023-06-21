@@ -1,8 +1,11 @@
 #include "Eigen/Dense"
 #include "Eigen/LU"
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <complex>
+
+#include "ros/ros.h"
 
 using namespace Eigen;
 
@@ -293,7 +296,7 @@ bool check_collision(RowVector6d Th){
 bool check_angles(RowVector6d Th){
 
     int cont = 0;
-    bool ret;
+    bool ret = true;
 
     RowVector2d J1{{-6.14, 6.14}};
     RowVector2d J2{{-3.14, 0.0}};
@@ -321,12 +324,11 @@ bool check_angles(RowVector6d Th){
 
         // std::cout << theta << std::endl;
     }
-
     if(not check_collision(Th=Th)){
         ret = false;
     }
 
-    return true;
+    return ret;
 }
 
 
@@ -359,11 +361,23 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
     bool ret = true;
 
     /* RIMUOVI RIGHE CHE NON VANNO BENE */
-
+    /*
     for(int i=0; i<8; i++){
         thi = all.row(i);
-        if(check_angles(thi) == false){
+        ROS_INFO("%d\n", i);
+        if(!check_angles(thi)){
+            ROS_INFO("errore\n");
             removeRow(all, i);
+            ROS_INFO("due\n");
+        }
+    }*/
+    int i=0;
+    while (i<all.rows()){
+        thi = all.row(i);
+        if (!check_angles(thi)){
+            removeRow(all, i);
+        } else {
+            i++;
         }
     }
 
@@ -388,8 +402,10 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
 
 /* SE NESSUNA VA BENE */
     if(all.size() == 0){
-        ret = false;
+        return false;
     }
+
+    
 
     return ret;
     //std::cout << "norma " << i << " = "<< normaMin << std::endl;
@@ -406,21 +422,16 @@ bool check_point(Vector3d pos, RowVector6d q0){
 
     Matrix<double, Dynamic, 6> confs;
     Matrix<double, 1, 6> Th;
-    bool ret = true;
+
 
     inverse_kinematics(pos, confs);
     bestInverse(q0, confs);
 
-    // if(not confs){
-    //   ret = false;
-    // }
-    // else{
-    //   th = confs.row(0);
-    // }
-
+    if(confs.rows() == 0){
+      return false;
+    }
     Th = confs.row(0);
     //controlla che la posizione inserita sia raggiungibile dal robot , per farlo controlla che il risultaro della inverse messo dentro la direct dia la medesima posizione
-
     Matrix3d R06;
     Vector3d ef;
     direct_kinematics(Th,R06,ef);
@@ -434,10 +445,9 @@ bool check_point(Vector3d pos, RowVector6d q0){
             continue;
         }
         else{
-            ret = false;
+            return false;
         }
     }
-
-    return ret;
+    return true;
 
 }
