@@ -30,14 +30,14 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "motion_plan");
     ros::NodeHandle n;
 
-    RowVector3d posFinal {{-0.15, 0.19, -0.50}};
+    RowVector3d posHome {{-0.2, 0.2, -0.50}};
     RowVector3d posDrop {{0.4, 0.2, -0.72}};
     RowVector3d phiZero {{0, 0, 0}};
 
     int start = 0;
     Eigen::RowVector3d pos;
     Eigen::RowVector3d phiEf{{0, 0, 0}};
-    int maxT = 6;       // movement time ( 3 -> fast, 6 -> slow)
+    int maxT = 3;       // movement time ( 3 -> fast, 6 -> slow)
 
     /*
     while(1){
@@ -57,10 +57,11 @@ int main(int argc, char **argv) {
 
         cout << "Moving to START position " << endl;
         RowVector3d posInit {{0.4, 0.2, -0.5}};
+        
         cond[0] = p2pMotionPlan(jointBraccio, posInit, phiEf, 0, maxT, Th);
         closeGripper(Th);
         jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond[1] = p2pMotionPlan(jointBraccio, posFinal, phiEf, 0, maxT, Th);
+        cond[1] = p2pMotionPlan(jointBraccio, posHome, phiEf, 0, maxT, Th);
         openGripper(Th);
         start = 1;
 
@@ -74,6 +75,8 @@ int main(int argc, char **argv) {
     while(ros::ok()) {
         boost::shared_ptr<geometry_msgs::Pose const> sharedMsg;
 
+        // Position waited from zed
+/*
         cout << "Waiting for messages " << endl;
         sharedMsg = ros::topic::waitForMessage<geometry_msgs::Pose>("/objects_info");
         if (sharedMsg != NULL) {
@@ -84,14 +87,19 @@ int main(int argc, char **argv) {
 
         pos(2) = -0.73;
         ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
+*/
 
-        /* To manually insert the coordinates
-        cout << "pos: [x]";
+        // To manually insert the coordinates
+
+        cout << "pos[x]: ";
         cin >> pos(0);
-        cout << "pos: [y]";
+        cout << "pos[y]: ";
         cin >> pos(1);
-        cout << "pos: [z]";
+        cout << "pos[z]: ";
         cin >> pos(2);
+
+        // offset manual 
+        /*
         pos(0) = pos(0) - 0.5;
         pos(1) = pos(1) -0.35;
         */
@@ -129,6 +137,7 @@ int main(int argc, char **argv) {
 
         Matrix8d Th;
         bool cond[3] = {true, true, true};
+        ROS_INFO("check_point");
         if (check_point(pos, jointBraccio)) {
             ROS_INFO("Posizione raggiungibile dal braccio!\n");
 
@@ -142,7 +151,7 @@ int main(int argc, char **argv) {
                 openGripper(Th);
                 // TORNO ALLA HOME
                 jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointBraccio, posFinal, phiZero, 0, maxT, Th);
+                cond[2] = threep2p(jointBraccio, posHome, phiZero, 0, maxT, Th);
             } else {
                 cout << phiEf << endl;
                 cond[0] = ruota(jointBraccio, pos, phiEf, 0, maxT, Th);
@@ -153,7 +162,7 @@ int main(int argc, char **argv) {
                 openGripper(Th);
                 // TORNO ALLA HOME
                 jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointBraccio, posFinal, phiZero, 0, maxT, Th);
+                cond[2] = threep2p(jointBraccio, posHome, phiZero, 0, maxT, Th);
             }
 
             //PUBLISH

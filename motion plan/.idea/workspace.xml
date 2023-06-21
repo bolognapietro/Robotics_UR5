@@ -6,7 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f67e6eb8-9edd-43d5-ac9b-24f46381f3ae" name="Changes" comment="" />
+    <list default="true" id="f67e6eb8-9edd-43d5-ac9b-24f46381f3ae" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../vision/zed/spawn_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../vision/zed/spawn_models.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +16,9 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -32,6 +37,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/home/lucaubu/ros_ws/src/motion_plan_2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -44,7 +50,11 @@
       <option name="presentableId" value="Default" />
       <updated>1687265587922</updated>
       <workItem from="1687265590845" duration="3000" />
+      <workItem from="1687274179348" duration="95000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
