@@ -61,6 +61,9 @@ def calculate_line(point1: tuple, point2: tuple) -> tuple:
         tuple: Angular coefficient and quote respectively.
     """
     
+    if point1[0] == point2[0]:
+        return 1,0
+    
     m = (point2[1] - point1[1]) / (point2[0] - point1[0])
     q = point1[1] - m*point1[0]
 

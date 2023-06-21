@@ -6,12 +6,12 @@ import uuid
 import rospy as ros
 
 from gazebo_msgs.srv import SpawnModel, SpawnModelRequest, SetModelState, SetModelStateRequest, GetModelState, GetModelStateRequest, GetWorldProperties, DeleteModel
-from os import walk
+from os import walk, getcwd
 from os.path import join
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from termcolor import colored
 
-BLENDER_MODELS_PATH = "./models"
+BLENDER_MODELS_PATH = join(getcwd(),"models")
 clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 

@@ -16,6 +16,7 @@ import tf
 
 import cv2
 from cv_bridge import CvBridge
+from collections import Counter
 
 # ROS modules
 import rospy as ros
@@ -62,150 +63,64 @@ def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 1
 
         pub.publish(msg)
 
-def get_base_link_position(base_link_folder: str = "ros_ws/src/locosim/robot_control/lab_exercises/lab_palopoli/") -> dict:
-    """
-    Retrieves the following information about the base link:
-    - Position: (x,y,z)
-
-    Args:
-        base_link_folder (str): The relative path of the params.py file inside ros_ws folder
-
-    Returns:
-        dict: Base link position.
-    """
-
-    import sys
-    sys.path.insert(0,join(os.path.expanduser("~"),base_link_folder))
-    import params as locosim_params
-    sys.path.pop(0)
-
-    robot_params = locosim_params.robot_params["ur5"]
-
-    return {
-        "spawn_x": robot_params["spawn_x"],
-        "spawn_y": robot_params["spawn_y"],
-        "spawn_z": robot_params["spawn_z"]
-    }
-
-def get_zed_position(zed_path: str = "ros_ws/install/share/ur_description/sensors/zed2/real/zed2.launch") -> dict:
-    """
-    Retrieves the following information about the zed camera:
-    - Position: (x,y,z)
-    - Rotation (roll, pitch, yaw)
-
-    Args:
-        zed_path (str): The relative path of the zed file inside ros_ws folder
-
-    Returns:
-        dict: Zed position.
-    """
-
-    xml = ET.parse(join(os.path.expanduser("~"),zed_path))
-
-    zed = {
-        "cam_pos_x": None,
-        "cam_pos_y": None,
-        "cam_pos_z": None,
-        "cam_roll": None,
-        "cam_pitch": None,
-        "cam_yaw": None
-    }
-
-    for item in xml.findall("./arg"):
-        
-        if "name" not in item.attrib:
-            continue
-
-        if "default" not in item.attrib:
-            continue
-
-        name = item.attrib["name"]
-        default = item.attrib["default"]
-
-        if name not in zed.keys():
-            continue
-
-        zed[name] = float(default)
-
-        if all([zed[key] != None for key in zed.keys()]):
-            break
-
-    return zed
-
-def convert_to_gazebo_world_frame(point: tuple, precision: int = 2) -> tuple:
+def convert_to_gazebo_world_frame(points: list, precision: int = 5) -> list:
     """
     Converts 2D coordinates into gazebo world frame coordinates
 
     Args:
-        point (tuple): Point to be converted.
-        precision (int, optional): Number of decimal digits for the returned coordinates. Defaults to 2.
+        points (list): Points to be converted.
+        precision (int, optional): Number of decimal digits for the returned coordinates. Defaults to 10.
 
     Returns:
-        tuple: 3D point (x,y,z).
+        list: 3D points (x,y,z).
     """
-    # get current function as object
-    function = eval(inspect.stack()[0][3])
-
-    # in order to reduce the loading time, the zed position and base link position are loaded once 
-    # and then saved in .zed_position and .base_link_position variables
-    try:
-        # check if the zed position has already been loaded
-        function.zed_position
-    except:
-        # load the zed position (only once)
-        function.zed_position = get_zed_position()
-
-    try:
-        # check if the base link position has already been loaded
-        function.base_link_position
-    except:
-        # load the zed position (only once)
-        function.base_link_position = get_base_link_position()
-
-    zed_position = function.zed_position
-    base_link_position = function.base_link_position
 
     point_cloud2_msg = ros.wait_for_message("/ur5/zed_node/point_cloud/cloud_registered", PointCloud2)
 
-    # retrieve the coordinates of the detected object
-    zed_coordinates = list(point)
-    zed_coordinates = [int(coordinate) for coordinate in zed_coordinates]
+    zed_points = []
+    multiple_points = all(isinstance(item, list) or isinstance(item, tuple) for item in points)
+
+    if multiple_points:
+
+        for point in list(points):
+            zed_points.append([int(coordinate) for coordinate in point])
+    
+    else:
+        zed_points = list(points)
+        zed_points = [int(coordinate) for coordinate in zed_points]
 
     # get the 3d point (x,y,z)
-    points = point_cloud2.read_points(point_cloud2_msg, field_names=['x','y','z'], skip_nans=False, uvs=[(zed_coordinates)])
-    
+    points = point_cloud2.read_points(point_cloud2_msg, field_names=['x','y','z'], skip_nans=False, uvs=zed_points if multiple_points else [zed_points])
+
+    zed_points = []
+
     for point in points:
-        zed_point = point[:3]
-
-    #Ry = np.matrix([[ 0., -0.49948, 0.86632],[-1., 0., 0.],[-0., -0.86632, -0.49948]])
-    #pos_zed = np.array([zed_position["cam_pos_x"], zed_position["cam_pos_y"], zed_position["cam_pos_z"]])
-    #pos_base_link = np.array([base_link_position["spawn_x"],base_link_position["spawn_y"],base_link_position["spawn_z"]])
-
-    #Ry = np.array([[ 0.     , -0.49948,  0.86632],[-1.     ,  0.     ,  0.     ],[-0.     , -0.86632, -0.49948]])
-    #pos_zed = np.array([-0.9 ,  0.24, -0.35])
-    #transl_offset = np.array([0.01, 0.00, 0.1])
+        zed_points.append(point[:3])
 
     Ry = np.array([[ 0.     , -0.49948,  0.86632],[-1.     ,  0.     ,  0.     ],[-0.     , -0.86632, -0.49948]])
     pos_zed = np.array([-0.4 ,  0.59,  1.4 ])
 
-    data_world = Ry.dot(zed_point) + pos_zed #+ transl_offset #+ pos_base_link
-    data_world = np.array(data_world)
-    
-    #data_world = data_world.tolist()[0]
-    #data_world = tuple(data_world)
+    data_world = []
 
-    return (round(data_world[0],precision), round(data_world[1],precision), round(data_world[2],precision))
+    for point in zed_points:
+        point = Ry.dot(point) + pos_zed
+        point = np.array(point)
+        point = [round(point[0],precision), round(point[1],precision), round(point[2],precision)]
 
-def detect_objects(img: np.ndarray, threshold: float = 0.8, render: bool = False, yolo_path: str = "./yolov5", model_path: str = "best_v2.40.pt") -> tuple:
+        data_world.append(point)
+
+    return data_world if len(data_world) > 1 else data_world[0]
+
+def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best_v2.40.pt") -> tuple:
     """
     Detects objects inside a given image.
 
     Args:
         img (np.ndarray): Image to be processed.
-        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 1.
+        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.4 (40%).
         render (bool, optional): Specifies if the function has to return the rendered image with the detected objects. Defaults to False.
-        yolo_path (str, optional): Yolo folder path. Defaults to "./yolov5".
-        model_path (str, optional): Yolo .pt file path. Defaults to "best_v6.pt".
+        yolo_path (str, optional): Yolo folder path. Defaults to "yolov5".
+        model_path (str, optional): Yolo .pt file path. Defaults to "best_v2.40.pt".
 
     Returns:
         dict: Detected objects.
@@ -245,17 +160,17 @@ def detect_objects(img: np.ndarray, threshold: float = 0.8, render: bool = False
         box = [int(b) for b in box]
         box = [(box[0],box[1]),(box[0],box[3]),(box[2],box[1]),(box[2],box[3])]
 
-        center = (int((box[0][0] + box[2][0])/2), int((box[0][1] + box[1][1])/2))
-        center = convert_to_gazebo_world_frame(point = center)
+        #center = (int((box[0][0] + box[2][0])/2), int((box[0][1] + box[1][1])/2))
+        #center = convert_to_gazebo_world_frame(points = center)
 
         objects.append({
             "label_name": result.names[item[5]],
             "label_index": item[5],
             "score": round(item[4]*100,2),
             "position": {
-                "x": center[0],
-                "y": center[1],
-                "z": center[2],
+                "x": None,
+                "y": None,
+                "z": None,
                 "roll": 0,
                 "pitch": 0,
                 "yaw": 0
@@ -285,110 +200,135 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     """
 
     frame = img.copy()
-
-    image = None
+    image = image_utils.extract_objects(img=frame)
 
     for obj in objects:
         
+        # process object box
         box = obj["box"]
+
+        adj_box = 5
+
+        min_x = min(box, key=lambda x: x[0])[0] - adj_box
+        max_x = max(box, key=lambda x: x[0])[0] + adj_box
+
+        min_y = min(box, key=lambda x: x[1])[1] - adj_box
+        max_y = max(box, key=lambda x: x[1])[1] + adj_box
+
+        points_2D = []
+
+        # extract colored pixels except for the black ones
+        for x in range(min_x, max_x+1):
+            for y in range(min_y, max_y+1):
+                
+                if image[y,x].tolist() == [0,0,0]:
+                    continue
+                
+                points_2D.append([x,y])
         
-        image = image_utils.extract_obj(img = frame, box = box)
+        # convert the extracted pixels (2d points) in 3d points
+        points_3D = convert_to_gazebo_world_frame(points=points_2D)
         
-        if image_utils.all_black(image):
-            continue 
+        # final points array
+        points = [[points_2D[i],points_3D[i]] for i in range(len(points_2D))]
 
-        # check
-        left_points = image_utils.left_side(img = image)
-        right_points = image_utils.right_side(img = image)
+        # object characterization
+        base_line = []
+        left_line = []
+        right_line = []
 
-        # vertices
-        v1 = left_points[1]
-        v3 = right_points[1]
+        img_center = int((min_x + max_x) / 2)
 
-        # Calculate the middle point v2 given by the intersection between r1 and r3
-        try:
-            m1, q1 = geometric_utils.calculate_line(left_points[0], left_points[1])
-            m2, q2 = geometric_utils.calculate_line(right_points[0], right_points[1])
+        # scan each row
+        for y in range(min_y, max_y+1):
 
-            v2 = ((q2-q1) / (m1 - m2), m1*((q2-q1) / (m1 - m2)) + q1)
-            v2 = [int(v2[0]),int(v2[1])]
+            # current row
+            pts = [point for point in points if point[0][1] == y]
 
-            if v2[1] > image.shape[0]:
-                v2[1] = image.shape[0]
-
-        except Exception as e:
-            v2 = deepcopy(left_points[0])
-
-        # offset
-        min_x = min(box, key=lambda x: x[0])[0]
-        max_x = max(box, key=lambda x: x[0])[0]
-
-        min_y = min(box, key=lambda x: x[1])[1]
-        max_y = max(box, key=lambda x: x[1])[1]
+            if not len(pts):
+                continue
             
-        # convert points coordinates to frame coordinates
-        v1[0], v1[1] = v1[0] + min_x, v1[1] + min_y
-        v2[0], v2[1] = v2[0] + min_x, v2[1] + min_y
-        v3[0], v3[1] = v3[0] + min_x, v3[1] + min_y
+            # discard current row if not all the points have the same x (necessary for base line)
+            if all(pts[i][1][0] == pts[i+1][1][0] for i in range(len(pts)-1)):
+                base_line.append(pts)
+            
+            # extract all the points in the current row that are on the left side of the image
+            left_points = [point for point in pts if point[0][0] < img_center]
 
-        v1, v2, v3 = tuple(v1), tuple(v2), tuple(v3)
-        v1_2D, v2_2D, v3_2D = v1, v2, v3
+            # extract all the points in the current row that are on the right side of the image
+            right_points = [point for point in pts if point[0][0] >= img_center]
 
-        # convert points
-        v1 = convert_to_gazebo_world_frame(point = v1)
-        v2 = convert_to_gazebo_world_frame(point = v2)
-        v3 = convert_to_gazebo_world_frame(point = v3)
+            # extract the point with the highest x on the left side of the image
+            if len(left_points):
+                left_line.append(max(left_points, key=lambda x: x[1][0]))
+            
+            # extract the point with the larger x on the rigth side of the image
+            if len(right_points):
+                right_line.append(max(right_points, key=lambda x: x[1][0]))
 
-        # calculate angle
-        if v2[0] - v1[0] != 0:
-            angle = math.atan((v1[1]-v2[1]) / (v1[0]-v2[0]))
-        else:
-            angle = 0
+        # extract the row with the smaller x
+        base_line = min(base_line, key=lambda x: x[0][1][0])
         
-        d12 = math.dist(v1,v2)
-        d23 = math.dist(v2,v3)
+        # calculate the left and right points
+        base_left = min(base_line, key=lambda x: x[0][0])
+        base_right = max(base_line, key=lambda x: x[0][0])
 
-        if(d12 > d23):
-            angle = angle + math.pi/2
+        # remove all the points that have an x greater than the x of base_left        
+        left_line = [point for point in left_line if point[1][2] == base_left[1][2] and point[0][0] <= base_left[0][0]]
+        # extract the point with the highest x
+        left_line_best = max(left_line, key=lambda x: x[1][0])
+        # check if there are other pixels with the same x
+        left_line = [point for point in left_line if point[0][0] == left_line_best[0][0]]
+        # get the pixel with the smaller distance from base_left
+        left_point = min(left_line, key=lambda x: math.dist(x[0], base_left[0]))
 
-        objects[objects.index(obj)]["position"]["yaw"] = angle
+        # remove all the points that have an x smaller than the x of base_right  
+        right_line = [point for point in right_line if point[1][2] == base_left[1][2] and point[0][0] >= base_right[0][0]]
+        # extract the point with the highest x
+        right_line_best = max(right_line, key=lambda x: x[1][0])
+        # check if there are other pixels with the same x
+        right_line = [point for point in right_line if point[0][0] == right_line_best[0][0]]
+        # get the pixel with the smaller distance from base_right
+        right_point = min(right_line, key=lambda x: math.dist(x[0], base_left[0]))
 
-        # draw object main axes and display angle
-        #cv2.line(frame, v1_2D, v2_2D, (0,255,0))
-        #cv2.line(frame, v3_2D, v2_2D, (0,0,255))
-        #cv2.line(frame, (v2_2D[0],v2_2D[1] - height), (v2_2D[0],v2_2D[1]), (255,0,0))
+        # calculate the center as the middle point between the left and right points
+        center_m, center_q = geometric_utils.calculate_line(left_point[1][:2],right_point[1][:2])
 
-        cv2.line(frame, v1_2D, v1_2D, (0,255,0),3) #Green (sx)
-        cv2.line(frame, v2_2D, v2_2D, (255,0,0),3) #Blue (middle)
-        cv2.line(frame, v3_2D, v3_2D, (0,0,255),3) #Red (dx)
+        center_x = (right_point[1][0] - left_point[1][0])/2 + left_point[1][0]
+        center_y = (right_point[1][1] + left_point[1][1]) / 2 if center_m == 1 and center_q == 0 else center_x * center_m + center_q 
 
-        #cv2.line(frame, (v2_2D[0],v2_2D[1] - height), (v2_2D[0],v2_2D[1] - height), (0,0,255),3)
+        center = (round(center_x,3), round(center_y,3), round(base_left[1][2],3))
 
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        text = str(round(angle,5))
-        textSize = cv2.getTextSize(text,font, 1, 2)[0]
-        textPos = (int((v1_2D[0] + v3_2D[0]) / 2 - textSize[0] / 2),v2_2D[1] + 40)
+        # calculate the angle
+        angle_rad = math.atan((left_point[1][1] - base_left[1][1]) / (left_point[1][0] - base_left[1][0]))
+        angle_deg = np.rad2deg(angle_rad)
 
-        top_left = (int(textPos[0] - 1),int(textPos[1] - textSize[1] - 2))
-        bottom_right = (int(textPos[0] + textSize[0] + 1),int(textPos[1] + textSize[1]/2 - 8))
+        angle_rad = round(angle_rad,4)
+        angle_deg = round(angle_deg,4)
 
-        frame = cv2.rectangle(frame, top_left, bottom_right, (0,0,255), -1)
-        frame = cv2.putText(frame, text, textPos, font, 1, (255,255,255), 2, cv2.LINE_AA)
+        # draw the results on the frame (optional)
+        cv2.line(frame, base_left[0], base_right[0], (0,0,255),2)
+        cv2.line(frame, left_point[0], left_point[0], (0,0,255),2)
+        cv2.line(frame, right_point[0], right_point[0], (0,0,255),2)
 
-    frame = frame[zed_params.WINDOW_RECT["min_y"] : zed_params.WINDOW_RECT["max_y"] + 1, zed_params.WINDOW_RECT["min_x"]: zed_params.WINDOW_RECT["max_x"] + 1]
+        print(f"========== OBJECT {obj['label_name']} ==========")
+        print(f"Center: {center}")
+        print(f"Rad: {angle_rad}\nDeg: {angle_deg}\n")
 
-    #cv2.imshow(f"Debug",frame)
+    if len(objects):
+        cv2.imshow(f"Debug",frame)
+        #cv2.imshow(f"Decolored",image_utils.extract_objects(img=frame))
 
     return objects, frame
 
-def process_image(img: np.ndarray, render: bool = False, threshold: float = 6) -> np.ndarray:
+def process_image(img: np.ndarray, render: bool = False, threshold: float = 3.5) -> np.ndarray:
     """
     Process the image captured by the zed camera
 
     Args:
         img (np.ndarray): Captured image.
         render (bool, optional): Specifies if the image with the bounding box of the detected objects has to be rendered. Defaults to False.
-        threshold (float, optional): If the difference between the previous frame and the current one is greater or equal than the threshold, the frame will be processed. Otherwise, the old frame will be returned. Defaults to 6
+        threshold (float, optional): If the difference between the previous frame and the current one is greater or equal than the threshold, the frame will be processed. Otherwise, the old frame will be returned. Defaults to 3.5
     Returns:
         dict: Updated objects.
     """
@@ -440,7 +380,7 @@ def process_image(img: np.ndarray, render: bool = False, threshold: float = 6) -
         objects, image_processed_objects = process_objects(img = image, objects = objects)
 
         # send detected objects
-        send_objects(objects = objects)
+        #send_objects(objects = objects)
 
         # print detected objects
         #debug.print_objects(objects = objects)
