@@ -380,7 +380,7 @@ def process_image(img: np.ndarray, render: bool = False, threshold: float = 3.5)
         objects, image_processed_objects = process_objects(img = image, objects = objects)
 
         # send detected objects
-        #send_objects(objects = objects)
+        send_objects(objects = objects)
 
         # print detected objects
         #debug.print_objects(objects = objects)
