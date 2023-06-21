@@ -160,9 +160,6 @@ def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False
         box = [int(b) for b in box]
         box = [(box[0],box[1]),(box[0],box[3]),(box[2],box[1]),(box[2],box[3])]
 
-        #center = (int((box[0][0] + box[2][0])/2), int((box[0][1] + box[1][1])/2))
-        #center = convert_to_gazebo_world_frame(points = center)
-
         objects.append({
             "label_name": result.names[item[5]],
             "label_index": item[5],
@@ -225,6 +222,9 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
                     continue
                 
                 points_2D.append([x,y])
+        
+        if not len(points_2D):
+            continue
         
         # convert the extracted pixels (2d points) in 3d points
         points_3D = convert_to_gazebo_world_frame(points=points_2D)
@@ -299,12 +299,27 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         center = (round(center_x,3), round(center_y,3), round(base_left[1][2],3))
 
-        # calculate the angle
-        angle_rad = math.atan((left_point[1][1] - base_left[1][1]) / (left_point[1][0] - base_left[1][0]))
+        # calculate the angle (z)
+
+        if left_point[1][0] != base_left[1][0]:
+            angle_rad = math.atan((left_point[1][1] - base_left[1][1]) / (left_point[1][0] - base_left[1][0]))
+        else:
+            angle_rad = 0
+
         angle_deg = np.rad2deg(angle_rad)
 
         angle_rad = round(angle_rad,4)
         angle_deg = round(angle_deg,4)
+
+        # save object
+        objects[objects.index(obj)]["position"] = {
+            "x": center[0],
+            "y": center[1],
+            "z": center[2],
+            "roll": 0,
+            "pitch": 0,
+            "yaw": angle_rad
+        }
 
         # draw the results on the frame (optional)
         cv2.line(frame, base_left[0], base_right[0], (0,0,255),2)
@@ -381,9 +396,6 @@ def process_image(img: np.ndarray, render: bool = False, threshold: float = 3.5)
 
         # send detected objects
         send_objects(objects = objects)
-
-        # print detected objects
-        #debug.print_objects(objects = objects)
 
         function.image_detected_objects = image_detected_objects
 

@@ -254,7 +254,7 @@ if __name__ == '__main__':
                     continue
                 
                 if option == 4:
-                    print(f"0) Delete all models")
+                    print(f"0) Delete all models\n")
 
                 for i, model in enumerate(models):
                     print(f"{i+1}) {model}")
@@ -273,7 +273,7 @@ if __name__ == '__main__':
 
                     if op == -1:
 
-                        print("\n")
+                        print("")
 
                         for name in models:
                             print(colored(f"Deleting {name}...","yellow"))
