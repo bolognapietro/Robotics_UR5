@@ -111,7 +111,7 @@ def convert_to_gazebo_world_frame(points: list, precision: int = 5) -> list:
 
     return data_world if len(data_world) > 1 else data_world[0]
 
-def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best_v2.40.pt") -> tuple:
+def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best.pt") -> tuple:
     """
     Detects objects inside a given image.
 
