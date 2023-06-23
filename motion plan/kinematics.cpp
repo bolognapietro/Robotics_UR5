@@ -371,6 +371,15 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
             ROS_INFO("due\n");
         }
     }*/
+
+    // Avoid too much rotation 
+    for (int i=0;i<all.rows();i++){
+        if (all.row(i)(0) > 0.8*M_PI){
+            all.row(i)(0) = all.row(i)(0) - 2 * M_PI;
+        }
+    }
+
+
     int i=0;
     while (i<all.rows()){
         thi = all.row(i);
@@ -400,12 +409,10 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
 
     }
 
-/* SE NESSUNA VA BENE */
+    /* SE NESSUNA VA BENE */
     if(all.size() == 0){
         return false;
     }
-
-    
 
     return ret;
     //std::cout << "norma " << i << " = "<< normaMin << std::endl;
@@ -425,11 +432,33 @@ bool check_point(Vector3d pos, RowVector6d q0){
 
 
     inverse_kinematics(pos, confs);
+
+    // std::ofstream myFile;
+    // myFile.open("src/motion_plan_2/datiInverse.csv", std::ios_base::app);
+    // myFile << pos << std::endl;
+    // for (int i=0;i<confs.rows();i++){
+    //     myFile << confs.row(i) << std::endl;
+    // }
+    // myFile << "\n";
+    // myFile.close();
+    
     bestInverse(q0, confs);
+
+    // myFile.open("src/motion_plan_2/dati.csv", std::ios_base::app);
+    // myFile << pos << std::endl;
+    // for (int i=0;i<confs.rows();i++){
+    //     myFile << confs.row(i) << std::endl;
+    // }
+    // myFile << "\n";
+    // myFile.close();
 
     if(confs.rows() == 0){
       return false;
     }
+
+
+
+
     Th = confs.row(0);
     //controlla che la posizione inserita sia raggiungibile dal robot , per farlo controlla che il risultaro della inverse messo dentro la direct dia la medesima posizione
     Matrix3d R06;

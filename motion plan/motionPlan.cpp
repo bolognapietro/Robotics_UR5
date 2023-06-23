@@ -7,6 +7,9 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
+#include <iostream>
+
+#include "ros/ros.h"
 
 using namespace Eigen;
 
@@ -40,7 +43,7 @@ Vector3d rotm2eul(Matrix3d R){
 void closeGripper(Matrix8d& Th){
     RowVector8d th = Th.row(Th.rows()-1);
     double start = -0.3;
-    for (int i=0;i<60;i++){
+    for (int i=0;i<50;i++){
         th(6) = start+0.01;
         th(7) = start+0.01;
         Th.conservativeResize(Th.rows()+1, Eigen::NoChange );
@@ -51,7 +54,7 @@ void closeGripper(Matrix8d& Th){
 void openGripper(Matrix8d& Th){
     RowVector8d th = Th.row(Th.rows()-1);
     double start = 0.3;
-    for (int i=0;i<60;i++){
+    for (int i=0;i<50;i++){
         th(6) = start-0.01;
         th(7) = start-0.01;
         Th.conservativeResize(Th.rows()+1, Eigen::NoChange );
@@ -61,7 +64,15 @@ void openGripper(Matrix8d& Th){
 
 bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double maxT, Matrix8d& Th, bool slow=false){
     //double grip = Th.row(Th.rows()-1)(6);
-
+    double grip;
+    if(Th.size() == 0)
+    {
+        grip = 0.3;
+    }
+    else
+    {
+        grip = Th.row(Th.rows()-1)(6);
+    }
 
     double dt = 0.01; //come prendere da params??
     if (slow){
@@ -103,7 +114,7 @@ bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, d
                 break;
             }
             RowVector8d th8;
-            th8 << th, 0, 0;   //FORSE NON VA
+            th8 << th, grip, grip;   //FORSE NON VA
 
             Th.conservativeResize(Th.rows()+1, Eigen::NoChange );
             Th.row(Th.rows()-1) = th8;
@@ -132,12 +143,10 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
     RowVector3d phiE1 {{0,0,0}};
 
     bool res = p2pMotionPlan(qEs, xE1, phiE1, t0(0), tf(0), Th);
+
     if (not res){
         return false;
     }
-
-
-    //std::cout << Th << std::endl;
 
     //SECOND MOVE
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
@@ -149,6 +158,7 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
         slow = true;
 
     res = p2pMotionPlan(qEs, xE2, phiEf, t0(1), tf(1), Th, slow);
+    //std::cout << "Second Move" << std::endl << Th << std::endl;
     if (not res){
         return false;
     }
@@ -156,6 +166,7 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
     //THIRD MOVE
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
     res = p2pMotionPlan(qEs, xEf, phiEf, t0(2), tf(2), Th);
+    //std::cout << "Third Move" << std::endl << Th << std::endl;
     if (not res){
         return false;
     }
@@ -163,35 +174,110 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
     return true;
 }
 
-bool ruota(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double maxT, Matrix8d& Th){
+/*
+
+param: type_rot = tipologia di rotazione da effettuare
+
+
+*/
+
+
+bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT, Matrix8d& Th, bool ricorsiva = false){
     Vector3d xe1 = xEf;
     Eigen::RowVector3d dir {{M_PI_2, 0, -M_PI_2}};
+    Eigen::RowVector3d phiE0;
+    bool cond1, cond2;
 
-    bool res = threep2p(qEs, xEf, phiEf, minT, maxT, Th); //da dove sono all'oggetto
+    switch (type_rot)
+    {
+    case 0:
+    case 1:
+        phiE0 << 0,0,0;
+        break;
+    case 2:
+        phiE0 << M_PI,0,0;
+        break;
+    case 3:
+        phiE0 << -M_PI_2,0,0;
+        break;
+    case 4:
+        phiE0 << M_PI_2,0,0;
+        break;
+    
+    case 5:
+        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 2, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+    
+    case 6:
+        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 1, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+
+    case 7:
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 2, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+
+    case 8:
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 1, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+
+    case 9:
+        cond1 = ruota(qEs, xEf, 1, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 4, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+
+    case 10:
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond2 = ruota(qEs, xEf, 4, minT, maxT, Th);
+        return cond1 and cond2;
+        break;
+
+    default:
+        return false;
+    }
+
+
+    bool res = threep2p(qEs, xEf, phiE0, minT, maxT, Th); //da dove sono all'oggetto
     if (not res)
         return false;
     // CLOSE GRIPPER
-    //closeGripper(Th);
+    closeGripper(Th);
 
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
 
-    xe1(1) = xe1(1) + 0.123;
-    xe1(2) = xe1(2) - 0.1;
+    xe1(0) = xe1(0) + 0.123;
+    xe1(2) = xe1(2) - 0.09;
 
     res = threep2p(qEs, xe1, dir, minT, maxT, Th);  //gira oggetto e lo rimette lì
     if (not res)
         return false;
     // OPEN GRIPPER
-    //openGripper(Th);
+    openGripper(Th);
 
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
-    phiEf << 0,0,0;
+    phiE0 << M_PI_2,0,0;
 
-    res = threep2p(qEs, xEf, phiEf, minT, maxT, Th);  //prende l'oggetto da sopra
-    if (not res)
-        return false;
-    // CLOSE GRIPPER
-    //closeGripper(Th);
+    if (!ricorsiva){
+        res = threep2p(qEs, xEf, phiE0, minT, maxT, Th);  //prende l'oggetto da sopra
+        if (not res)
+            return false;
+        // CLOSE GRIPPER
+        closeGripper(Th);
+    }
 
     return true;
 }

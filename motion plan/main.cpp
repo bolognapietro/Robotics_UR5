@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "motion_plan");
     ros::NodeHandle n;
 
-    RowVector3d posHome {{-0.2, 0.2, -0.50}};
+    RowVector3d posHome {{- 0.2, 0.2, -0.50}};
     RowVector3d posDrop {{0.4, 0.2, -0.72}};
     RowVector3d phiZero {{0, 0, 0}};
 
@@ -105,31 +105,22 @@ int main(int argc, char **argv) {
         */
 
         bool rot;
-
         double frameInizialeZ = 0;
+        int type_rot;
+
         //double frameInizialeZ;
         //frameInizialeZ = sharedMsg->orientation.w;
-        cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
-        /*
-        cin >> fZ;  // 90 - 180 - -90
-        switch (fZ) {
-            case 90:
-                frameInizialeZ = M_PI_2;
-                break;
-            case 180:
-                frameInizialeZ = M_PI;
-                break;
-            case -90:
-                frameInizialeZ = -M_PI_2;
-                break;
-            default:
-                frameInizialeZ = 0;
-                break;
-        }
-        */
+        //cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
 
         cout << "Rotazione? [0 = no, 1 = si] ";
         cin >> rot;
+        
+        if (rot){
+            cout << "Tipologia rotazione: ";
+            cin >> type_rot;  // 0-10 , 0 -> no_rot , 1-4 -> elementar , 5-10 -> composte
+        } else {
+            frameInizialeZ = 0;
+        }
 
         phiEf(0) = frameInizialeZ;
 
@@ -137,7 +128,6 @@ int main(int argc, char **argv) {
 
         Matrix8d Th;
         bool cond[3] = {true, true, true};
-        ROS_INFO("check_point");
         if (check_point(pos, jointBraccio)) {
             ROS_INFO("Posizione raggiungibile dal braccio!\n");
 
@@ -154,7 +144,7 @@ int main(int argc, char **argv) {
                 cond[2] = threep2p(jointBraccio, posHome, phiZero, 0, maxT, Th);
             } else {
                 cout << phiEf << endl;
-                cond[0] = ruota(jointBraccio, pos, phiEf, 0, maxT, Th);
+                cond[0] = ruota(jointBraccio, pos, type_rot, 0, maxT, Th);
                 // ROTAZIONI NELLA RUOTA
                 jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
                 cond[1] = threep2p(jointBraccio, posDrop, phiZero, 0, maxT, Th);
