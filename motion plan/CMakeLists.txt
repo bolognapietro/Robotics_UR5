@@ -13,7 +13,7 @@ catkin_package()
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
 include_directories(/home/lucaubu/ros_ws/src/locosim/robot_control/lab_exercises/lab_palopoli/cpp/json/include)
-include_directories(/home/lucaubu/ros_ws/src/motion_plan_2)
+include_directories(/home/lucaubu/ros_ws/src/motion_plan)
 
 add_executable(motion_plan motionPlan.cpp motionPlan.h kinematics.cpp kinematics.h main.cpp)
 
