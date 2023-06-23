@@ -39,41 +39,49 @@ def execute_request(service_name: str, service_class, request = None, wait: floa
 def create_spawnmodel_request(name: str, model: str, position: tuple, rot: int):
     
     schema = """<?xml version="1.0"?>
-    <sdf version="1.4"> 
-    <gravity>0.0 0.0 -9.81</gravity>
-    <model name="MODELNAME">
-        <static>false</static>
-        <link name="link">
-        <inertial>
-            <mass>1.0</mass>
-        </inertial>
-        <pose>0 0 0 0 0 0</pose>
+        <sdf version="1.4"> 
+        <gravity>0.0 0.0 -9.81</gravity>
+        <model name="MODELNAME">
+            <static>false</static>
+            <link name="link">
+            <inertial>
+                <mass>1.0</mass>
+                <inertia>
+                    <ixx>20.0</ixx>
+                    <iyy>20.0</iyy>
+                    <izz>20.0</izz>
+                    <ixy>0.0</ixy>
+                    <ixz>0.0</ixz>
+                    <iyz>0.0</iyz>
+                </inertia>
+            </inertial>
+            <pose>0 0 0 0 0 0</pose>
 
-        <visual name="visual">
-            <geometry>
-            <mesh>
-                <uri>URL_MODEL</uri>
-            </mesh>
-            </geometry>
-            <material>
-            <script>
-                <uri>file://media/materials/scripts/gazebo.material</uri>
-                <name>COLOR</name>
-            </script>
-            </material>
-        </visual>
-        
-        <collision name="collision">
-            <geometry>
-            <mesh>
-                <uri>URL_MODEL</uri>
-            </mesh>
-            </geometry>
-        </collision>
-        </link>
-    </model>
-    </sdf>
-    """
+            <visual name="visual">
+                <geometry>
+                <mesh>
+                    <uri>URL_MODEL</uri>
+                </mesh>
+                </geometry>
+                <material>
+                <script>
+                    <uri>file://media/materials/scripts/gazebo.material</uri>
+                    <name>COLOR</name>
+                </script>
+                </material>
+            </visual>
+            
+            <collision name="collision">
+                <geometry>
+                <mesh>
+                    <uri>URL_MODEL</uri>
+                </mesh>
+                </geometry>
+            </collision>
+            </link>
+        </model>
+        </sdf>
+        """
 
     schema = schema.replace('URL_MODEL', model)
     
@@ -132,7 +140,8 @@ def random_model(path: str) -> str:
 
     models = next(walk(path), (None, None, []))[2]
     #return join(path,random.choice(models))
-    return join(path, "X1-Y2-Z1.stl")
+    n = int(input("n: "))
+    return join(path, models[n])
 
 def random_position(x_min: float = 0.2, x_max: float = 0.5, y_min: float = 0.2, y_max: float = 0.65, z: float = 0.87, precision: int = 3) -> tuple:
 
