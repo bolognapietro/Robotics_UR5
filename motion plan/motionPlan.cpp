@@ -176,14 +176,15 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
 
 /*
 
-param: type_rot = tipologia di rotazione da effettuare
+    >>> param: type_rot = tipologia di rotazione da effettuare
 
 
 */
+bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT, Matrix8d& Th, bool ricorsiva1 = false, bool ricorsiva2 = false){
+    Vector3d xRot {-0.277, 0.35, -0.83};
+    Vector3d xWork {-0.4, 0.35, -0.74};
+    Vector3d xWorkHigh {-0.4, 0.35, -0.5};
 
-
-bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT, Matrix8d& Th, bool ricorsiva = false){
-    Vector3d xe1 = xEf;
     Eigen::RowVector3d dir {{M_PI_2, 0, -M_PI_2}};
     Eigen::RowVector3d phiE0;
     bool cond1, cond2;
@@ -205,44 +206,44 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
         break;
     
     case 5:
-        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 2, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 2, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
     
     case 6:
-        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 1, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 1, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 7:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 2, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 2, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 8:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 1, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 1, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 9:
-        cond1 = ruota(qEs, xEf, 1, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 1, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 4, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 4, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 10:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true);
+        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xEf, 4, minT, maxT, Th);
+        cond2 = ruota(qEs, xWork, 4, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
@@ -259,10 +260,27 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
 
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
 
-    xe1(0) = xe1(0) + 0.123;
-    xe1(2) = xe1(2) - 0.09;
+    if (!ricorsiva2){
 
-    res = threep2p(qEs, xe1, dir, minT, maxT, Th);  //gira oggetto e lo rimette lì
+        //res = threep2p(qEs, xWorkHigh, phiE0, minT, maxT, Th); //dall'oggetto alla zona di lavoro xWork
+
+        bool res[2] = {true, true};
+        Vector3d xtemp = xEf;
+        xtemp(2) = -0.5;
+        res[0] = p2pMotionPlan(qEs, xtemp, phiE0, 0, maxT/2, Th);
+
+        qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        res[1] = p2pMotionPlan(qEs, xWorkHigh, phiE0, 0, maxT, Th);
+
+        if (!(res[0] and res[1]))
+            return false;
+        
+        qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
+    }
+
+    //std::cout << "xe1: " << xe1 << std::endl;
+
+    res = threep2p(qEs, xRot, dir, minT, maxT, Th);  //gira oggetto e lo rimette lì
     if (not res)
         return false;
     // OPEN GRIPPER
@@ -271,8 +289,8 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
     phiE0 << M_PI_2,0,0;
 
-    if (!ricorsiva){
-        res = threep2p(qEs, xEf, phiE0, minT, maxT, Th);  //prende l'oggetto da sopra
+    if (!ricorsiva1){
+        res = threep2p(qEs, xWork, phiE0, minT, maxT, Th);  //prende l'oggetto da sopra
         if (not res)
             return false;
         // CLOSE GRIPPER

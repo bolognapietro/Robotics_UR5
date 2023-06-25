@@ -249,6 +249,10 @@ void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,
     Th = T;
 }
 
+bool areEqual(double n1, double n2, double precision = 0.0001){
+    double diff = std::abs(n1 - n2);
+    return diff < precision;
+}
 
 /* ######################### CHECK COLLISION ######################### */
 
@@ -377,6 +381,9 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
         if (all.row(i)(0) > 0.8*M_PI){
             all.row(i)(0) = all.row(i)(0) - 2 * M_PI;
         }
+        if (all.row(i)(0) < -M_PI){
+            all.row(i)(0) = all.row(i)(0) +2*M_PI;
+        }
     }
 
 
@@ -456,9 +463,6 @@ bool check_point(Vector3d pos, RowVector6d q0){
       return false;
     }
 
-
-
-
     Th = confs.row(0);
     //controlla che la posizione inserita sia raggiungibile dal robot , per farlo controlla che il risultaro della inverse messo dentro la direct dia la medesima posizione
     Matrix3d R06;
@@ -468,9 +472,7 @@ bool check_point(Vector3d pos, RowVector6d q0){
     ef(2) = -ef(2);
 
     for(int i=0; i<3; i++){
-        // double a = ef[i];
-        // double b = pos[i];
-        if(ceil((ef[i]*10000.0)/10000.0) == ceil((pos[i]*10000.0)/10000.0)){
+        if(areEqual(ef[i], pos[i])){
             continue;
         }
         else{
@@ -480,3 +482,5 @@ bool check_point(Vector3d pos, RowVector6d q0){
     return true;
 
 }
+
+

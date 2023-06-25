@@ -25,6 +25,7 @@ RowVector8d getJointState();
 RowVector6d getJointBraccio();
 Eigen::RowVector2d getJointGripper();
 void publish(Matrix8d& Th);
+RowVector3d findPosDrop(int type_block);
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "motion_plan");
@@ -65,7 +66,7 @@ int main(int argc, char **argv) {
         openGripper(Th);
         start = 1;
 
-        if (cond[0] and cond[1] and cond[2]) {  // MOVEMENT OK
+        if (cond[0] and cond[1]) {  // MOVEMENT OK
             //PUBLISH
             publish(Th);
         }
@@ -82,7 +83,7 @@ int main(int argc, char **argv) {
         if (sharedMsg != NULL) {
             pos(0) = sharedMsg->position.x - 0.5;
             pos(1) = sharedMsg->position.y - 0.35;
-            //pos(2) = sharedMsg->position.z;
+            pos(2) = sharedMsg->position.z - 1.61 -0.04;
         }
 
         pos(2) = -0.73;
@@ -98,19 +99,24 @@ int main(int argc, char **argv) {
         cout << "pos[z]: ";
         cin >> pos(2);
 
-        // offset manual 
-        /*
-        pos(0) = pos(0) - 0.5;
-        pos(1) = pos(1) -0.35;
-        */
-
         bool rot;
         double frameInizialeZ = 0;
         int type_rot;
+        int type_block;
 
-        //double frameInizialeZ;
-        //frameInizialeZ = sharedMsg->orientation.w;
-        //cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
+        cout << "Pos drop [0-8]: ";
+        cin >> type_block;
+
+        // ZED
+
+        // double frameInizialeZ;
+        // frameInizialeZ = sharedMsg->orientation.w;
+        // cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
+
+        // // POS DROP
+        // type_block = sharedMsg->label_index;
+
+        posDrop = findPosDrop(type_block);
 
         cout << "Rotazione? [0 = no, 1 = si] ";
         cin >> rot;
@@ -232,4 +238,53 @@ void publish(Matrix8d& Th){
             loop_rate.sleep();
         }
     }
+}
+
+RowVector3d findPosDrop(int type_block){
+    RowVector3d posDrop;
+
+    switch(type_block){
+        case 0:
+            posDrop(0) = 0.3;
+            posDrop(1) = 0.35;
+            break;
+        case 1:
+            posDrop(0) = 0.37;
+            posDrop(1) = 0.35;
+            break;
+        case 2:
+            posDrop(0) = 0.45;
+            posDrop(1) = 0.35;
+            break;
+        case 3:
+            posDrop(0) = 0.3;
+            posDrop(1) = 0.15;
+            break;
+        case 4:
+            posDrop(0) = 0.37;
+            posDrop(1) = 0.15;
+            break;
+        case 5:
+            posDrop(0) = 0.45;
+            posDrop(1) = 0.15;
+            break;
+        case 6:
+            posDrop(0) = 0.3;
+            posDrop(1) = -0.05;
+            break;
+        case 7:
+            posDrop(0) = 0.37;
+            posDrop(1) = -0.05;
+            break;
+        case 8:
+            posDrop(0) = 0.45;
+            posDrop(1) = -0.05;
+            break;
+
+        default:
+            posDrop(0) = 0.3;
+            posDrop(1) = 0.35;
+    }
+    posDrop(2) = -0.72;
+    return posDrop;
 }
