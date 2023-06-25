@@ -36,8 +36,18 @@ import geometric_utils
 
 clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
-def truncate(number: float, digits: int):
-    
+def truncate(number: float, digits: int) -> float:
+    """
+    Truncate float number to n digits.
+
+    Args:
+        number (float): Number to be truncated.
+        digits (int): Number of digits to keep.
+
+    Returns:
+        float: Truncated number.
+    """
+
     index = str(number).find(".")
 
     if index == -1:
@@ -157,8 +167,12 @@ def detect_objects(img: np.ndarray, threshold: float = 0.7, render: bool = False
     except:
         # load the model (only once)
         function.model = torch.hub.load(yolo_path, 'custom', path=model_path, source='local')
-
+    
     image = img.copy()
+
+    if np.all(image == 0):
+        return [], None
+
     image = image_utils.extract_objects(image)
 
     # process input image
@@ -225,7 +239,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     for obj in objects:
         
         start = time()
-        
+
         # process object box
         box = obj["box"]
 
@@ -371,9 +385,16 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         cv2.line(image, right[0], base[-1][0], (0,0,255),1) # red
 
-        # HEIGHT
+        #? HEIGHT
         z1 = center_max_z
-        z2 = min([point for point in points if point[0][1] == base[0][0][1]], key=lambda x: math.dist(x[1], [center_max_z[1][0], center_max_z[1][1], center_min_z[1][2]]))
+        z2 = [point for point in points if point[0][0] == z1[0][0] and point[0][1] == base[0][0][1]]
+
+        if not len(z2):
+            z2 = min([point for point in points if point[0][1] == base[0][0][1]], key=lambda x: math.dist(x[1], [z1[1][0], z1[1][1], z1[1][2]]))
+        else:
+            z2 = z2[0]
+
+        height = round(math.dist(z1[1][:2], z2[1][:2]),5)
 
         cv2.line(image, z1[0], z2[0], (0,255,255),1) # yellow
 
@@ -405,7 +426,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         kpi_1_1 = round(time() - start,2)
 
-        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nKPI 1-1: {kpi_1_1} second(s)")
+        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nHeight: {height}\nKPI 1-1: {kpi_1_1} second(s)")
 
     if len(objects):
         cv2.imshow(f"Debug",image)
@@ -543,6 +564,9 @@ def live_detection(msg: Image) -> None:
         exit(0)
 
 if __name__ == '__main__':
+
+    # dummy invocation used to load yolo
+    detect_objects(img = np.zeros((100, 100), dtype=np.uint8), render = False)
 
     ros.init_node("vision", anonymous=True)
 
