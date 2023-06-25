@@ -8,6 +8,7 @@ from typing import Union
 from termcolor import colored
 
 import random
+from time import sleep
 import uuid
 
 import numpy as np
@@ -15,11 +16,14 @@ import math
 
 import rospy as ros
 from gazebo_msgs.srv import SpawnModel, SpawnModelRequest, GetModelState, GetModelStateRequest, GetWorldProperties, DeleteModel
+from std_msgs.msg import Bool
 from tf.transformations import quaternion_from_euler, euler_from_quaternion
 
 clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
 
 BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
+
+SLEEP_TIME = 3
 
 MARGIN = 0.07
 
@@ -27,7 +31,7 @@ X_MIN = 0 + MARGIN
 X_MAX = 0.3 - MARGIN
 
 Y_MIN = 0.25 + MARGIN
-Y_MAX = 0.77 - MARGIN
+Y_MAX = 0.65 - MARGIN
 
 MODELS_NUMBER = 4
 MAX_MODELS = math.floor((X_MAX - X_MIN) * (Y_MAX - Y_MIN) / (math.pi * (MARGIN/2)**2))
@@ -270,17 +274,17 @@ def random_orientation(index: int = None) -> tuple:
     """
 
     orientations = [
-        quaternion_from_euler(0,0,0),
-        quaternion_from_euler(1.571,0,0),
-        quaternion_from_euler(-1.571,0,0),
-        quaternion_from_euler(1.571,0,1.571),
-        quaternion_from_euler(1.571,0,-1.571),
-        quaternion_from_euler(0,1.571,0),
-        quaternion_from_euler(0,-1.571,0),
-        quaternion_from_euler(1.571,1.571,0),
-        quaternion_from_euler(-1.571,1.571,0),
-        quaternion_from_euler(3.141,0,0),
-        quaternion_from_euler(3.141,0,1.571)
+        quaternion_from_euler(0,0,0), #?            0
+        quaternion_from_euler(1.571,0,0), #?        1
+        quaternion_from_euler(-1.571,0,0), #?       2
+        #quaternion_from_euler(1.571,0,1.571), #?    3
+        quaternion_from_euler(1.571,0,-1.571), #?   4
+        #quaternion_from_euler(0,1.571,0), #?        5
+        quaternion_from_euler(0,-1.571,0), #?       6
+        quaternion_from_euler(1.571,1.571,0), #?    7
+        quaternion_from_euler(-1.571,1.571,0), #?   8
+        quaternion_from_euler(3.141,0,0), #?        9
+        quaternion_from_euler(3.141,0,1.571) #?     10
     ]
     
     if index != None and index >= 0 and index < len(orientations):
@@ -305,7 +309,7 @@ def print_model(name: str, model: str, position: tuple, orientation: tuple, orie
     """
     Print model
 
-    Returns:
+    Args:
         str: Model's name.
         str: Model's .stl file.
         tuple: Model's position.
@@ -417,7 +421,21 @@ def assignment4():
     """
     pass
 
+def start_zed():
+    """
+    Once executed, the zed camera is allowed to process the objects
+    """
+
+    pub = ros.Publisher("/start_zed", Bool, queue_size=10)
+
+    msg = Bool()
+    msg.data = True
+    
+    pub.publish(msg)
+
 if __name__ == "__main__":
+
+    ros.init_node("assignments", anonymous=True)
 
     try:
         
@@ -439,6 +457,15 @@ if __name__ == "__main__":
             assignment = eval(f"assignment{option}")
             assignment()
 
+            for i in range(SLEEP_TIME):
+                print(colored(f"Waiting {SLEEP_TIME - i}", "yellow"),end="\r")
+                sleep(1)
+
+            start_zed()
+            ros.sleep(1)
+            start_zed()
+
+            print(f"                                                                ",end="\r")
             input("Done!")
 
     except KeyboardInterrupt:
