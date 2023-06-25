@@ -129,13 +129,13 @@ def convert_to_gazebo_world_frame(points: list, precision: int = 5) -> list:
 
     return data_world if len(data_world) > 1 else data_world[0]
 
-def detect_objects(img: np.ndarray, threshold: float = 0.55, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best.pt") -> tuple:
+def detect_objects(img: np.ndarray, threshold: float = 0.7, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best.pt") -> tuple:
     """
     Detects objects inside a given image.
 
     Args:
         img (np.ndarray): Image to be processed.
-        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.55 (55%).
+        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.7 (70%).
         render (bool, optional): Specifies if the function has to return the rendered image with the detected objects. Defaults to False.
         yolo_path (str, optional): Yolo folder path. Defaults to "yolov5".
         model_path (str, optional): Yolo .pt file path. Defaults to "best.pt".
@@ -224,6 +224,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
     for obj in objects:
         
+        start = time()
+        
         # process object box
         box = obj["box"]
 
@@ -285,6 +287,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         center_min_y = min(points, key=lambda x: x[1][1])
 
         center_max_z = max(points, key=lambda x: x[1][2])
+        center_min_z = min(points, key=lambda x: x[1][2])
 
         a = (center_min_x[1][0], center_min_y[1][1])
         b = (center_min_x[1][0], center_max_y[1][1])
@@ -310,6 +313,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         else:
             base = [rows[-1][0], rows[-1][-1]]
         
+        cv2.line(image, base[0][0], base[-1][0], (0,255,0),1) # green
+
         #? LEFT
         threshold = 3
 
@@ -337,12 +342,12 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
             if abs(left[0][0] - base[0][0][0]) <= threshold:
                 left = base[0]
 
-        cv2.line(image, left[0], base[0][0], (255,255,255),1)
+        cv2.line(image, left[0], base[0][0], (255,0,0),1) # blue
 
         #? RIGHT
         right = [point for point in points if point[0][0] > base[-1][0][0]]
 
-        if not len(left):
+        if not len(right):
             right = base[-1]
         
         else:
@@ -354,7 +359,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
             while not len(tmp):
 
-                tmp = [point for point in right if point[1][2] < base[0][1][2] + error]
+                tmp = [point for point in right if point[1][2] < base[-1][1][2] + error]
 
                 if not len(tmp):
                     error = error + factor
@@ -364,13 +369,24 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
             if abs(right[0][0] - base[-1][0][0]) <= threshold:
                 right = base[-1]
 
-        cv2.line(image, right[0], base[-1][0], (255,255,255),1)
+        cv2.line(image, right[0], base[-1][0], (0,0,255),1) # red
+
+        # HEIGHT
+        z1 = center_max_z
+        z2 = min([point for point in points if point[0][1] == base[0][0][1]], key=lambda x: math.dist(x[1], [center_max_z[1][0], center_max_z[1][1], center_min_z[1][2]]))
+
+        cv2.line(image, z1[0], z2[0], (0,255,255),1) # yellow
 
         #? YAW
         if left[1][0] != base[0][1][0]:
             angle_rad = math.atan((left[1][1] - base[0][1][1]) / (left[1][0] - base[0][1][0]))
         else:
             angle_rad = 0
+
+        angle_rad = 0 if angle_rad - 0.14 < 0 else angle_rad - 0.14
+
+        if math.dist(left[1], base[0][1]) > math.dist(base[0][1], base[-1][1]):
+            angle_rad = angle_rad + math.pi / 2
 
         angle_deg = np.rad2deg(angle_rad)
 
@@ -387,7 +403,9 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
             "yaw": angle_rad
         }
 
-        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation: (None, None, {angle_rad})\n")
+        kpi_1_1 = round(time() - start,2)
+
+        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nKPI 1-1: {kpi_1_1} second(s)")
 
     if len(objects):
         cv2.imshow(f"Debug",image)

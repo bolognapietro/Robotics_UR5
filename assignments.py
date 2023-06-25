@@ -33,7 +33,7 @@ X_MAX = 0.3 - MARGIN
 Y_MIN = 0.25 + MARGIN
 Y_MAX = 0.65 - MARGIN
 
-MODELS_NUMBER = 4
+MODELS_NUMBER = 3
 MAX_MODELS = math.floor((X_MAX - X_MIN) * (Y_MAX - Y_MIN) / (math.pi * (MARGIN/2)**2))
 
 assert MAX_MODELS >= MODELS_NUMBER, f"Too many models. Maximum number of models: {MAX_MODELS}"
@@ -453,17 +453,17 @@ if __name__ == "__main__":
                 continue
             
             clear()
-
+		
             assignment = eval(f"assignment{option}")
             assignment()
 
-            for i in range(SLEEP_TIME):
-                print(colored(f"Waiting {SLEEP_TIME - i}", "yellow"),end="\r")
-                sleep(1)
+            #for i in range(SLEEP_TIME):
+            #    print(colored(f"Waiting {SLEEP_TIME - i}", "yellow"),end="\r")
+            #    sleep(1)
 
-            start_zed()
-            ros.sleep(1)
-            start_zed()
+            #start_zed()
+            #ros.sleep(1)
+            #start_zed()
 
             print(f"                                                                ",end="\r")
             input("Done!")
