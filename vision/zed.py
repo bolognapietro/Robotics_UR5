@@ -9,6 +9,10 @@ import inspect
 import math
 import xml.etree.ElementTree as ET
 from copy import deepcopy
+from statistics import mean, median
+import itertools
+import subprocess
+from time import time
 
 import numpy as np
 import torch
@@ -23,12 +27,26 @@ import rospy as ros
 from geometry_msgs.msg import Pose
 from sensor_msgs.msg import Image, PointCloud2
 from sensor_msgs import point_cloud2
-from std_msgs.msg import String
+from std_msgs.msg import String, Bool
 
 # Local imports
 import zed_params
 import image_utils
 import geometric_utils
+
+clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True)
+
+def truncate(number: float, digits: int):
+    
+    index = str(number).find(".")
+
+    if index == -1:
+        return number
+    
+    number = f"{str(number)[:index]}{str(number)[index:digits+2]}"
+    number = float(number)
+
+    return number
 
 def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 10) -> None:
     """
@@ -111,16 +129,16 @@ def convert_to_gazebo_world_frame(points: list, precision: int = 5) -> list:
 
     return data_world if len(data_world) > 1 else data_world[0]
 
-def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best.pt") -> tuple:
+def detect_objects(img: np.ndarray, threshold: float = 0.55, render: bool = False, yolo_path: str = "yolov5", model_path: str = "best.pt") -> tuple:
     """
     Detects objects inside a given image.
 
     Args:
         img (np.ndarray): Image to be processed.
-        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.4 (40%).
+        threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.55 (55%).
         render (bool, optional): Specifies if the function has to return the rendered image with the detected objects. Defaults to False.
         yolo_path (str, optional): Yolo folder path. Defaults to "yolov5".
-        model_path (str, optional): Yolo .pt file path. Defaults to "best_v2.40.pt".
+        model_path (str, optional): Yolo .pt file path. Defaults to "best.pt".
 
     Returns:
         dict: Detected objects.
@@ -141,6 +159,7 @@ def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False
         function.model = torch.hub.load(yolo_path, 'custom', path=model_path, source='local')
 
     image = img.copy()
+    image = image_utils.extract_objects(image)
 
     # process input image
     result = function.model([image], size = 640)
@@ -155,7 +174,7 @@ def detect_objects(img: np.ndarray, threshold: float = 0.4, render: bool = False
     for item in result.xyxy[0]:
 
         item = item.tolist()
-
+        
         box = item[0:4]
         box = [int(b) for b in box]
         box = [(box[0],box[1]),(box[0],box[3]),(box[2],box[1]),(box[2],box[3])]
@@ -196,8 +215,12 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         dict: Updated objects.
     """
 
+    clear()
+
     frame = img.copy()
     image = image_utils.extract_objects(img=frame)
+
+    processed_objects = []
 
     for obj in objects:
         
@@ -225,84 +248,127 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         
         if not len(points_2D):
             continue
-        
+
         # convert the extracted pixels (2d points) in 3d points
         points_3D = convert_to_gazebo_world_frame(points=points_2D)
         
         # final points array
         points = [[points_2D[i],points_3D[i]] for i in range(len(points_2D))]
 
-        # object characterization
-        base_line = []
-        left_line = []
-        right_line = []
+        # get rows of the image
+        rows = []
 
-        img_center = int((min_x + max_x) / 2)
-
-        # scan each row
         for y in range(min_y, max_y+1):
+            row = [point for point in points if point[0][1] == y]
 
-            # current row
-            pts = [point for point in points if point[0][1] == y]
-
-            if not len(pts):
+            if not len(row):
                 continue
-            
-            # discard current row if not all the points have the same x (necessary for base line)
-            if all(pts[i][1][0] == pts[i+1][1][0] for i in range(len(pts)-1)):
-                base_line.append(pts)
-            
-            # extract all the points in the current row that are on the left side of the image
-            left_points = [point for point in pts if point[0][0] < img_center]
 
-            # extract all the points in the current row that are on the right side of the image
-            right_points = [point for point in pts if point[0][0] >= img_center]
-
-            # extract the point with the highest x on the left side of the image
-            if len(left_points):
-                left_line.append(max(left_points, key=lambda x: x[1][0]))
-            
-            # extract the point with the larger x on the rigth side of the image
-            if len(right_points):
-                right_line.append(max(right_points, key=lambda x: x[1][0]))
-
-        # extract the row with the smaller x
-        base_line = min(base_line, key=lambda x: x[0][1][0])
+            rows.append(row)
         
-        # calculate the left and right points
-        base_left = min(base_line, key=lambda x: x[0][0])
-        base_right = max(base_line, key=lambda x: x[0][0])
+        # get columns of the image
+        columns = []
 
-        # remove all the points that have an x greater than the x of base_left        
-        left_line = [point for point in left_line if point[1][2] == base_left[1][2] and point[0][0] <= base_left[0][0]]
-        # extract the point with the highest x
-        left_line_best = max(left_line, key=lambda x: x[1][0])
-        # check if there are other pixels with the same x
-        left_line = [point for point in left_line if point[0][0] == left_line_best[0][0]]
-        # get the pixel with the smaller distance from base_left
-        left_point = min(left_line, key=lambda x: math.dist(x[0], base_left[0]))
+        for x in range(min_x, max_x+1):
+            column = [point for point in points if point[0][0] == x]
 
-        # remove all the points that have an x smaller than the x of base_right  
-        right_line = [point for point in right_line if point[1][2] == base_left[1][2] and point[0][0] >= base_right[0][0]]
-        # extract the point with the highest x
-        right_line_best = max(right_line, key=lambda x: x[1][0])
-        # check if there are other pixels with the same x
-        right_line = [point for point in right_line if point[0][0] == right_line_best[0][0]]
-        # get the pixel with the smaller distance from base_right
-        right_point = min(right_line, key=lambda x: math.dist(x[0], base_left[0]))
+            if not len(column):
+                continue
 
-        # calculate the center as the middle point between the left and right points
-        center_m, center_q = geometric_utils.calculate_line(left_point[1][:2],right_point[1][:2])
+            columns.append(column)
 
-        center_x = (right_point[1][0] - left_point[1][0])/2 + left_point[1][0]
-        center_y = (right_point[1][1] + left_point[1][1]) / 2 if center_m == 1 and center_q == 0 else center_x * center_m + center_q 
+        #? CENTER
+        center_max_x = max(points, key=lambda x: x[1][0])
+        center_min_x = min(points, key=lambda x: x[1][0])
 
-        center = (round(center_x,3), round(center_y,3), round(base_left[1][2],3))
+        center_max_y = max(points, key=lambda x: x[1][1])
+        center_min_y = min(points, key=lambda x: x[1][1])
 
-        # calculate the angle (z)
+        center_max_z = max(points, key=lambda x: x[1][2])
 
-        if left_point[1][0] != base_left[1][0]:
-            angle_rad = math.atan((left_point[1][1] - base_left[1][1]) / (left_point[1][0] - base_left[1][0]))
+        a = (center_min_x[1][0], center_min_y[1][1])
+        b = (center_min_x[1][0], center_max_y[1][1])
+        c = (center_max_x[1][0], center_max_y[1][1])
+        d = (center_max_x[1][0], center_min_y[1][1])
+
+        m_bd, q_bd = geometric_utils.calculate_line(b, d)
+        m_ac, q_ac = geometric_utils.calculate_line(a,c)
+
+        center_x = (q_bd - q_ac) / (m_ac - m_bd)
+        center_y = m_ac * center_x + q_ac
+        center_z = center_max_z[1][2]
+
+        center = (center_x, center_y, center_z)
+        center = min(points, key=lambda x: math.dist(x[1], center))
+
+        center_2D, center_3D = center
+
+        #? BOTTOM
+        # the bottom will be the last row (approx), the one with the highest y
+        if rows[-2][-1][0][0] - rows[-2][0][0][0] > rows[-1][-1][0][0] - rows[-1][0][0][0]:
+            base = [rows[-2][0], rows[-2][-1]]
+        else:
+            base = [rows[-1][0], rows[-1][-1]]
+        
+        #? LEFT
+        threshold = 3
+
+        left = [point for point in points if point[0][0] < base[0][0][0]]
+
+        if not len(left):
+            left = base[0]
+        
+        else:
+
+            tmp = []
+
+            error = 0
+            factor = 0.01
+
+            while not len(tmp):
+
+                tmp = [point for point in left if point[1][2] < base[0][1][2] + error]
+
+                if not len(tmp):
+                    error = error + factor
+            
+            left = max(tmp, key=lambda x: x[1][0])
+
+            if abs(left[0][0] - base[0][0][0]) <= threshold:
+                left = base[0]
+
+        cv2.line(image, left[0], base[0][0], (255,255,255),1)
+
+        #? RIGHT
+        right = [point for point in points if point[0][0] > base[-1][0][0]]
+
+        if not len(left):
+            right = base[-1]
+        
+        else:
+
+            tmp = []
+
+            error = 0
+            factor = 0.01
+
+            while not len(tmp):
+
+                tmp = [point for point in right if point[1][2] < base[0][1][2] + error]
+
+                if not len(tmp):
+                    error = error + factor
+            
+            right = max(tmp, key=lambda x: x[1][0])
+
+            if abs(right[0][0] - base[-1][0][0]) <= threshold:
+                right = base[-1]
+
+        cv2.line(image, right[0], base[-1][0], (255,255,255),1)
+
+        #? YAW
+        if left[1][0] != base[0][1][0]:
+            angle_rad = math.atan((left[1][1] - base[0][1][1]) / (left[1][0] - base[0][1][0]))
         else:
             angle_rad = 0
 
@@ -313,28 +379,20 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         # save object
         objects[objects.index(obj)]["position"] = {
-            "x": center[0],
-            "y": center[1],
-            "z": center[2],
+            "x": center_3D[0],
+            "y": center_3D[1],
+            "z": center_3D[2],
             "roll": 0,
             "pitch": 0,
             "yaw": angle_rad
         }
 
-        # draw the results on the frame (optional)
-        cv2.line(frame, base_left[0], base_right[0], (0,0,255),2)
-        cv2.line(frame, left_point[0], left_point[0], (0,0,255),2)
-        cv2.line(frame, right_point[0], right_point[0], (0,0,255),2)
-
-        print(f"========== OBJECT {obj['label_name']} ==========")
-        print(f"Center: {center}")
-        print(f"Rad: {angle_rad}\nDeg: {angle_deg}\n")
+        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation: (None, None, {angle_rad})\n")
 
     if len(objects):
-        cv2.imshow(f"Debug",frame)
-        #cv2.imshow(f"Decolored",image_utils.extract_objects(img=frame))
+        cv2.imshow(f"Debug",image)
 
-    return objects, frame
+    return processed_objects, frame
 
 def process_image(img: np.ndarray, render: bool = False, threshold: float = 3.5) -> np.ndarray:
     """

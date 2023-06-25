@@ -23,7 +23,7 @@ clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True
 
 BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
 
-SLEEP_TIME = 3
+SLEEP_TIME = 5
 
 MARGIN = 0.07
 
