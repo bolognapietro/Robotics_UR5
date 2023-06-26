@@ -12,8 +12,15 @@ using namespace Eigen;
 typedef Matrix<double,Dynamic,6> Matrix6d;
 typedef Matrix<double, 1, 6> RowVector6d;
 
-RowVectorXd A{{0.0, -0.425, -0.3922, 0.0, 0.0, 0.0}};        // Row-vector with 6 elements
-RowVectorXd D{{0.1625, 0.0, 0.0, 0.1333, 0.0997, 0.0996}};   // Row-vector with 6 elements
+RowVectorXd A{{0.0, -0.425, -0.3922, 0.0, 0.0, 0.0}};        
+RowVectorXd D{{0.1625, 0.0, 0.0, 0.1333, 0.0997, 0.0996}};   
+
+/**
+ * @brief Give th1, returns the transformation matrix from frame 0 to frame 1
+ * 
+ * @param th1 
+ * @return ** Matrix4d
+ */
 
 Matrix4d T10f (double th1){
     Matrix4d T10f {
@@ -25,6 +32,13 @@ Matrix4d T10f (double th1){
     return T10f;
 }
 
+/**
+ * @brief Give th1, returns the transformation matrix from frame 1 to frame 2
+ * 
+ * @param th1 
+ * @return ** Matrix4d
+ */
+
 Matrix4d T21f (double th2){
     Matrix4d T21f {
             {cos(th2) , -sin(th2) , 0 , 0},
@@ -34,6 +48,13 @@ Matrix4d T21f (double th2){
     };
     return T21f;
 }
+
+/**
+ * @brief Give th2, returns the transformation matrix from frame 2 to frame 3
+ * 
+ * @param th2
+ * @return ** Matrix4d
+ */
 
 Matrix4d T32f (double th3){
     Matrix4d T32f {
@@ -45,6 +66,13 @@ Matrix4d T32f (double th3){
     return T32f;
 }
 
+/**
+ * @brief Give th3, returns the transformation matrix from frame 3 to frame 4
+ * 
+ * @param th3 
+ * @return ** Matrix4d
+ */
+
 Matrix4d T43f (double th4){
     Matrix4d T43f {
             {cos(th4) , -sin(th4) , 0 , A[2]},
@@ -54,6 +82,13 @@ Matrix4d T43f (double th4){
     };
     return T43f;
 }
+
+/**
+ * @brief Give th4, returns the transformation matrix from frame 4 to frame 5
+ * 
+ * @param th4
+ * @return ** Matrix4d
+ */
 
 Matrix4d T54f (double th5){
     Matrix4d T54f {
@@ -65,6 +100,13 @@ Matrix4d T54f (double th5){
     return T54f;
 }
 
+/**
+ * @brief Give th5, returns the transformation matrix from frame 5 to frame 6
+ * 
+ * @param th5
+ * @return ** Matrix4d
+ */
+
 Matrix4d T65f (double th6){
     Matrix4d T65f {
             {cos(th6) , -sin(th6) , 0 , 0},
@@ -75,8 +117,13 @@ Matrix4d T65f (double th6){
     return T65f;
 }
 
-
-/* ######################### DIRECT KINEMATICS ######################### */
+/**
+ * @brief Transform from the joint angles space to the operational space, which is specified in terms of position and orientation of the end-effector
+ * 
+ * @param[in] Th
+ * @param[in] R06
+ * @param[in] ef
+ */
 
 void direct_kinematics(RowVector6d Th, Matrix3d& R06, Vector3d& ef){
 
@@ -87,8 +134,6 @@ void direct_kinematics(RowVector6d Th, Matrix3d& R06, Vector3d& ef){
     double th5 = Th[4];
     double th6 = Th[5];
 
-    RowVectorXd alfa{{0.0, M_PI_2, 0.0, 0.0, M_PI_2, -M_PI_2}};
-
     Matrix4d T06 = T10f(th1)*T21f(th2)*T32f(th3)*T43f(th4)*T54f(th5)*T65f(th6);
 
     ef = T06.block<3,1>(0,3);
@@ -96,25 +141,51 @@ void direct_kinematics(RowVector6d Th, Matrix3d& R06, Vector3d& ef){
 }
 
 
-/* ######################### INVERSE KINEMATICS ######################### */
+/**
+ * @brief return the hypotenuse of two sides
+ * 
+ * @param[in] x1
+ * @param[in] x2 
+ * @return double
+ */
 
 double hypot(double x1, double x2){
     double hy = sqrt(x1*x1 + x2*x2);
     return hy;
 }
 
+/**
+ * @brief return the real part of the asin of an angle
+ * 
+ * @param[in] theta
+ * @return double
+ */
+
 double arccos(std::complex<double> theta){
     return acos(theta).real();
 }
+
+/**
+ * @brief return the real part of the sin of an angle
+ * 
+ * @param[in] theta
+ * @return double
+ */
 
 double arcsin(std::complex<double> theta){
     return asin(theta).real();
 }
 
-void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,0,0},{0,1,0},{0,0,1}}){
-    /* INVERTO LA Y e Z PERCHE' SU GAZEBO E' SEMPRE IL CONTRARIO (assi invertiti ? ) */
+/**
+ * @brief Transform from the operational space to the joint angles space
+ * 
+ * @param[in] p60 position you want to bring in the joint space
+ * @param[in] Th Matrix6d passed as reference to save the computed joints
+ * @param[in] R60 Matrix3d passed as reference to save the orientation matrix
+ */
 
-    //bool ret = true;
+void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,0,0},{0,1,0},{0,0,1}}){
+
 
     p60[1] = -p60[1];
     p60[2] = -p60[2];
@@ -140,7 +211,7 @@ void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,
 
     //Related to th11 a th51
     Matrix4d T06 = T60.inverse();
-    Vector3d Xhat = T06.block<3,1>(0,0);  //seleziono la prima colonna e ne estraggo solamente i primi 3 elementi
+    Vector3d Xhat = T06.block<3,1>(0,0);  
     Vector3d Yhat = T06.block<3,1>(0,1);   //[:,1][0:3]
 
     float th6_1 = (atan2(((-Xhat[1]*sin(th1_1) + Yhat[1]*cos(th1_1))) / sin(th5_1), ((Xhat[0]*sin(th1_1) - Yhat[0]*cos(th1_1)))/sin(th5_1)));
@@ -192,8 +263,6 @@ void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,
     double th2_6 = atan2(-p41_2[2], -p41_2[0])-arcsin((A[2]*sin(th3_2))/p41xz_2);
     double th2_7 = atan2(-p41_3[2], -p41_3[0])-arcsin((A[2]*sin(th3_3))/p41xz_3);
     double th2_8 = atan2(-p41_4[2], -p41_4[0])-arcsin((A[2]*sin(th3_4))/p41xz_4);
-
-    //std::cout << "det:\n" << T32f(th3_1).determinant() << std::endl;
 
     //Five
     Matrix4d T43m = T32f(th3_1).inverse()*T21f(th2_1).inverse()*T10f(th1_1).inverse()*T60*T65f(th6_1).inverse()*T54f(th5_1).inverse();
@@ -249,12 +318,26 @@ void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,
     Th = T;
 }
 
-bool areEqual(double n1, double n2, double precision = 0.0001){
+/**
+ * @brief Evaluate if two decimal numbers are almost equal
+ * 
+ * @param[in] n1
+ * @param[in] Tn2
+ * @param[in] precision
+ * @return bool
+ */
+
+bool areEqual(double n1, double n2, double precision = 0.001){
     double diff = std::abs(n1 - n2);
     return diff < precision;
 }
 
-/* ######################### CHECK COLLISION ######################### */
+/**
+ * @brief checks if the final pose of every single link of the robot is over some space limits, such as the table height and the backward wall.
+ * 
+ * @param[in] Th
+ * @return bool
+ */
 
 bool check_collision(RowVector6d Th){
 
@@ -272,9 +355,6 @@ bool check_collision(RowVector6d Th){
 
     Matrix4d matrici[6] = {T10f(th1),T21f(th2),T32f(th3),T43f(th4),T54f(th5),T65f(th6)};
 
-    //Calcolo la posizione dell n-esimo end effector
-    //Per selezionare il numero di end-effector modificare la variabile num_joint
-
     double pos_z;
     double pos_y;
 
@@ -288,14 +368,17 @@ bool check_collision(RowVector6d Th){
             cond = false;
             break;
         }
-        //std::cout << "CIAO " << i << std::endl;
     }
 
     return cond;
 }
 
-
-/* ######################### CHECK ANGLES ######################### */
+/**
+ * @brief checks if the computed joint are reachable by the ur5 robot.
+ * 
+ * @param[in] Th
+ * @return bool
+ */
 
 bool check_angles(RowVector6d Th){
 
@@ -317,7 +400,6 @@ bool check_angles(RowVector6d Th){
     for(int i=0; i<6; i++){       // i<th.cols()
         theta = Th[i];
         RowVector2d mav = max_angles_value[cont];
-        // std::cout << "mav[0]: " << mav[0] << std::endl;
         if(theta > mav[0] and theta < mav[1]){
             cont++;
             continue;
@@ -325,8 +407,6 @@ bool check_angles(RowVector6d Th){
         else{
             ret = false;
         }
-
-        // std::cout << theta << std::endl;
     }
     if(not check_collision(Th=Th)){
         ret = false;
@@ -335,16 +415,25 @@ bool check_angles(RowVector6d Th){
     return ret;
 }
 
+/**
+ * @brief compute the norm of two joint configurations
+ * 
+ * @param[in] Th0
+ * @param[in] th
+ * @return double
+ */
 
-/* ######################### NORMA ######################### */
-
-double norma(RowVector6d Th0, RowVector6d th){
-    // std::cout << "Th0[0]: " << Th0[0] << std::endl;
+double norm(RowVector6d Th0, RowVector6d th){
     return sqrt(pow(Th0[0]-th[0], 2) + pow(Th0[1]-th[1], 2) + pow(Th0[2]-th[2], 2) + pow(Th0[3]-th[3], 2) + pow(Th0[4]-th[4], 2) + pow(Th0[5]-th[5], 2));
 }
 
 
-/* ######################### BEST INVERSE ######################### */
+/**
+ * @brief removes a row from a matrix
+ * 
+ * @param[in] matrix
+ * @param[in] rowToRemove
+ */
 
 void removeRow(Matrix6d& matrix, unsigned int rowToRemove)
 {
@@ -357,24 +446,20 @@ void removeRow(Matrix6d& matrix, unsigned int rowToRemove)
     matrix.conservativeResize(numRows,numCols);
 }
 
+/**
+ * @brief sorts the result of the inverse kinematics and removes the not allowed rows
+ * 
+ * @param[in] Th0
+ * @param[in] all
+ * @return bool
+ */
+
 bool bestInverse(RowVector6d Th0, Matrix6d& all){
     Matrix<double, 1, 6> thi;
     Matrix<double, 1, 6> thj;
     Matrix<double, 1, 6> tmp;
 
     bool ret = true;
-
-    /* RIMUOVI RIGHE CHE NON VANNO BENE */
-    /*
-    for(int i=0; i<8; i++){
-        thi = all.row(i);
-        ROS_INFO("%d\n", i);
-        if(!check_angles(thi)){
-            ROS_INFO("errore\n");
-            removeRow(all, i);
-            ROS_INFO("due\n");
-        }
-    }*/
 
     // Avoid too much rotation 
     for (int i=0;i<all.rows();i++){
@@ -399,13 +484,13 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
 
     for(int i=0; i<all.rows(); i++){
         thi = all.row(i);
-        double normaMin = norma(Th0, thi);
+        double normaMin = norm(Th0, thi);
         int iMin = i;
 
         for(int j=i; j<all.rows(); j++){
             thj = all.row(j);
-            if(norma(Th0, thj) < normaMin){
-                normaMin = norma(Th0, thj);
+            if(norm(Th0, thj) < normaMin){
+                normaMin = norm(Th0, thj);
                 iMin = j;
             }
         }
@@ -416,55 +501,37 @@ bool bestInverse(RowVector6d Th0, Matrix6d& all){
 
     }
 
-    /* SE NESSUNA VA BENE */
     if(all.size() == 0){
         return false;
     }
 
     return ret;
-    //std::cout << "norma " << i << " = "<< normaMin << std::endl;
-
 }
 
-
-/* ######################### CHECK POINT ######################### */
+/**
+ * @brief checks if the inserted position is reachable by the robot, comparing the result of the inverse and the direct kinematics
+ * 
+ * @param[in] pos
+ * @param[in] q0
+ * @return bool
+ */
 
 bool check_point(Vector3d pos, RowVector6d q0){
-    /*chiede gli angoli alla inverse kinematics che tra la lista di 8 array guarda che ci sia almeno un array di angoli che
-      rispetta le condizioni, ovvero angoli la cui applicazione non comportano che nessun joint sbatta sul soffitto , ovvero abbia z > 0
-      e che gli angoli che bisogna applicare si possano veramente*/
 
     Matrix<double, Dynamic, 6> confs;
     Matrix<double, 1, 6> Th;
 
 
-    inverse_kinematics(pos, confs);
-
-    // std::ofstream myFile;
-    // myFile.open("src/motion_plan_2/datiInverse.csv", std::ios_base::app);
-    // myFile << pos << std::endl;
-    // for (int i=0;i<confs.rows();i++){
-    //     myFile << confs.row(i) << std::endl;
-    // }
-    // myFile << "\n";
-    // myFile.close();
-    
+    inverse_kinematics(pos, confs);    
     bestInverse(q0, confs);
-
-    // myFile.open("src/motion_plan_2/dati.csv", std::ios_base::app);
-    // myFile << pos << std::endl;
-    // for (int i=0;i<confs.rows();i++){
-    //     myFile << confs.row(i) << std::endl;
-    // }
-    // myFile << "\n";
-    // myFile.close();
 
     if(confs.rows() == 0){
       return false;
     }
 
+    std::cout << "ciao" << std::endl;
+
     Th = confs.row(0);
-    //controlla che la posizione inserita sia raggiungibile dal robot , per farlo controlla che il risultaro della inverse messo dentro la direct dia la medesima posizione
     Matrix3d R06;
     Vector3d ef;
     direct_kinematics(Th,R06,ef);

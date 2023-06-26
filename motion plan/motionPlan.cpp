@@ -18,6 +18,13 @@ typedef Matrix<double, 1, 6> RowVector6d;
 typedef Matrix<double, 1, 8> RowVector8d;
 typedef Matrix<double, Dynamic, 8> Matrix8d;
 
+/**
+ * @brief converts euler angles to a rotation matrix
+ * 
+ * @param[in] angles
+ * @return Matrix3d
+ */
+
 Matrix3d eul2rotm(Vector3d angles){
     double phi = angles(0);
     double theta = angles(1);
@@ -32,6 +39,13 @@ Matrix3d eul2rotm(Vector3d angles){
     return R;
 }
 
+/**
+ * @brief converts a rotation matrix to euler angles
+ * 
+ * @param[in] R
+ * @return Vector3d
+ */
+
 Vector3d rotm2eul(Matrix3d R){
     double x = atan2(R(1,0),R(0,0));
     double y = atan2(-R(2,0), sqrt(pow(R(2,1), 2) + pow(R(2,2), 2)));
@@ -39,6 +53,12 @@ Vector3d rotm2eul(Matrix3d R){
     Vector3d vet {{x, y, z}};
     return vet;
 }
+
+/**
+ * @brief compute the joints to close the gripper
+ * 
+ * @param[in] Th
+ */
 
 void closeGripper(Matrix8d& Th){
     RowVector8d th = Th.row(Th.rows()-1);
@@ -51,6 +71,12 @@ void closeGripper(Matrix8d& Th){
     }
 }
 
+/**
+ * @brief compute the joints to open the gripper
+ * 
+ * @param[in] Th
+ */
+
 void openGripper(Matrix8d& Th){
     RowVector8d th = Th.row(Th.rows()-1);
     double start = 0.3;
@@ -62,8 +88,21 @@ void openGripper(Matrix8d& Th){
     }
 }
 
+/**
+ * @brief computes a path of points between a starting point and a final point.
+
+ * 
+ * @param[in] qEs current joint configuration
+ * @param[in] xEf final position to reach
+ * @param[in] phiEf orientation matrix of the final position
+ * @param[in] minT minimum time of the move
+ * @param[in] maxT max time of the move
+ * @param[in] Th joint matrix passed as reference to store the computed joint configurations
+ * @param[in] slow parameter to perform slower moves
+ * @return bool
+ */
+
 bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double maxT, Matrix8d& Th, bool slow=false){
-    //double grip = Th.row(Th.rows()-1)(6);
     double grip;
     if(Th.size() == 0)
     {
@@ -74,7 +113,7 @@ bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, d
         grip = Th.row(Th.rows()-1)(6);
     }
 
-    double dt = 0.01; //come prendere da params??
+    double dt = 0.01;
     if (slow){
         dt = dt/2;
     }
@@ -114,7 +153,7 @@ bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, d
                 break;
             }
             RowVector8d th8;
-            th8 << th, grip, grip;   //FORSE NON VA
+            th8 << th, grip, grip;
 
             Th.conservativeResize(Th.rows()+1, Eigen::NoChange );
             Th.row(Th.rows()-1) = th8;
@@ -127,6 +166,18 @@ bool p2pMotionPlan(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, d
     }
     return false;
 }
+
+/**
+ * @brief build an entire movement from a starting point to a final point. It joins three different p2p motionplans
+ * 
+ * @param[in] qEs current joint configuration
+ * @param[in] xEf final position to reach
+ * @param[in] phiEf orientation matrix of the final position
+ * @param[in] minT minimum time of the move
+ * @param[in] maxT max time of the move
+ * @param[in] Th joint matrix passed as reference to store the computed joint configurations
+ * @return bool
+ */
 
 bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double maxT, Matrix8d& Th){
 
@@ -158,7 +209,6 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
         slow = true;
 
     res = p2pMotionPlan(qEs, xE2, phiEf, t0(1), tf(1), Th, slow);
-    //std::cout << "Second Move" << std::endl << Th << std::endl;
     if (not res){
         return false;
     }
@@ -166,7 +216,6 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
     //THIRD MOVE
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
     res = p2pMotionPlan(qEs, xEf, phiEf, t0(2), tf(2), Th);
-    //std::cout << "Third Move" << std::endl << Th << std::endl;
     if (not res){
         return false;
     }
@@ -174,13 +223,21 @@ bool threep2p(RowVector6d qEs, Vector3d xEf, Vector3d phiEf, double minT, double
     return true;
 }
 
-/*
+/**
+ * @brief perform a rotation movement
+ * 
+ * @param[in] qEs current joint configuration
+ * @param[in] xEf final position to reach
+ * @param[in] type_rot defines the type of the rotation
+ * @param[in] minT minimum time of the move
+ * @param[in] maxT max time of the move
+ * @param[in] Th joint matrix passed as reference to store the computed joint configurations
+ * @param[in] recursive1
+ * @param[in] recursive2
+ * @return bool
+ */
 
-    >>> param: type_rot = tipologia di rotazione da effettuare
-
-
-*/
-bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT, Matrix8d& Th, bool ricorsiva1 = false, bool ricorsiva2 = false){
+bool rotate(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT, Matrix8d& Th, bool recursive1 = false, bool recursive2 = false){
     Vector3d xRot {-0.277, 0.35, -0.83};
     Vector3d xWork {-0.4, 0.35, -0.74};
     Vector3d xWorkHigh {-0.4, 0.35, -0.5};
@@ -206,44 +263,44 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
         break;
     
     case 5:
-        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 2, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 2, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 2, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
     
     case 6:
-        cond1 = ruota(qEs, xEf, 2, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 2, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 1, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 1, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 7:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 2, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 2, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 8:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 1, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 1, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 9:
-        cond1 = ruota(qEs, xEf, 1, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 1, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 4, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 4, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
     case 10:
-        cond1 = ruota(qEs, xEf, 3, minT, maxT, Th, true, false);
+        cond1 = rotate(qEs, xEf, 3, minT, maxT, Th, true, false);
         qEs = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond2 = ruota(qEs, xWork, 4, minT, maxT, Th, false, true);
+        cond2 = rotate(qEs, xWork, 4, minT, maxT, Th, false, true);
         return cond1 and cond2;
         break;
 
@@ -252,7 +309,7 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
     }
 
 
-    bool res = threep2p(qEs, xEf, phiE0, minT, maxT, Th); //da dove sono all'oggetto
+    bool res = threep2p(qEs, xEf, phiE0, minT, maxT, Th); //from where i am the object
     if (not res)
         return false;
     // CLOSE GRIPPER
@@ -260,9 +317,7 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
 
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
 
-    if (!ricorsiva2){
-
-        //res = threep2p(qEs, xWorkHigh, phiE0, minT, maxT, Th); //dall'oggetto alla zona di lavoro xWork
+    if (!recursive2){
 
         bool res[2] = {true, true};
         Vector3d xtemp = xEf;
@@ -278,9 +333,7 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
         qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
     }
 
-    //std::cout << "xe1: " << xe1 << std::endl;
-
-    res = threep2p(qEs, xRot, dir, minT, maxT, Th);  //gira oggetto e lo rimette lì
+    res = threep2p(qEs, xRot, dir, minT, maxT, Th);  // rotate object
     if (not res)
         return false;
     // OPEN GRIPPER
@@ -289,8 +342,8 @@ bool ruota(RowVector6d qEs, Vector3d xEf, int type_rot, double minT, double maxT
     qEs = Th.row(Th.rows()-1).block<1,6>(0,0);
     phiE0 << M_PI_2,0,0;
 
-    if (!ricorsiva1){
-        res = threep2p(qEs, xWork, phiE0, minT, maxT, Th);  //prende l'oggetto da sopra
+    if (!recursive1){
+        res = threep2p(qEs, xWork, phiE0, minT, maxT, Th); // takes the object from above
         if (not res)
             return false;
         // CLOSE GRIPPER

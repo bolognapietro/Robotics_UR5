@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>Prova motion_plan_pkg</description>
   
-  <maintainer email="mfocchi@todo.todo">mfocchi</maintainer>
+  <maintainer email="christian@todo.todo">christian</maintainer>
 
   <license>TODO</license>
   
@@ -12,4 +12,7 @@
   <depend>roscpp</depend>
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
+  <build_depend>message_generation</build_depend>
+
+<exec_depend>message_runtime</exec_depend>
 </package>

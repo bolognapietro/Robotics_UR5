@@ -31,7 +31,7 @@ void inverse_kinematics(Vector3d p60, Matrix6d& Th, Matrix3d R60 = Matrix3d {{1,
 bool areEqual(double n1, double n2, double precision);
 bool check_collision(RowVector6d Th);
 bool check_angles(RowVector6d Th);
-double norma(RowVector6d Th0, RowVector6d th);
+double norm(RowVector6d Th0, RowVector6d th);
 void removeRow(Matrix6d& matrix, unsigned int rowToRemove);
 bool bestInverse(RowVector6d Th0, Matrix6d& all);
 bool check_point(Vector3d pos, RowVector6d q0);

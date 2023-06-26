@@ -11,6 +11,7 @@
 #include "sensor_msgs/JointState.h"
 #include "boost/shared_ptr.hpp"
 #include "geometry_msgs/Pose.h"
+#include "vision_pkg/legoMessage.h"
 
 using namespace std;
 
@@ -22,12 +23,16 @@ typedef Matrix<double, 1, 8> RowVector8d;
 bool real_robot = false;
 
 RowVector8d getJointState();
-RowVector6d getJointBraccio();
+RowVector6d getJointArm();
 Eigen::RowVector2d getJointGripper();
 void publish(Matrix8d& Th);
 RowVector3d findPosDrop(int type_block);
 
-int main(int argc, char **argv) {
+/**
+ * @brief manages the motion plan node
+ */
+
+ int main(int argc, char **argv) {
     ros::init(argc, argv, "motion_plan");
     ros::NodeHandle n;
 
@@ -40,29 +45,19 @@ int main(int argc, char **argv) {
     Eigen::RowVector3d phiEf{{0, 0, 0}};
     int maxT = 3;       // movement time ( 3 -> fast, 6 -> slow)
 
-    /*
-    while(1){
-        RowVector8d test = getJointState();
-        for(int i=0; i<8; i++){
-            ROS_INFO("%f ", test(i));
-        }
-        cout << endl;
-    }
-    */
-
     // START POSITION
     {
         Matrix8d Th;
         bool cond[3] = {true, true, true};
-        RowVector6d jointBraccio = getJointBraccio();
+        RowVector6d jointArm = getJointArm();
 
         cout << "Moving to START position " << endl;
         RowVector3d posInit {{0.4, 0.2, -0.5}};
         
-        cond[0] = p2pMotionPlan(jointBraccio, posInit, phiEf, 0, maxT, Th);
+        cond[0] = p2pMotionPlan(jointArm, posInit, phiEf, 0, maxT, Th);
         closeGripper(Th);
-        jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-        cond[1] = p2pMotionPlan(jointBraccio, posHome, phiEf, 0, maxT, Th);
+        jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+        cond[1] = p2pMotionPlan(jointArm, posHome, phiEf, 0, maxT, Th);
         openGripper(Th);
         start = 1;
 
@@ -74,24 +69,27 @@ int main(int argc, char **argv) {
 
 
     while(ros::ok()) {
-        boost::shared_ptr<geometry_msgs::Pose const> sharedMsg;
 
         // Position waited from zed
-/*
+
+        ros::NodeHandle node_1;
+        vision_pkg::legoMessage::ConstPtr sharedMsg = ros::topic::waitForMessage<vision_pkg::legoMessage>("/objects_info",node_1 );
+
+
         cout << "Waiting for messages " << endl;
-        sharedMsg = ros::topic::waitForMessage<geometry_msgs::Pose>("/objects_info");
         if (sharedMsg != NULL) {
-            pos(0) = sharedMsg->position.x - 0.5;
-            pos(1) = sharedMsg->position.y - 0.35;
-            pos(2) = sharedMsg->position.z - 1.61 -0.04;
+            pos(0) = sharedMsg->pose.position.x - 0.5;
+            pos(1) = sharedMsg->pose.position.y - 0.35;
+            pos(2) = sharedMsg->pose.position.z - 1.61 -0.04;
         }
 
         pos(2) = -0.73;
         ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
-*/
+
 
         // To manually insert the coordinates
 
+/*
         cout << "pos[x]: ";
         cin >> pos(0);
         cout << "pos[y]: ";
@@ -106,79 +104,85 @@ int main(int argc, char **argv) {
 
         cout << "Pos drop [0-8]: ";
         cin >> type_block;
+*/      
+        bool rot = false;
+        int type_rot = 0;
 
         // ZED
 
-        // double frameInizialeZ;
-        // frameInizialeZ = sharedMsg->orientation.w;
-        // cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
+        double frameInizialeZ;
+        frameInizialeZ = sharedMsg->pose.orientation.w;
+        cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
 
-        // // POS DROP
-        // type_block = sharedMsg->label_index;
+        // POS DROP
+        string type_block_str = sharedMsg->model;
+        int type_block = stoi(type_block_str);
 
         posDrop = findPosDrop(type_block);
 
-        cout << "Rotazione? [0 = no, 1 = si] ";
-        cin >> rot;
+        // cout << "Rotation? [0 = no, 1 = si] ";
+        // cin >> rot;
         
-        if (rot){
-            cout << "Tipologia rotazione: ";
-            cin >> type_rot;  // 0-10 , 0 -> no_rot , 1-4 -> elementar , 5-10 -> composte
-        } else {
-            frameInizialeZ = 0;
-        }
+        // if (rot){
+        //     cout << "Tipologia rotazione: ";
+        //     cin >> type_rot;  // 0-10 , 0 -> no_rot , 1-4 -> elementar , 5-10 -> composite
+        // } else {
+        //     frameInizialeZ = 0;
+        // }
 
         phiEf(0) = frameInizialeZ;
 
-        RowVector6d jointBraccio = getJointBraccio();
+        RowVector6d jointArm = getJointArm();
 
         Matrix8d Th;
         bool cond[3] = {true, true, true};
-        if (check_point(pos, jointBraccio)) {
-            ROS_INFO("Posizione raggiungibile dal braccio!\n");
+        if (check_point(pos, jointArm)) {
+            ROS_INFO("Posizione raggiungibile dal Arm!\n");
 
             if (!rot) {
-                cond[0] = threep2p(jointBraccio, pos, phiEf, 0, maxT, Th);
+                cond[0] = threep2p(jointArm, pos, phiEf, 0, maxT, Th);
                 // CLOSE GRIPPER
                 closeGripper(Th);
-                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointBraccio, posDrop, phiZero, 0, maxT, Th);
+                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
                 // OPEN GRIPPER
                 openGripper(Th);
-                // TORNO ALLA HOME
-                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointBraccio, posHome, phiZero, 0, maxT, Th);
+                // RETURN HOME
+                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
             } else {
                 cout << phiEf << endl;
-                cond[0] = ruota(jointBraccio, pos, type_rot, 0, maxT, Th);
-                // ROTAZIONI NELLA RUOTA
-                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointBraccio, posDrop, phiZero, 0, maxT, Th);
+                cond[0] = rotate(jointArm, pos, type_rot, 0, maxT, Th);
+                // ROTATIONS
+                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
                 // OPEN GRIPPER
                 openGripper(Th);
-                // TORNO ALLA HOME
-                jointBraccio = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointBraccio, posHome, phiZero, 0, maxT, Th);
+                // RETURN HOME
+                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
             }
 
             //PUBLISH
-            if (cond[0] and cond[1] and cond[2]) {  //MOVIMENTO OK
-                //PUBLISH
+            if (cond[0] and cond[1] and cond[2]) {  //MOVE OK
                 publish(Th);
             } else {
-                ROS_INFO("Errore nella traiettoria\n");
-                //cout << "Errore nella traiettoria" << endl;
+                ROS_INFO("Trajectory error\n");
             }
 
         } else {
-            ROS_INFO("Posizione IMPOSSIBILE da raggiungere!\n");
-            //cout << "Posizione IMPOSSIBILE da raggiungere!" << endl;
+            ROS_INFO("Position IMPOSSIBLE to reach!\n");
         }
     }
 
     return 0;
 }
 
+/**
+ * @brief get the joint state published by the ur5 generic node on the topic
+ * 
+ * @return RowVector8d
+ */
 
 RowVector8d getJointState(){
     boost::shared_ptr<sensor_msgs::JointState const> sharedMsg;
@@ -195,17 +199,34 @@ RowVector8d getJointState(){
     return joints;
 }
 
-RowVector6d getJointBraccio(){
+/**
+ * @brief get the joint state of the arm
+ * 
+ * @return RowVector6d
+ */
+
+RowVector6d getJointArm(){
     RowVector8d joints = getJointState();
-    RowVector6d jointBraccio {{joints(4), joints(3), joints(0), joints(5), joints(6), joints(7)}};
-    return jointBraccio;
+    RowVector6d jointArm {{joints(4), joints(3), joints(0), joints(5), joints(6), joints(7)}};
+    return jointArm;
 }
+
+/**
+ * @brief get the joint state of the gripper
+ * 
+ * @return RowVector2d
+ */
 
 Eigen::RowVector2d getJointGripper(){
     RowVector8d joints = getJointState();
     RowVector2d jointGripper {{joints(1), joints(2)}};
     return jointGripper;
 }
+
+/**
+ * @brief publishes the computed joint configurations on the topic
+ * 
+ */
 
 void publish(Matrix8d& Th){
     ros::NodeHandle n;
@@ -239,6 +260,12 @@ void publish(Matrix8d& Th){
         }
     }
 }
+
+/**
+ * @brief finds the drop position from the index of the block
+ * 
+ * @return RowVector3d
+ */
 
 RowVector3d findPosDrop(int type_block){
     RowVector3d posDrop;
