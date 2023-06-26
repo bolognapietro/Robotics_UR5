@@ -11,7 +11,7 @@
 #include "sensor_msgs/JointState.h"
 #include "boost/shared_ptr.hpp"
 #include "geometry_msgs/Pose.h"
-#include "vision_pkg/legoMessage.h"
+#include "motion_plan_pkg/legoMessage.h"
 
 using namespace std;
 
@@ -73,7 +73,7 @@ RowVector3d findPosDrop(int type_block);
         // Position waited from zed
 
         ros::NodeHandle node_1;
-        vision_pkg::legoMessage::ConstPtr sharedMsg = ros::topic::waitForMessage<vision_pkg::legoMessage>("/objects_info",node_1 );
+        motion_plan_pkg::legoMessage::ConstPtr sharedMsg = ros::topic::waitForMessage<motion_plan_pkg::legoMessage>("/objects_info",node_1 );
 
 
         cout << "Waiting for messages " << endl;
