@@ -251,6 +251,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         min_y = min(box, key=lambda x: x[1])[1] - adj_box
         max_y = max(box, key=lambda x: x[1])[1] + adj_box
 
+        #clean_image = image_utils.remove_noise_by_color(img=image[min_y : max_y+1, min_x : max_x+1])
+
         points_2D = []
 
         # extract colored pixels except for the black ones
@@ -414,8 +416,187 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         angle_rad = round(angle_rad,4)
         angle_deg = round(angle_deg,4)
 
+        #? BORDER
+        border_pixels = []
+    
+        for row in rows:
+
+            chunk = [row[0]]
+
+            for i in range(1,len(row)):
+
+                if row[i][0][0] - (chunk[-1][0][0]+1) == 0:
+                    chunk.append(row[i])
+
+                else:
+                    border_pixels.extend([chunk[0], chunk[-1]] if len(chunk) > 1 else chunk)
+                    chunk = [row[i]]
+            
+            if len(chunk):
+                border_pixels.extend([chunk[0], chunk[-1]] if len(chunk) > 1 else chunk)
+        
+        for column in columns:
+
+            chunk = [column[0]]
+
+            for i in range(1,len(column)):
+
+                if column[i][0][1] - (chunk[-1][0][1]+1) == 0:
+                    chunk.append(column[i])
+
+                else:
+                    border_pixels.extend([chunk[0], chunk[-1]] if len(chunk) > 1 else chunk)
+                    chunk = [column[i]]
+            
+            if len(chunk):
+                border_pixels.extend([chunk[0], chunk[-1]] if len(chunk) > 1 else chunk)
+
+        tmp = []
+        [tmp.append(point) for point in border_pixels if point not in tmp]
+        border_pixels = tmp
+
+        bottom_left = base[0]
+        bottom_right = base[-1]
+        
+        cv2.line(image, bottom_left[0], bottom_right[0], (255,255,255),1)
+
+        #? LEDGES
+        # group border pixels in rows and columns
+        border_rows = []
+        border_rows_differences = []
+
+        border_columns = []
+        border_columns_differences = []
+
+        for y in range(min_y, max_y+1):
+            row = [point for point in border_pixels if point[0][1] == y]
+
+            if not len(row):
+                continue
+            
+            row.sort(key=lambda x: x[0][0])
+
+            border_rows.append(row)
+        
+        for x in range(min_x, max_x+1):
+            column = [point for point in border_pixels if point[0][0] == x]
+
+            if not len(column):
+                continue
+            
+            column.sort(key=lambda x: x[0][1])
+
+            border_columns.append(column)
+
+        # calculate the difference between non sequential pixels in the same row or column
+        for row in border_rows:
+            differences = [row[i+1][0][0] - row[i][0][0] for i in range(len(row)-1) if row[i+1][0][0] != row[i][0][0] + 1]
+
+            if not len(differences):
+                continue
+
+            border_rows_differences.append([differences, row])
+        
+        for column in border_columns:
+            differences = [column[i+1][0][1] - column[i][0][1] for i in range(len(column)-1) if column[i+1][0][1] != column[i][0][1] + 1]
+
+            if not len(differences):
+                continue
+
+            border_columns_differences.append([differences, column])
+
+        threshold = 35
+
+        # take the first n differences until threshold is reached (starting from top)
+        top = []
+
+        for index, item in enumerate(border_rows_differences):
+
+            difference, row = item
+            difference = difference[0]
+
+            if difference > threshold:
+
+                if index < 1:
+                    continue
+
+                break
+
+            top.append([difference, row])
+
+        # take the first n differences until threshold is reached (starting from bottom)
+        base = []
+
+        border_rows_differences.reverse()
+
+        for index, item in enumerate(border_rows_differences):
+
+            difference, row = item
+            difference = difference[0]
+
+            if difference > threshold:
+
+                if index < 1:
+                    continue
+
+                break
+
+            base.append([difference, row])
+
+        # take the first n differences until threshold is reached (starting from left)
+        left = []
+
+        for index, item in enumerate(border_columns_differences):
+
+            difference, column = item
+            difference = difference[0]
+
+            if difference > threshold:
+
+                if index < 1:
+                    continue
+
+                break
+
+            left.append([difference, column])
+
+        # take the first n differences until threshold is reached (starting from right)
+        right = []
+
+        border_columns_differences.reverse()
+
+        for index, item in enumerate(border_columns_differences):
+
+            difference, column = item
+            difference = difference[0]
+
+            if difference > threshold:
+
+                if index < 1:
+                    continue
+
+                break
+
+            right.append([difference, column])
+
+        # calculate the orientation based on the results
+        orientation = None
+        
+        if len(top) > max([len(base), len(left), len(right)]):
+            orientation = "TOP"
+        
+        elif len(base) > max([len(top), len(left), len(right)]):
+            orientation = "BOTTOM"
+        
+        elif len(left) > max([len(base), len(top), len(right)]):
+            orientation = "LEFT"
+        
+        elif len(right) > max([len(base), len(left), len(top)]):
+            orientation = "RIGHT"
+
         # save object
-        objects[objects.index(obj)]["position"] = {
+        processed_objects.append(obj)
+        processed_objects[processed_objects.index(obj)]["position"] = {
             "x": center_3D[0],
             "y": center_3D[1],
             "z": center_3D[2],
@@ -426,79 +607,62 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         kpi_1_1 = round(time() - start,2)
 
-        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nHeight: {height}\nKPI 1-1: {kpi_1_1} second(s)\n")
+        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nOrientation: {orientation}\nKPI 1-1: {kpi_1_1} second(s)\n")
 
     if len(objects):
         cv2.imshow(f"Debug",image)
 
     return processed_objects, frame
 
-def process_image(img: np.ndarray, render: bool = False, threshold: float = 3.5) -> np.ndarray:
+def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
     """
     Process the image captured by the zed camera
 
     Args:
         img (np.ndarray): Captured image.
         render (bool, optional): Specifies if the image with the bounding box of the detected objects has to be rendered. Defaults to False.
-        threshold (float, optional): If the difference between the previous frame and the current one is greater or equal than the threshold, the frame will be processed. Otherwise, the old frame will be returned. Defaults to 3.5
     Returns:
         dict: Updated objects.
     """
+
+    function = eval(inspect.stack()[0][3])
+    
+    try:
+        function.cold_start
+        function.image_detected_objects
+    except:
+        function.cold_start = True
+        function.image_detected_objects = None
+
+    if not function.cold_start:
+
+        try:
+            ros.wait_for_message("/start_zed", Bool, timeout=1)
+        except:
+            return function.image_detected_objects
+
+    else:
+        function.cold_start = False
 
     image = img.copy()
 
     # extract table from image
     image = image_utils.extract_table(img = image)
 
-    function = eval(inspect.stack()[0][3])
+    # half table
+    for y in range(int(image.shape[0]*zed_params.TABLE_PERCENTAGE)):
+        image[y] = 0
 
-    process = True
+    # detect objects
+    objects, image_detected_objects = detect_objects(img = image, render = render)
+    
+    # process objects
+    objects, image_processed_objects = process_objects(img = image, objects = objects)
 
-    try:
-        
-        # calculate the difference % between the previous frame and the current one
-        diff = cv2.absdiff(function.img, image)
-        diff_gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
-        diff_gray = cv2.convertScaleAbs(diff_gray, alpha=5, beta=0)
-        intensity = cv2.mean(diff_gray)[0]
+    # send detected objects
+    send_objects(objects = objects)
 
-        diff = abs((function.intensity - intensity) / intensity * 100)
-        diff = round(diff,2)
-        process = diff >= threshold
-
-        # the current intensity becomes the previous one
-        function.intensity = intensity
-    except:
-
-        # if this is the first time the function is called, initialize the parameters
-        function.intensity = 0
-        function.image_detected_objects = None
-
-    # the current frame becomes the previous one
-    function.img = image.copy()
-
-    # if the current frame is different from the previous or if there is no previous processed image
-    if process or function.image_detected_objects is None:
-        #print("Updating...")
-
-        # half table
-        for y in range(int(image.shape[0]*zed_params.TABLE_PERCENTAGE)):
-            image[y] = 0
-
-        # detect objects
-        objects, image_detected_objects = detect_objects(img = image, render = render)
-        
-        # process objects
-        objects, image_processed_objects = process_objects(img = image, objects = objects)
-
-        # send detected objects
-        send_objects(objects = objects)
-
-        function.image_detected_objects = image_detected_objects
-
-    else:
-        # if the two frames are similar, then return the last processed image
-        image_detected_objects = function.image_detected_objects
+    function.image_detected_objects = image_detected_objects
 
     return image_detected_objects
 
