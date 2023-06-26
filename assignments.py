@@ -25,19 +25,6 @@ BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
 
 SLEEP_TIME = 5
 
-MARGIN = 0.08
-
-X_MIN = 0 + MARGIN
-X_MAX = 0.3 - MARGIN
-
-Y_MIN = 0.25 + MARGIN
-Y_MAX = 0.65 - MARGIN
-
-MODELS_NUMBER = 3
-MAX_MODELS = math.floor((X_MAX - X_MIN) * (Y_MAX - Y_MIN) / (math.pi * (MARGIN/2)**2))
-
-assert MAX_MODELS >= MODELS_NUMBER, f"Too many models. Maximum number of models: {MAX_MODELS}"
-
 def execute_request(service_name: str, service_class, request: Union[str, None] = None, wait: float = 0.2):
     """
     Execute ROS request
@@ -220,26 +207,30 @@ def random_model() -> str:
     models = next(walk(BLENDER_MODELS_PATH), (None, None, []))[2]
     return join(BLENDER_MODELS_PATH,random.choice(models))
 
-def random_position(precision: int = 3) -> tuple:
+def random_position(x_min: float, x_max: float, y_min: float, y_max: float, precision: int = 3) -> tuple:
     """
     Generate random position
 
     Args:
+        x_min (float): Minimum x for spawning an object.
+        x_max (float): Maximum x for spawning an object.
+        y_min (float): Minimum y for spawning an object.
+        y_max (float): Maximum y for spawning an object.
         precision (int, optional): Number of digits of the coordinates. Defaults to 3.
 
     Returns:
         tuple: Random position.
     """
 
-    global MARGIN, X_MAX, X_MIN, Y_MAX, Y_MIN
+    margin = 0.08
 
     precision = 10**precision
 
-    x_min = X_MIN * precision
-    x_max = X_MAX * precision
+    x_min = (x_min + margin) * precision
+    x_max = (x_max - margin) * precision
 
-    y_min = Y_MIN * precision
-    y_max = Y_MAX * precision
+    y_min = (y_min + margin) * precision
+    y_max = (y_max - margin) * precision
 
     z = 0.93
 
@@ -253,7 +244,7 @@ def random_position(precision: int = 3) -> tuple:
         for model in get_world_models():
             position, orientation = get_model_state(name = model)
 
-            if math.dist((x,y), position[:2]) < MARGIN:
+            if math.dist((x,y), position[:2]) < margin:
                 collision = True
                 break
         
@@ -342,7 +333,7 @@ def assignment1():
     print(colored(f"Generating {name}...","yellow"),end="\r")
 
     model = random_model()
-    position = random_position()
+    position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.77)
     orientation, orientation_index = random_orientation(index=0)
 
     request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
@@ -359,19 +350,17 @@ def assignment2():
     KPI 2-1: Total time to move all the objects from their initial to their final positions.
     """
 
-    global MODELS_NUMBER
-
     delete_all_models()
     
     clear()
 
-    for _ in range(MODELS_NUMBER):
+    for _ in range(4):
 
         name = random_name()
         print(colored(f"Generating {name}...","yellow"),end="\r")
 
         model = random_model()
-        position = random_position()
+        position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.65)
         orientation, orientation_index = random_orientation(index=0)
 
         request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
@@ -396,13 +385,13 @@ def assignment3():
 
     clear()
 
-    for _ in range(MODELS_NUMBER):
+    for _ in range(3):
 
         name = random_name()
         print(colored(f"Generating {name}...","yellow"),end="\r")
 
         model = random_model()
-        position = random_position()
+        position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.65)
         orientation, orientation_index = random_orientation()
 
         request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
@@ -457,13 +446,13 @@ if __name__ == "__main__":
             assignment = eval(f"assignment{option}")
             assignment()
 
-            #for i in range(SLEEP_TIME):
-            #    print(colored(f"Waiting {SLEEP_TIME - i}", "yellow"),end="\r")
-            #    sleep(1)
+            for i in range(SLEEP_TIME):
+                print(colored(f"Waiting {SLEEP_TIME - i}", "yellow"),end="\r")
+                sleep(1)
 
-            #start_zed()
-            #ros.sleep(1)
-            #start_zed()
+            start_zed()
+            ros.sleep(1)
+            start_zed()
 
             print(f"                                                                ",end="\r")
             input("Done!")
