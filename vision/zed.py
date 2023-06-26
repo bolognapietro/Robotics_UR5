@@ -426,7 +426,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         kpi_1_1 = round(time() - start,2)
 
-        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nHeight: {height}\nKPI 1-1: {kpi_1_1} second(s)")
+        print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nHeight: {height}\nKPI 1-1: {kpi_1_1} second(s)\n")
 
     if len(objects):
         cv2.imshow(f"Debug",image)

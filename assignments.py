@@ -25,7 +25,7 @@ BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
 
 SLEEP_TIME = 5
 
-MARGIN = 0.07
+MARGIN = 0.08
 
 X_MIN = 0 + MARGIN
 X_MAX = 0.3 - MARGIN
