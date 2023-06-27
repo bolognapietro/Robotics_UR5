@@ -1,6 +1,3 @@
-[submodule "locosim"]
-	path = locosim
-	url = https://github.com/mfocchi/locosim.git
 [submodule "vision/zed/yolov5"]
 	path = vision/yolov5
 	url = https://github.com/ultralytics/yolov5
