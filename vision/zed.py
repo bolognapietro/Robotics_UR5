@@ -2,15 +2,9 @@
 
 # Standard library modules
 import os
-from os.path import join, isfile
-import pickle
-import json
 import inspect
 import math
-import xml.etree.ElementTree as ET
-from copy import deepcopy
-from statistics import mean, median
-import itertools
+from statistics import mean
 import subprocess
 from time import time
 
@@ -20,14 +14,14 @@ import tf
 
 import cv2
 from cv_bridge import CvBridge
-from collections import Counter
 
 # ROS modules
 import rospy as ros
 from geometry_msgs.msg import Pose
 from sensor_msgs.msg import Image, PointCloud2
 from sensor_msgs import point_cloud2
-from std_msgs.msg import String, Bool
+from motion_plan_pkg.msg import legoMessage
+from std_msgs.msg import Bool
 
 # Local imports
 import zed_params
@@ -70,24 +64,28 @@ def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 1
         None.
     """
 
-    pub = ros.Publisher(topic, Pose, queue_size=max_queue)
+    pub = ros.Publisher(topic, legoMessage, queue_size=max_queue)
 
     for obj in objects:
 
         position = obj["position"]
 
-        msg = Pose()
+        pose = Pose()
 
-        msg.position.x = position["x"]
-        msg.position.y = position["y"]
-        msg.position.z = position["z"]
+        pose.position.x = position["x"]
+        pose.position.y = position["y"]
+        pose.position.z = position["z"]
 
         angles = tf.transformations.quaternion_from_euler(position["roll"], position["pitch"], position["yaw"])
 
-        msg.orientation.x = angles[0]
-        msg.orientation.y = angles[1]
-        msg.orientation.z = angles[2]
-        msg.orientation.w = angles[3]
+        pose.orientation.x = angles[0]
+        pose.orientation.y = angles[1]
+        pose.orientation.z = angles[2]
+        pose.orientation.w = angles[3]
+
+        msg = legoMessage()
+        msg.pose = pose
+        msg.model = str(int(obj["label_index"]))
 
         pub.publish(msg)
 
@@ -167,20 +165,19 @@ def detect_objects(img: np.ndarray, threshold: float = 0.7, render: bool = False
     except:
         # load the model (only once)
         function.model = torch.hub.load(yolo_path, 'custom', path=model_path, source='local')
+
+        function.model.conf = threshold
+        function.model.iou = 0.45
     
     image = img.copy()
 
     if np.all(image == 0):
         return [], None
 
-    image = image_utils.extract_objects(image)
+    #image = image_utils.extract_objects(image)
 
     # process input image
     result = function.model([image], size = 640)
-
-    # keep valid prediction(s) (e.g. score >= threshold)
-    thresholded_result = torch.Tensor([item.tolist() for item in result.xyxy[0] if item[-2] >= threshold])
-    result.xyxy[0] = thresholded_result
     
     # create objects list
     objects = []
@@ -231,8 +228,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
     clear()
 
-    frame = img.copy()
-    image = image_utils.extract_objects(img=frame)
+    image = img.copy()
+    image = image_utils.extract_objects(img=image)
 
     processed_objects = []
 
@@ -251,7 +248,9 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         min_y = min(box, key=lambda x: x[1])[1] - adj_box
         max_y = max(box, key=lambda x: x[1])[1] + adj_box
 
-        #clean_image = image_utils.remove_noise_by_color(img=image[min_y : max_y+1, min_x : max_x+1])
+        clean_image = image.copy()
+        clean_box = image_utils.remove_noise_by_color(img=image[min_y : max_y+1, min_x : max_x+1])
+        clean_image[min_y : max_y+1, min_x : max_x+1] = clean_box
 
         points_2D = []
 
@@ -259,7 +258,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         for x in range(min_x, max_x+1):
             for y in range(min_y, max_y+1):
                 
-                if image[y,x].tolist() == [0,0,0]:
+                if clean_image[y,x].tolist() == [0,0,0]:
                     continue
                 
                 points_2D.append([x,y])
@@ -324,17 +323,20 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         #? BOTTOM
         # the bottom will be the last row (approx), the one with the highest y
+
+        base = [rows[-1][0], rows[-1][-1]]
+
         if rows[-2][-1][0][0] - rows[-2][0][0][0] > rows[-1][-1][0][0] - rows[-1][0][0][0]:
             base = [rows[-2][0], rows[-2][-1]]
-        else:
-            base = [rows[-1][0], rows[-1][-1]]
         
-        cv2.line(image, base[0][0], base[-1][0], (0,255,0),1) # green
-
+        if rows[-3][-1][0][0] - rows[-3][0][0][0] > rows[-2][-1][0][0] - rows[-2][0][0][0]:
+            base = [rows[-3][0], rows[-3][-1]]
+        
         #? LEFT
         threshold = 3
 
-        left = [point for point in points if point[0][0] < base[0][0][0]]
+        left = [sorted(column, key=lambda x: x[0][1]) for column in columns if column[0][0][0] <= base[0][0][0]]
+        left = [column[-1] for column in left]
 
         if not len(left):
             left = base[0]
@@ -348,20 +350,40 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
             while not len(tmp):
 
-                tmp = [point for point in left if point[1][2] < base[0][1][2] + error]
+                tmp = [point for point in left if point[1][2] <= base[0][1][2] + error]
 
                 if not len(tmp):
                     error = error + factor
-            
-            left = max(tmp, key=lambda x: x[1][0])
 
-            if abs(left[0][0] - base[0][0][0]) <= threshold:
+            left_diff = [math.dist(tmp[i+1][0],tmp[i][0]) for i in range(len(tmp)-1)]
+
+            if len(left_diff):
+                left_diff_mean = math.ceil(mean(left_diff))
+
+                left = []
+
+                for i in range(len(tmp) - 1):
+
+                    if math.dist(tmp[i+1][0],tmp[i][0]) > left_diff_mean:
+
+                        if len(left):
+                            break
+                        else:
+                            continue
+                    
+                    left.append(tmp[i])
+
+                left = max(left, key=lambda x: x[1][0])
+
+                if abs(left[0][0] - base[0][0][0]) <= threshold:
+                    left = base[0]
+            
+            else:
                 left = base[0]
 
-        cv2.line(image, left[0], base[0][0], (255,0,0),1) # blue
-
         #? RIGHT
-        right = [point for point in points if point[0][0] > base[-1][0][0]]
+        right = [sorted(column, key=lambda x: x[0][1]) for column in columns if column[0][0][0] >= base[-1][0][0]]
+        right = [column[-1] for column in right]
 
         if not len(right):
             right = base[-1]
@@ -375,40 +397,65 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
             while not len(tmp):
 
-                tmp = [point for point in right if point[1][2] < base[-1][1][2] + error]
+                tmp = [point for point in right if point[1][2] <= base[-1][1][2] + error]
 
                 if not len(tmp):
                     error = error + factor
             
-            right = max(tmp, key=lambda x: x[1][0])
+            right_diff = [math.dist(tmp[i+1][0],tmp[i][0]) for i in range(len(tmp)-1)]
 
-            if abs(right[0][0] - base[-1][0][0]) <= threshold:
+            if len(right_diff):
+                right_diff_mean = math.ceil(mean(right_diff))
+
+                right = []
+
+                for i in range(len(tmp) - 1):
+
+                    if math.dist(tmp[i+1][0],tmp[i][0]) > right_diff_mean:
+                        
+                        if len(right):
+                            break
+                        else:
+                            continue
+                    
+                    right.append(tmp[i])
+
+                right = max(right, key=lambda x: x[1][0])
+
+                if abs(right[0][0] - base[-1][0][0]) <= threshold:
+                    right = base[-1]
+            
+            else:
                 right = base[-1]
+        
+        threshold = 3
 
-        cv2.line(image, right[0], base[-1][0], (0,0,255),1) # red
+        if abs(left[0][1] - base[0][0][1]) <= threshold:
+            base[0] = left
+        
+        if abs(right[0][1] - base[-1][0][1]) <= threshold:
+            base[-1] = right
+            
+        #? COLORS
+        thickness = 2
 
-        #? HEIGHT
-        z1 = center_max_z
-        z2 = [point for point in points if point[0][0] == z1[0][0] and point[0][1] == base[0][0][1]]
+        green = (0,255,0)
+        blue = (255, 0, 0)
+        red = (0, 0, 255)
 
-        if not len(z2):
-            z2 = min([point for point in points if point[0][1] == base[0][0][1]], key=lambda x: math.dist(x[1], [z1[1][0], z1[1][1], z1[1][2]]))
-        else:
-            z2 = z2[0]
-
-        height = round(math.dist(z1[1][:2], z2[1][:2]),5)
-
-        cv2.line(image, z1[0], z2[0], (0,255,255),1) # yellow
+        cv2.line(image, left[0], base[0][0], blue, thickness)
+        cv2.line(image, base[0][0], base[-1][0], green, thickness)
+        cv2.line(image, right[0], base[-1][0], red, thickness)
 
         #? YAW
         if left[1][0] != base[0][1][0]:
             angle_rad = math.atan((left[1][1] - base[0][1][1]) / (left[1][0] - base[0][1][0]))
-        else:
+        elif right[1][0] == base[-1][1][0]:
             angle_rad = 0
+        else:
+            angle_rad = math.pi / 2 - abs(math.atan((right[1][1] - base[-1][1][1]) / (right[1][0] - base[-1][1][0])))
 
-        angle_rad = 0 if angle_rad - 0.14 < 0 else angle_rad - 0.14
-
-        if math.dist(left[1], base[0][1]) > math.dist(base[0][1], base[-1][1]):
+        if math.dist(left[1], base[0][1]) > math.dist(right[1], base[-1][1]):
             angle_rad = angle_rad + math.pi / 2
 
         angle_deg = np.rad2deg(angle_rad)
@@ -458,7 +505,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         bottom_left = base[0]
         bottom_right = base[-1]
         
-        cv2.line(image, bottom_left[0], bottom_right[0], (255,255,255),1)
+        #cv2.line(image, bottom_left[0], bottom_right[0], (255,255,255),1)
 
         #? LEDGES
         # group border pixels in rows and columns
@@ -612,7 +659,7 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
     if len(objects):
         cv2.imshow(f"Debug",image)
 
-    return processed_objects, frame
+    return processed_objects, img
 
 def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
     """
