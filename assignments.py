@@ -6,6 +6,7 @@ import subprocess
 
 from typing import Union
 from termcolor import colored
+from copy import deepcopy
 
 import random
 from time import sleep
@@ -24,6 +25,36 @@ clear = lambda: subprocess.run("cls" if os.name == "nt" else "clear", shell=True
 BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
 
 SLEEP_TIME = 5
+
+BOX = [
+    {
+        "max_x": 0.175,
+        "min_x": 0,
+        "max_y": 0.45,
+        "min_y": 0.25
+    },
+
+    {
+        "max_x": 0.35,
+        "min_x": 0.175,
+        "max_y": 0.45,
+        "min_y": 0.25
+    },
+
+    {
+        "max_x": 0.175,
+        "min_x": 0,
+        "max_y": 0.65,
+        "min_y": 0.45
+    },
+
+    {
+        "max_x": 0.35,
+        "min_x": 0.175,
+        "max_y": 0.65,
+        "min_y": 0.45
+    },
+]
 
 def execute_request(service_name: str, service_class, request: Union[str, None] = None, wait: float = 0.2):
     """
@@ -207,84 +238,77 @@ def random_model() -> str:
     models = next(walk(BLENDER_MODELS_PATH), (None, None, []))[2]
     return join(BLENDER_MODELS_PATH,random.choice(models))
 
-def random_position(x_min: float, x_max: float, y_min: float, y_max: float, precision: int = 3) -> tuple:
+def random_position(box: dict, precision: int = 3) -> tuple:
     """
     Generate random position
 
     Args:
-        x_min (float): Minimum x for spawning an object.
-        x_max (float): Maximum x for spawning an object.
-        y_min (float): Minimum y for spawning an object.
-        y_max (float): Maximum y for spawning an object.
         precision (int, optional): Number of digits of the coordinates. Defaults to 3.
 
     Returns:
         tuple: Random position.
     """
 
-    margin = 0.08
+    selected_box = random.choice(box)
+    box.pop(box.index(selected_box))
+
+    max_x = selected_box["max_x"]
+    min_x = selected_box["min_x"]
+
+    max_y = selected_box["max_y"]
+    min_y = selected_box["min_y"]
 
     precision = 10**precision
 
-    x_min = (x_min + margin) * precision
-    x_max = (x_max - margin) * precision
+    max_x = max_x * precision
+    min_x = min_x * precision
 
-    y_min = (y_min + margin) * precision
-    y_max = (y_max - margin) * precision
+    max_y = max_y * precision
+    min_y = min_y * precision
 
+    x = random.randrange(int(min_x),int(max_x)) / precision
+    y = random.randrange(int(min_y),int(max_y)) / precision
     z = 0.93
 
-    while True:
+    return (x,y,z), box
 
-        x = random.randrange(int(x_min),int(x_max)) / precision
-        y = random.randrange(int(y_min),int(y_max)) / precision
-
-        collision = False
-
-        for model in get_world_models():
-            position, orientation = get_model_state(name = model)
-
-            if math.dist((x,y), position[:2]) < margin:
-                collision = True
-                break
-        
-        if not collision:
-            break
-
-    return (x,y,z)
-
-def random_orientation(index: int = None) -> tuple:
+def random_orientation(index: int = None, z_orientation: bool = True) -> tuple:
     """
     Generate pseudo-random orientation
 
     Args:
         index (float, optional): Select a specific orientation from the list.
-
+        z_orientation (bool, optional): If True, applies a random rotation along z.
     Returns:
         tuple: NDArray[float64] random orientation and it's index.
     """
 
     orientations = [
-        quaternion_from_euler(0,0,0), #?            0
-        quaternion_from_euler(1.571,0,0), #?        1
-        quaternion_from_euler(-1.571,0,0), #?       2
-        #quaternion_from_euler(1.571,0,1.571), #?    3
-        quaternion_from_euler(1.571,0,-1.571), #?   4
-        #quaternion_from_euler(0,1.571,0), #?        5
-        quaternion_from_euler(0,-1.571,0), #?       6
-        quaternion_from_euler(1.571,1.571,0), #?    7
-        quaternion_from_euler(-1.571,1.571,0), #?   8
-        quaternion_from_euler(3.141,0,0), #?        9
-        quaternion_from_euler(3.141,0,1.571) #?     10
+        [0,0,0], #?            0
+        [1.571,0,0], #?        1
+        [-1.571,0,0], #?       2
+        #[1.571,0,1.571], #?    3
+        #[1.571,0,-1.571], #?   4
+        #[0,1.571,0], #?        5
+        #[0,-1.571,0], #?       6
+        #[1.571,1.571,0], #?    7
+        #[-1.571,1.571,0], #?   8
+        [3.141,0,0], #?        9
+        #[3.141,0,1.571] #?     10
     ]
     
     if index != None and index >= 0 and index < len(orientations):
-        return orientations[index], index
+        orientation = orientations[index]
+    else:
+        index = random.randint(0, len(orientations) - 1)
+        orientation = orientations[index]
     
-    orientation_index = random.randint(0, len(orientations) - 1)
-    orientation = orientations[orientation_index]
-    
-    return orientation, orientation_index
+    if z_orientation:
+        orientation[2] = np.deg2rad(random.randint(0,180))
+
+    orientation = quaternion_from_euler(orientation[0], orientation[1], orientation[2])
+
+    return orientation, index
 
 def random_name() -> str:
     """
@@ -312,7 +336,8 @@ def print_model(name: str, model: str, position: tuple, orientation: tuple, orie
     print(f"Model: {basename(model).split('.')[0]}")
     print(f"Position (gazebo): {tuple(round(pos, 2) for pos in position)}")
     print(f"Position (robot): {tuple([round(position[0] - 0.5,2), round(position[1] - 0.35,2), -0.74])}")
-    print(f"Orientation: {tuple(round(np.rad2deg(angle) / 90)*90 for angle in euler_from_quaternion(orientation))}")
+    print(f"Orientation (rad): {euler_from_quaternion(orientation)}")
+    print(f"Orientation (deg): {tuple(np.rad2deg(euler_from_quaternion(orientation)))}")
     print(f"Orientation index: {orientation_index}\n")
 
 def assignment1():
@@ -324,6 +349,10 @@ def assignment1():
     KPI 1-2 time to move the object between its initial and its final positions, counting from the instant in which both of them have been identified.
     """
 
+    global BOX
+
+    box = deepcopy(BOX)
+
     print(f"Deleting models...")
     delete_all_models()
 
@@ -333,7 +362,7 @@ def assignment1():
     print(colored(f"Generating {name}...","yellow"),end="\r")
 
     model = random_model()
-    position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.77)
+    position, box = random_position(box = box)
     orientation, orientation_index = random_orientation(index=0)
 
     request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
@@ -350,6 +379,10 @@ def assignment2():
     KPI 2-1: Total time to move all the objects from their initial to their final positions.
     """
 
+    global BOX
+
+    box = deepcopy(BOX)
+
     delete_all_models()
     
     clear()
@@ -360,7 +393,7 @@ def assignment2():
         print(colored(f"Generating {name}...","yellow"),end="\r")
 
         model = random_model()
-        position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.65)
+        position, box = random_position(box = box)
         orientation, orientation_index = random_orientation(index=0)
 
         request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
@@ -379,7 +412,9 @@ def assignment3():
     KPI 3-1: Total time to move all the objects from their initial to their final positions.
     """
 
-    global MODELS_NUMBER
+    global BOX
+
+    box = deepcopy(BOX)
 
     delete_all_models()
 
@@ -391,8 +426,8 @@ def assignment3():
         print(colored(f"Generating {name}...","yellow"),end="\r")
 
         model = random_model()
-        position = random_position(x_min=0, x_max=0.3, y_min=0.25, y_max=0.65)
-        orientation, orientation_index = random_orientation()
+        position, box = random_position(box = box)
+        orientation, orientation_index = random_orientation(z_orientation=False)
 
         request = create_spawnmodel_request(name = name, model = model, position = position, orientation = orientation)
         execute_request(request = request, service_name = "/gazebo/spawn_sdf_model", service_class = SpawnModel)
