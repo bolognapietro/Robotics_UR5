@@ -464,13 +464,18 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         #? YAW
         if left[1][0] != base[0][1][0]:
             angle_rad = math.atan((left[1][1] - base[0][1][1]) / (left[1][0] - base[0][1][0]))
+
+            if math.dist(left[1], base[0][1]) > math.dist(right[1], base[-1][1]):
+                angle_rad = angle_rad + math.pi / 2
+
         elif right[1][0] == base[-1][1][0]:
-            angle_rad = 0
+
+            if abs(math.dist(base[0][1],base[-1][1]) - 0.01575):
+                angle_rad = math.pi / 2
+            else:
+                angle_rad = 0
         else:
             angle_rad = math.pi / 2 - abs(math.atan((right[1][1] - base[-1][1][1]) / (right[1][0] - base[-1][1][0])))
-
-        if math.dist(left[1], base[0][1]) > math.dist(right[1], base[-1][1]):
-            angle_rad = angle_rad + math.pi / 2
 
         angle_deg = np.rad2deg(angle_rad)
 
