@@ -26,33 +26,35 @@ BLENDER_MODELS_PATH = join(getcwd(),"vision","models")
 
 SLEEP_TIME = 5
 
+MARGIN = 0.035
+
 BOX = [
     {
-        "max_x": 0.175,
-        "min_x": 0,
-        "max_y": 0.45,
-        "min_y": 0.25
+        "max_x": 0.175 - MARGIN,
+        "min_x": 0 + MARGIN,
+        "max_y": 0.45 - MARGIN,
+        "min_y": 0.25 + MARGIN
     },
 
     {
-        "max_x": 0.35,
-        "min_x": 0.175,
-        "max_y": 0.45,
-        "min_y": 0.25
+        "max_x": 0.35 - MARGIN,
+        "min_x": 0.175 + MARGIN,
+        "max_y": 0.45 - MARGIN,
+        "min_y": 0.25 + MARGIN
     },
 
     {
-        "max_x": 0.175,
-        "min_x": 0,
-        "max_y": 0.65,
-        "min_y": 0.45
+        "max_x": 0.175 - MARGIN,
+        "min_x": 0 + MARGIN,
+        "max_y": 0.65 - MARGIN,
+        "min_y": 0.45 + MARGIN
     },
 
     {
-        "max_x": 0.35,
-        "min_x": 0.175,
-        "max_y": 0.65,
-        "min_y": 0.45
+        "max_x": 0.35 - MARGIN,
+        "min_x": 0.175 + MARGIN,
+        "max_y": 0.65 - MARGIN,
+        "min_y": 0.45 + MARGIN
     },
 ]
 
