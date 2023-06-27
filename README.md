@@ -1,3 +1,13 @@
+<div align="center">
+    <p>
+        <img width="100%" src="assets/images/splash.png"/>
+    </p>
+    <div>
+        <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=flat&logo=c%2B%2B&logoColor=white" alt="C++"/>
+        <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python"/>
+    </div>
+</div>
+
 # Table of contents
 
 -   [Introduction](#introduction)
