@@ -87,4 +87,4 @@ Pietro Bologna [218186] - [pietro.bologna@studenti.unitn.it](mailto:pietro.bolog
 
 Christian Sassi [217640] - [christian.sassi@studenti.unitn.it](mailto:christian.sassi@studenti.unitn.it)
 
-<a href="https://www.unitn.it/"><img src="assets/unitn-logo.png" width="300px"></a>
+<a href="https://www.unitn.it/"><img src="assets/images/unitn-logo.png" width="300px"></a>
