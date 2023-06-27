@@ -166,8 +166,8 @@ def detect_objects(img: np.ndarray, threshold: float = 0.7, render: bool = False
         # load the model (only once)
         function.model = torch.hub.load(yolo_path, 'custom', path=model_path, source='local')
 
+        # apply the threshold
         function.model.conf = threshold
-        function.model.iou = 0.45
     
     image = img.copy()
 
