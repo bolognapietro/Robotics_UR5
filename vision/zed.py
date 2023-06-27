@@ -188,8 +188,6 @@ def detect_objects(img: np.ndarray, threshold: float = 0.7, render: bool = False
     if np.all(image == 0):
         return [], None
 
-    #image = image_utils.extract_objects(image)
-
     # process input image
     result = function.model([image], size = 640)
     
@@ -337,7 +335,6 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         #? BOTTOM
         # the bottom will be the last row (approx), the one with the highest y
-
         base = [rows[-1][0], rows[-1][-1]]
 
         if rows[-2][-1][0][0] - rows[-2][0][0][0] > rows[-1][-1][0][0] - rows[-1][0][0][0]:
@@ -449,17 +446,6 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         
         if abs(right[0][1] - base[-1][0][1]) <= threshold:
             base[-1] = right
-            
-        #? COLORS
-        thickness = 2
-
-        green = (0,255,0)
-        blue = (255, 0, 0)
-        red = (0, 0, 255)
-
-        cv2.line(image, left[0], base[0][0], blue, thickness)
-        cv2.line(image, base[0][0], base[-1][0], green, thickness)
-        cv2.line(image, right[0], base[-1][0], red, thickness)
 
         #? YAW
         if left[1][0] != base[0][1][0]:
@@ -482,6 +468,17 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
         angle_rad = round(angle_rad,4)
         angle_deg = round(angle_deg,4)
 
+        #? COLORS
+        thickness = 2
+
+        green = (0,255,0)
+        blue = (255, 0, 0)
+        red = (0, 0, 255)
+
+        cv2.line(image, left[0], base[0][0], blue, thickness)
+        cv2.line(image, base[0][0], base[-1][0], green, thickness)
+        cv2.line(image, right[0], base[-1][0], red, thickness)
+        
         # save object
         processed_objects.append(obj)
         processed_objects[processed_objects.index(obj)]["position"] = {
@@ -497,8 +494,8 @@ def process_objects(img: np.ndarray, objects: dict) -> dict:
 
         print(f"Model: {obj['label_name']} \nPosition: {(center_3D[0], center_3D[1], center_3D[2])} \nOrientation (rad): (None, None, {angle_rad})\nOrientation (deg): (None, None, {angle_deg})\nKPI 1-1: {kpi_1_1} second(s)\n")
 
-    if len(objects):
-        cv2.imshow(f"Debug",image)
+    #if len(objects):
+    #    cv2.imshow(f"Debug",image)
 
     return processed_objects, img
 
@@ -524,6 +521,7 @@ def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
 
     if not function.cold_start:
 
+        # the script will process a new frame only after the assignment script has finished spawning the objects.
         try:
             ros.wait_for_message("/start_zed", Bool, timeout=1)
         except:
