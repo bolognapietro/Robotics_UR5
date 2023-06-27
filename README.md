@@ -1,6 +1,6 @@
 <div align="center">
     <p>
-        <img width="100%" src="assets/images/splash.png"/>
+        <img width="100%" src="assets/images/splash-logo.png"/>
     </p>
     <div>
         <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=flat&logo=c%2B%2B&logoColor=white" alt="C++"/>
