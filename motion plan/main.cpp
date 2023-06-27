@@ -1,8 +1,11 @@
 #include "Eigen/Dense"
+#include "Eigen/Geometry"
+#include "Eigen/Dense"
 #include <iostream>
 #include "kinematics.h"
 #include "motionPlan.h"
 #include "cmath"
+#include <vector>
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
@@ -12,6 +15,7 @@
 #include "boost/shared_ptr.hpp"
 #include "geometry_msgs/Pose.h"
 #include "motion_plan_pkg/legoMessage.h"
+#include "motion_plan_pkg/legoArray.h"
 
 using namespace std;
 
@@ -43,7 +47,7 @@ RowVector3d findPosDrop(int type_block);
     int start = 0;
     Eigen::RowVector3d pos;
     Eigen::RowVector3d phiEf{{0, 0, 0}};
-    int maxT = 3;       // movement time ( 3 -> fast, 6 -> slow)
+    int maxT = 6;       // movement time ( 3 -> fast, 6 -> slow)
 
     // START POSITION
     {
@@ -67,111 +71,114 @@ RowVector3d findPosDrop(int type_block);
         }
     }
 
-
     while(ros::ok()) {
 
         // Position waited from zed
 
         ros::NodeHandle node_1;
-        motion_plan_pkg::legoMessage::ConstPtr sharedMsg = ros::topic::waitForMessage<motion_plan_pkg::legoMessage>("/objects_info",node_1 );
-
-
         cout << "Waiting for messages " << endl;
-        if (sharedMsg != NULL) {
-            pos(0) = sharedMsg->pose.position.x - 0.5;
-            pos(1) = sharedMsg->pose.position.y - 0.35;
-            pos(2) = sharedMsg->pose.position.z - 1.61 -0.04;
-        }
+        motion_plan_pkg::legoArray::ConstPtr sharedMsg = ros::topic::waitForMessage<motion_plan_pkg::legoArray>("/objects_info",n );
 
-        pos(2) = -0.73;
-        ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
+        vector<motion_plan_pkg::legoMessage> lego_array = sharedMsg->lego_array;
 
+        for (motion_plan_pkg::legoMessage lego_msg : lego_array){
+            pos(0) = lego_msg.pose.position.x - 0.5;
+            pos(1) = lego_msg.pose.position.y - 0.35;
+            pos(2) = lego_msg.pose.position.z - 1.61 -0.03;
 
-        // To manually insert the coordinates
+            ROS_INFO("[%f, %f, %f]\n", pos(0), pos(1), pos(2));
 
-/*
-        cout << "pos[x]: ";
-        cin >> pos(0);
-        cout << "pos[y]: ";
-        cin >> pos(1);
-        cout << "pos[z]: ";
-        cin >> pos(2);
-
-        bool rot;
-        double frameInizialeZ = 0;
-        int type_rot;
-        int type_block;
-
-        cout << "Pos drop [0-8]: ";
-        cin >> type_block;
-*/      
-        bool rot = false;
-        int type_rot = 0;
-
-        // ZED
-
-        double frameInizialeZ;
-        frameInizialeZ = sharedMsg->pose.orientation.w;
-        cout << "Frame iniziale [z]: " << frameInizialeZ << endl;
-
-        // POS DROP
-        string type_block_str = sharedMsg->model;
-        int type_block = stoi(type_block_str);
-
-        posDrop = findPosDrop(type_block);
-
-        // cout << "Rotation? [0 = no, 1 = si] ";
-        // cin >> rot;
-        
-        // if (rot){
-        //     cout << "Tipologia rotazione: ";
-        //     cin >> type_rot;  // 0-10 , 0 -> no_rot , 1-4 -> elementar , 5-10 -> composite
-        // } else {
-        //     frameInizialeZ = 0;
-        // }
-
-        phiEf(0) = frameInizialeZ;
-
-        RowVector6d jointArm = getJointArm();
-
-        Matrix8d Th;
-        bool cond[3] = {true, true, true};
-        if (check_point(pos, jointArm)) {
-            ROS_INFO("Posizione raggiungibile dal Arm!\n");
-
-            if (!rot) {
-                cond[0] = threep2p(jointArm, pos, phiEf, 0, maxT, Th);
-                // CLOSE GRIPPER
-                closeGripper(Th);
-                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
-                // OPEN GRIPPER
-                openGripper(Th);
-                // RETURN HOME
-                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
-            } else {
-                cout << phiEf << endl;
-                cond[0] = rotate(jointArm, pos, type_rot, 0, maxT, Th);
-                // ROTATIONS
-                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
-                // OPEN GRIPPER
-                openGripper(Th);
-                // RETURN HOME
-                jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
-                cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
+            Eigen::Quaterniond q = Quaterniond(lego_msg.pose.orientation.x, lego_msg.pose.orientation.y, lego_msg.pose.orientation.z, lego_msg.pose.orientation.w);
+            Eigen::Vector3d euler = q.toRotationMatrix().eulerAngles(2,1,0);
+            double frameInizialeZ = -euler(2);
+            std::cout << euler << std::endl;
+            if (areEqual(frameInizialeZ, M_PI, 0.01)){ // Correct M_PI errors from the conversion
+                frameInizialeZ = 0;  
             }
+            std::cout << frameInizialeZ << std::endl;
 
-            //PUBLISH
-            if (cond[0] and cond[1] and cond[2]) {  //MOVE OK
-                publish(Th);
+            // To manually insert the coordinates
+
+    /*
+            cout << "pos[x]: ";
+            cin >> pos(0);
+            cout << "pos[y]: ";
+            cin >> pos(1);
+            cout << "pos[z]: ";
+            cin >> pos(2);
+
+            bool rot;
+            double frameInizialeZ = 0;
+            int type_rot;
+            int type_block;
+
+            cout << "Pos drop [0-8]: ";
+            cin >> type_block;
+    */      
+            bool rot = false;
+            int type_rot = 0;
+
+            // ZED
+
+            // POS DROP
+            string type_block_str = lego_msg.model;
+            int type_block = stoi(type_block_str);
+
+            posDrop = findPosDrop(type_block);
+
+            // cout << "Rotation? [0 = no, 1 = si] ";
+            // cin >> rot;
+            
+            // if (rot){
+            //     cout << "Tipologia rotazione: ";
+            //     cin >> type_rot;  // 0-10 , 0 -> no_rot , 1-4 -> elementar , 5-10 -> composite
+            // } else {
+            //     frameInizialeZ = 0;
+            // }
+
+            phiEf(0) = frameInizialeZ;
+
+            RowVector6d jointArm = getJointArm();
+
+            Matrix8d Th;
+            bool cond[3] = {true, true, true};
+            if (check_point(pos, jointArm)) {
+                ROS_INFO("Posizione raggiungibile dal Arm!\n");
+
+                if (!rot) {
+                    cond[0] = threep2p(jointArm, pos, phiEf, 0, maxT, Th);
+                    // CLOSE GRIPPER
+                    closeGripper(Th);
+                    jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                    cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
+                    // OPEN GRIPPER
+                    openGripper(Th);
+                    // RETURN HOME
+                    jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                    cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
+                } else {
+                    cout << phiEf << endl;
+                    cond[0] = rotate(jointArm, pos, type_rot, 0, maxT, Th);
+                    // ROTATIONS
+                    jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                    cond[1] = threep2p(jointArm, posDrop, phiZero, 0, maxT, Th);
+                    // OPEN GRIPPER
+                    openGripper(Th);
+                    // RETURN HOME
+                    jointArm = Th.row(Th.rows() - 1).block<1, 6>(0, 0);
+                    cond[2] = threep2p(jointArm, posHome, phiZero, 0, maxT, Th);
+                }
+
+                //PUBLISH
+                if (cond[0] and cond[1] and cond[2]) {  //MOVE OK
+                    publish(Th);
+                } else {
+                    ROS_INFO("Trajectory error\n");
+                }
+
             } else {
-                ROS_INFO("Trajectory error\n");
+                ROS_INFO("Position IMPOSSIBLE to reach!\n");
             }
-
-        } else {
-            ROS_INFO("Position IMPOSSIBLE to reach!\n");
         }
     }
 

@@ -9,6 +9,7 @@ find_package(Eigen3 3.3 REQUIRED)
 add_message_files(
   FILES
   legoMessage.msg
+  legoArray.msg
 )
 
 generate_messages(

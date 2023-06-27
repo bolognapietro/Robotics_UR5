@@ -21,6 +21,7 @@ from geometry_msgs.msg import Pose
 from sensor_msgs.msg import Image, PointCloud2
 from sensor_msgs import point_cloud2
 from motion_plan_pkg.msg import legoMessage
+from motion_plan_pkg.msg import legoArray
 from std_msgs.msg import Bool
 
 # Local imports
@@ -63,8 +64,14 @@ def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 1
     Returns:
         None.
     """
+    if not len(objects):
+        return
 
-    pub = ros.Publisher(topic, legoMessage, queue_size=max_queue)
+    pub = ros.Publisher(topic, legoArray, queue_size=max_queue)
+
+    share_msg = legoArray()
+
+    msgArray = []
 
     for obj in objects:
 
@@ -87,7 +94,14 @@ def send_objects(objects: dict, topic: str = "/objects_info", max_queue: int = 1
         msg.pose = pose
         msg.model = str(int(obj["label_index"]))
 
-        pub.publish(msg)
+        msgArray.append(msg)
+
+    share_msg.lego_array = msgArray
+    ros.sleep(1)
+    pub.publish(share_msg)
+    
+    ros.sleep(1)
+    pub.publish(share_msg)
 
 def convert_to_gazebo_world_frame(points: list, precision: int = 5) -> list:
     """
@@ -501,7 +515,7 @@ def process_image(img: np.ndarray, render: bool = False) -> np.ndarray:
         function.image_detected_objects
     except:
         function.cold_start = True
-        function.image_detected_objects = None
+        function.image_detected_objects = img.copy()
 
     if not function.cold_start:
 

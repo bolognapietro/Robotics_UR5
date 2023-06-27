@@ -529,8 +529,6 @@ bool check_point(Vector3d pos, RowVector6d q0){
       return false;
     }
 
-    std::cout << "ciao" << std::endl;
-
     Th = confs.row(0);
     Matrix3d R06;
     Vector3d ef;
