@@ -36,30 +36,30 @@ git submodule init
 git submodule update
 ```
 
-Once done, copy the [motion plan](motion plan) folder inside the `ros_swc/src/motion_plan` folder (create the folder if it not exists via `mkdir motion_plan`) and inside the `ros_swc/src/motion_plan` extract the [Eigen](motion plan/Eigen.tar.gz) library:
+Once done, copy the [motion plan](motion plan) folder inside the `ros_ws/src/motion_plan` folder (create the folder if it not exists via `mkdir motion_plan`) and inside the `ros_ws/src/motion_plan` extract the [Eigen](motion plan/Eigen.tar.gz) library:
 
 ```bash
 tar -xzvf Eigen.tar.gz
 rm Eigen.tar.gz
 ```
 
-Inside `ros_swc` folder type:
+Inside `ros_ws` folder type:
 
 ```bash
 catkin_make install
 ```
 
-Finally, change the gripper type inside `ros_swc/src/locosim/robot_control/lab_exercises/lab_palopoli/params.py` script by setting [this line](https://github.com/mfocchi/robot_control/blob/a1babcb55217681b73229f3f9ec8ce93c477bc4d/lab_exercises/lab_palopoli/params.py#L45C8-L45C8) to `True`.
+Finally, change the gripper type inside `ros_ws/src/locosim/robot_control/lab_exercises/lab_palopoli/params.py` script by setting [this line](https://github.com/mfocchi/robot_control/blob/a1babcb55217681b73229f3f9ec8ce93c477bc4d/lab_exercises/lab_palopoli/params.py#L45C8-L45C8) to `True`.
 
 # Getting started
 
-Open a new terminal and navigate inside `ros_swc/src/locosim/robot_control/lab_exercises/lab_palopoli` folder. Once done type:
+Open a new terminal and navigate inside `ros_ws/src/locosim/robot_control/lab_exercises/lab_palopoli` folder. Once done type:
 
 ```bash
 python3 ur5_generic.py
 ```
 
-After the homing procedure has finished, navigate inside `ros_swc` folder, open a new terminal and type:
+After the homing procedure has finished, navigate inside `ros_ws` folder, open a new terminal and type:
 
 ```bash
 rosrun motion_plan_pkg motion_plan
