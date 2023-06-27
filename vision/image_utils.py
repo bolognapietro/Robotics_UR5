@@ -114,3 +114,33 @@ def extract_objects(img: np.ndarray) -> np.ndarray:
 
     # combine the objects and background
     return cv2.add(result, background)
+
+def remove_noise_by_color(img: np.ndarray) -> np.ndarray:
+    """
+    Remove any colored interference inside the image box
+
+    Args:
+        img (np.ndarray): Image to be processed.
+
+    Returns:
+        np.ndarray: The processed image.
+    """
+
+    image = img.copy()
+
+    # convert the image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # threshold the image to obtain a binary mask
+    _, binary_mask = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+
+    # find contours in the binary mask
+    contours, _ = cv2.findContours(binary_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
+    contours.pop(0)
+
+    # iterate over the contours and fill each contour area with black color
+    for contour in contours:
+        cv2.drawContours(image, [contour], 0, (0, 0, 0), -1)
+
+    return image
