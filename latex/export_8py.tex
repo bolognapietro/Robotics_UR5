@@ -1,0 +1,62 @@
+\hypertarget{export_8py}{}\doxysection{vision/yolov5/export.py File Reference}
+\label{export_8py}\index{vision/yolov5/export.py@{vision/yolov5/export.py}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classexport_1_1iOSModel}{export.\+i\+O\+S\+Model}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceexport}{export}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceexport_af5bb848ad6962057a365bf05feaa0eed}{export.\+export\+\_\+formats}} ()
+\item 
+def \mbox{\hyperlink{namespaceexport_a6ad359168cac60011b5268c0e9bb791f}{export.\+try\+\_\+export}} (inner\+\_\+func)
+\item 
+def \mbox{\hyperlink{namespaceexport_aecb11b4d46bba0215b070d2abddf335d}{export.\+export\+\_\+torchscript}} (model, im, file, optimize, prefix=colorstr(\textquotesingle{}Torch\+Script\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a3afdc1f0bf42305dc9ca004643d181ce}{export.\+export\+\_\+onnx}} (model, im, file, opset, dynamic, simplify, prefix=colorstr(\textquotesingle{}O\+N\+N\+X\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a4b3b2a99883c682361d8579227bdf606}{export.\+export\+\_\+openvino}} (file, metadata, half, int8, data, prefix=colorstr(\textquotesingle{}Open\+V\+I\+N\+O\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a6ec960123d69446aea51400d72b2bc49}{export.\+export\+\_\+paddle}} (model, im, file, metadata, prefix=colorstr(\textquotesingle{}Paddle\+Paddle\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_ab4aed33a189e6c810c087072064a2cd1}{export.\+export\+\_\+coreml}} (model, im, file, int8, half, nms, prefix=colorstr(\textquotesingle{}Core\+M\+L\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_af10b49b7ea52ac0a311ecd022f29e5a3}{export.\+export\+\_\+engine}} (model, im, file, half, dynamic, simplify, workspace=4, verbose=False, prefix=colorstr(\textquotesingle{}Tensor\+R\+T\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a7c59c98c857a3888acb11d2edbae9d3e}{export.\+export\+\_\+saved\+\_\+model}} (model, im, file, dynamic, tf\+\_\+nms=False, agnostic\+\_\+nms=False, topk\+\_\+per\+\_\+class=100, topk\+\_\+all=100, iou\+\_\+thres=0.\+45, conf\+\_\+thres=0.\+25, keras=False, prefix=colorstr(\textquotesingle{}Tensor\+Flow Saved\+Model\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_aded17badbcfca2eaee0edb8020e6ce19}{export.\+export\+\_\+pb}} (keras\+\_\+model, file, prefix=colorstr(\textquotesingle{}Tensor\+Flow Graph\+Def\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a696552736bb627c345b56ab94c49ffa2}{export.\+export\+\_\+tflite}} (keras\+\_\+model, im, file, int8, data, nms, agnostic\+\_\+nms, prefix=colorstr(\textquotesingle{}Tensor\+Flow Lite\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a22d7ac226dbce17c33e434483dc8700e}{export.\+export\+\_\+edgetpu}} (file, prefix=colorstr(\textquotesingle{}Edge T\+P\+U\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a7a63cfb181619eaff79c80f843323545}{export.\+export\+\_\+tfjs}} (file, int8, prefix=colorstr(\textquotesingle{}Tensor\+Flow.\+js\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_ac6b82abe11469f25d9869c2531dacca9}{export.\+add\+\_\+tflite\+\_\+metadata}} (file, metadata, num\+\_\+outputs)
+\item 
+def \mbox{\hyperlink{namespaceexport_a3c15a9276dcf6c33228e1ec75f0c46cf}{export.\+pipeline\+\_\+coreml}} (model, im, file, names, y, prefix=colorstr(\textquotesingle{}Core\+ML Pipeline\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceexport_a190f93520576345d4ce9a70ef8b8c6ec}{export.\+run}} (data=R\+O\+OT/ \textquotesingle{}data/coco128.\+yaml\textquotesingle{}, weights=R\+O\+OT/ \textquotesingle{}yolov5s.\+pt\textquotesingle{}, imgsz=(640, 640), batch\+\_\+size=1, device=\textquotesingle{}cpu\textquotesingle{}, include=(\textquotesingle{}torchscript\textquotesingle{}, \textquotesingle{}onnx\textquotesingle{}), half=False, inplace=False, keras=False, optimize=False, int8=False, dynamic=False, simplify=False, opset=12, verbose=False, workspace=4, nms=False, agnostic\+\_\+nms=False, topk\+\_\+per\+\_\+class=100, topk\+\_\+all=100, iou\+\_\+thres=0.\+45, conf\+\_\+thres=0.\+25)
+\item 
+def \mbox{\hyperlink{namespaceexport_adbec48c318dfd57c9cf538307f79c614}{export.\+parse\+\_\+opt}} (known=False)
+\item 
+def \mbox{\hyperlink{namespaceexport_a5ab119049b7316948428a5d309156c4b}{export.\+main}} (opt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceexport_a9bfae37ca15b3f687b2907c4b6fa38c5}{export.\+F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceexport_aa2a435b13a4c49dde8c5c3f389bdd2d5}{export.\+R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}0\mbox{]}
+\item 
+string \mbox{\hyperlink{namespaceexport_a851d097381116346af6b0eab8a0b7a1d}{export.\+M\+A\+C\+OS}} = \textquotesingle{}Darwin\textquotesingle{}
+\item 
+def \mbox{\hyperlink{namespaceexport_a50889475aab29ffec8d8b68d06f0c924}{export.\+opt}} = parse\+\_\+opt()
+\end{DoxyCompactItemize}

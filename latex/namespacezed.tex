@@ -1,0 +1,243 @@
+\hypertarget{namespacezed}{}\doxysection{zed Namespace Reference}
+\label{namespacezed}\index{zed@{zed}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespacezed_a151dca20397aa91f63c143ea86f3b08e}{truncate}} (float number, int digits)
+\item 
+None \mbox{\hyperlink{namespacezed_a4a769f36b78d1aa24d8e2896922cda90}{send\+\_\+objects}} (dict objects, str topic=\char`\"{}/objects\+\_\+info\char`\"{}, int max\+\_\+queue=10)
+\item 
+list \mbox{\hyperlink{namespacezed_a8413fd85045ecbbcd0b955640a129452}{convert\+\_\+to\+\_\+gazebo\+\_\+world\+\_\+frame}} (list points, int precision=5)
+\item 
+tuple \mbox{\hyperlink{namespacezed_a8db05ba49a014210bc8f31f556179910}{detect\+\_\+objects}} (np.\+ndarray \mbox{\hyperlink{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}{img}}, float threshold=0.\+7, bool \mbox{\hyperlink{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}{render}}=False, str yolo\+\_\+path=\char`\"{}yolov5\char`\"{}, str model\+\_\+path=\char`\"{}best.\+pt\char`\"{})
+\item 
+dict \mbox{\hyperlink{namespacezed_ac44705fda48661c1396e0d77d65f8fa7}{process\+\_\+objects}} (np.\+ndarray \mbox{\hyperlink{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}{img}}, dict objects)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespacezed_a052cb1896ec83a2f0301f167bb5d3930}{process\+\_\+image}} (np.\+ndarray \mbox{\hyperlink{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}{img}}, bool \mbox{\hyperlink{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}{render}}=False)
+\item 
+None \mbox{\hyperlink{namespacezed_a2400014c962afe3fcaabbb4b020b6b10}{background\+\_\+detection}} (\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{Image}} msg)
+\item 
+None \mbox{\hyperlink{namespacezed_a8d95ea831fb949ad76301be8c370fb87}{live\+\_\+detection}} (\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{Image}} msg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacezed_a92620fc3327272c1e5453628f5d3471c}{clear}} = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)
+\item 
+\mbox{\hyperlink{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}{img}}
+\item 
+\mbox{\hyperlink{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}{render}}
+\item 
+\mbox{\hyperlink{namespacezed_af812230632ccc54c5123f54f10223e72}{anonymous}}
+\item 
+\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{Image}}
+\item 
+\mbox{\hyperlink{namespacezed_a6db989a1e6c7ea9f8e7d3f56b1885e1e}{callback}}
+\item 
+\mbox{\hyperlink{namespacezed_a9f5001d251fa29228c2086a2d0827004}{live\+\_\+detection}}
+\item 
+\mbox{\hyperlink{namespacezed_a0c6c5e419d48018cb6cae1335c695fae}{queue\+\_\+size}}
+\item 
+\mbox{\hyperlink{namespacezed_adbcf80d901045497b0779fd54e0ba0a9}{loop\+\_\+rate}} = ros.\+Rate(1.)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacezed_a2400014c962afe3fcaabbb4b020b6b10}\label{namespacezed_a2400014c962afe3fcaabbb4b020b6b10}} 
+\index{zed@{zed}!background\_detection@{background\_detection}}
+\index{background\_detection@{background\_detection}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{background\_detection()}{background\_detection()}}
+{\footnotesize\ttfamily  None zed.\+background\+\_\+detection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{Image}}}]{msg }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Receives and elaborates zed images in background (no display)
+
+Args:
+    msg (Image): Image received from the zed camera.
+
+Returns:
+    None.
+
+Example:
+    >>> import rospy as ros
+    >>> from sensor_msgs.msg import Image
+    >>> if __name__ == "__main__":
+    >>>     ros.init_node('mynode', anonymous=True)
+    >>>     ros.Subscriber("/ur5/zed_node/left_raw/image_raw_color", Image, callback = background_detection, queue_size=1)
+    >>>     loop_rate = ros.Rate(1.)
+    >>>     while True:
+    >>>         loop_rate.sleep()
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a8413fd85045ecbbcd0b955640a129452}\label{namespacezed_a8413fd85045ecbbcd0b955640a129452}} 
+\index{zed@{zed}!convert\_to\_gazebo\_world\_frame@{convert\_to\_gazebo\_world\_frame}}
+\index{convert\_to\_gazebo\_world\_frame@{convert\_to\_gazebo\_world\_frame}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{convert\_to\_gazebo\_world\_frame()}{convert\_to\_gazebo\_world\_frame()}}
+{\footnotesize\ttfamily  list zed.\+convert\+\_\+to\+\_\+gazebo\+\_\+world\+\_\+frame (\begin{DoxyParamCaption}\item[{list}]{points,  }\item[{int }]{precision = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Converts 2D coordinates into gazebo world frame coordinates
+
+Args:
+    points (list): Points to be converted.
+    precision (int, optional): Number of decimal digits for the returned coordinates. Defaults to 10.
+
+Returns:
+    list: 3D points (x,y,z).
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a8db05ba49a014210bc8f31f556179910}\label{namespacezed_a8db05ba49a014210bc8f31f556179910}} 
+\index{zed@{zed}!detect\_objects@{detect\_objects}}
+\index{detect\_objects@{detect\_objects}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{detect\_objects()}{detect\_objects()}}
+{\footnotesize\ttfamily  tuple zed.\+detect\+\_\+objects (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img,  }\item[{float }]{threshold = {\ttfamily 0.7},  }\item[{bool }]{render = {\ttfamily False},  }\item[{str }]{yolo\+\_\+path = {\ttfamily \char`\"{}yolov5\char`\"{}},  }\item[{str }]{model\+\_\+path = {\ttfamily \char`\"{}best.pt\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Detects objects inside a given image.
+
+Args:
+    img (np.ndarray): Image to be processed.
+    threshold (float, optional): Specifies the minimum score that a detected object must have in order to be considered "valid". Defaults to 0.7 (70%).
+    render (bool, optional): Specifies if the function has to return the rendered image with the detected objects. Defaults to False.
+    yolo_path (str, optional): Yolo folder path. Defaults to "yolov5".
+    model_path (str, optional): Yolo .pt file path. Defaults to "best.pt".
+
+Returns:
+    dict: Detected objects.
+    np.ndarray | None: Rendered image if render param is set on True.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a8d95ea831fb949ad76301be8c370fb87}\label{namespacezed_a8d95ea831fb949ad76301be8c370fb87}} 
+\index{zed@{zed}!live\_detection@{live\_detection}}
+\index{live\_detection@{live\_detection}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{live\_detection()}{live\_detection()}}
+{\footnotesize\ttfamily  None zed.\+live\+\_\+detection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{Image}}}]{msg }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Receives, elaborates zed images and display them (useful for debugging).
+
+Args:
+    msg (Image): Image received from the zed camera.
+
+Returns:
+    None.
+
+Example:
+    >>> import rospy as ros
+    >>> from sensor_msgs.msg import Image
+    >>> if __name__ == "__main__":
+    >>>     ros.init_node('mynode', anonymous=True)
+    >>>     ros.Subscriber("/ur5/zed_node/left_raw/image_raw_color", Image, callback = live_detection, queue_size=1)
+    >>>     loop_rate = ros.Rate(1.)
+    >>>     while True:
+    >>>         loop_rate.sleep()
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a052cb1896ec83a2f0301f167bb5d3930}\label{namespacezed_a052cb1896ec83a2f0301f167bb5d3930}} 
+\index{zed@{zed}!process\_image@{process\_image}}
+\index{process\_image@{process\_image}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{process\_image()}{process\_image()}}
+{\footnotesize\ttfamily  np.\+ndarray zed.\+process\+\_\+image (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img,  }\item[{bool }]{render = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process the image captured by the zed camera
+
+Args:
+    img (np.ndarray): Captured image.
+    render (bool, optional): Specifies if the image with the bounding box of the detected objects has to be rendered. Defaults to False.
+Returns:
+    dict: Updated objects.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_ac44705fda48661c1396e0d77d65f8fa7}\label{namespacezed_ac44705fda48661c1396e0d77d65f8fa7}} 
+\index{zed@{zed}!process\_objects@{process\_objects}}
+\index{process\_objects@{process\_objects}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{process\_objects()}{process\_objects()}}
+{\footnotesize\ttfamily  dict zed.\+process\+\_\+objects (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img,  }\item[{dict}]{objects }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process the detected objects
+
+Args:
+    frame (np.ndarray): Captured frame. It has a "clean" frame without any previous manipulation.
+    objects (dict): Detected objects.
+
+Returns:
+    dict: Updated objects.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a4a769f36b78d1aa24d8e2896922cda90}\label{namespacezed_a4a769f36b78d1aa24d8e2896922cda90}} 
+\index{zed@{zed}!send\_objects@{send\_objects}}
+\index{send\_objects@{send\_objects}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{send\_objects()}{send\_objects()}}
+{\footnotesize\ttfamily  None zed.\+send\+\_\+objects (\begin{DoxyParamCaption}\item[{dict}]{objects,  }\item[{str }]{topic = {\ttfamily \char`\"{}/objects\+\_\+info\char`\"{}},  }\item[{int }]{max\+\_\+queue = {\ttfamily 10} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Publish each object.
+
+Args:
+    objects (dict): Detected objects.
+    topic (str, optional): Where to publish the informations. Defaults to "/objects_info".
+
+Returns:
+    None.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacezed_a151dca20397aa91f63c143ea86f3b08e}\label{namespacezed_a151dca20397aa91f63c143ea86f3b08e}} 
+\index{zed@{zed}!truncate@{truncate}}
+\index{truncate@{truncate}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{truncate()}{truncate()}}
+{\footnotesize\ttfamily  float zed.\+truncate (\begin{DoxyParamCaption}\item[{float}]{number,  }\item[{int}]{digits }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Truncate float number to n digits.
+
+Args:
+    number (float): Number to be truncated.
+    digits (int): Number of digits to keep.
+
+Returns:
+    float: Truncated number.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacezed_af812230632ccc54c5123f54f10223e72}\label{namespacezed_af812230632ccc54c5123f54f10223e72}} 
+\index{zed@{zed}!anonymous@{anonymous}}
+\index{anonymous@{anonymous}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{anonymous}{anonymous}}
+{\footnotesize\ttfamily zed.\+anonymous}
+
+\mbox{\Hypertarget{namespacezed_a6db989a1e6c7ea9f8e7d3f56b1885e1e}\label{namespacezed_a6db989a1e6c7ea9f8e7d3f56b1885e1e}} 
+\index{zed@{zed}!callback@{callback}}
+\index{callback@{callback}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{callback}{callback}}
+{\footnotesize\ttfamily zed.\+callback}
+
+\mbox{\Hypertarget{namespacezed_a92620fc3327272c1e5453628f5d3471c}\label{namespacezed_a92620fc3327272c1e5453628f5d3471c}} 
+\index{zed@{zed}!clear@{clear}}
+\index{clear@{clear}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{clear}{clear}}
+{\footnotesize\ttfamily zed.\+clear = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)}
+
+\mbox{\Hypertarget{namespacezed_a30ad6868c44c61e992cba47b66301be6}\label{namespacezed_a30ad6868c44c61e992cba47b66301be6}} 
+\index{zed@{zed}!Image@{Image}}
+\index{Image@{Image}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{Image}{Image}}
+{\footnotesize\ttfamily zed.\+Image}
+
+\mbox{\Hypertarget{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}\label{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}} 
+\index{zed@{zed}!img@{img}}
+\index{img@{img}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{img}{img}}
+{\footnotesize\ttfamily zed.\+img}
+
+\mbox{\Hypertarget{namespacezed_a9f5001d251fa29228c2086a2d0827004}\label{namespacezed_a9f5001d251fa29228c2086a2d0827004}} 
+\index{zed@{zed}!live\_detection@{live\_detection}}
+\index{live\_detection@{live\_detection}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{live\_detection}{live\_detection}}
+{\footnotesize\ttfamily zed.\+live\+\_\+detection}
+
+\mbox{\Hypertarget{namespacezed_adbcf80d901045497b0779fd54e0ba0a9}\label{namespacezed_adbcf80d901045497b0779fd54e0ba0a9}} 
+\index{zed@{zed}!loop\_rate@{loop\_rate}}
+\index{loop\_rate@{loop\_rate}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{loop\_rate}{loop\_rate}}
+{\footnotesize\ttfamily zed.\+loop\+\_\+rate = ros.\+Rate(1.)}
+
+\mbox{\Hypertarget{namespacezed_a0c6c5e419d48018cb6cae1335c695fae}\label{namespacezed_a0c6c5e419d48018cb6cae1335c695fae}} 
+\index{zed@{zed}!queue\_size@{queue\_size}}
+\index{queue\_size@{queue\_size}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{queue\_size}{queue\_size}}
+{\footnotesize\ttfamily zed.\+queue\+\_\+size}
+
+\mbox{\Hypertarget{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}\label{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}} 
+\index{zed@{zed}!render@{render}}
+\index{render@{render}!zed@{zed}}
+\doxysubsubsection{\texorpdfstring{render}{render}}
+{\footnotesize\ttfamily zed.\+render}
+

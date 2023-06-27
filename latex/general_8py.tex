@@ -1,0 +1,188 @@
+\hypertarget{general_8py}{}\doxysection{vision/yolov5/utils/general.py File Reference}
+\label{general_8py}\index{vision/yolov5/utils/general.py@{vision/yolov5/utils/general.py}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1general_1_1Profile}{utils.\+general.\+Profile}}
+\item 
+class \mbox{\hyperlink{classutils_1_1general_1_1Timeout}{utils.\+general.\+Timeout}}
+\item 
+class \mbox{\hyperlink{classutils_1_1general_1_1WorkingDirectory}{utils.\+general.\+Working\+Directory}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1general}{utils.\+general}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a7779c62301788d9fd39145e1f36289a7}{utils.\+general.\+is\+\_\+ascii}} (s=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a3762d4d512c5ac25e95428d52a3f86bd}{utils.\+general.\+is\+\_\+chinese}} (s=\textquotesingle{}人工智能\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a28124b7e0fe351b311dc4b386ac57205}{utils.\+general.\+is\+\_\+colab}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a798ccaed345f6785f011959ad539cef5}{utils.\+general.\+is\+\_\+jupyter}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a414b765b7c4c97c48a49b51b71329c7c}{utils.\+general.\+is\+\_\+kaggle}} ()
+\item 
+bool \mbox{\hyperlink{namespaceutils_1_1general_abe4792dc89d09f46071a461a3402da9d}{utils.\+general.\+is\+\_\+docker}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a7890e182ddb21e0eb2de3a15ff1af62b}{utils.\+general.\+is\+\_\+writeable}} (dir, test=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_af06225c87b770348e56875b03a300a3c}{utils.\+general.\+set\+\_\+logging}} (name=L\+O\+G\+G\+I\+N\+G\+\_\+\+N\+A\+ME, verbose=True)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a4cef8274fe4489133e9ca0cc0dbb73ee}{utils.\+general.\+user\+\_\+config\+\_\+dir}} (dir=\textquotesingle{}Ultralytics\textquotesingle{}, env\+\_\+var=\textquotesingle{}Y\+O\+L\+O\+V5\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+D\+IR\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a3fa59ef87e2046da82f9967abe013ba1}{utils.\+general.\+methods}} (instance)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a09b6207bc60d592f69a96976ca6802c7}{utils.\+general.\+print\+\_\+args}} (Optional\mbox{[}dict\mbox{]} args=None, show\+\_\+file=True, show\+\_\+func=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_accfdf971849fe0667d1190aa9fdb424e}{utils.\+general.\+init\+\_\+seeds}} (seed=0, deterministic=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ad43530bb8ba505fd60b9fb28cf9d7425}{utils.\+general.\+intersect\+\_\+dicts}} (da, db, exclude=())
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a33f47432549190b554f399ffd0ccc375}{utils.\+general.\+get\+\_\+default\+\_\+args}} (func)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a0a9d5715225a45aa216f472b23d345ef}{utils.\+general.\+get\+\_\+latest\+\_\+run}} (search\+\_\+dir=\textquotesingle{}.\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ac97b93153ba7ab7e0a281a74cc1bce1e}{utils.\+general.\+file\+\_\+age}} (path=\+\_\+\+\_\+file\+\_\+\+\_\+)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_aff1097532a9df3986a09c1110671a828}{utils.\+general.\+file\+\_\+date}} (path=\+\_\+\+\_\+file\+\_\+\+\_\+)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a04dd6875740eb0bf7b1aac806ce141e7}{utils.\+general.\+file\+\_\+size}} (path)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a3fcffcf8a778a3a17e07a1604ed21c2b}{utils.\+general.\+check\+\_\+online}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a1607154494ea64358bc88038d04c3d11}{utils.\+general.\+git\+\_\+describe}} (path=R\+O\+OT)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a2d90f9aa95ffea38d55dbbb769d50153}{utils.\+general.\+check\+\_\+git\+\_\+status}} (repo=\textquotesingle{}ultralytics/yolov5\textquotesingle{}, branch=\textquotesingle{}master\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ad0a31f7277a311db1db7d6472b1000eb}{utils.\+general.\+check\+\_\+git\+\_\+info}} (path=\textquotesingle{}.\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a5af33b8b7c43d1efdcb2f69394fddb0e}{utils.\+general.\+check\+\_\+python}} (minimum=\textquotesingle{}3.\+7.\+0\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a0faedb05da295d1beac1cd73d714b7e7}{utils.\+general.\+check\+\_\+version}} (current=\textquotesingle{}0.\+0.\+0\textquotesingle{}, minimum=\textquotesingle{}0.\+0.\+0\textquotesingle{}, name=\textquotesingle{}version \textquotesingle{}, pinned=False, hard=False, verbose=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a244d6249c0b2577bcc3251f52819db46}{utils.\+general.\+check\+\_\+img\+\_\+size}} (imgsz, s=32, floor=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_adc62a832138061bdc4635da74837f08c}{utils.\+general.\+check\+\_\+imshow}} (warn=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a28de1ab4838cec745f600c2ef0fa434a}{utils.\+general.\+check\+\_\+suffix}} (file=\textquotesingle{}yolov5s.\+pt\textquotesingle{}, suffix=(\textquotesingle{}.pt\textquotesingle{},), msg=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a385b695c1822c8b79be06d176fb36d6a}{utils.\+general.\+check\+\_\+yaml}} (file, suffix=(\textquotesingle{}.yaml\textquotesingle{}, \textquotesingle{}.yml\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a86cf146c31d2d27257ee77ce742d61c8}{utils.\+general.\+check\+\_\+file}} (file, suffix=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_abe1c8d447bc8d9e477fb78ab5dafc514}{utils.\+general.\+check\+\_\+font}} (font=F\+O\+NT, progress=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a0c4a084b707ba1e52a9623ea00a38136}{utils.\+general.\+check\+\_\+dataset}} (data, autodownload=True)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ace7675120d769d78f50b3c434f330ba9}{utils.\+general.\+check\+\_\+amp}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a9e12fb3e04e044a72a069847ca88ce45}{utils.\+general.\+yaml\+\_\+load}} (file=\textquotesingle{}data.\+yaml\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a9c4465367197b746ed35aac7271db5cf}{utils.\+general.\+yaml\+\_\+save}} (file=\textquotesingle{}data.\+yaml\textquotesingle{}, data=\{\})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a058edf93435d60da193556c1d0a2b698}{utils.\+general.\+unzip\+\_\+file}} (file, path=None, exclude=(\textquotesingle{}.D\+S\+\_\+\+Store\textquotesingle{}, \textquotesingle{}\+\_\+\+\_\+\+M\+A\+C\+O\+SX\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a6b8ecef83570496b94a5bfb88c83de62}{utils.\+general.\+url2file}} (url)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a605b36592607795f1dac45137828cd6a}{utils.\+general.\+download}} (url, dir=\textquotesingle{}.\textquotesingle{}, unzip=True, delete=True, curl=False, threads=1, retry=3)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_addfbd08fe5ad62fd8dff06c508e9b3f1}{utils.\+general.\+make\+\_\+divisible}} (x, divisor)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ab81b3cfd0ecadc2bfb67041b53411dc9}{utils.\+general.\+clean\+\_\+str}} (s)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_acb783580c61d0992a9fc76977dc247fd}{utils.\+general.\+one\+\_\+cycle}} (y1=0.\+0, y2=1.\+0, steps=100)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_aaaf8ee7de4ad040a6ab3b3f7c953b554}{utils.\+general.\+colorstr}} ($\ast$input)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a4f43a87896c754a91e93fe24893179b2}{utils.\+general.\+labels\+\_\+to\+\_\+class\+\_\+weights}} (labels, nc=80)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a5fea4c95b22452e6c0df72b50b35d76c}{utils.\+general.\+labels\+\_\+to\+\_\+image\+\_\+weights}} (labels, nc=80, class\+\_\+weights=np.\+ones(80))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_aba0fdf9aa462cb175c323c76f98b69ee}{utils.\+general.\+coco80\+\_\+to\+\_\+coco91\+\_\+class}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a26624f384586553132479c3b23b3a3bb}{utils.\+general.\+xyxy2xywh}} (x)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_afa488619e2faa6a3390cb18b4756511c}{utils.\+general.\+xywh2xyxy}} (x)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_aa1002564332c8f7741249856ae1c789d}{utils.\+general.\+xywhn2xyxy}} (x, w=640, h=640, padw=0, padh=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a36083c3c9e276342a9cc7ec3910b5a57}{utils.\+general.\+xyxy2xywhn}} (x, w=640, h=640, clip=False, eps=0.\+0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a595c5c7ca74934f9808b7e3c3afad2d0}{utils.\+general.\+xyn2xy}} (x, w=640, h=640, padw=0, padh=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a0f2fd8f91e1d8c5fb5381dbc0ee69bfb}{utils.\+general.\+segment2box}} (segment, width=640, height=640)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_acbca4215c40f3f88d811a58924cf092f}{utils.\+general.\+segments2boxes}} (segments)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a8fd51559eee737c034fedfa69a884f89}{utils.\+general.\+resample\+\_\+segments}} (segments, n=1000)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a08c131ec99bf83ba7295c79d04ed6cce}{utils.\+general.\+scale\+\_\+boxes}} (img1\+\_\+shape, boxes, img0\+\_\+shape, ratio\+\_\+pad=None)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a3722980ef6e40c2c9369000e28c6ffa1}{utils.\+general.\+scale\+\_\+segments}} (img1\+\_\+shape, segments, img0\+\_\+shape, ratio\+\_\+pad=None, normalize=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a38d24411b6403b9dbcc1b008041cf0fd}{utils.\+general.\+clip\+\_\+boxes}} (boxes, shape)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_af196cf41d994cee4935a34f7146dfd35}{utils.\+general.\+clip\+\_\+segments}} (segments, shape)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a551cec893e564f83e531ac103a06034f}{utils.\+general.\+non\+\_\+max\+\_\+suppression}} (prediction, conf\+\_\+thres=0.\+25, iou\+\_\+thres=0.\+45, classes=None, agnostic=False, multi\+\_\+label=False, labels=(), max\+\_\+det=300, nm=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ae834a12929b851bdcc4f6348f802fb66}{utils.\+general.\+strip\+\_\+optimizer}} (f=\textquotesingle{}best.\+pt\textquotesingle{}, s=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a26c18f7307f8e5a3603c0259535f3530}{utils.\+general.\+print\+\_\+mutation}} (keys, results, hyp, save\+\_\+dir, bucket, prefix=colorstr(\textquotesingle{}evolve\+:\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_ab7510113b1d173b619b2270a325d81c2}{utils.\+general.\+apply\+\_\+classifier}} (x, model, img, im0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a06fae0c41c814da37887d42fa06b89e2}{utils.\+general.\+increment\+\_\+path}} (path, exist\+\_\+ok=False, sep=\textquotesingle{}\textquotesingle{}, mkdir=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a6241092ec6ff72f42127f1b05dfc51bd}{utils.\+general.\+imread}} (filename, flags=cv2.\+I\+M\+R\+E\+A\+D\+\_\+\+C\+O\+L\+OR)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a9764b3868fc16b269a9afdd50d064be7}{utils.\+general.\+imwrite}} (filename, img)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a5c945989bb36480e769c44fe061c0acb}{utils.\+general.\+imshow}} (path, im)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a6908d0edbbf0d5afdf6b2f6ca4686b15}{utils.\+general.\+F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a76034cc50cd3d61c5867c240c00162dc}{utils.\+general.\+R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}1\mbox{]}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a92b2c04a7821c2ef1145d1344e2822a2}{utils.\+general.\+R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a97387ce67b736addbff64e5bc1c06597}{utils.\+general.\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS}} = min(8, max(1, os.\+cpu\+\_\+count() -\/ 1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a80177133c39d35e8377a99381d7c1efa}{utils.\+general.\+D\+A\+T\+A\+S\+E\+T\+S\+\_\+\+D\+IR}} = Path(os.\+getenv(\textquotesingle{}Y\+O\+L\+Ov5\+\_\+\+D\+A\+T\+A\+S\+E\+T\+S\+\_\+\+D\+IR\textquotesingle{}, R\+O\+O\+T.\+parent / \textquotesingle{}datasets\textquotesingle{}))
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1general_ae3d99c572787e25abbd0c4efcdd04a14}{utils.\+general.\+A\+U\+T\+O\+I\+N\+S\+T\+A\+LL}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1general_a097e2fdc3477040f8a60cc198f504a62}{utils.\+general.\+V\+E\+R\+B\+O\+SE}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1general_a0ba8d88b0855cd7100a1ffb96319b2ee}{utils.\+general.\+T\+Q\+D\+M\+\_\+\+B\+A\+R\+\_\+\+F\+O\+R\+M\+AT}} = \textquotesingle{}\{l\+\_\+bar\}\{bar\+:10\}\{r\+\_\+bar\}\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1general_a252aa0c686afe592f967d56a92dd610f}{utils.\+general.\+F\+O\+NT}} = \textquotesingle{}Arial.\+ttf\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_afa824a829bd3b3568d10128abdc9e524}{utils.\+general.\+linewidth}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_ad0ac856f5f6814f71e5b764277d1062c}{utils.\+general.\+precision}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_ab7c2e70c90cbca6d2abb888a0e904370}{utils.\+general.\+profile}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a6ab7c4b39206f6774dfc96b6a687d0f3}{utils.\+general.\+formatter}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a1e4709b274732e5262c584de53a3d450}{utils.\+general.\+max\+\_\+columns}}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1general_a46b200c13ca2f1a376abbaa5584b12dd}{utils.\+general.\+L\+O\+G\+G\+I\+N\+G\+\_\+\+N\+A\+ME}} = \textquotesingle{}yolov5\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a45010d4247a8b9df795aac0f947cb445}{utils.\+general.\+L\+O\+G\+G\+ER}} = logging.\+get\+Logger(L\+O\+G\+G\+I\+N\+G\+\_\+\+N\+A\+ME)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1general_a7df5f25781783040e1ad8a6e5af3c3bb}{utils.\+general.\+C\+O\+N\+F\+I\+G\+\_\+\+D\+IR}} = user\+\_\+config\+\_\+dir()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_ab633cbcf3ce476c28cdd3b44864dac05}{utils.\+general.\+imshow\+\_\+}} = cv2.\+imshow
+\item 
+\mbox{\hyperlink{namespaceutils_1_1general_a7e431a1cf0c91d76448f5b4aeb70ae94}{utils.\+general.\+imshow}}
+\end{DoxyCompactItemize}

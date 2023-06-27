@@ -1,0 +1,132 @@
+\hypertarget{namespaceval}{}\doxysection{val Namespace Reference}
+\label{namespaceval}\index{val@{val}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceval_a454457db33f1fc48d8d45ef8fcd0f1f4}{run}} (data=\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}/\textquotesingle{}../datasets/mnist\textquotesingle{}, weights=\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}/ \textquotesingle{}yolov5s-\/cls.\+pt\textquotesingle{}, batch\+\_\+size=128, imgsz=224, device=\textquotesingle{}\textquotesingle{}, workers=8, verbose=False, project=\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}/ \textquotesingle{}runs/val-\/cls\textquotesingle{}, name=\textquotesingle{}exp\textquotesingle{}, exist\+\_\+ok=False, half=False, dnn=False, model=None, dataloader=None, criterion=None, pbar=None)
+\item 
+def \mbox{\hyperlink{namespaceval_a763276101b42f001ba80ee2dbdaf41f0}{parse\+\_\+opt}} ()
+\item 
+def \mbox{\hyperlink{namespaceval_a0e44e6428df76c25cb77d576ccc23f36}{main}} (\mbox{\hyperlink{namespaceval_af716a3ada81b5621561736874950f228}{opt}})
+\item 
+def \mbox{\hyperlink{namespaceval_a369be236fe0857acbeb25eda9731043f}{save\+\_\+one\+\_\+txt}} (predn, save\+\_\+conf, shape, file)
+\item 
+def \mbox{\hyperlink{namespaceval_a0b4593e0dee2f2c9b52d1ae0c7d5d748}{save\+\_\+one\+\_\+json}} (predn, jdict, path, class\+\_\+map, pred\+\_\+masks)
+\item 
+def \mbox{\hyperlink{namespaceval_af000fb501470923e94ccda9c37824063}{process\+\_\+batch}} (detections, labels, iouv, pred\+\_\+masks=None, gt\+\_\+masks=None, overlap=False, masks=False)
+\item 
+def \mbox{\hyperlink{namespaceval_ac991d0e4329450393b3ddf5e944fb803}{run}} (data, weights=None, batch\+\_\+size=32, imgsz=640, conf\+\_\+thres=0.\+001, iou\+\_\+thres=0.\+6, max\+\_\+det=300, task=\textquotesingle{}val\textquotesingle{}, device=\textquotesingle{}\textquotesingle{}, workers=8, single\+\_\+cls=False, augment=False, verbose=False, save\+\_\+txt=False, save\+\_\+hybrid=False, save\+\_\+conf=False, save\+\_\+json=False, project=\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}/ \textquotesingle{}runs/val-\/seg\textquotesingle{}, name=\textquotesingle{}exp\textquotesingle{}, exist\+\_\+ok=False, half=True, dnn=False, model=None, dataloader=None, save\+\_\+dir=Path(\textquotesingle{}\textquotesingle{}), plots=True, overlap=False, mask\+\_\+downsample\+\_\+ratio=1, compute\+\_\+loss=None, callbacks=\mbox{\hyperlink{classutils_1_1callbacks_1_1Callbacks}{Callbacks}}())
+\item 
+def \mbox{\hyperlink{namespaceval_a742bed1791d7b8a1b853a75beb731153}{save\+\_\+one\+\_\+json}} (predn, jdict, path, class\+\_\+map)
+\item 
+def \mbox{\hyperlink{namespaceval_adfc3741ecd4e1272220b54749f143d90}{process\+\_\+batch}} (detections, labels, iouv)
+\item 
+def \mbox{\hyperlink{namespaceval_a4cde91adb337cc5cd9b6b98b28757044}{run}} (data, weights=None, batch\+\_\+size=32, imgsz=640, conf\+\_\+thres=0.\+001, iou\+\_\+thres=0.\+6, max\+\_\+det=300, task=\textquotesingle{}val\textquotesingle{}, device=\textquotesingle{}\textquotesingle{}, workers=8, single\+\_\+cls=False, augment=False, verbose=False, save\+\_\+txt=False, save\+\_\+hybrid=False, save\+\_\+conf=False, save\+\_\+json=False, project=\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}/ \textquotesingle{}runs/val\textquotesingle{}, name=\textquotesingle{}exp\textquotesingle{}, exist\+\_\+ok=False, half=True, dnn=False, model=None, dataloader=None, save\+\_\+dir=Path(\textquotesingle{}\textquotesingle{}), plots=True, callbacks=\mbox{\hyperlink{classutils_1_1callbacks_1_1Callbacks}{Callbacks}}(), compute\+\_\+loss=None)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceval_a9572b46935104dab1c3fd617b1414f17}{F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}1\mbox{]}
+\item 
+def \mbox{\hyperlink{namespaceval_af716a3ada81b5621561736874950f228}{opt}} = \mbox{\hyperlink{namespaceval_a763276101b42f001ba80ee2dbdaf41f0}{parse\+\_\+opt}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceval_a0e44e6428df76c25cb77d576ccc23f36}\label{namespaceval_a0e44e6428df76c25cb77d576ccc23f36}} 
+\index{val@{val}!main@{main}}
+\index{main@{main}!val@{val}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def val.\+main (\begin{DoxyParamCaption}\item[{}]{opt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_a763276101b42f001ba80ee2dbdaf41f0}\label{namespaceval_a763276101b42f001ba80ee2dbdaf41f0}} 
+\index{val@{val}!parse\_opt@{parse\_opt}}
+\index{parse\_opt@{parse\_opt}!val@{val}}
+\doxysubsubsection{\texorpdfstring{parse\_opt()}{parse\_opt()}}
+{\footnotesize\ttfamily def val.\+parse\+\_\+opt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_adfc3741ecd4e1272220b54749f143d90}\label{namespaceval_adfc3741ecd4e1272220b54749f143d90}} 
+\index{val@{val}!process\_batch@{process\_batch}}
+\index{process\_batch@{process\_batch}!val@{val}}
+\doxysubsubsection{\texorpdfstring{process\_batch()}{process\_batch()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def val.\+process\+\_\+batch (\begin{DoxyParamCaption}\item[{}]{detections,  }\item[{}]{labels,  }\item[{}]{iouv }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Return correct prediction matrix
+Arguments:
+    detections (array[N, 6]), x1, y1, x2, y2, conf, class
+    labels (array[M, 5]), class, x1, y1, x2, y2
+Returns:
+    correct (array[N, 10]), for 10 IoU levels
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceval_af000fb501470923e94ccda9c37824063}\label{namespaceval_af000fb501470923e94ccda9c37824063}} 
+\index{val@{val}!process\_batch@{process\_batch}}
+\index{process\_batch@{process\_batch}!val@{val}}
+\doxysubsubsection{\texorpdfstring{process\_batch()}{process\_batch()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def val.\+process\+\_\+batch (\begin{DoxyParamCaption}\item[{}]{detections,  }\item[{}]{labels,  }\item[{}]{iouv,  }\item[{}]{pred\+\_\+masks = {\ttfamily None},  }\item[{}]{gt\+\_\+masks = {\ttfamily None},  }\item[{}]{overlap = {\ttfamily False},  }\item[{}]{masks = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Return correct prediction matrix
+Arguments:
+    detections (array[N, 6]), x1, y1, x2, y2, conf, class
+    labels (array[M, 5]), class, x1, y1, x2, y2
+Returns:
+    correct (array[N, 10]), for 10 IoU levels
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceval_a4cde91adb337cc5cd9b6b98b28757044}\label{namespaceval_a4cde91adb337cc5cd9b6b98b28757044}} 
+\index{val@{val}!run@{run}}
+\index{run@{run}!val@{val}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily def val.\+run (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{weights = {\ttfamily None},  }\item[{}]{batch\+\_\+size = {\ttfamily 32},  }\item[{}]{imgsz = {\ttfamily 640},  }\item[{}]{conf\+\_\+thres = {\ttfamily 0.001},  }\item[{}]{iou\+\_\+thres = {\ttfamily 0.6},  }\item[{}]{max\+\_\+det = {\ttfamily 300},  }\item[{}]{task = {\ttfamily \textquotesingle{}val\textquotesingle{}},  }\item[{}]{device = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{single\+\_\+cls = {\ttfamily False},  }\item[{}]{augment = {\ttfamily False},  }\item[{}]{verbose = {\ttfamily False},  }\item[{}]{save\+\_\+txt = {\ttfamily False},  }\item[{}]{save\+\_\+hybrid = {\ttfamily False},  }\item[{}]{save\+\_\+conf = {\ttfamily False},  }\item[{}]{save\+\_\+json = {\ttfamily False},  }\item[{}]{project = {\ttfamily \mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}~/~\textquotesingle{}runs/val\textquotesingle{}},  }\item[{}]{name = {\ttfamily \textquotesingle{}exp\textquotesingle{}},  }\item[{}]{exist\+\_\+ok = {\ttfamily False},  }\item[{}]{half = {\ttfamily True},  }\item[{}]{dnn = {\ttfamily False},  }\item[{}]{model = {\ttfamily None},  }\item[{}]{dataloader = {\ttfamily None},  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}\textquotesingle{})},  }\item[{}]{plots = {\ttfamily True},  }\item[{}]{callbacks = {\ttfamily \mbox{\hyperlink{classutils_1_1callbacks_1_1Callbacks}{Callbacks}}()},  }\item[{}]{compute\+\_\+loss = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_ac991d0e4329450393b3ddf5e944fb803}\label{namespaceval_ac991d0e4329450393b3ddf5e944fb803}} 
+\index{val@{val}!run@{run}}
+\index{run@{run}!val@{val}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily def val.\+run (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{weights = {\ttfamily None},  }\item[{}]{batch\+\_\+size = {\ttfamily 32},  }\item[{}]{imgsz = {\ttfamily 640},  }\item[{}]{conf\+\_\+thres = {\ttfamily 0.001},  }\item[{}]{iou\+\_\+thres = {\ttfamily 0.6},  }\item[{}]{max\+\_\+det = {\ttfamily 300},  }\item[{}]{task = {\ttfamily \textquotesingle{}val\textquotesingle{}},  }\item[{}]{device = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{single\+\_\+cls = {\ttfamily False},  }\item[{}]{augment = {\ttfamily False},  }\item[{}]{verbose = {\ttfamily False},  }\item[{}]{save\+\_\+txt = {\ttfamily False},  }\item[{}]{save\+\_\+hybrid = {\ttfamily False},  }\item[{}]{save\+\_\+conf = {\ttfamily False},  }\item[{}]{save\+\_\+json = {\ttfamily False},  }\item[{}]{project = {\ttfamily \mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}~/~\textquotesingle{}runs/val-\/seg\textquotesingle{}},  }\item[{}]{name = {\ttfamily \textquotesingle{}exp\textquotesingle{}},  }\item[{}]{exist\+\_\+ok = {\ttfamily False},  }\item[{}]{half = {\ttfamily True},  }\item[{}]{dnn = {\ttfamily False},  }\item[{}]{model = {\ttfamily None},  }\item[{}]{dataloader = {\ttfamily None},  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}\textquotesingle{})},  }\item[{}]{plots = {\ttfamily True},  }\item[{}]{overlap = {\ttfamily False},  }\item[{}]{mask\+\_\+downsample\+\_\+ratio = {\ttfamily 1},  }\item[{}]{compute\+\_\+loss = {\ttfamily None},  }\item[{}]{callbacks = {\ttfamily \mbox{\hyperlink{classutils_1_1callbacks_1_1Callbacks}{Callbacks}}()} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_a454457db33f1fc48d8d45ef8fcd0f1f4}\label{namespaceval_a454457db33f1fc48d8d45ef8fcd0f1f4}} 
+\index{val@{val}!run@{run}}
+\index{run@{run}!val@{val}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily def val.\+run (\begin{DoxyParamCaption}\item[{}]{data = {\ttfamily \mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}~/~\textquotesingle{}../datasets/mnist\textquotesingle{}},  }\item[{}]{weights = {\ttfamily \mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}~/~\textquotesingle{}yolov5s-\/cls.pt\textquotesingle{}},  }\item[{}]{batch\+\_\+size = {\ttfamily 128},  }\item[{}]{imgsz = {\ttfamily 224},  }\item[{}]{device = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{verbose = {\ttfamily False},  }\item[{}]{project = {\ttfamily \mbox{\hyperlink{namespaceval_a481b90651ac652c0165cbd271448a5af}{R\+O\+OT}}~/~\textquotesingle{}runs/val-\/cls\textquotesingle{}},  }\item[{}]{name = {\ttfamily \textquotesingle{}exp\textquotesingle{}},  }\item[{}]{exist\+\_\+ok = {\ttfamily False},  }\item[{}]{half = {\ttfamily False},  }\item[{}]{dnn = {\ttfamily False},  }\item[{}]{model = {\ttfamily None},  }\item[{}]{dataloader = {\ttfamily None},  }\item[{}]{criterion = {\ttfamily None},  }\item[{}]{pbar = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_a742bed1791d7b8a1b853a75beb731153}\label{namespaceval_a742bed1791d7b8a1b853a75beb731153}} 
+\index{val@{val}!save\_one\_json@{save\_one\_json}}
+\index{save\_one\_json@{save\_one\_json}!val@{val}}
+\doxysubsubsection{\texorpdfstring{save\_one\_json()}{save\_one\_json()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def val.\+save\+\_\+one\+\_\+json (\begin{DoxyParamCaption}\item[{}]{predn,  }\item[{}]{jdict,  }\item[{}]{path,  }\item[{}]{class\+\_\+map }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_a0b4593e0dee2f2c9b52d1ae0c7d5d748}\label{namespaceval_a0b4593e0dee2f2c9b52d1ae0c7d5d748}} 
+\index{val@{val}!save\_one\_json@{save\_one\_json}}
+\index{save\_one\_json@{save\_one\_json}!val@{val}}
+\doxysubsubsection{\texorpdfstring{save\_one\_json()}{save\_one\_json()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def val.\+save\+\_\+one\+\_\+json (\begin{DoxyParamCaption}\item[{}]{predn,  }\item[{}]{jdict,  }\item[{}]{path,  }\item[{}]{class\+\_\+map,  }\item[{}]{pred\+\_\+masks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceval_a369be236fe0857acbeb25eda9731043f}\label{namespaceval_a369be236fe0857acbeb25eda9731043f}} 
+\index{val@{val}!save\_one\_txt@{save\_one\_txt}}
+\index{save\_one\_txt@{save\_one\_txt}!val@{val}}
+\doxysubsubsection{\texorpdfstring{save\_one\_txt()}{save\_one\_txt()}}
+{\footnotesize\ttfamily def val.\+save\+\_\+one\+\_\+txt (\begin{DoxyParamCaption}\item[{}]{predn,  }\item[{}]{save\+\_\+conf,  }\item[{}]{shape,  }\item[{}]{file }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceval_a9572b46935104dab1c3fd617b1414f17}\label{namespaceval_a9572b46935104dab1c3fd617b1414f17}} 
+\index{val@{val}!FILE@{FILE}}
+\index{FILE@{FILE}!val@{val}}
+\doxysubsubsection{\texorpdfstring{FILE}{FILE}}
+{\footnotesize\ttfamily val.\+F\+I\+LE = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()}
+
+\mbox{\Hypertarget{namespaceval_af716a3ada81b5621561736874950f228}\label{namespaceval_af716a3ada81b5621561736874950f228}} 
+\index{val@{val}!opt@{opt}}
+\index{opt@{opt}!val@{val}}
+\doxysubsubsection{\texorpdfstring{opt}{opt}}
+{\footnotesize\ttfamily def val.\+opt = \mbox{\hyperlink{namespaceval_a763276101b42f001ba80ee2dbdaf41f0}{parse\+\_\+opt}}()}
+
+\mbox{\Hypertarget{namespaceval_a481b90651ac652c0165cbd271448a5af}\label{namespaceval_a481b90651ac652c0165cbd271448a5af}} 
+\index{val@{val}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!val@{val}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily val.\+R\+O\+OT = F\+I\+L\+E.\+parents\mbox{[}1\mbox{]}}
+

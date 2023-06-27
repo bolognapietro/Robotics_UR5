@@ -1,0 +1,171 @@
+\hypertarget{namespaceutils_1_1plots}{}\doxysection{utils.\+plots Namespace Reference}
+\label{namespaceutils_1_1plots}\index{utils.plots@{utils.plots}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1plots_1_1Annotator}{Annotator}}
+\item 
+class \mbox{\hyperlink{classutils_1_1plots_1_1Colors}{Colors}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a840a57e5d6a87f38a75bb68353d580ea}{check\+\_\+pil\+\_\+font}} (font=F\+O\+NT, size=10)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a247c49c711458c90f0d85646c010e161}{feature\+\_\+visualization}} (x, module\+\_\+type, stage, n=32, save\+\_\+dir=Path(\textquotesingle{}runs/detect/exp\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a02cd023208ffa1ab7f5676d14e9b53cd}{hist2d}} (x, y, n=100)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_af323d1cf8d9a3e934a422410e20dcb51}{butter\+\_\+lowpass\+\_\+filtfilt}} (data, cutoff=1500, fs=50000, order=5)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a943c05fd3117091fb89e532bd8fedc58}{output\+\_\+to\+\_\+target}} (output, max\+\_\+det=300)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a63f2741134f696e7e8de58e75c95ef2f}{plot\+\_\+images}} (images, targets, paths=None, fname=\textquotesingle{}images.\+jpg\textquotesingle{}, names=None)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a9ec82b4ea2f3a887523887ff14b055dc}{plot\+\_\+lr\+\_\+scheduler}} (optimizer, scheduler, epochs=300, save\+\_\+dir=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_aa553f73e6ea0e7d6b4ea27906996d055}{plot\+\_\+val\+\_\+txt}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a522d4def2e6133e7a8858c90ba6cf45f}{plot\+\_\+targets\+\_\+txt}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a2a2939f7481f34986a14fe27a9479ca3}{plot\+\_\+val\+\_\+study}} (file=\textquotesingle{}\textquotesingle{}, dir=\textquotesingle{}\textquotesingle{}, x=None)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a89b79dbe94dcd174a18e16ce6d558f01}{plot\+\_\+labels}} (labels, names=(), save\+\_\+dir=Path(\textquotesingle{}\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_aa0c825817304c62c2bff0262196db376}{imshow\+\_\+cls}} (im, labels=None, pred=None, names=None, nmax=25, verbose=False, f=Path(\textquotesingle{}images.\+jpg\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_ad8784d1671b80d5f96aaa356cdeebc39}{plot\+\_\+evolve}} (evolve\+\_\+csv=\textquotesingle{}path/to/evolve.\+csv\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a975e7c37e5d2d4e419e43105f5107bfb}{plot\+\_\+results}} (file=\textquotesingle{}path/to/results.\+csv\textquotesingle{}, dir=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a28780091b6c40456ab72e706b4e34d59}{profile\+\_\+idetection}} (start=0, stop=0, labels=(), save\+\_\+dir=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1plots_a7b07f00f4e83c7b35b211aefdc8976d2}{save\+\_\+one\+\_\+box}} (xyxy, im, file=Path(\textquotesingle{}im.\+jpg\textquotesingle{}), gain=1.\+02, pad=10, square=False, B\+GR=False, save=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1plots_a6855ba0cd6e922a4c546035c11d145d3}{R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1plots_a720ba7aa2a257eb569bd7b104d747ac7}{colors}} = \mbox{\hyperlink{classutils_1_1plots_1_1Colors}{Colors}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1plots_af323d1cf8d9a3e934a422410e20dcb51}\label{namespaceutils_1_1plots_af323d1cf8d9a3e934a422410e20dcb51}} 
+\index{utils.plots@{utils.plots}!butter\_lowpass\_filtfilt@{butter\_lowpass\_filtfilt}}
+\index{butter\_lowpass\_filtfilt@{butter\_lowpass\_filtfilt}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{butter\_lowpass\_filtfilt()}{butter\_lowpass\_filtfilt()}}
+{\footnotesize\ttfamily def utils.\+plots.\+butter\+\_\+lowpass\+\_\+filtfilt (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{cutoff = {\ttfamily 1500},  }\item[{}]{fs = {\ttfamily 50000},  }\item[{}]{order = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a840a57e5d6a87f38a75bb68353d580ea}\label{namespaceutils_1_1plots_a840a57e5d6a87f38a75bb68353d580ea}} 
+\index{utils.plots@{utils.plots}!check\_pil\_font@{check\_pil\_font}}
+\index{check\_pil\_font@{check\_pil\_font}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{check\_pil\_font()}{check\_pil\_font()}}
+{\footnotesize\ttfamily def utils.\+plots.\+check\+\_\+pil\+\_\+font (\begin{DoxyParamCaption}\item[{}]{font = {\ttfamily FONT},  }\item[{}]{size = {\ttfamily 10} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a247c49c711458c90f0d85646c010e161}\label{namespaceutils_1_1plots_a247c49c711458c90f0d85646c010e161}} 
+\index{utils.plots@{utils.plots}!feature\_visualization@{feature\_visualization}}
+\index{feature\_visualization@{feature\_visualization}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{feature\_visualization()}{feature\_visualization()}}
+{\footnotesize\ttfamily def utils.\+plots.\+feature\+\_\+visualization (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{module\+\_\+type,  }\item[{}]{stage,  }\item[{}]{n = {\ttfamily 32},  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}runs/detect/exp\textquotesingle{})} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}x:              Features to be visualized
+module_type:    Module type
+stage:          Module stage within model
+n:              Maximum number of feature maps to plot
+save_dir:       Directory to save results
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1plots_a02cd023208ffa1ab7f5676d14e9b53cd}\label{namespaceutils_1_1plots_a02cd023208ffa1ab7f5676d14e9b53cd}} 
+\index{utils.plots@{utils.plots}!hist2d@{hist2d}}
+\index{hist2d@{hist2d}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{hist2d()}{hist2d()}}
+{\footnotesize\ttfamily def utils.\+plots.\+hist2d (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{n = {\ttfamily 100} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_aa0c825817304c62c2bff0262196db376}\label{namespaceutils_1_1plots_aa0c825817304c62c2bff0262196db376}} 
+\index{utils.plots@{utils.plots}!imshow\_cls@{imshow\_cls}}
+\index{imshow\_cls@{imshow\_cls}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{imshow\_cls()}{imshow\_cls()}}
+{\footnotesize\ttfamily def utils.\+plots.\+imshow\+\_\+cls (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{labels = {\ttfamily None},  }\item[{}]{pred = {\ttfamily None},  }\item[{}]{names = {\ttfamily None},  }\item[{}]{nmax = {\ttfamily 25},  }\item[{}]{verbose = {\ttfamily False},  }\item[{}]{f = {\ttfamily Path(\textquotesingle{}images.jpg\textquotesingle{})} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a943c05fd3117091fb89e532bd8fedc58}\label{namespaceutils_1_1plots_a943c05fd3117091fb89e532bd8fedc58}} 
+\index{utils.plots@{utils.plots}!output\_to\_target@{output\_to\_target}}
+\index{output\_to\_target@{output\_to\_target}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{output\_to\_target()}{output\_to\_target()}}
+{\footnotesize\ttfamily def utils.\+plots.\+output\+\_\+to\+\_\+target (\begin{DoxyParamCaption}\item[{}]{output,  }\item[{}]{max\+\_\+det = {\ttfamily 300} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_ad8784d1671b80d5f96aaa356cdeebc39}\label{namespaceutils_1_1plots_ad8784d1671b80d5f96aaa356cdeebc39}} 
+\index{utils.plots@{utils.plots}!plot\_evolve@{plot\_evolve}}
+\index{plot\_evolve@{plot\_evolve}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_evolve()}{plot\_evolve()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+evolve (\begin{DoxyParamCaption}\item[{}]{evolve\+\_\+csv = {\ttfamily \textquotesingle{}path/to/evolve.csv\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a63f2741134f696e7e8de58e75c95ef2f}\label{namespaceutils_1_1plots_a63f2741134f696e7e8de58e75c95ef2f}} 
+\index{utils.plots@{utils.plots}!plot\_images@{plot\_images}}
+\index{plot\_images@{plot\_images}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_images()}{plot\_images()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+images (\begin{DoxyParamCaption}\item[{}]{images,  }\item[{}]{targets,  }\item[{}]{paths = {\ttfamily None},  }\item[{}]{fname = {\ttfamily \textquotesingle{}images.jpg\textquotesingle{}},  }\item[{}]{names = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a89b79dbe94dcd174a18e16ce6d558f01}\label{namespaceutils_1_1plots_a89b79dbe94dcd174a18e16ce6d558f01}} 
+\index{utils.plots@{utils.plots}!plot\_labels@{plot\_labels}}
+\index{plot\_labels@{plot\_labels}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_labels()}{plot\_labels()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+labels (\begin{DoxyParamCaption}\item[{}]{labels,  }\item[{}]{names = {\ttfamily ()},  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}\textquotesingle{})} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a9ec82b4ea2f3a887523887ff14b055dc}\label{namespaceutils_1_1plots_a9ec82b4ea2f3a887523887ff14b055dc}} 
+\index{utils.plots@{utils.plots}!plot\_lr\_scheduler@{plot\_lr\_scheduler}}
+\index{plot\_lr\_scheduler@{plot\_lr\_scheduler}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_lr\_scheduler()}{plot\_lr\_scheduler()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+lr\+\_\+scheduler (\begin{DoxyParamCaption}\item[{}]{optimizer,  }\item[{}]{scheduler,  }\item[{}]{epochs = {\ttfamily 300},  }\item[{}]{save\+\_\+dir = {\ttfamily \textquotesingle{}\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a975e7c37e5d2d4e419e43105f5107bfb}\label{namespaceutils_1_1plots_a975e7c37e5d2d4e419e43105f5107bfb}} 
+\index{utils.plots@{utils.plots}!plot\_results@{plot\_results}}
+\index{plot\_results@{plot\_results}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_results()}{plot\_results()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+results (\begin{DoxyParamCaption}\item[{}]{file = {\ttfamily \textquotesingle{}path/to/results.csv\textquotesingle{}},  }\item[{}]{dir = {\ttfamily \textquotesingle{}\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a522d4def2e6133e7a8858c90ba6cf45f}\label{namespaceutils_1_1plots_a522d4def2e6133e7a8858c90ba6cf45f}} 
+\index{utils.plots@{utils.plots}!plot\_targets\_txt@{plot\_targets\_txt}}
+\index{plot\_targets\_txt@{plot\_targets\_txt}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_targets\_txt()}{plot\_targets\_txt()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+targets\+\_\+txt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a2a2939f7481f34986a14fe27a9479ca3}\label{namespaceutils_1_1plots_a2a2939f7481f34986a14fe27a9479ca3}} 
+\index{utils.plots@{utils.plots}!plot\_val\_study@{plot\_val\_study}}
+\index{plot\_val\_study@{plot\_val\_study}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_val\_study()}{plot\_val\_study()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+val\+\_\+study (\begin{DoxyParamCaption}\item[{}]{file = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{dir = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{x = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_aa553f73e6ea0e7d6b4ea27906996d055}\label{namespaceutils_1_1plots_aa553f73e6ea0e7d6b4ea27906996d055}} 
+\index{utils.plots@{utils.plots}!plot\_val\_txt@{plot\_val\_txt}}
+\index{plot\_val\_txt@{plot\_val\_txt}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{plot\_val\_txt()}{plot\_val\_txt()}}
+{\footnotesize\ttfamily def utils.\+plots.\+plot\+\_\+val\+\_\+txt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a28780091b6c40456ab72e706b4e34d59}\label{namespaceutils_1_1plots_a28780091b6c40456ab72e706b4e34d59}} 
+\index{utils.plots@{utils.plots}!profile\_idetection@{profile\_idetection}}
+\index{profile\_idetection@{profile\_idetection}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{profile\_idetection()}{profile\_idetection()}}
+{\footnotesize\ttfamily def utils.\+plots.\+profile\+\_\+idetection (\begin{DoxyParamCaption}\item[{}]{start = {\ttfamily 0},  }\item[{}]{stop = {\ttfamily 0},  }\item[{}]{labels = {\ttfamily ()},  }\item[{}]{save\+\_\+dir = {\ttfamily \textquotesingle{}\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a7b07f00f4e83c7b35b211aefdc8976d2}\label{namespaceutils_1_1plots_a7b07f00f4e83c7b35b211aefdc8976d2}} 
+\index{utils.plots@{utils.plots}!save\_one\_box@{save\_one\_box}}
+\index{save\_one\_box@{save\_one\_box}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{save\_one\_box()}{save\_one\_box()}}
+{\footnotesize\ttfamily def utils.\+plots.\+save\+\_\+one\+\_\+box (\begin{DoxyParamCaption}\item[{}]{xyxy,  }\item[{}]{im,  }\item[{}]{file = {\ttfamily Path(\textquotesingle{}im.jpg\textquotesingle{})},  }\item[{}]{gain = {\ttfamily 1.02},  }\item[{}]{pad = {\ttfamily 10},  }\item[{}]{square = {\ttfamily False},  }\item[{}]{B\+GR = {\ttfamily False},  }\item[{}]{save = {\ttfamily True} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1plots_a720ba7aa2a257eb569bd7b104d747ac7}\label{namespaceutils_1_1plots_a720ba7aa2a257eb569bd7b104d747ac7}} 
+\index{utils.plots@{utils.plots}!colors@{colors}}
+\index{colors@{colors}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{colors}{colors}}
+{\footnotesize\ttfamily utils.\+plots.\+colors = \mbox{\hyperlink{classutils_1_1plots_1_1Colors}{Colors}}()}
+
+\mbox{\Hypertarget{namespaceutils_1_1plots_a6855ba0cd6e922a4c546035c11d145d3}\label{namespaceutils_1_1plots_a6855ba0cd6e922a4c546035c11d145d3}} 
+\index{utils.plots@{utils.plots}!RANK@{RANK}}
+\index{RANK@{RANK}!utils.plots@{utils.plots}}
+\doxysubsubsection{\texorpdfstring{RANK}{RANK}}
+{\footnotesize\ttfamily utils.\+plots.\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))}
+

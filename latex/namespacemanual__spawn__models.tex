@@ -1,0 +1,230 @@
+\hypertarget{namespacemanual__spawn__models}{}\doxysection{manual\+\_\+spawn\+\_\+models Namespace Reference}
+\label{namespacemanual__spawn__models}\index{manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a7c71c0b317fa996078851d8796f1a35d}{execute\+\_\+request}} (str service\+\_\+name, service\+\_\+class, request=None, float wait=0.\+2)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a796049290af87135fb4a8231abbf07e7}{create\+\_\+spawnmodel\+\_\+request}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}}, str model, tuple \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}}, int rot)
+\item 
+str \mbox{\hyperlink{namespacemanual__spawn__models_ad423e59ffcdcb7a257a751b6b1a47750}{random\+\_\+model}} (str path)
+\item 
+tuple \mbox{\hyperlink{namespacemanual__spawn__models_a803e91dc9e25d0d5f88ec71f9a0c1d15}{random\+\_\+position}} (float x\+\_\+min=0.\+2, float x\+\_\+max=0.\+5, float y\+\_\+min=0.\+2, float y\+\_\+max=0.\+65, float z=0.\+87, int precision=3)
+\item 
+float \mbox{\hyperlink{namespacemanual__spawn__models_ae1e40ca9d2a5c3ec49955ca308eaf0f3}{random\+\_\+angle}} (int precision=3)
+\item 
+str \mbox{\hyperlink{namespacemanual__spawn__models_ad8e7b06049186fd6ca2574a7868cbea7}{random\+\_\+name}} ()
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_aa8b57a745cdae4b8a6f4b769e74e5216}{spawn\+\_\+model}} (str path)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ab7587d5d127c6f82cfc04168bd5a73d1}{create\+\_\+getmodelstate\+\_\+request}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a8a7e76a54ccc11fded5ac35f49bc08b5}{get\+\_\+model\+\_\+state}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ab2f1ca63d053c3290fd3a17404ba9fab}{create\+\_\+setmodelstate\+\_\+request}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}}, list \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}}, list \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ad9b2b7fe4d634ea1fd68118a98f61b25}{set\+\_\+model\+\_\+state}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}}, list \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}}, list \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}{get\+\_\+world\+\_\+properties}} ()
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a4088eb79cf07214e5ab488a603712362}{delete\+\_\+model}} (str \mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a3382fe359ac22f510901d2a577ad7b6b}{B\+L\+E\+N\+D\+E\+R\+\_\+\+M\+O\+D\+E\+L\+S\+\_\+\+P\+A\+TH}} = join(getcwd(),\char`\"{}models\char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ae4d59656275c9aa10efd0dc7724bc41f}{clear}} = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a322f32fa1223bed4cdc24849b1a190a8}{option}} = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}{models}} = \mbox{\hyperlink{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}{get\+\_\+world\+\_\+properties}}()
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}{op}} = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{name}} = \mbox{\hyperlink{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}{models}}\mbox{[}\mbox{\hyperlink{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}{op}}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a4a8a2070c7d6a8300b7d5a5a30a3e67c}{new\+\_\+pos\+\_\+x}} = input(f\char`\"{}\textbackslash{}n\+New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} x\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ae4af3435377377cb8db36d60ab692b5f}{new\+\_\+pos\+\_\+y}} = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} y\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a7a514c85e4498c0d153f78743a64f98a}{new\+\_\+pos\+\_\+z}} = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} z\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a7885294fd16db707845b19e9a17c256f}{new\+\_\+or\+\_\+x}} = input(f\char`\"{}\textbackslash{}n\+New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} x\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a06b84761f59c02784cee28325109d317}{new\+\_\+or\+\_\+y}} = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} y\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a657cbf28f78f57d75fbcdc04df3f6637}{new\+\_\+or\+\_\+z}} = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} z\+: \char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacemanual__spawn__models_ab7587d5d127c6f82cfc04168bd5a73d1}\label{namespacemanual__spawn__models_ab7587d5d127c6f82cfc04168bd5a73d1}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!create\_getmodelstate\_request@{create\_getmodelstate\_request}}
+\index{create\_getmodelstate\_request@{create\_getmodelstate\_request}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{create\_getmodelstate\_request()}{create\_getmodelstate\_request()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+create\+\_\+getmodelstate\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ab2f1ca63d053c3290fd3a17404ba9fab}\label{namespacemanual__spawn__models_ab2f1ca63d053c3290fd3a17404ba9fab}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!create\_setmodelstate\_request@{create\_setmodelstate\_request}}
+\index{create\_setmodelstate\_request@{create\_setmodelstate\_request}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{create\_setmodelstate\_request()}{create\_setmodelstate\_request()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+create\+\_\+setmodelstate\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{list}]{position,  }\item[{list}]{orientation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a796049290af87135fb4a8231abbf07e7}\label{namespacemanual__spawn__models_a796049290af87135fb4a8231abbf07e7}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!create\_spawnmodel\_request@{create\_spawnmodel\_request}}
+\index{create\_spawnmodel\_request@{create\_spawnmodel\_request}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{create\_spawnmodel\_request()}{create\_spawnmodel\_request()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+create\+\_\+spawnmodel\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{str}]{model,  }\item[{tuple}]{position,  }\item[{int}]{rot }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a4088eb79cf07214e5ab488a603712362}\label{namespacemanual__spawn__models_a4088eb79cf07214e5ab488a603712362}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!delete\_model@{delete\_model}}
+\index{delete\_model@{delete\_model}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{delete\_model()}{delete\_model()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+delete\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a7c71c0b317fa996078851d8796f1a35d}\label{namespacemanual__spawn__models_a7c71c0b317fa996078851d8796f1a35d}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!execute\_request@{execute\_request}}
+\index{execute\_request@{execute\_request}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{execute\_request()}{execute\_request()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+execute\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{service\+\_\+name,  }\item[{}]{service\+\_\+class,  }\item[{}]{request = {\ttfamily None},  }\item[{float }]{wait = {\ttfamily 0.2} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a8a7e76a54ccc11fded5ac35f49bc08b5}\label{namespacemanual__spawn__models_a8a7e76a54ccc11fded5ac35f49bc08b5}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!get\_model\_state@{get\_model\_state}}
+\index{get\_model\_state@{get\_model\_state}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{get\_model\_state()}{get\_model\_state()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+get\+\_\+model\+\_\+state (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}\label{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!get\_world\_properties@{get\_world\_properties}}
+\index{get\_world\_properties@{get\_world\_properties}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{get\_world\_properties()}{get\_world\_properties()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+get\+\_\+world\+\_\+properties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ae1e40ca9d2a5c3ec49955ca308eaf0f3}\label{namespacemanual__spawn__models_ae1e40ca9d2a5c3ec49955ca308eaf0f3}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!random\_angle@{random\_angle}}
+\index{random\_angle@{random\_angle}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{random\_angle()}{random\_angle()}}
+{\footnotesize\ttfamily  float manual\+\_\+spawn\+\_\+models.\+random\+\_\+angle (\begin{DoxyParamCaption}\item[{int }]{precision = {\ttfamily 3} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ad423e59ffcdcb7a257a751b6b1a47750}\label{namespacemanual__spawn__models_ad423e59ffcdcb7a257a751b6b1a47750}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!random\_model@{random\_model}}
+\index{random\_model@{random\_model}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{random\_model()}{random\_model()}}
+{\footnotesize\ttfamily  str manual\+\_\+spawn\+\_\+models.\+random\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ad8e7b06049186fd6ca2574a7868cbea7}\label{namespacemanual__spawn__models_ad8e7b06049186fd6ca2574a7868cbea7}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!random\_name@{random\_name}}
+\index{random\_name@{random\_name}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{random\_name()}{random\_name()}}
+{\footnotesize\ttfamily  str manual\+\_\+spawn\+\_\+models.\+random\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a803e91dc9e25d0d5f88ec71f9a0c1d15}\label{namespacemanual__spawn__models_a803e91dc9e25d0d5f88ec71f9a0c1d15}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!random\_position@{random\_position}}
+\index{random\_position@{random\_position}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{random\_position()}{random\_position()}}
+{\footnotesize\ttfamily  tuple manual\+\_\+spawn\+\_\+models.\+random\+\_\+position (\begin{DoxyParamCaption}\item[{float }]{x\+\_\+min = {\ttfamily 0.2},  }\item[{float }]{x\+\_\+max = {\ttfamily 0.5},  }\item[{float }]{y\+\_\+min = {\ttfamily 0.2},  }\item[{float }]{y\+\_\+max = {\ttfamily 0.65},  }\item[{float }]{z = {\ttfamily 0.87},  }\item[{int }]{precision = {\ttfamily 3} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ad9b2b7fe4d634ea1fd68118a98f61b25}\label{namespacemanual__spawn__models_ad9b2b7fe4d634ea1fd68118a98f61b25}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!set\_model\_state@{set\_model\_state}}
+\index{set\_model\_state@{set\_model\_state}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{set\_model\_state()}{set\_model\_state()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+set\+\_\+model\+\_\+state (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{list}]{position,  }\item[{list}]{orientation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_aa8b57a745cdae4b8a6f4b769e74e5216}\label{namespacemanual__spawn__models_aa8b57a745cdae4b8a6f4b769e74e5216}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!spawn\_model@{spawn\_model}}
+\index{spawn\_model@{spawn\_model}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{spawn\_model()}{spawn\_model()}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+spawn\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{path }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacemanual__spawn__models_a3382fe359ac22f510901d2a577ad7b6b}\label{namespacemanual__spawn__models_a3382fe359ac22f510901d2a577ad7b6b}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!BLENDER\_MODELS\_PATH@{BLENDER\_MODELS\_PATH}}
+\index{BLENDER\_MODELS\_PATH@{BLENDER\_MODELS\_PATH}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{BLENDER\_MODELS\_PATH}{BLENDER\_MODELS\_PATH}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+B\+L\+E\+N\+D\+E\+R\+\_\+\+M\+O\+D\+E\+L\+S\+\_\+\+P\+A\+TH = join(getcwd(),\char`\"{}models\char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ae4d59656275c9aa10efd0dc7724bc41f}\label{namespacemanual__spawn__models_ae4d59656275c9aa10efd0dc7724bc41f}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!clear@{clear}}
+\index{clear@{clear}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{clear}{clear}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+clear = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}\label{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!models@{models}}
+\index{models@{models}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{models}{models}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+models = \mbox{\hyperlink{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}{get\+\_\+world\+\_\+properties}}()}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}\label{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!name@{name}}
+\index{name@{name}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily def manual\+\_\+spawn\+\_\+models.\+name = \mbox{\hyperlink{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}{models}}\mbox{[}\mbox{\hyperlink{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}{op}}\mbox{]}}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a7885294fd16db707845b19e9a17c256f}\label{namespacemanual__spawn__models_a7885294fd16db707845b19e9a17c256f}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_or\_x@{new\_or\_x}}
+\index{new\_or\_x@{new\_or\_x}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_or\_x}{new\_or\_x}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+x = input(f\char`\"{}\textbackslash{}n\+New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} x\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a06b84761f59c02784cee28325109d317}\label{namespacemanual__spawn__models_a06b84761f59c02784cee28325109d317}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_or\_y@{new\_or\_y}}
+\index{new\_or\_y@{new\_or\_y}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_or\_y}{new\_or\_y}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+y = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} y\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a657cbf28f78f57d75fbcdc04df3f6637}\label{namespacemanual__spawn__models_a657cbf28f78f57d75fbcdc04df3f6637}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_or\_z@{new\_or\_z}}
+\index{new\_or\_z@{new\_or\_z}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_or\_z}{new\_or\_z}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+z = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{orientation}} z\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a4a8a2070c7d6a8300b7d5a5a30a3e67c}\label{namespacemanual__spawn__models_a4a8a2070c7d6a8300b7d5a5a30a3e67c}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_pos\_x@{new\_pos\_x}}
+\index{new\_pos\_x@{new\_pos\_x}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_pos\_x}{new\_pos\_x}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+x = input(f\char`\"{}\textbackslash{}n\+New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} x\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_ae4af3435377377cb8db36d60ab692b5f}\label{namespacemanual__spawn__models_ae4af3435377377cb8db36d60ab692b5f}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_pos\_y@{new\_pos\_y}}
+\index{new\_pos\_y@{new\_pos\_y}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_pos\_y}{new\_pos\_y}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+y = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} y\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a7a514c85e4498c0d153f78743a64f98a}\label{namespacemanual__spawn__models_a7a514c85e4498c0d153f78743a64f98a}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!new\_pos\_z@{new\_pos\_z}}
+\index{new\_pos\_z@{new\_pos\_z}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{new\_pos\_z}{new\_pos\_z}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+z = input(f\char`\"{}New \mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{position}} z\+: \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}\label{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!op@{op}}
+\index{op@{op}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{op}{op}}
+{\footnotesize\ttfamily int manual\+\_\+spawn\+\_\+models.\+op = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a322f32fa1223bed4cdc24849b1a190a8}\label{namespacemanual__spawn__models_a322f32fa1223bed4cdc24849b1a190a8}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!option@{option}}
+\index{option@{option}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{option}{option}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+option = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}\label{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!orientation@{orientation}}
+\index{orientation@{orientation}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{orientation}{orientation}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+orientation}
+
+\mbox{\Hypertarget{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}\label{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}} 
+\index{manual\_spawn\_models@{manual\_spawn\_models}!position@{position}}
+\index{position@{position}!manual\_spawn\_models@{manual\_spawn\_models}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily manual\+\_\+spawn\+\_\+models.\+position}
+

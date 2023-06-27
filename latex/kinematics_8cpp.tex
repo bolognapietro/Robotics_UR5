@@ -1,0 +1,440 @@
+\hypertarget{kinematics_8cpp}{}\doxysection{motion plan/kinematics.cpp File Reference}
+\label{kinematics_8cpp}\index{motion plan/kinematics.cpp@{motion plan/kinematics.cpp}}
+{\ttfamily \#include \char`\"{}Eigen/\+Dense\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Eigen/\+LU\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+Include dependency graph for kinematics.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{kinematics_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Matrix$<$ double, Dynamic, 6 $>$ \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}}
+\item 
+typedef Matrix$<$ double, 1, 6 $>$ \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_af7d31ef5f244d204ad79703f66730491}{T10f}} (double th1)
+\begin{DoxyCompactList}\small\item\em Give th1, returns the transformation matrix from frame 0 to frame 1. \end{DoxyCompactList}\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_a85ff382f3b5542ec5bb82d43d7f1703b}{T21f}} (double th2)
+\begin{DoxyCompactList}\small\item\em Give th1, returns the transformation matrix from frame 1 to frame 2. \end{DoxyCompactList}\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_a9f3b51c59ada38f184b2636fa8957b79}{T32f}} (double th3)
+\begin{DoxyCompactList}\small\item\em Give th2, returns the transformation matrix from frame 2 to frame 3. \end{DoxyCompactList}\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_af2459ec9cd212ef8a680df22f35c8e46}{T43f}} (double th4)
+\begin{DoxyCompactList}\small\item\em Give th3, returns the transformation matrix from frame 3 to frame 4. \end{DoxyCompactList}\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_a91a513cfb8c32135152cc75785f5af81}{T54f}} (double th5)
+\begin{DoxyCompactList}\small\item\em Give th4, returns the transformation matrix from frame 4 to frame 5. \end{DoxyCompactList}\item 
+Matrix4d \mbox{\hyperlink{kinematics_8cpp_adb1a86a3e288560caca70e1b6a7a5e6e}{T65f}} (double th6)
+\begin{DoxyCompactList}\small\item\em Give th5, returns the transformation matrix from frame 5 to frame 6. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{kinematics_8cpp_a7563db816814a098edf0fe4ce2df35d0}{direct\+\_\+kinematics}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} Th, Matrix3d \&R06, Vector3d \&ef)
+\begin{DoxyCompactList}\small\item\em Transform from the joint angles space to the operational space, which is specified in terms of position and orientation of the end-\/effector. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{kinematics_8cpp_ae72a580e5790e9f9d8be624ee66b3c6e}{hypot}} (double x1, double x2)
+\begin{DoxyCompactList}\small\item\em return the hypotenuse of two sides \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{kinematics_8cpp_a3221734f64396126009cb94cd2929254}{arccos}} (std\+::complex$<$ double $>$ theta)
+\begin{DoxyCompactList}\small\item\em return the real part of the asin of an angle \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{kinematics_8cpp_a0d2e01221419355935c392f57b829608}{arcsin}} (std\+::complex$<$ double $>$ theta)
+\begin{DoxyCompactList}\small\item\em return the real part of the sin of an angle \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{kinematics_8cpp_a77e6c1d6597facba94c78dc6b9741421}{inverse\+\_\+kinematics}} (Vector3d p60, \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&Th, Matrix3d R60=Matrix3d \{\{1, 0, 0\},\{0, 1, 0\},\{0, 0, 1\}\})
+\begin{DoxyCompactList}\small\item\em Transform from the operational space to the joint angles space. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{kinematics_8cpp_a33302b0843facbd0b1b2f99ee159f0ce}{are\+Equal}} (double n1, double n2, double precision=0.\+001)
+\begin{DoxyCompactList}\small\item\em Evaluate if two decimal numbers are almost equal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{kinematics_8cpp_af29b0e61489aafe1b48a121ef33d2a29}{check\+\_\+collision}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} Th)
+\begin{DoxyCompactList}\small\item\em checks if the final pose of every single link of the robot is over some space limits, such as the table height and the backward wall. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{kinematics_8cpp_af59fa3f3050b6f10f54f2777d6badaa3}{check\+\_\+angles}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} Th)
+\begin{DoxyCompactList}\small\item\em checks if the computed joint are reachable by the ur5 robot. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{kinematics_8cpp_af649d9ca3758cf1f633c223aa2c4f729}{norm}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} Th0, \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} th)
+\begin{DoxyCompactList}\small\item\em compute the norm of two joint configurations \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{kinematics_8cpp_ad0c231f8518a73f0ab045ef09a125fff}{remove\+Row}} (\mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&matrix, unsigned int row\+To\+Remove)
+\begin{DoxyCompactList}\small\item\em removes a row from a matrix \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{kinematics_8cpp_ada3f1bb9682e5629cc5e48dc11f6f853}{best\+Inverse}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} Th0, \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&all)
+\begin{DoxyCompactList}\small\item\em sorts the result of the inverse kinematics and removes the not allowed rows \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{kinematics_8cpp_acfefe080af45d096ac5381583e3d10a5}{check\+\_\+point}} (Vector3d pos, \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} q0)
+\begin{DoxyCompactList}\small\item\em checks if the inserted position is reachable by the robot, comparing the result of the inverse and the direct kinematics \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Row\+Vector\+Xd \mbox{\hyperlink{kinematics_8cpp_a4061ab908e05bf0a223a50ffc69d48ce}{A}} \{\{0.\+0, -\/0.\+425, -\/0.\+3922, 0.\+0, 0.\+0, 0.\+0\}\}
+\item 
+Row\+Vector\+Xd \mbox{\hyperlink{kinematics_8cpp_a3467f1e7b2b1241c420f7b0ab33d4c33}{D}} \{\{0.\+1625, 0.\+0, 0.\+0, 0.\+1333, 0.\+0997, 0.\+0996\}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}\label{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}} 
+\index{kinematics.cpp@{kinematics.cpp}!Matrix6d@{Matrix6d}}
+\index{Matrix6d@{Matrix6d}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{Matrix6d}{Matrix6d}}
+{\footnotesize\ttfamily typedef Matrix$<$double,Dynamic,6$>$ \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}}}
+
+\mbox{\Hypertarget{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}\label{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}} 
+\index{kinematics.cpp@{kinematics.cpp}!RowVector6d@{RowVector6d}}
+\index{RowVector6d@{RowVector6d}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{RowVector6d}{RowVector6d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 1, 6$>$ \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{kinematics_8cpp_a3221734f64396126009cb94cd2929254}\label{kinematics_8cpp_a3221734f64396126009cb94cd2929254}} 
+\index{kinematics.cpp@{kinematics.cpp}!arccos@{arccos}}
+\index{arccos@{arccos}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{arccos()}{arccos()}}
+{\footnotesize\ttfamily double arccos (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$}]{theta }\end{DoxyParamCaption})}
+
+
+
+return the real part of the asin of an angle 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em theta} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a0d2e01221419355935c392f57b829608}\label{kinematics_8cpp_a0d2e01221419355935c392f57b829608}} 
+\index{kinematics.cpp@{kinematics.cpp}!arcsin@{arcsin}}
+\index{arcsin@{arcsin}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{arcsin()}{arcsin()}}
+{\footnotesize\ttfamily double arcsin (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$}]{theta }\end{DoxyParamCaption})}
+
+
+
+return the real part of the sin of an angle 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em theta} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a33302b0843facbd0b1b2f99ee159f0ce}\label{kinematics_8cpp_a33302b0843facbd0b1b2f99ee159f0ce}} 
+\index{kinematics.cpp@{kinematics.cpp}!areEqual@{areEqual}}
+\index{areEqual@{areEqual}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{areEqual()}{areEqual()}}
+{\footnotesize\ttfamily bool are\+Equal (\begin{DoxyParamCaption}\item[{double}]{n1,  }\item[{double}]{n2,  }\item[{double}]{precision = {\ttfamily 0.001} }\end{DoxyParamCaption})}
+
+
+
+Evaluate if two decimal numbers are almost equal. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em n1} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tn2} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em precision} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_ada3f1bb9682e5629cc5e48dc11f6f853}\label{kinematics_8cpp_ada3f1bb9682e5629cc5e48dc11f6f853}} 
+\index{kinematics.cpp@{kinematics.cpp}!bestInverse@{bestInverse}}
+\index{bestInverse@{bestInverse}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{bestInverse()}{bestInverse()}}
+{\footnotesize\ttfamily bool best\+Inverse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{Th0,  }\item[{\mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&}]{all }\end{DoxyParamCaption})}
+
+
+
+sorts the result of the inverse kinematics and removes the not allowed rows 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th0} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em all} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_af59fa3f3050b6f10f54f2777d6badaa3}\label{kinematics_8cpp_af59fa3f3050b6f10f54f2777d6badaa3}} 
+\index{kinematics.cpp@{kinematics.cpp}!check\_angles@{check\_angles}}
+\index{check\_angles@{check\_angles}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_angles()}{check\_angles()}}
+{\footnotesize\ttfamily bool check\+\_\+angles (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{Th }\end{DoxyParamCaption})}
+
+
+
+checks if the computed joint are reachable by the ur5 robot. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_af29b0e61489aafe1b48a121ef33d2a29}\label{kinematics_8cpp_af29b0e61489aafe1b48a121ef33d2a29}} 
+\index{kinematics.cpp@{kinematics.cpp}!check\_collision@{check\_collision}}
+\index{check\_collision@{check\_collision}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_collision()}{check\_collision()}}
+{\footnotesize\ttfamily bool check\+\_\+collision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{Th }\end{DoxyParamCaption})}
+
+
+
+checks if the final pose of every single link of the robot is over some space limits, such as the table height and the backward wall. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_acfefe080af45d096ac5381583e3d10a5}\label{kinematics_8cpp_acfefe080af45d096ac5381583e3d10a5}} 
+\index{kinematics.cpp@{kinematics.cpp}!check\_point@{check\_point}}
+\index{check\_point@{check\_point}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_point()}{check\_point()}}
+{\footnotesize\ttfamily bool check\+\_\+point (\begin{DoxyParamCaption}\item[{Vector3d}]{pos,  }\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{q0 }\end{DoxyParamCaption})}
+
+
+
+checks if the inserted position is reachable by the robot, comparing the result of the inverse and the direct kinematics 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pos} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em q0} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a7563db816814a098edf0fe4ce2df35d0}\label{kinematics_8cpp_a7563db816814a098edf0fe4ce2df35d0}} 
+\index{kinematics.cpp@{kinematics.cpp}!direct\_kinematics@{direct\_kinematics}}
+\index{direct\_kinematics@{direct\_kinematics}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{direct\_kinematics()}{direct\_kinematics()}}
+{\footnotesize\ttfamily void direct\+\_\+kinematics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{Th,  }\item[{Matrix3d \&}]{R06,  }\item[{Vector3d \&}]{ef }\end{DoxyParamCaption})}
+
+
+
+Transform from the joint angles space to the operational space, which is specified in terms of position and orientation of the end-\/effector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em R06} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em ef} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{kinematics_8cpp_ae72a580e5790e9f9d8be624ee66b3c6e}\label{kinematics_8cpp_ae72a580e5790e9f9d8be624ee66b3c6e}} 
+\index{kinematics.cpp@{kinematics.cpp}!hypot@{hypot}}
+\index{hypot@{hypot}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{hypot()}{hypot()}}
+{\footnotesize\ttfamily double hypot (\begin{DoxyParamCaption}\item[{double}]{x1,  }\item[{double}]{x2 }\end{DoxyParamCaption})}
+
+
+
+return the hypotenuse of two sides 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em x1} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em x2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a77e6c1d6597facba94c78dc6b9741421}\label{kinematics_8cpp_a77e6c1d6597facba94c78dc6b9741421}} 
+\index{kinematics.cpp@{kinematics.cpp}!inverse\_kinematics@{inverse\_kinematics}}
+\index{inverse\_kinematics@{inverse\_kinematics}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{inverse\_kinematics()}{inverse\_kinematics()}}
+{\footnotesize\ttfamily void inverse\+\_\+kinematics (\begin{DoxyParamCaption}\item[{Vector3d}]{p60,  }\item[{\mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&}]{Th,  }\item[{Matrix3d}]{R60 = {\ttfamily Matrix3d~\{\{1,0,0\},\{0,1,0\},\{0,0,1\}\}} }\end{DoxyParamCaption})}
+
+
+
+Transform from the operational space to the joint angles space. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em p60} & position you want to bring in the joint space \\
+\hline
+\mbox{\texttt{ in}}  & {\em Th} & Matrix6d passed as reference to save the computed joints \\
+\hline
+\mbox{\texttt{ in}}  & {\em R60} & Matrix3d passed as reference to save the orientation matrix \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{kinematics_8cpp_af649d9ca3758cf1f633c223aa2c4f729}\label{kinematics_8cpp_af649d9ca3758cf1f633c223aa2c4f729}} 
+\index{kinematics.cpp@{kinematics.cpp}!norm@{norm}}
+\index{norm@{norm}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}}
+{\footnotesize\ttfamily double norm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{Th0,  }\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{th }\end{DoxyParamCaption})}
+
+
+
+compute the norm of two joint configurations 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th0} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em th} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_ad0c231f8518a73f0ab045ef09a125fff}\label{kinematics_8cpp_ad0c231f8518a73f0ab045ef09a125fff}} 
+\index{kinematics.cpp@{kinematics.cpp}!removeRow@{removeRow}}
+\index{removeRow@{removeRow}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{removeRow()}{removeRow()}}
+{\footnotesize\ttfamily void remove\+Row (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}} \&}]{matrix,  }\item[{unsigned int}]{row\+To\+Remove }\end{DoxyParamCaption})}
+
+
+
+removes a row from a matrix 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em matrix} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em row\+To\+Remove} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{kinematics_8cpp_af7d31ef5f244d204ad79703f66730491}\label{kinematics_8cpp_af7d31ef5f244d204ad79703f66730491}} 
+\index{kinematics.cpp@{kinematics.cpp}!T10f@{T10f}}
+\index{T10f@{T10f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T10f()}{T10f()}}
+{\footnotesize\ttfamily Matrix4d T10f (\begin{DoxyParamCaption}\item[{double}]{th1 }\end{DoxyParamCaption})}
+
+
+
+Give th1, returns the transformation matrix from frame 0 to frame 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th1} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a85ff382f3b5542ec5bb82d43d7f1703b}\label{kinematics_8cpp_a85ff382f3b5542ec5bb82d43d7f1703b}} 
+\index{kinematics.cpp@{kinematics.cpp}!T21f@{T21f}}
+\index{T21f@{T21f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T21f()}{T21f()}}
+{\footnotesize\ttfamily Matrix4d T21f (\begin{DoxyParamCaption}\item[{double}]{th2 }\end{DoxyParamCaption})}
+
+
+
+Give th1, returns the transformation matrix from frame 1 to frame 2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th1} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a9f3b51c59ada38f184b2636fa8957b79}\label{kinematics_8cpp_a9f3b51c59ada38f184b2636fa8957b79}} 
+\index{kinematics.cpp@{kinematics.cpp}!T32f@{T32f}}
+\index{T32f@{T32f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T32f()}{T32f()}}
+{\footnotesize\ttfamily Matrix4d T32f (\begin{DoxyParamCaption}\item[{double}]{th3 }\end{DoxyParamCaption})}
+
+
+
+Give th2, returns the transformation matrix from frame 2 to frame 3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_af2459ec9cd212ef8a680df22f35c8e46}\label{kinematics_8cpp_af2459ec9cd212ef8a680df22f35c8e46}} 
+\index{kinematics.cpp@{kinematics.cpp}!T43f@{T43f}}
+\index{T43f@{T43f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T43f()}{T43f()}}
+{\footnotesize\ttfamily Matrix4d T43f (\begin{DoxyParamCaption}\item[{double}]{th4 }\end{DoxyParamCaption})}
+
+
+
+Give th3, returns the transformation matrix from frame 3 to frame 4. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th3} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_a91a513cfb8c32135152cc75785f5af81}\label{kinematics_8cpp_a91a513cfb8c32135152cc75785f5af81}} 
+\index{kinematics.cpp@{kinematics.cpp}!T54f@{T54f}}
+\index{T54f@{T54f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T54f()}{T54f()}}
+{\footnotesize\ttfamily Matrix4d T54f (\begin{DoxyParamCaption}\item[{double}]{th5 }\end{DoxyParamCaption})}
+
+
+
+Give th4, returns the transformation matrix from frame 4 to frame 5. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th4} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{kinematics_8cpp_adb1a86a3e288560caca70e1b6a7a5e6e}\label{kinematics_8cpp_adb1a86a3e288560caca70e1b6a7a5e6e}} 
+\index{kinematics.cpp@{kinematics.cpp}!T65f@{T65f}}
+\index{T65f@{T65f}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{T65f()}{T65f()}}
+{\footnotesize\ttfamily Matrix4d T65f (\begin{DoxyParamCaption}\item[{double}]{th6 }\end{DoxyParamCaption})}
+
+
+
+Give th5, returns the transformation matrix from frame 5 to frame 6. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th5} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\ast$$\ast$ Matrix4d 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{kinematics_8cpp_a4061ab908e05bf0a223a50ffc69d48ce}\label{kinematics_8cpp_a4061ab908e05bf0a223a50ffc69d48ce}} 
+\index{kinematics.cpp@{kinematics.cpp}!A@{A}}
+\index{A@{A}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily Row\+Vector\+Xd A \{\{0.\+0, -\/0.\+425, -\/0.\+3922, 0.\+0, 0.\+0, 0.\+0\}\}}
+
+\mbox{\Hypertarget{kinematics_8cpp_a3467f1e7b2b1241c420f7b0ab33d4c33}\label{kinematics_8cpp_a3467f1e7b2b1241c420f7b0ab33d4c33}} 
+\index{kinematics.cpp@{kinematics.cpp}!D@{D}}
+\index{D@{D}!kinematics.cpp@{kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily Row\+Vector\+Xd D \{\{0.\+1625, 0.\+0, 0.\+0, 0.\+1333, 0.\+0997, 0.\+0996\}\}}
+

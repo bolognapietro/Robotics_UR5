@@ -1,0 +1,67 @@
+\hypertarget{manual__spawn__models_8py}{}\doxysection{vision/manual\+\_\+spawn\+\_\+models.py File Reference}
+\label{manual__spawn__models_8py}\index{vision/manual\_spawn\_models.py@{vision/manual\_spawn\_models.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacemanual__spawn__models}{manual\+\_\+spawn\+\_\+models}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a7c71c0b317fa996078851d8796f1a35d}{manual\+\_\+spawn\+\_\+models.\+execute\+\_\+request}} (str service\+\_\+name, service\+\_\+class, request=None, float wait=0.\+2)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a796049290af87135fb4a8231abbf07e7}{manual\+\_\+spawn\+\_\+models.\+create\+\_\+spawnmodel\+\_\+request}} (str name, str model, tuple position, int rot)
+\item 
+str \mbox{\hyperlink{namespacemanual__spawn__models_ad423e59ffcdcb7a257a751b6b1a47750}{manual\+\_\+spawn\+\_\+models.\+random\+\_\+model}} (str path)
+\item 
+tuple \mbox{\hyperlink{namespacemanual__spawn__models_a803e91dc9e25d0d5f88ec71f9a0c1d15}{manual\+\_\+spawn\+\_\+models.\+random\+\_\+position}} (float x\+\_\+min=0.\+2, float x\+\_\+max=0.\+5, float y\+\_\+min=0.\+2, float y\+\_\+max=0.\+65, float z=0.\+87, int precision=3)
+\item 
+float \mbox{\hyperlink{namespacemanual__spawn__models_ae1e40ca9d2a5c3ec49955ca308eaf0f3}{manual\+\_\+spawn\+\_\+models.\+random\+\_\+angle}} (int precision=3)
+\item 
+str \mbox{\hyperlink{namespacemanual__spawn__models_ad8e7b06049186fd6ca2574a7868cbea7}{manual\+\_\+spawn\+\_\+models.\+random\+\_\+name}} ()
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_aa8b57a745cdae4b8a6f4b769e74e5216}{manual\+\_\+spawn\+\_\+models.\+spawn\+\_\+model}} (str path)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ab7587d5d127c6f82cfc04168bd5a73d1}{manual\+\_\+spawn\+\_\+models.\+create\+\_\+getmodelstate\+\_\+request}} (str name)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a8a7e76a54ccc11fded5ac35f49bc08b5}{manual\+\_\+spawn\+\_\+models.\+get\+\_\+model\+\_\+state}} (str name)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ab2f1ca63d053c3290fd3a17404ba9fab}{manual\+\_\+spawn\+\_\+models.\+create\+\_\+setmodelstate\+\_\+request}} (str name, list position, list orientation)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ad9b2b7fe4d634ea1fd68118a98f61b25}{manual\+\_\+spawn\+\_\+models.\+set\+\_\+model\+\_\+state}} (str name, list position, list orientation)
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_ac4665c69cf1f7afa5421c9a45c0ec3b7}{manual\+\_\+spawn\+\_\+models.\+get\+\_\+world\+\_\+properties}} ()
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_a4088eb79cf07214e5ab488a603712362}{manual\+\_\+spawn\+\_\+models.\+delete\+\_\+model}} (str name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a3382fe359ac22f510901d2a577ad7b6b}{manual\+\_\+spawn\+\_\+models.\+B\+L\+E\+N\+D\+E\+R\+\_\+\+M\+O\+D\+E\+L\+S\+\_\+\+P\+A\+TH}} = join(getcwd(),\char`\"{}models\char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ae4d59656275c9aa10efd0dc7724bc41f}{manual\+\_\+spawn\+\_\+models.\+clear}} = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a322f32fa1223bed4cdc24849b1a190a8}{manual\+\_\+spawn\+\_\+models.\+option}} = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemanual__spawn__models_afca15b64127564de2a12eb314778a4ab}{manual\+\_\+spawn\+\_\+models.\+models}} = get\+\_\+world\+\_\+properties()
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a4bdd388b08b5cf606c2737606d2aa139}{manual\+\_\+spawn\+\_\+models.\+op}} = input(\char`\"{}\textbackslash{}n$>$ \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ac19ec1f422648ac8744af2c876fa538a}{manual\+\_\+spawn\+\_\+models.\+name}} = models\mbox{[}op\mbox{]}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_af65f4a5fb4773bb301dde0d808206b0d}{manual\+\_\+spawn\+\_\+models.\+position}}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a822a5a8a67b52ac489f19fb27499402e}{manual\+\_\+spawn\+\_\+models.\+orientation}}
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a4a8a2070c7d6a8300b7d5a5a30a3e67c}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+x}} = input(f\char`\"{}\textbackslash{}n\+New position x\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_ae4af3435377377cb8db36d60ab692b5f}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+y}} = input(f\char`\"{}New position y\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a7a514c85e4498c0d153f78743a64f98a}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+pos\+\_\+z}} = input(f\char`\"{}New position z\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a7885294fd16db707845b19e9a17c256f}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+x}} = input(f\char`\"{}\textbackslash{}n\+New orientation x\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a06b84761f59c02784cee28325109d317}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+y}} = input(f\char`\"{}New orientation y\+: \char`\"{})
+\item 
+\mbox{\hyperlink{namespacemanual__spawn__models_a657cbf28f78f57d75fbcdc04df3f6637}{manual\+\_\+spawn\+\_\+models.\+new\+\_\+or\+\_\+z}} = input(f\char`\"{}New orientation z\+: \char`\"{})
+\end{DoxyCompactItemize}

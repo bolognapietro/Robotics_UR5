@@ -1,0 +1,72 @@
+\hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils}{}\doxysection{utils.\+loggers.\+wandb.\+wandb\+\_\+utils Namespace Reference}
+\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils}\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1loggers_1_1wandb_1_1wandb__utils_1_1WandbLogger}{Wandb\+Logger}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a5da76778426c6eedd6cbd17386f9b154}{all\+\_\+logging\+\_\+disabled}} (highest\+\_\+level=logging.\+C\+R\+I\+T\+I\+C\+AL)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_ab4cad09933fbfcf905799f1b89e2a3a8}{F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a7442e579ddcc0b671c4e11dc66b6b852}{R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a09e8b9ff2f96924f4cec130c8af75b07}{R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_af2beee4ff60c740fd085d54a16918239}{D\+E\+P\+R\+E\+C\+A\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG}} = f\char`\"{}\{colorstr(\textquotesingle{}\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}{wandb}}\textquotesingle{})\}\+: W\+A\+R\+N\+I\+NG ⚠️ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}{wandb}} is deprecated and will be removed in a future release. \char`\"{} \textbackslash{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}{wandb}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a5da76778426c6eedd6cbd17386f9b154}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a5da76778426c6eedd6cbd17386f9b154}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!all\_logging\_disabled@{all\_logging\_disabled}}
+\index{all\_logging\_disabled@{all\_logging\_disabled}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{all\_logging\_disabled()}{all\_logging\_disabled()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+all\+\_\+logging\+\_\+disabled (\begin{DoxyParamCaption}\item[{}]{highest\+\_\+level = {\ttfamily logging.CRITICAL} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}source - https://gist.github.com/simon-weber/7853144
+A context manager that will prevent any logging messages triggered during the body from being processed.
+:param highest_level: the maximum logging level in use.
+  This would only need to be changed if a custom level greater than CRITICAL is defined.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_af2beee4ff60c740fd085d54a16918239}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_af2beee4ff60c740fd085d54a16918239}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!DEPRECATION\_WARNING@{DEPRECATION\_WARNING}}
+\index{DEPRECATION\_WARNING@{DEPRECATION\_WARNING}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{DEPRECATION\_WARNING}{DEPRECATION\_WARNING}}
+{\footnotesize\ttfamily string utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+D\+E\+P\+R\+E\+C\+A\+T\+I\+O\+N\+\_\+\+W\+A\+R\+N\+I\+NG = f\char`\"{}\{colorstr(\textquotesingle{}\mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}{wandb}}\textquotesingle{})\}\+: W\+A\+R\+N\+I\+NG ⚠️ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}{wandb}} is deprecated and will be removed in a future release. \char`\"{} \textbackslash{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_ab4cad09933fbfcf905799f1b89e2a3a8}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_ab4cad09933fbfcf905799f1b89e2a3a8}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!FILE@{FILE}}
+\index{FILE@{FILE}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{FILE}{FILE}}
+{\footnotesize\ttfamily utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+F\+I\+LE = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a09e8b9ff2f96924f4cec130c8af75b07}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a09e8b9ff2f96924f4cec130c8af75b07}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!RANK@{RANK}}
+\index{RANK@{RANK}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{RANK}{RANK}}
+{\footnotesize\ttfamily utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a7442e579ddcc0b671c4e11dc66b6b852}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_a7442e579ddcc0b671c4e11dc66b6b852}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+R\+O\+OT = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}\label{namespaceutils_1_1loggers_1_1wandb_1_1wandb__utils_affdbac7a9e5beb4d7385f873f40427ad}} 
+\index{utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}!wandb@{wandb}}
+\index{wandb@{wandb}!utils.loggers.wandb.wandb\_utils@{utils.loggers.wandb.wandb\_utils}}
+\doxysubsubsection{\texorpdfstring{wandb}{wandb}}
+{\footnotesize\ttfamily utils.\+loggers.\+wandb.\+wandb\+\_\+utils.\+wandb = None}
+

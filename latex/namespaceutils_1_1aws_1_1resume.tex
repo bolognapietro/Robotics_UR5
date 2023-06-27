@@ -1,0 +1,96 @@
+\hypertarget{namespaceutils_1_1aws_1_1resume}{}\doxysection{utils.\+aws.\+resume Namespace Reference}
+\label{namespaceutils_1_1aws_1_1resume}\index{utils.aws.resume@{utils.aws.resume}}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a93843c2d7133dc4d61320ddfd9d69b66}{F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_aaa7200240514de7fcd261e28f4ce14f6}{R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}2\mbox{]}
+\item 
+int \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}{port}} = 0
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a8625192782100dfb6ce85dc6600f05cf}{path}} = Path(\textquotesingle{}\textquotesingle{}).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_aa61fc4375c57933b4b92a83f02f485b9}{ckpt}} = torch.\+load(last)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a4c50e16182da53a1c946a42c9b133a6e}{errors}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}{opt}} = yaml.\+safe\+\_\+load(f)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}{d}} = \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}{opt}}\mbox{[}\textquotesingle{}device\textquotesingle{}\mbox{]}.split(\textquotesingle{},\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}} = len(\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}{d}})
+\item 
+int \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a5d8381d92d3d3c4b878b8346ae7fcb14}{ddp}} = \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}} $>$ 1 or (\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}} == 0 and torch.\+cuda.\+device\+\_\+count() $>$ 1)
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a26fa631ddd4ee9e7362118d37f878c44}{cmd}} = f\textquotesingle{}python -\/m torch.\+distributed.\+run -\/-\/nproc\+\_\+per\+\_\+node \{\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}}\} -\/-\/master\+\_\+port \{\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}{port}}\} train.\+py -\/-\/resume \{last\}\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_aa61fc4375c57933b4b92a83f02f485b9}\label{namespaceutils_1_1aws_1_1resume_aa61fc4375c57933b4b92a83f02f485b9}} 
+\index{utils.aws.resume@{utils.aws.resume}!ckpt@{ckpt}}
+\index{ckpt@{ckpt}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{ckpt}{ckpt}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+ckpt = torch.\+load(last)}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a26fa631ddd4ee9e7362118d37f878c44}\label{namespaceutils_1_1aws_1_1resume_a26fa631ddd4ee9e7362118d37f878c44}} 
+\index{utils.aws.resume@{utils.aws.resume}!cmd@{cmd}}
+\index{cmd@{cmd}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{cmd}{cmd}}
+{\footnotesize\ttfamily string utils.\+aws.\+resume.\+cmd = f\textquotesingle{}python -\/m torch.\+distributed.\+run -\/-\/nproc\+\_\+per\+\_\+node \{\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}}\} -\/-\/master\+\_\+port \{\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}{port}}\} train.\+py -\/-\/resume \{last\}\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}\label{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}} 
+\index{utils.aws.resume@{utils.aws.resume}!d@{d}}
+\index{d@{d}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+d = \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}{opt}}\mbox{[}\textquotesingle{}device\textquotesingle{}\mbox{]}.split(\textquotesingle{},\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a5d8381d92d3d3c4b878b8346ae7fcb14}\label{namespaceutils_1_1aws_1_1resume_a5d8381d92d3d3c4b878b8346ae7fcb14}} 
+\index{utils.aws.resume@{utils.aws.resume}!ddp@{ddp}}
+\index{ddp@{ddp}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{ddp}{ddp}}
+{\footnotesize\ttfamily int utils.\+aws.\+resume.\+ddp = \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}} $>$ 1 or (\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{nd}} == 0 and torch.\+cuda.\+device\+\_\+count() $>$ 1)}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a4c50e16182da53a1c946a42c9b133a6e}\label{namespaceutils_1_1aws_1_1resume_a4c50e16182da53a1c946a42c9b133a6e}} 
+\index{utils.aws.resume@{utils.aws.resume}!errors@{errors}}
+\index{errors@{errors}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{errors}{errors}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+errors}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a93843c2d7133dc4d61320ddfd9d69b66}\label{namespaceutils_1_1aws_1_1resume_a93843c2d7133dc4d61320ddfd9d69b66}} 
+\index{utils.aws.resume@{utils.aws.resume}!FILE@{FILE}}
+\index{FILE@{FILE}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{FILE}{FILE}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+F\+I\+LE = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}\label{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}} 
+\index{utils.aws.resume@{utils.aws.resume}!nd@{nd}}
+\index{nd@{nd}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{nd}{nd}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+nd = len(\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}{d}})}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}\label{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}} 
+\index{utils.aws.resume@{utils.aws.resume}!opt@{opt}}
+\index{opt@{opt}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{opt}{opt}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+opt = yaml.\+safe\+\_\+load(f)}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a8625192782100dfb6ce85dc6600f05cf}\label{namespaceutils_1_1aws_1_1resume_a8625192782100dfb6ce85dc6600f05cf}} 
+\index{utils.aws.resume@{utils.aws.resume}!path@{path}}
+\index{path@{path}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+path = Path(\textquotesingle{}\textquotesingle{}).resolve()}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}\label{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}} 
+\index{utils.aws.resume@{utils.aws.resume}!port@{port}}
+\index{port@{port}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily int utils.\+aws.\+resume.\+port = 0}
+
+\mbox{\Hypertarget{namespaceutils_1_1aws_1_1resume_aaa7200240514de7fcd261e28f4ce14f6}\label{namespaceutils_1_1aws_1_1resume_aaa7200240514de7fcd261e28f4ce14f6}} 
+\index{utils.aws.resume@{utils.aws.resume}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!utils.aws.resume@{utils.aws.resume}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily utils.\+aws.\+resume.\+R\+O\+OT = F\+I\+L\+E.\+parents\mbox{[}2\mbox{]}}
+

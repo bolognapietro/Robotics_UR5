@@ -1,0 +1,188 @@
+\hypertarget{namespaceutils_1_1loggers_1_1comet}{}\doxysection{utils.\+loggers.\+comet Namespace Reference}
+\label{namespaceutils_1_1loggers_1_1comet}\index{utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils}{comet\+\_\+utils}}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo}{hpo}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1loggers_1_1comet_1_1CometLogger}{Comet\+Logger}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aed3090bd061d0558eb9d3141568babb3}{logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a0c6590e43054175ff18dfb39d1d62fff}{F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_acaab4111e28bbd77b729bdce773f6434}{R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a7e691fb49a452b2a39066526a6923a73}{config}} = comet\+\_\+ml.\+config.\+get\+\_\+config()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a6b26e6492e8d2b0b42480073efd22aef}{C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME}} = config.\+get\+\_\+string(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME\textquotesingle{}), \textquotesingle{}comet.\+project\+\_\+name\textquotesingle{}, default=\textquotesingle{}yolov5\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aef60b830b52dc4af9d178e0baceb9c8d}{comet\+\_\+ml}} = None
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_abe1fea30f9af9ed79a815903399e65c7}{C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+F\+IX}} = \textquotesingle{}comet\+://\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_ac4331f1df883553ec4c77c25f15665c4}{C\+O\+M\+E\+T\+\_\+\+M\+O\+DE}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+DE\textquotesingle{}, \textquotesingle{}online\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a4caaedf725624d76b44359a96bcbd9ab}{C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME\textquotesingle{}, \textquotesingle{}yolov5\textquotesingle{})
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a624fc8a6a1b9a28e38249009bf47ebac}{C\+O\+M\+E\+T\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+D\+A\+T\+A\+S\+ET}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a6cd3d11b1d3831bfdb02029f11deb088}{C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+C\+O\+N\+F\+U\+S\+I\+O\+N\+\_\+\+M\+A\+T\+R\+IX}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aca7a775e6f432a49fe3427bcea496e74}{C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+NS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a193068f4598efa8b73dcbeb83939e683}{C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS}} = int(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS\textquotesingle{}, 100))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_ab50573cb53c6a0ee4f6c8c0f5b68f5bd}{C\+O\+N\+F\+\_\+\+T\+H\+R\+ES}} = float(os.\+getenv(\textquotesingle{}C\+O\+N\+F\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+001))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a33409a1cf00ea8e58f278a3bb6c4d6a5}{I\+O\+U\+\_\+\+T\+H\+R\+ES}} = float(os.\+getenv(\textquotesingle{}I\+O\+U\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+6))
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a91d05f20a8313e7eb12a6978601cdcb7}{C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+E\+T\+R\+I\+CS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_add875288ba9a73552c806a2503744edd}{C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a1740b5d533991c93d5709f476fc59146}{C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a44cde377eb27533eec7833b8c3ce7c6f}{C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+E\+R\+\_\+\+C\+L\+A\+S\+S\+\_\+\+M\+E\+T\+R\+I\+CS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a4e2ca557c808a6221762f1783ff888eb}{R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a50a3daae7ce19eb3b8f4712b83503e2c}{to\+\_\+pil}} = T.\+To\+P\+I\+L\+Image()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_add875288ba9a73552c806a2503744edd}\label{namespaceutils_1_1loggers_1_1comet_add875288ba9a73552c806a2503744edd}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_BATCH\_LOGGING\_INTERVAL@{COMET\_BATCH\_LOGGING\_INTERVAL}}
+\index{COMET\_BATCH\_LOGGING\_INTERVAL@{COMET\_BATCH\_LOGGING\_INTERVAL}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_BATCH\_LOGGING\_INTERVAL}{COMET\_BATCH\_LOGGING\_INTERVAL}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a91d05f20a8313e7eb12a6978601cdcb7}\label{namespaceutils_1_1loggers_1_1comet_a91d05f20a8313e7eb12a6978601cdcb7}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_LOG\_BATCH\_METRICS@{COMET\_LOG\_BATCH\_METRICS}}
+\index{COMET\_LOG\_BATCH\_METRICS@{COMET\_LOG\_BATCH\_METRICS}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_LOG\_BATCH\_METRICS}{COMET\_LOG\_BATCH\_METRICS}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+E\+T\+R\+I\+CS = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a6cd3d11b1d3831bfdb02029f11deb088}\label{namespaceutils_1_1loggers_1_1comet_a6cd3d11b1d3831bfdb02029f11deb088}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_LOG\_CONFUSION\_MATRIX@{COMET\_LOG\_CONFUSION\_MATRIX}}
+\index{COMET\_LOG\_CONFUSION\_MATRIX@{COMET\_LOG\_CONFUSION\_MATRIX}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_LOG\_CONFUSION\_MATRIX}{COMET\_LOG\_CONFUSION\_MATRIX}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+C\+O\+N\+F\+U\+S\+I\+O\+N\+\_\+\+M\+A\+T\+R\+IX = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a44cde377eb27533eec7833b8c3ce7c6f}\label{namespaceutils_1_1loggers_1_1comet_a44cde377eb27533eec7833b8c3ce7c6f}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_LOG\_PER\_CLASS\_METRICS@{COMET\_LOG\_PER\_CLASS\_METRICS}}
+\index{COMET\_LOG\_PER\_CLASS\_METRICS@{COMET\_LOG\_PER\_CLASS\_METRICS}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_LOG\_PER\_CLASS\_METRICS}{COMET\_LOG\_PER\_CLASS\_METRICS}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+E\+R\+\_\+\+C\+L\+A\+S\+S\+\_\+\+M\+E\+T\+R\+I\+CS = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_aca7a775e6f432a49fe3427bcea496e74}\label{namespaceutils_1_1loggers_1_1comet_aca7a775e6f432a49fe3427bcea496e74}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_LOG\_PREDICTIONS@{COMET\_LOG\_PREDICTIONS}}
+\index{COMET\_LOG\_PREDICTIONS@{COMET\_LOG\_PREDICTIONS}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_LOG\_PREDICTIONS}{COMET\_LOG\_PREDICTIONS}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+NS = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a193068f4598efa8b73dcbeb83939e683}\label{namespaceutils_1_1loggers_1_1comet_a193068f4598efa8b73dcbeb83939e683}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_MAX\_IMAGE\_UPLOADS@{COMET\_MAX\_IMAGE\_UPLOADS}}
+\index{COMET\_MAX\_IMAGE\_UPLOADS@{COMET\_MAX\_IMAGE\_UPLOADS}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_MAX\_IMAGE\_UPLOADS}{COMET\_MAX\_IMAGE\_UPLOADS}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS = int(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS\textquotesingle{}, 100))}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_aef60b830b52dc4af9d178e0baceb9c8d}\label{namespaceutils_1_1loggers_1_1comet_aef60b830b52dc4af9d178e0baceb9c8d}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!comet\_ml@{comet\_ml}}
+\index{comet\_ml@{comet\_ml}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{comet\_ml}{comet\_ml}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+comet\+\_\+ml = None}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_ac4331f1df883553ec4c77c25f15665c4}\label{namespaceutils_1_1loggers_1_1comet_ac4331f1df883553ec4c77c25f15665c4}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_MODE@{COMET\_MODE}}
+\index{COMET\_MODE@{COMET\_MODE}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_MODE}{COMET\_MODE}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+O\+DE = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+DE\textquotesingle{}, \textquotesingle{}online\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a4caaedf725624d76b44359a96bcbd9ab}\label{namespaceutils_1_1loggers_1_1comet_a4caaedf725624d76b44359a96bcbd9ab}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_MODEL\_NAME@{COMET\_MODEL\_NAME}}
+\index{COMET\_MODEL\_NAME@{COMET\_MODEL\_NAME}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_MODEL\_NAME}{COMET\_MODEL\_NAME}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME\textquotesingle{}, \textquotesingle{}yolov5\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a1740b5d533991c93d5709f476fc59146}\label{namespaceutils_1_1loggers_1_1comet_a1740b5d533991c93d5709f476fc59146}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_PREDICTION\_LOGGING\_INTERVAL@{COMET\_PREDICTION\_LOGGING\_INTERVAL}}
+\index{COMET\_PREDICTION\_LOGGING\_INTERVAL@{COMET\_PREDICTION\_LOGGING\_INTERVAL}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_PREDICTION\_LOGGING\_INTERVAL}{COMET\_PREDICTION\_LOGGING\_INTERVAL}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_abe1fea30f9af9ed79a815903399e65c7}\label{namespaceutils_1_1loggers_1_1comet_abe1fea30f9af9ed79a815903399e65c7}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_PREFIX@{COMET\_PREFIX}}
+\index{COMET\_PREFIX@{COMET\_PREFIX}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_PREFIX}{COMET\_PREFIX}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+F\+IX = \textquotesingle{}comet\+://\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a6b26e6492e8d2b0b42480073efd22aef}\label{namespaceutils_1_1loggers_1_1comet_a6b26e6492e8d2b0b42480073efd22aef}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_PROJECT\_NAME@{COMET\_PROJECT\_NAME}}
+\index{COMET\_PROJECT\_NAME@{COMET\_PROJECT\_NAME}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_PROJECT\_NAME}{COMET\_PROJECT\_NAME}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME = config.\+get\+\_\+string(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME\textquotesingle{}), \textquotesingle{}comet.\+project\+\_\+name\textquotesingle{}, default=\textquotesingle{}yolov5\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a624fc8a6a1b9a28e38249009bf47ebac}\label{namespaceutils_1_1loggers_1_1comet_a624fc8a6a1b9a28e38249009bf47ebac}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!COMET\_UPLOAD\_DATASET@{COMET\_UPLOAD\_DATASET}}
+\index{COMET\_UPLOAD\_DATASET@{COMET\_UPLOAD\_DATASET}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{COMET\_UPLOAD\_DATASET}{COMET\_UPLOAD\_DATASET}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+D\+A\+T\+A\+S\+ET = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_ab50573cb53c6a0ee4f6c8c0f5b68f5bd}\label{namespaceutils_1_1loggers_1_1comet_ab50573cb53c6a0ee4f6c8c0f5b68f5bd}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!CONF\_THRES@{CONF\_THRES}}
+\index{CONF\_THRES@{CONF\_THRES}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{CONF\_THRES}{CONF\_THRES}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+C\+O\+N\+F\+\_\+\+T\+H\+R\+ES = float(os.\+getenv(\textquotesingle{}C\+O\+N\+F\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+001))}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a7e691fb49a452b2a39066526a6923a73}\label{namespaceutils_1_1loggers_1_1comet_a7e691fb49a452b2a39066526a6923a73}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!config@{config}}
+\index{config@{config}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+config = comet\+\_\+ml.\+config.\+get\+\_\+config()}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a0c6590e43054175ff18dfb39d1d62fff}\label{namespaceutils_1_1loggers_1_1comet_a0c6590e43054175ff18dfb39d1d62fff}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!FILE@{FILE}}
+\index{FILE@{FILE}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{FILE}{FILE}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+F\+I\+LE = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a33409a1cf00ea8e58f278a3bb6c4d6a5}\label{namespaceutils_1_1loggers_1_1comet_a33409a1cf00ea8e58f278a3bb6c4d6a5}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!IOU\_THRES@{IOU\_THRES}}
+\index{IOU\_THRES@{IOU\_THRES}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{IOU\_THRES}{IOU\_THRES}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+I\+O\+U\+\_\+\+T\+H\+R\+ES = float(os.\+getenv(\textquotesingle{}I\+O\+U\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+6))}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_aed3090bd061d0558eb9d3141568babb3}\label{namespaceutils_1_1loggers_1_1comet_aed3090bd061d0558eb9d3141568babb3}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!logger@{logger}}
+\index{logger@{logger}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+logger = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a4e2ca557c808a6221762f1783ff888eb}\label{namespaceutils_1_1loggers_1_1comet_a4e2ca557c808a6221762f1783ff888eb}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!RANK@{RANK}}
+\index{RANK@{RANK}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{RANK}{RANK}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_acaab4111e28bbd77b729bdce773f6434}\label{namespaceutils_1_1loggers_1_1comet_acaab4111e28bbd77b729bdce773f6434}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+R\+O\+OT = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_a50a3daae7ce19eb3b8f4712b83503e2c}\label{namespaceutils_1_1loggers_1_1comet_a50a3daae7ce19eb3b8f4712b83503e2c}} 
+\index{utils.loggers.comet@{utils.loggers.comet}!to\_pil@{to\_pil}}
+\index{to\_pil@{to\_pil}!utils.loggers.comet@{utils.loggers.comet}}
+\doxysubsubsection{\texorpdfstring{to\_pil}{to\_pil}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+to\+\_\+pil = T.\+To\+P\+I\+L\+Image()}
+

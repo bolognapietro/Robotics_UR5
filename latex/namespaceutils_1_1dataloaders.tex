@@ -1,0 +1,182 @@
+\hypertarget{namespaceutils_1_1dataloaders}{}\doxysection{utils.\+dataloaders Namespace Reference}
+\label{namespaceutils_1_1dataloaders}\index{utils.dataloaders@{utils.dataloaders}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1__RepeatSampler}{\+\_\+\+Repeat\+Sampler}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1ClassificationDataset}{Classification\+Dataset}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1HUBDatasetStats}{H\+U\+B\+Dataset\+Stats}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1InfiniteDataLoader}{Infinite\+Data\+Loader}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImages}{Load\+Images}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels}{Load\+Images\+And\+Labels}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadScreenshots}{Load\+Screenshots}}
+\item 
+class \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadStreams}{Load\+Streams}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a1bb633e5481bd106f7483134de4e4a5f}{get\+\_\+hash}} (paths)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_ab42d89fa4d3381ebd31f5d212c1b2d5b}{exif\+\_\+size}} (img)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a3096570548d2cb867a88c3a09fed02bb}{exif\+\_\+transpose}} (image)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a9c78c2f9de39d08528a90ae699cfd0c8}{seed\+\_\+worker}} (worker\+\_\+id)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a79b6272fcfb0e230089fc118e2c9cd8b}{create\+\_\+dataloader}} (path, imgsz, batch\+\_\+size, stride, single\+\_\+cls=False, hyp=None, augment=False, cache=False, pad=0.\+0, rect=False, rank=-\/1, workers=8, image\+\_\+weights=False, quad=False, prefix=\textquotesingle{}\textquotesingle{}, shuffle=False, seed=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_aad388bf89c7df60e93fc8612b4654d0d}{img2label\+\_\+paths}} (img\+\_\+paths)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a8c08fb759148b7279ccbd90dff438dfb}{flatten\+\_\+recursive}} (path=D\+A\+T\+A\+S\+E\+T\+S\+\_\+\+D\+IR/ \textquotesingle{}coco128\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_ad6b0dc0d7bbcff5a9f62b7691ecc8d37}{extract\+\_\+boxes}} (path=D\+A\+T\+A\+S\+E\+T\+S\+\_\+\+D\+IR/ \textquotesingle{}coco128\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_ae7c9018f94a2e1da76b5223cbcf16444}{autosplit}} (path=D\+A\+T\+A\+S\+E\+T\+S\+\_\+\+D\+IR/ \textquotesingle{}coco128/images\textquotesingle{}, weights=(0.\+9, 0.\+1, 0.\+0), annotated\+\_\+only=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_a87a6a0a083e7f1273433c1bb306d7f12}{verify\+\_\+image\+\_\+label}} (args)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1dataloaders_add85dd5ae426eab916c6aab762d5b5e6}{create\+\_\+classification\+\_\+dataloader}} (path, imgsz=224, batch\+\_\+size=16, augment=True, cache=False, rank=-\/1, workers=8, shuffle=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1dataloaders_a931f6581979987b39d2f3b88576dd0dc}{H\+E\+L\+P\+\_\+\+U\+RL}} = \textquotesingle{}See https\+://docs.\+ultralytics.\+com/yolov5/tutorials/train\+\_\+custom\+\_\+data\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1dataloaders_a5ac7df87ff5915439c784484d52a7340}{I\+M\+G\+\_\+\+F\+O\+R\+M\+A\+TS}} = \textquotesingle{}bmp\textquotesingle{}, \textquotesingle{}dng\textquotesingle{}, \textquotesingle{}jpeg\textquotesingle{}, \textquotesingle{}jpg\textquotesingle{}, \textquotesingle{}mpo\textquotesingle{}, \textquotesingle{}png\textquotesingle{}, \textquotesingle{}tif\textquotesingle{}, \textquotesingle{}tiff\textquotesingle{}, \textquotesingle{}webp\textquotesingle{}, \textquotesingle{}pfm\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1dataloaders_ab26504771f47f1d5b10d2684f9f61334}{V\+I\+D\+\_\+\+F\+O\+R\+M\+A\+TS}} = \textquotesingle{}asf\textquotesingle{}, \textquotesingle{}avi\textquotesingle{}, \textquotesingle{}gif\textquotesingle{}, \textquotesingle{}m4v\textquotesingle{}, \textquotesingle{}mkv\textquotesingle{}, \textquotesingle{}mov\textquotesingle{}, \textquotesingle{}mp4\textquotesingle{}, \textquotesingle{}mpeg\textquotesingle{}, \textquotesingle{}mpg\textquotesingle{}, \textquotesingle{}ts\textquotesingle{}, \textquotesingle{}wmv\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1dataloaders_aeeca508603811db48e02cceaa25c8ac2}{L\+O\+C\+A\+L\+\_\+\+R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}L\+O\+C\+A\+L\+\_\+\+R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1dataloaders_a40c7b24e4d43d768cc17b711eb7e8aea}{R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1dataloaders_a5c47915fd28862c5e52a65d598520283}{P\+I\+N\+\_\+\+M\+E\+M\+O\+RY}} = \textquotesingle{}true\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_ae7c9018f94a2e1da76b5223cbcf16444}\label{namespaceutils_1_1dataloaders_ae7c9018f94a2e1da76b5223cbcf16444}} 
+\index{utils.dataloaders@{utils.dataloaders}!autosplit@{autosplit}}
+\index{autosplit@{autosplit}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{autosplit()}{autosplit()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+autosplit (\begin{DoxyParamCaption}\item[{}]{path = {\ttfamily DATASETS\+\_\+DIR~/~\textquotesingle{}coco128/images\textquotesingle{}},  }\item[{}]{weights = {\ttfamily (0.9,~0.1,~0.0)},  }\item[{}]{annotated\+\_\+only = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Autosplit a dataset into train/val/test splits and save path/autosplit_*.txt files
+Usage: from utils.dataloaders import *; autosplit()
+Arguments
+    path:            Path to images directory
+    weights:         Train, val, test weights (list, tuple)
+    annotated_only:  Only use images with an annotated txt file
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1dataloaders_add85dd5ae426eab916c6aab762d5b5e6}\label{namespaceutils_1_1dataloaders_add85dd5ae426eab916c6aab762d5b5e6}} 
+\index{utils.dataloaders@{utils.dataloaders}!create\_classification\_dataloader@{create\_classification\_dataloader}}
+\index{create\_classification\_dataloader@{create\_classification\_dataloader}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{create\_classification\_dataloader()}{create\_classification\_dataloader()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+create\+\_\+classification\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{path,  }\item[{}]{imgsz = {\ttfamily 224},  }\item[{}]{batch\+\_\+size = {\ttfamily 16},  }\item[{}]{augment = {\ttfamily True},  }\item[{}]{cache = {\ttfamily False},  }\item[{}]{rank = {\ttfamily -\/1},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{shuffle = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a79b6272fcfb0e230089fc118e2c9cd8b}\label{namespaceutils_1_1dataloaders_a79b6272fcfb0e230089fc118e2c9cd8b}} 
+\index{utils.dataloaders@{utils.dataloaders}!create\_dataloader@{create\_dataloader}}
+\index{create\_dataloader@{create\_dataloader}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{create\_dataloader()}{create\_dataloader()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+create\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{path,  }\item[{}]{imgsz,  }\item[{}]{batch\+\_\+size,  }\item[{}]{stride,  }\item[{}]{single\+\_\+cls = {\ttfamily False},  }\item[{}]{hyp = {\ttfamily None},  }\item[{}]{augment = {\ttfamily False},  }\item[{}]{cache = {\ttfamily False},  }\item[{}]{pad = {\ttfamily 0.0},  }\item[{}]{rect = {\ttfamily False},  }\item[{}]{rank = {\ttfamily -\/1},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{image\+\_\+weights = {\ttfamily False},  }\item[{}]{quad = {\ttfamily False},  }\item[{}]{prefix = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{shuffle = {\ttfamily False},  }\item[{}]{seed = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_ab42d89fa4d3381ebd31f5d212c1b2d5b}\label{namespaceutils_1_1dataloaders_ab42d89fa4d3381ebd31f5d212c1b2d5b}} 
+\index{utils.dataloaders@{utils.dataloaders}!exif\_size@{exif\_size}}
+\index{exif\_size@{exif\_size}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{exif\_size()}{exif\_size()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+exif\+\_\+size (\begin{DoxyParamCaption}\item[{}]{img }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a3096570548d2cb867a88c3a09fed02bb}\label{namespaceutils_1_1dataloaders_a3096570548d2cb867a88c3a09fed02bb}} 
+\index{utils.dataloaders@{utils.dataloaders}!exif\_transpose@{exif\_transpose}}
+\index{exif\_transpose@{exif\_transpose}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{exif\_transpose()}{exif\_transpose()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+exif\+\_\+transpose (\begin{DoxyParamCaption}\item[{}]{image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Transpose a PIL image accordingly if it has an EXIF Orientation tag.
+Inplace version of https://github.com/python-pillow/Pillow/blob/master/src/PIL/ImageOps.py exif_transpose()
+
+:param image: The image to transpose.
+:return: An image.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1dataloaders_ad6b0dc0d7bbcff5a9f62b7691ecc8d37}\label{namespaceutils_1_1dataloaders_ad6b0dc0d7bbcff5a9f62b7691ecc8d37}} 
+\index{utils.dataloaders@{utils.dataloaders}!extract\_boxes@{extract\_boxes}}
+\index{extract\_boxes@{extract\_boxes}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{extract\_boxes()}{extract\_boxes()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+extract\+\_\+boxes (\begin{DoxyParamCaption}\item[{}]{path = {\ttfamily DATASETS\+\_\+DIR~/~\textquotesingle{}coco128\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a8c08fb759148b7279ccbd90dff438dfb}\label{namespaceutils_1_1dataloaders_a8c08fb759148b7279ccbd90dff438dfb}} 
+\index{utils.dataloaders@{utils.dataloaders}!flatten\_recursive@{flatten\_recursive}}
+\index{flatten\_recursive@{flatten\_recursive}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{flatten\_recursive()}{flatten\_recursive()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+flatten\+\_\+recursive (\begin{DoxyParamCaption}\item[{}]{path = {\ttfamily DATASETS\+\_\+DIR~/~\textquotesingle{}coco128\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a1bb633e5481bd106f7483134de4e4a5f}\label{namespaceutils_1_1dataloaders_a1bb633e5481bd106f7483134de4e4a5f}} 
+\index{utils.dataloaders@{utils.dataloaders}!get\_hash@{get\_hash}}
+\index{get\_hash@{get\_hash}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{get\_hash()}{get\_hash()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+get\+\_\+hash (\begin{DoxyParamCaption}\item[{}]{paths }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_aad388bf89c7df60e93fc8612b4654d0d}\label{namespaceutils_1_1dataloaders_aad388bf89c7df60e93fc8612b4654d0d}} 
+\index{utils.dataloaders@{utils.dataloaders}!img2label\_paths@{img2label\_paths}}
+\index{img2label\_paths@{img2label\_paths}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{img2label\_paths()}{img2label\_paths()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+img2label\+\_\+paths (\begin{DoxyParamCaption}\item[{}]{img\+\_\+paths }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a9c78c2f9de39d08528a90ae699cfd0c8}\label{namespaceutils_1_1dataloaders_a9c78c2f9de39d08528a90ae699cfd0c8}} 
+\index{utils.dataloaders@{utils.dataloaders}!seed\_worker@{seed\_worker}}
+\index{seed\_worker@{seed\_worker}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{seed\_worker()}{seed\_worker()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+seed\+\_\+worker (\begin{DoxyParamCaption}\item[{}]{worker\+\_\+id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a87a6a0a083e7f1273433c1bb306d7f12}\label{namespaceutils_1_1dataloaders_a87a6a0a083e7f1273433c1bb306d7f12}} 
+\index{utils.dataloaders@{utils.dataloaders}!verify\_image\_label@{verify\_image\_label}}
+\index{verify\_image\_label@{verify\_image\_label}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{verify\_image\_label()}{verify\_image\_label()}}
+{\footnotesize\ttfamily def utils.\+dataloaders.\+verify\+\_\+image\+\_\+label (\begin{DoxyParamCaption}\item[{}]{args }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a931f6581979987b39d2f3b88576dd0dc}\label{namespaceutils_1_1dataloaders_a931f6581979987b39d2f3b88576dd0dc}} 
+\index{utils.dataloaders@{utils.dataloaders}!HELP\_URL@{HELP\_URL}}
+\index{HELP\_URL@{HELP\_URL}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{HELP\_URL}{HELP\_URL}}
+{\footnotesize\ttfamily string utils.\+dataloaders.\+H\+E\+L\+P\+\_\+\+U\+RL = \textquotesingle{}See https\+://docs.\+ultralytics.\+com/yolov5/tutorials/train\+\_\+custom\+\_\+data\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a5ac7df87ff5915439c784484d52a7340}\label{namespaceutils_1_1dataloaders_a5ac7df87ff5915439c784484d52a7340}} 
+\index{utils.dataloaders@{utils.dataloaders}!IMG\_FORMATS@{IMG\_FORMATS}}
+\index{IMG\_FORMATS@{IMG\_FORMATS}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{IMG\_FORMATS}{IMG\_FORMATS}}
+{\footnotesize\ttfamily string utils.\+dataloaders.\+I\+M\+G\+\_\+\+F\+O\+R\+M\+A\+TS = \textquotesingle{}bmp\textquotesingle{}, \textquotesingle{}dng\textquotesingle{}, \textquotesingle{}jpeg\textquotesingle{}, \textquotesingle{}jpg\textquotesingle{}, \textquotesingle{}mpo\textquotesingle{}, \textquotesingle{}png\textquotesingle{}, \textquotesingle{}tif\textquotesingle{}, \textquotesingle{}tiff\textquotesingle{}, \textquotesingle{}webp\textquotesingle{}, \textquotesingle{}pfm\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_aeeca508603811db48e02cceaa25c8ac2}\label{namespaceutils_1_1dataloaders_aeeca508603811db48e02cceaa25c8ac2}} 
+\index{utils.dataloaders@{utils.dataloaders}!LOCAL\_RANK@{LOCAL\_RANK}}
+\index{LOCAL\_RANK@{LOCAL\_RANK}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{LOCAL\_RANK}{LOCAL\_RANK}}
+{\footnotesize\ttfamily utils.\+dataloaders.\+L\+O\+C\+A\+L\+\_\+\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}L\+O\+C\+A\+L\+\_\+\+R\+A\+NK\textquotesingle{}, -\/1))}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a5c47915fd28862c5e52a65d598520283}\label{namespaceutils_1_1dataloaders_a5c47915fd28862c5e52a65d598520283}} 
+\index{utils.dataloaders@{utils.dataloaders}!PIN\_MEMORY@{PIN\_MEMORY}}
+\index{PIN\_MEMORY@{PIN\_MEMORY}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{PIN\_MEMORY}{PIN\_MEMORY}}
+{\footnotesize\ttfamily string utils.\+dataloaders.\+P\+I\+N\+\_\+\+M\+E\+M\+O\+RY = \textquotesingle{}true\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_a40c7b24e4d43d768cc17b711eb7e8aea}\label{namespaceutils_1_1dataloaders_a40c7b24e4d43d768cc17b711eb7e8aea}} 
+\index{utils.dataloaders@{utils.dataloaders}!RANK@{RANK}}
+\index{RANK@{RANK}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{RANK}{RANK}}
+{\footnotesize\ttfamily utils.\+dataloaders.\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))}
+
+\mbox{\Hypertarget{namespaceutils_1_1dataloaders_ab26504771f47f1d5b10d2684f9f61334}\label{namespaceutils_1_1dataloaders_ab26504771f47f1d5b10d2684f9f61334}} 
+\index{utils.dataloaders@{utils.dataloaders}!VID\_FORMATS@{VID\_FORMATS}}
+\index{VID\_FORMATS@{VID\_FORMATS}!utils.dataloaders@{utils.dataloaders}}
+\doxysubsubsection{\texorpdfstring{VID\_FORMATS}{VID\_FORMATS}}
+{\footnotesize\ttfamily string utils.\+dataloaders.\+V\+I\+D\+\_\+\+F\+O\+R\+M\+A\+TS = \textquotesingle{}asf\textquotesingle{}, \textquotesingle{}avi\textquotesingle{}, \textquotesingle{}gif\textquotesingle{}, \textquotesingle{}m4v\textquotesingle{}, \textquotesingle{}mkv\textquotesingle{}, \textquotesingle{}mov\textquotesingle{}, \textquotesingle{}mp4\textquotesingle{}, \textquotesingle{}mpeg\textquotesingle{}, \textquotesingle{}mpg\textquotesingle{}, \textquotesingle{}ts\textquotesingle{}, \textquotesingle{}wmv\textquotesingle{}}
+

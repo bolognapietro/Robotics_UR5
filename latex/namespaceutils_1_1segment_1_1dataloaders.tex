@@ -1,0 +1,71 @@
+\hypertarget{namespaceutils_1_1segment_1_1dataloaders}{}\doxysection{utils.\+segment.\+dataloaders Namespace Reference}
+\label{namespaceutils_1_1segment_1_1dataloaders}\index{utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks}{Load\+Images\+And\+Labels\+And\+Masks}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1segment_1_1dataloaders_af2cb36cde84e71aea02bd7f2d1c27997}{create\+\_\+dataloader}} (path, imgsz, batch\+\_\+size, stride, single\+\_\+cls=False, hyp=None, augment=False, cache=False, pad=0.\+0, rect=False, rank=-\/1, workers=8, image\+\_\+weights=False, quad=False, prefix=\textquotesingle{}\textquotesingle{}, shuffle=False, mask\+\_\+downsample\+\_\+ratio=1, overlap\+\_\+mask=False, seed=0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1segment_1_1dataloaders_a1fde070beacd32c2abf55aa251047097}{polygon2mask}} (img\+\_\+size, polygons, color=1, downsample\+\_\+ratio=1)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1segment_1_1dataloaders_a53b9f501cd184859cdf85b20ad942043}{polygons2masks}} (img\+\_\+size, polygons, color, downsample\+\_\+ratio=1)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1segment_1_1dataloaders_ab80e0833cf526dade6cc4a4f390cb1c1}{polygons2masks\+\_\+overlap}} (img\+\_\+size, segments, downsample\+\_\+ratio=1)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1segment_1_1dataloaders_ab8bc6f344c88acf2f5e72f5562b05596}{R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1segment_1_1dataloaders_af2cb36cde84e71aea02bd7f2d1c27997}\label{namespaceutils_1_1segment_1_1dataloaders_af2cb36cde84e71aea02bd7f2d1c27997}} 
+\index{utils.segment.dataloaders@{utils.segment.dataloaders}!create\_dataloader@{create\_dataloader}}
+\index{create\_dataloader@{create\_dataloader}!utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsubsection{\texorpdfstring{create\_dataloader()}{create\_dataloader()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+create\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{path,  }\item[{}]{imgsz,  }\item[{}]{batch\+\_\+size,  }\item[{}]{stride,  }\item[{}]{single\+\_\+cls = {\ttfamily False},  }\item[{}]{hyp = {\ttfamily None},  }\item[{}]{augment = {\ttfamily False},  }\item[{}]{cache = {\ttfamily False},  }\item[{}]{pad = {\ttfamily 0.0},  }\item[{}]{rect = {\ttfamily False},  }\item[{}]{rank = {\ttfamily -\/1},  }\item[{}]{workers = {\ttfamily 8},  }\item[{}]{image\+\_\+weights = {\ttfamily False},  }\item[{}]{quad = {\ttfamily False},  }\item[{}]{prefix = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{shuffle = {\ttfamily False},  }\item[{}]{mask\+\_\+downsample\+\_\+ratio = {\ttfamily 1},  }\item[{}]{overlap\+\_\+mask = {\ttfamily False},  }\item[{}]{seed = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1segment_1_1dataloaders_a1fde070beacd32c2abf55aa251047097}\label{namespaceutils_1_1segment_1_1dataloaders_a1fde070beacd32c2abf55aa251047097}} 
+\index{utils.segment.dataloaders@{utils.segment.dataloaders}!polygon2mask@{polygon2mask}}
+\index{polygon2mask@{polygon2mask}!utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsubsection{\texorpdfstring{polygon2mask()}{polygon2mask()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+polygon2mask (\begin{DoxyParamCaption}\item[{}]{img\+\_\+size,  }\item[{}]{polygons,  }\item[{}]{color = {\ttfamily 1},  }\item[{}]{downsample\+\_\+ratio = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Args:
+    img_size (tuple): The image size.
+    polygons (np.ndarray): [N, M], N is the number of polygons,
+        M is the number of points(Be divided by 2).
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1segment_1_1dataloaders_a53b9f501cd184859cdf85b20ad942043}\label{namespaceutils_1_1segment_1_1dataloaders_a53b9f501cd184859cdf85b20ad942043}} 
+\index{utils.segment.dataloaders@{utils.segment.dataloaders}!polygons2masks@{polygons2masks}}
+\index{polygons2masks@{polygons2masks}!utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsubsection{\texorpdfstring{polygons2masks()}{polygons2masks()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+polygons2masks (\begin{DoxyParamCaption}\item[{}]{img\+\_\+size,  }\item[{}]{polygons,  }\item[{}]{color,  }\item[{}]{downsample\+\_\+ratio = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Args:
+    img_size (tuple): The image size.
+    polygons (list[np.ndarray]): each polygon is [N, M],
+        N is the number of polygons,
+        M is the number of points(Be divided by 2).
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1segment_1_1dataloaders_ab80e0833cf526dade6cc4a4f390cb1c1}\label{namespaceutils_1_1segment_1_1dataloaders_ab80e0833cf526dade6cc4a4f390cb1c1}} 
+\index{utils.segment.dataloaders@{utils.segment.dataloaders}!polygons2masks\_overlap@{polygons2masks\_overlap}}
+\index{polygons2masks\_overlap@{polygons2masks\_overlap}!utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsubsection{\texorpdfstring{polygons2masks\_overlap()}{polygons2masks\_overlap()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+polygons2masks\+\_\+overlap (\begin{DoxyParamCaption}\item[{}]{img\+\_\+size,  }\item[{}]{segments,  }\item[{}]{downsample\+\_\+ratio = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Return a (640, 640) overlap mask.\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1segment_1_1dataloaders_ab8bc6f344c88acf2f5e72f5562b05596}\label{namespaceutils_1_1segment_1_1dataloaders_ab8bc6f344c88acf2f5e72f5562b05596}} 
+\index{utils.segment.dataloaders@{utils.segment.dataloaders}!RANK@{RANK}}
+\index{RANK@{RANK}!utils.segment.dataloaders@{utils.segment.dataloaders}}
+\doxysubsubsection{\texorpdfstring{RANK}{RANK}}
+{\footnotesize\ttfamily utils.\+segment.\+dataloaders.\+R\+A\+NK = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))}
+

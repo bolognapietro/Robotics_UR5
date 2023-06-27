@@ -1,0 +1,350 @@
+\hypertarget{namespaceassignments}{}\doxysection{assignments Namespace Reference}
+\label{namespaceassignments}\index{assignments@{assignments}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceassignments_a7d8e70a51a54d860fc866dc3c5e254b6}{execute\+\_\+request}} (str service\+\_\+name, service\+\_\+class, Union\mbox{[}str, None\mbox{]} request=None, float wait=0.\+2)
+\item 
+Spawn\+Model\+Request \mbox{\hyperlink{namespaceassignments_abbf9d966fa18676def9f9cab65bea263}{create\+\_\+spawnmodel\+\_\+request}} (str name, str model, tuple position, tuple orientation)
+\item 
+list \mbox{\hyperlink{namespaceassignments_a3dd56642674637d9ad1d31b70ea8ec3c}{get\+\_\+world\+\_\+models}} ()
+\item 
+tuple \mbox{\hyperlink{namespaceassignments_a1ad926648ae3bfd7dbeebedd3d1fcbab}{get\+\_\+model\+\_\+state}} (str name)
+\item 
+bool \mbox{\hyperlink{namespaceassignments_acfe46beb83a4654f9218514165e0a488}{delete\+\_\+model}} (str name)
+\item 
+None \mbox{\hyperlink{namespaceassignments_ad999226f8248cc0b082189411bb66ad6}{delete\+\_\+all\+\_\+models}} ()
+\item 
+str \mbox{\hyperlink{namespaceassignments_a79ad021345548373fbf0984121a4ccc1}{random\+\_\+model}} ()
+\item 
+tuple \mbox{\hyperlink{namespaceassignments_a273a088b3157bcb5754e0dfc95012048}{random\+\_\+position}} (dict box, int precision=3)
+\item 
+tuple \mbox{\hyperlink{namespaceassignments_aabb592b1c2fcf7e07f2912b067987576}{random\+\_\+orientation}} (int index=None, bool z\+\_\+orientation=True)
+\item 
+str \mbox{\hyperlink{namespaceassignments_ab941904c7004454ec0f417dc3d26f68c}{random\+\_\+name}} ()
+\item 
+None \mbox{\hyperlink{namespaceassignments_a815173ddccba4aec134be3f84cec35ab}{print\+\_\+model}} (str name, str model, tuple position, tuple orientation, int orientation\+\_\+index)
+\item 
+def \mbox{\hyperlink{namespaceassignments_a4ff159eb01e79cbd27b68d6d6425d60d}{assignment1}} ()
+\item 
+def \mbox{\hyperlink{namespaceassignments_a7f9a3b74c27e8bc3d8d0620906600cbf}{assignment2}} ()
+\item 
+def \mbox{\hyperlink{namespaceassignments_a8a46f85d48ec939a0aa69f7d6ade4644}{assignment3}} ()
+\item 
+def \mbox{\hyperlink{namespaceassignments_aba102fd6d2ef98d66f2b3cfc48a0b6a0}{assignment4}} ()
+\item 
+def \mbox{\hyperlink{namespaceassignments_a03b7dc8a5cce2d8822edf8a8124b95cc}{start\+\_\+zed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceassignments_a8efed4be22bb7ff08cc186287538d1e0}{clear}} = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)
+\item 
+\mbox{\hyperlink{namespaceassignments_a33baf331fca3a480bb7ccd166eeb79f7}{B\+L\+E\+N\+D\+E\+R\+\_\+\+M\+O\+D\+E\+L\+S\+\_\+\+P\+A\+TH}} = join(getcwd(),\char`\"{}vision\char`\"{},\char`\"{}models\char`\"{})
+\item 
+int \mbox{\hyperlink{namespaceassignments_a4ff8fac98e71fbe1bac8e3440442f9d3}{S\+L\+E\+E\+P\+\_\+\+T\+I\+ME}} = 5
+\item 
+float \mbox{\hyperlink{namespaceassignments_ad7e6a8d3edd905cf9d7d00c4a4d5bac2}{M\+A\+R\+G\+IN}} = 0.\+035
+\item 
+list \mbox{\hyperlink{namespaceassignments_a81bd7f85023b3dc7c20b30fe0a2a7522}{B\+OX}}
+\item 
+\mbox{\hyperlink{namespaceassignments_a829ee54f1cfd56d5eb89e3a9a966a30b}{anonymous}}
+\item 
+\mbox{\hyperlink{namespaceassignments_adcd16c8e8a01fd8b01897755cbbfe762}{option}} = int(input(\char`\"{}\textbackslash{}n$>$ \char`\"{}))
+\item 
+\mbox{\hyperlink{namespaceassignments_a506320e2d316e5a5674e9c8fb5527cde}{assignment}} = eval(f\char`\"{}assignment\{\mbox{\hyperlink{namespaceassignments_adcd16c8e8a01fd8b01897755cbbfe762}{option}}\}\char`\"{})
+\item 
+\mbox{\hyperlink{namespaceassignments_aa8ef8d07558296fb190368d395d78658}{end}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceassignments_a4ff159eb01e79cbd27b68d6d6425d60d}\label{namespaceassignments_a4ff159eb01e79cbd27b68d6d6425d60d}} 
+\index{assignments@{assignments}!assignment1@{assignment1}}
+\index{assignment1@{assignment1}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{assignment1()}{assignment1()}}
+{\footnotesize\ttfamily def assignments.\+assignment1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}There is only one object in the initial stand, which is positioned with its base “naturally” in contact with the ground. 
+The object can be of any of the classes specified by the project. 
+Each class has an assigned position on the final stand, which is marked by a coloured shape representing the silhouette of the object.
+KPI 1-1 time to detect the position of the object
+KPI 1-2 time to move the object between its initial and its final positions, counting from the instant in which both of them have been identified.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a7f9a3b74c27e8bc3d8d0620906600cbf}\label{namespaceassignments_a7f9a3b74c27e8bc3d8d0620906600cbf}} 
+\index{assignments@{assignments}!assignment2@{assignment2}}
+\index{assignment2@{assignment2}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{assignment2()}{assignment2()}}
+{\footnotesize\ttfamily def assignments.\+assignment2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}There are multiple objects on the initial stand, one for each class. 
+There is no specific order in the initial configuration, except that the base of the object is “naturally” in contact with the ground. 
+Each object has to be picked up and stored in the position prescribed for its class and marked by the object’s silhouette. 
+KPI 2-1: Total time to move all the objects from their initial to their final positions.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a8a46f85d48ec939a0aa69f7d6ade4644}\label{namespaceassignments_a8a46f85d48ec939a0aa69f7d6ade4644}} 
+\index{assignments@{assignments}!assignment3@{assignment3}}
+\index{assignment3@{assignment3}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{assignment3()}{assignment3()}}
+{\footnotesize\ttfamily def assignments.\+assignment3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}There are multiple objects on the initial stand, and there can be more than one object for each class. 
+The objects are positioned randomly on the stand but would not stand or lean on each other. 
+An object could be lying on one of its lateral sides or on its top. 
+Each object has to be stored in the position prescribed by its class. 
+Objects of the same class have to be stacked up to form a tower.
+KPI 3-1: Total time to move all the objects from their initial to their final positions.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_aba102fd6d2ef98d66f2b3cfc48a0b6a0}\label{namespaceassignments_aba102fd6d2ef98d66f2b3cfc48a0b6a0}} 
+\index{assignments@{assignments}!assignment4@{assignment4}}
+\index{assignment4@{assignment4}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{assignment4()}{assignment4()}}
+{\footnotesize\ttfamily def assignments.\+assignment4 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The objects on the initial stand are those needed to create a composite object with a known design (e.g., a castle). 
+The objects are positioned randomly on the stand. 
+An object could be lying on one of its lateral sides or on its top. 
+The objects could also stand or lean on each other. 
+The manipulator has to pick them up in sequence and create the desired composite object on the final stand.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_abbf9d966fa18676def9f9cab65bea263}\label{namespaceassignments_abbf9d966fa18676def9f9cab65bea263}} 
+\index{assignments@{assignments}!create\_spawnmodel\_request@{create\_spawnmodel\_request}}
+\index{create\_spawnmodel\_request@{create\_spawnmodel\_request}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{create\_spawnmodel\_request()}{create\_spawnmodel\_request()}}
+{\footnotesize\ttfamily  Spawn\+Model\+Request assignments.\+create\+\_\+spawnmodel\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{str}]{model,  }\item[{tuple}]{position,  }\item[{tuple}]{orientation }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create SpawnModel request
+
+Args:
+    name (str): Model's name.
+    model (str): .ptl model file.
+    position (tuple): Model's position (x,y,z).
+    orientation (tuple): Model's orientation (roll, pitch, yaw).
+
+Returns:
+    SpawnModelRequest: created request.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_ad999226f8248cc0b082189411bb66ad6}\label{namespaceassignments_ad999226f8248cc0b082189411bb66ad6}} 
+\index{assignments@{assignments}!delete\_all\_models@{delete\_all\_models}}
+\index{delete\_all\_models@{delete\_all\_models}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{delete\_all\_models()}{delete\_all\_models()}}
+{\footnotesize\ttfamily  None assignments.\+delete\+\_\+all\+\_\+models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Delete all the worlds models
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_acfe46beb83a4654f9218514165e0a488}\label{namespaceassignments_acfe46beb83a4654f9218514165e0a488}} 
+\index{assignments@{assignments}!delete\_model@{delete\_model}}
+\index{delete\_model@{delete\_model}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{delete\_model()}{delete\_model()}}
+{\footnotesize\ttfamily  bool assignments.\+delete\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Delete a specific model
+
+Args:
+    name (str): Model's name.
+
+Returns:
+    bool: result of the request. True success, False, fail.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a7d8e70a51a54d860fc866dc3c5e254b6}\label{namespaceassignments_a7d8e70a51a54d860fc866dc3c5e254b6}} 
+\index{assignments@{assignments}!execute\_request@{execute\_request}}
+\index{execute\_request@{execute\_request}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{execute\_request()}{execute\_request()}}
+{\footnotesize\ttfamily def assignments.\+execute\+\_\+request (\begin{DoxyParamCaption}\item[{str}]{service\+\_\+name,  }\item[{}]{service\+\_\+class,  }\item[{Union\mbox{[}str, None\mbox{]} }]{request = {\ttfamily None},  }\item[{float }]{wait = {\ttfamily 0.2} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Execute ROS request
+
+Args:
+    service_name (str): Name of service to call.
+    service_class: Auto-generated service class.
+    request (str, optional): Model's id (name). Defaults to None.
+    wait (float, optional): Ros sleep time after executing the request. Defaults to 0.2.
+
+Returns:
+    Any: response of the executed request
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a1ad926648ae3bfd7dbeebedd3d1fcbab}\label{namespaceassignments_a1ad926648ae3bfd7dbeebedd3d1fcbab}} 
+\index{assignments@{assignments}!get\_model\_state@{get\_model\_state}}
+\index{get\_model\_state@{get\_model\_state}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{get\_model\_state()}{get\_model\_state()}}
+{\footnotesize\ttfamily  tuple assignments.\+get\+\_\+model\+\_\+state (\begin{DoxyParamCaption}\item[{str}]{name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Retrieve model's position and orientation
+
+Returns:
+    tuple: position and orientation.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a3dd56642674637d9ad1d31b70ea8ec3c}\label{namespaceassignments_a3dd56642674637d9ad1d31b70ea8ec3c}} 
+\index{assignments@{assignments}!get\_world\_models@{get\_world\_models}}
+\index{get\_world\_models@{get\_world\_models}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{get\_world\_models()}{get\_world\_models()}}
+{\footnotesize\ttfamily  list assignments.\+get\+\_\+world\+\_\+models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Retrieve world models
+
+Returns:
+    list: world models list.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a815173ddccba4aec134be3f84cec35ab}\label{namespaceassignments_a815173ddccba4aec134be3f84cec35ab}} 
+\index{assignments@{assignments}!print\_model@{print\_model}}
+\index{print\_model@{print\_model}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{print\_model()}{print\_model()}}
+{\footnotesize\ttfamily  None assignments.\+print\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{str}]{model,  }\item[{tuple}]{position,  }\item[{tuple}]{orientation,  }\item[{int}]{orientation\+\_\+index }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Print model
+
+Args:
+    str: Model's name.
+    str: Model's .stl file.
+    tuple: Model's position.
+    tuple: Model's orientation.
+    int: Model's orientation index.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a79ad021345548373fbf0984121a4ccc1}\label{namespaceassignments_a79ad021345548373fbf0984121a4ccc1}} 
+\index{assignments@{assignments}!random\_model@{random\_model}}
+\index{random\_model@{random\_model}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{random\_model()}{random\_model()}}
+{\footnotesize\ttfamily  str assignments.\+random\+\_\+model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Pick a random .stl model file
+
+Returns:
+    str: .stl file.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_ab941904c7004454ec0f417dc3d26f68c}\label{namespaceassignments_ab941904c7004454ec0f417dc3d26f68c}} 
+\index{assignments@{assignments}!random\_name@{random\_name}}
+\index{random\_name@{random\_name}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{random\_name()}{random\_name()}}
+{\footnotesize\ttfamily  str assignments.\+random\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate random name
+
+Returns:
+    str: Random name.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_aabb592b1c2fcf7e07f2912b067987576}\label{namespaceassignments_aabb592b1c2fcf7e07f2912b067987576}} 
+\index{assignments@{assignments}!random\_orientation@{random\_orientation}}
+\index{random\_orientation@{random\_orientation}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{random\_orientation()}{random\_orientation()}}
+{\footnotesize\ttfamily  tuple assignments.\+random\+\_\+orientation (\begin{DoxyParamCaption}\item[{int }]{index = {\ttfamily None},  }\item[{bool }]{z\+\_\+orientation = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate pseudo-random orientation
+
+Args:
+    index (float, optional): Select a specific orientation from the list.
+    z_orientation (bool, optional): If True, applies a random rotation along z.
+Returns:
+    tuple: NDArray[float64] random orientation and it's index.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a273a088b3157bcb5754e0dfc95012048}\label{namespaceassignments_a273a088b3157bcb5754e0dfc95012048}} 
+\index{assignments@{assignments}!random\_position@{random\_position}}
+\index{random\_position@{random\_position}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{random\_position()}{random\_position()}}
+{\footnotesize\ttfamily  tuple assignments.\+random\+\_\+position (\begin{DoxyParamCaption}\item[{dict}]{box,  }\item[{int }]{precision = {\ttfamily 3} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate random position
+
+Args:
+    precision (int, optional): Number of digits of the coordinates. Defaults to 3.
+
+Returns:
+    tuple: Random position.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceassignments_a03b7dc8a5cce2d8822edf8a8124b95cc}\label{namespaceassignments_a03b7dc8a5cce2d8822edf8a8124b95cc}} 
+\index{assignments@{assignments}!start\_zed@{start\_zed}}
+\index{start\_zed@{start\_zed}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{start\_zed()}{start\_zed()}}
+{\footnotesize\ttfamily def assignments.\+start\+\_\+zed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Once executed, the zed camera is allowed to process the objects
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceassignments_a829ee54f1cfd56d5eb89e3a9a966a30b}\label{namespaceassignments_a829ee54f1cfd56d5eb89e3a9a966a30b}} 
+\index{assignments@{assignments}!anonymous@{anonymous}}
+\index{anonymous@{anonymous}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{anonymous}{anonymous}}
+{\footnotesize\ttfamily assignments.\+anonymous}
+
+\mbox{\Hypertarget{namespaceassignments_a506320e2d316e5a5674e9c8fb5527cde}\label{namespaceassignments_a506320e2d316e5a5674e9c8fb5527cde}} 
+\index{assignments@{assignments}!assignment@{assignment}}
+\index{assignment@{assignment}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{assignment}{assignment}}
+{\footnotesize\ttfamily assignments.\+assignment = eval(f\char`\"{}assignment\{\mbox{\hyperlink{namespaceassignments_adcd16c8e8a01fd8b01897755cbbfe762}{option}}\}\char`\"{})}
+
+\mbox{\Hypertarget{namespaceassignments_a33baf331fca3a480bb7ccd166eeb79f7}\label{namespaceassignments_a33baf331fca3a480bb7ccd166eeb79f7}} 
+\index{assignments@{assignments}!BLENDER\_MODELS\_PATH@{BLENDER\_MODELS\_PATH}}
+\index{BLENDER\_MODELS\_PATH@{BLENDER\_MODELS\_PATH}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{BLENDER\_MODELS\_PATH}{BLENDER\_MODELS\_PATH}}
+{\footnotesize\ttfamily assignments.\+B\+L\+E\+N\+D\+E\+R\+\_\+\+M\+O\+D\+E\+L\+S\+\_\+\+P\+A\+TH = join(getcwd(),\char`\"{}vision\char`\"{},\char`\"{}models\char`\"{})}
+
+\mbox{\Hypertarget{namespaceassignments_a81bd7f85023b3dc7c20b30fe0a2a7522}\label{namespaceassignments_a81bd7f85023b3dc7c20b30fe0a2a7522}} 
+\index{assignments@{assignments}!BOX@{BOX}}
+\index{BOX@{BOX}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{BOX}{BOX}}
+{\footnotesize\ttfamily list assignments.\+B\+OX}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  [}
+\DoxyCodeLine{2     \{}
+\DoxyCodeLine{3         \textcolor{stringliteral}{"max\_x"}: 0.175 -\/ MARGIN,}
+\DoxyCodeLine{4         \textcolor{stringliteral}{"min\_x"}: 0 + MARGIN,}
+\DoxyCodeLine{5         \textcolor{stringliteral}{"max\_y"}: 0.45 -\/ MARGIN,}
+\DoxyCodeLine{6         \textcolor{stringliteral}{"min\_y"}: 0.25 + MARGIN}
+\DoxyCodeLine{7     \},}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         \textcolor{stringliteral}{"max\_x"}: 0.35 -\/ MARGIN,}
+\DoxyCodeLine{11         \textcolor{stringliteral}{"min\_x"}: 0.175 + MARGIN,}
+\DoxyCodeLine{12         \textcolor{stringliteral}{"max\_y"}: 0.45 -\/ MARGIN,}
+\DoxyCodeLine{13         \textcolor{stringliteral}{"min\_y"}: 0.25 + MARGIN}
+\DoxyCodeLine{14     \},}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \{}
+\DoxyCodeLine{17         \textcolor{stringliteral}{"max\_x"}: 0.175 -\/ MARGIN,}
+\DoxyCodeLine{18         \textcolor{stringliteral}{"min\_x"}: 0 + MARGIN,}
+\DoxyCodeLine{19         \textcolor{stringliteral}{"max\_y"}: 0.65 -\/ MARGIN,}
+\DoxyCodeLine{20         \textcolor{stringliteral}{"min\_y"}: 0.45 + MARGIN}
+\DoxyCodeLine{21     \},}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \textcolor{stringliteral}{"max\_x"}: 0.35 -\/ MARGIN,}
+\DoxyCodeLine{25         \textcolor{stringliteral}{"min\_x"}: 0.175 + MARGIN,}
+\DoxyCodeLine{26         \textcolor{stringliteral}{"max\_y"}: 0.65 -\/ MARGIN,}
+\DoxyCodeLine{27         \textcolor{stringliteral}{"min\_y"}: 0.45 + MARGIN}
+\DoxyCodeLine{28     \},}
+\DoxyCodeLine{29 ]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceassignments_a8efed4be22bb7ff08cc186287538d1e0}\label{namespaceassignments_a8efed4be22bb7ff08cc186287538d1e0}} 
+\index{assignments@{assignments}!clear@{clear}}
+\index{clear@{clear}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{clear}{clear}}
+{\footnotesize\ttfamily assignments.\+clear = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)}
+
+\mbox{\Hypertarget{namespaceassignments_aa8ef8d07558296fb190368d395d78658}\label{namespaceassignments_aa8ef8d07558296fb190368d395d78658}} 
+\index{assignments@{assignments}!end@{end}}
+\index{end@{end}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily assignments.\+end}
+
+\mbox{\Hypertarget{namespaceassignments_ad7e6a8d3edd905cf9d7d00c4a4d5bac2}\label{namespaceassignments_ad7e6a8d3edd905cf9d7d00c4a4d5bac2}} 
+\index{assignments@{assignments}!MARGIN@{MARGIN}}
+\index{MARGIN@{MARGIN}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{MARGIN}{MARGIN}}
+{\footnotesize\ttfamily float assignments.\+M\+A\+R\+G\+IN = 0.\+035}
+
+\mbox{\Hypertarget{namespaceassignments_adcd16c8e8a01fd8b01897755cbbfe762}\label{namespaceassignments_adcd16c8e8a01fd8b01897755cbbfe762}} 
+\index{assignments@{assignments}!option@{option}}
+\index{option@{option}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{option}{option}}
+{\footnotesize\ttfamily assignments.\+option = int(input(\char`\"{}\textbackslash{}n$>$ \char`\"{}))}
+
+\mbox{\Hypertarget{namespaceassignments_a4ff8fac98e71fbe1bac8e3440442f9d3}\label{namespaceassignments_a4ff8fac98e71fbe1bac8e3440442f9d3}} 
+\index{assignments@{assignments}!SLEEP\_TIME@{SLEEP\_TIME}}
+\index{SLEEP\_TIME@{SLEEP\_TIME}!assignments@{assignments}}
+\doxysubsubsection{\texorpdfstring{SLEEP\_TIME}{SLEEP\_TIME}}
+{\footnotesize\ttfamily int assignments.\+S\+L\+E\+E\+P\+\_\+\+T\+I\+ME = 5}
+

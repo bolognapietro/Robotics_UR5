@@ -1,0 +1,134 @@
+\hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger}{}\doxysection{utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger Class Reference}
+\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger}\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a58132f9516086ce8fdb20cae5dec32cc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, opt, hyp)
+\item 
+def \mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a9d093a8d1c71adabee1842b7f5bf542a}{log\+\_\+debug\+\_\+samples}} (self, files, title=\textquotesingle{}Debug Samples\textquotesingle{})
+\item 
+def \mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a1a3162f9b485f54d9f5994b105479128}{log\+\_\+image\+\_\+with\+\_\+boxes}} (self, image\+\_\+path, boxes, class\+\_\+names, image, conf\+\_\+threshold=0.\+25)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_af29dc9b086f9a41c8a5ba8cd628fb547}{current\+\_\+epoch}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a6716d988b1bdc1c3a34fb3c253ce0340}{current\+\_\+epoch\+\_\+logged\+\_\+images}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_aa30aa334883840209ff09dc0a29cb254}{max\+\_\+imgs\+\_\+to\+\_\+log\+\_\+per\+\_\+epoch}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a4c24ab925c18c89502d5a44d9be44159}{bbox\+\_\+interval}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a555ff105debaf54641db37336f16db74}{clearml}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a07b6ea0804052e51a504bf70ba323910}{task}}
+\item 
+\mbox{\hyperlink{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_ae7f0778446ae13c0f324f9a48c211a62}{data\+\_\+dict}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Log training runs, datasets, models, and predictions to ClearML.
+
+This logger sends information to ClearML at app.clear.ml or to your own hosted server. By default,
+this information includes hyperparameters, system configuration and metrics, model metrics, code information and
+basic data metrics and analyses.
+
+By providing additional command line arguments to train.py, datasets,
+models and predictions can also be logged.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a58132f9516086ce8fdb20cae5dec32cc}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a58132f9516086ce8fdb20cae5dec32cc}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{opt,  }\item[{}]{hyp }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}- Initialize ClearML Task, this object will capture the experiment
+- Upload dataset version to ClearML Data if opt.upload_dataset is True
+
+arguments:
+opt (namespace) -- Commandline arguments for this run
+hyp (dict) -- Hyperparameters for this run\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a9d093a8d1c71adabee1842b7f5bf542a}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a9d093a8d1c71adabee1842b7f5bf542a}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!log\_debug\_samples@{log\_debug\_samples}}
+\index{log\_debug\_samples@{log\_debug\_samples}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{log\_debug\_samples()}{log\_debug\_samples()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+log\+\_\+debug\+\_\+samples (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{files,  }\item[{}]{title = {\ttfamily \textquotesingle{}Debug~Samples\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Log files (images) as debug samples in the ClearML task.
+
+arguments:
+files (List(PosixPath)) a list of file paths in PosixPath format
+title (str) A title that groups together images with the same values
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a1a3162f9b485f54d9f5994b105479128}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a1a3162f9b485f54d9f5994b105479128}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!log\_image\_with\_boxes@{log\_image\_with\_boxes}}
+\index{log\_image\_with\_boxes@{log\_image\_with\_boxes}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{log\_image\_with\_boxes()}{log\_image\_with\_boxes()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+log\+\_\+image\+\_\+with\+\_\+boxes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{image\+\_\+path,  }\item[{}]{boxes,  }\item[{}]{class\+\_\+names,  }\item[{}]{image,  }\item[{}]{conf\+\_\+threshold = {\ttfamily 0.25} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draw the bounding boxes on a single image and report the result as a ClearML debug sample.
+
+arguments:
+image_path (PosixPath) the path the original image file
+boxes (list): list of scaled predictions in the format - [xmin, ymin, xmax, ymax, confidence, class]
+class_names (dict): dict containing mapping of class int to class name
+image (Tensor): A torch tensor containing the actual image data
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a4c24ab925c18c89502d5a44d9be44159}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a4c24ab925c18c89502d5a44d9be44159}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!bbox\_interval@{bbox\_interval}}
+\index{bbox\_interval@{bbox\_interval}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{bbox\_interval}{bbox\_interval}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+bbox\+\_\+interval}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a555ff105debaf54641db37336f16db74}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a555ff105debaf54641db37336f16db74}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!clearml@{clearml}}
+\index{clearml@{clearml}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{clearml}{clearml}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+clearml}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_af29dc9b086f9a41c8a5ba8cd628fb547}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_af29dc9b086f9a41c8a5ba8cd628fb547}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!current\_epoch@{current\_epoch}}
+\index{current\_epoch@{current\_epoch}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{current\_epoch}{current\_epoch}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+current\+\_\+epoch}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a6716d988b1bdc1c3a34fb3c253ce0340}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a6716d988b1bdc1c3a34fb3c253ce0340}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!current\_epoch\_logged\_images@{current\_epoch\_logged\_images}}
+\index{current\_epoch\_logged\_images@{current\_epoch\_logged\_images}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{current\_epoch\_logged\_images}{current\_epoch\_logged\_images}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+current\+\_\+epoch\+\_\+logged\+\_\+images}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_ae7f0778446ae13c0f324f9a48c211a62}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_ae7f0778446ae13c0f324f9a48c211a62}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!data\_dict@{data\_dict}}
+\index{data\_dict@{data\_dict}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{data\_dict}{data\_dict}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+data\+\_\+dict}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_aa30aa334883840209ff09dc0a29cb254}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_aa30aa334883840209ff09dc0a29cb254}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!max\_imgs\_to\_log\_per\_epoch@{max\_imgs\_to\_log\_per\_epoch}}
+\index{max\_imgs\_to\_log\_per\_epoch@{max\_imgs\_to\_log\_per\_epoch}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{max\_imgs\_to\_log\_per\_epoch}{max\_imgs\_to\_log\_per\_epoch}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+max\+\_\+imgs\+\_\+to\+\_\+log\+\_\+per\+\_\+epoch}
+
+\mbox{\Hypertarget{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a07b6ea0804052e51a504bf70ba323910}\label{classutils_1_1loggers_1_1clearml_1_1clearml__utils_1_1ClearmlLogger_a07b6ea0804052e51a504bf70ba323910}} 
+\index{utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}!task@{task}}
+\index{task@{task}!utils.loggers.clearml.clearml\_utils.ClearmlLogger@{utils.loggers.clearml.clearml\_utils.ClearmlLogger}}
+\doxysubsubsection{\texorpdfstring{task}{task}}
+{\footnotesize\ttfamily utils.\+loggers.\+clearml.\+clearml\+\_\+utils.\+Clearml\+Logger.\+task}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vision/yolov5/utils/loggers/clearml/\mbox{\hyperlink{clearml__utils_8py}{clearml\+\_\+utils.\+py}}\end{DoxyCompactItemize}

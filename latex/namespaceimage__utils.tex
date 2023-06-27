@@ -1,0 +1,59 @@
+\hypertarget{namespaceimage__utils}{}\doxysection{image\+\_\+utils Namespace Reference}
+\label{namespaceimage__utils}\index{image\_utils@{image\_utils}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+np.\+ndarray \mbox{\hyperlink{namespaceimage__utils_ac42a125ee16900a9a1f1942d0620cd32}{extract\+\_\+table}} (np.\+ndarray img, tuple resolution=(1920, 1080), list table=\mbox{\hyperlink{namespacezed__params_a2c1c460fbd3fe8fcc96b130093598573}{zed\+\_\+params.\+T\+A\+B\+L\+E\+\_\+\+D\+E\+F\+A\+U\+LT}})
+\item 
+np.\+ndarray \mbox{\hyperlink{namespaceimage__utils_a85fd9f8c028cc2248e047aa55af31367}{extract\+\_\+objects}} (np.\+ndarray img)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespaceimage__utils_aad4e75f5a2fbd74a43812ebaad10bc57}{remove\+\_\+noise\+\_\+by\+\_\+color}} (np.\+ndarray img)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceimage__utils_a85fd9f8c028cc2248e047aa55af31367}\label{namespaceimage__utils_a85fd9f8c028cc2248e047aa55af31367}} 
+\index{image\_utils@{image\_utils}!extract\_objects@{extract\_objects}}
+\index{extract\_objects@{extract\_objects}!image\_utils@{image\_utils}}
+\doxysubsubsection{\texorpdfstring{extract\_objects()}{extract\_objects()}}
+{\footnotesize\ttfamily  np.\+ndarray image\+\_\+utils.\+extract\+\_\+objects (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fill the entire image of black except for the main objects.
+
+Args:
+    img (np.ndarray): Image to be processed.
+
+Returns:
+    np.ndarray: The processed image.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceimage__utils_ac42a125ee16900a9a1f1942d0620cd32}\label{namespaceimage__utils_ac42a125ee16900a9a1f1942d0620cd32}} 
+\index{image\_utils@{image\_utils}!extract\_table@{extract\_table}}
+\index{extract\_table@{extract\_table}!image\_utils@{image\_utils}}
+\doxysubsubsection{\texorpdfstring{extract\_table()}{extract\_table()}}
+{\footnotesize\ttfamily  np.\+ndarray image\+\_\+utils.\+extract\+\_\+table (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img,  }\item[{tuple }]{resolution = {\ttfamily (1920,1080)},  }\item[{list }]{table = {\ttfamily \mbox{\hyperlink{namespacezed__params_a2c1c460fbd3fe8fcc96b130093598573}{zed\+\_\+params.\+T\+A\+B\+L\+E\+\_\+\+D\+E\+F\+A\+U\+LT}}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extracts the table from a given image. In other words, it makes all the image black except for the table.
+
+Args:
+    img (np.ndarray): Image to be processed.
+    resolution (tuple, optional): Resolution of the zed camera. Defaults to (1920,1080)
+    render (list, optional): Specifies the four vertices (x,y) of the table. Defaults to TABLE_DEFAULT.
+
+Returns:
+    np.ndarray: Processed image
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceimage__utils_aad4e75f5a2fbd74a43812ebaad10bc57}\label{namespaceimage__utils_aad4e75f5a2fbd74a43812ebaad10bc57}} 
+\index{image\_utils@{image\_utils}!remove\_noise\_by\_color@{remove\_noise\_by\_color}}
+\index{remove\_noise\_by\_color@{remove\_noise\_by\_color}!image\_utils@{image\_utils}}
+\doxysubsubsection{\texorpdfstring{remove\_noise\_by\_color()}{remove\_noise\_by\_color()}}
+{\footnotesize\ttfamily  np.\+ndarray image\+\_\+utils.\+remove\+\_\+noise\+\_\+by\+\_\+color (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{img }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove any colored interference inside the image box
+
+Args:
+    img (np.ndarray): Image to be processed.
+
+Returns:
+    np.ndarray: The processed image.
+\end{DoxyVerb}
+ 

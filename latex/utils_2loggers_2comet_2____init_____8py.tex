@@ -1,0 +1,57 @@
+\hypertarget{utils_2loggers_2comet_2____init_____8py}{}\doxysection{vision/yolov5/utils/loggers/comet/\+\_\+\+\_\+init\+\_\+\+\_\+.py File Reference}
+\label{utils_2loggers_2comet_2____init_____8py}\index{vision/yolov5/utils/loggers/comet/\_\_init\_\_.py@{vision/yolov5/utils/loggers/comet/\_\_init\_\_.py}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1loggers_1_1comet_1_1CometLogger}{utils.\+loggers.\+comet.\+Comet\+Logger}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet}{utils.\+loggers.\+comet}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aed3090bd061d0558eb9d3141568babb3}{utils.\+loggers.\+comet.\+logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a0c6590e43054175ff18dfb39d1d62fff}{utils.\+loggers.\+comet.\+F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_acaab4111e28bbd77b729bdce773f6434}{utils.\+loggers.\+comet.\+R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a7e691fb49a452b2a39066526a6923a73}{utils.\+loggers.\+comet.\+config}} = comet\+\_\+ml.\+config.\+get\+\_\+config()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a6b26e6492e8d2b0b42480073efd22aef}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME}} = config.\+get\+\_\+string(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME\textquotesingle{}), \textquotesingle{}comet.\+project\+\_\+name\textquotesingle{}, default=\textquotesingle{}yolov5\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aef60b830b52dc4af9d178e0baceb9c8d}{utils.\+loggers.\+comet.\+comet\+\_\+ml}} = None
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_abe1fea30f9af9ed79a815903399e65c7}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+F\+IX}} = \textquotesingle{}comet\+://\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_ac4331f1df883553ec4c77c25f15665c4}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+O\+DE}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+DE\textquotesingle{}, \textquotesingle{}online\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a4caaedf725624d76b44359a96bcbd9ab}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME\textquotesingle{}, \textquotesingle{}yolov5\textquotesingle{})
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a624fc8a6a1b9a28e38249009bf47ebac}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+U\+P\+L\+O\+A\+D\+\_\+\+D\+A\+T\+A\+S\+ET}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a6cd3d11b1d3831bfdb02029f11deb088}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+C\+O\+N\+F\+U\+S\+I\+O\+N\+\_\+\+M\+A\+T\+R\+IX}} = \textquotesingle{}true\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_aca7a775e6f432a49fe3427bcea496e74}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+NS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a193068f4598efa8b73dcbeb83939e683}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS}} = int(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+A\+X\+\_\+\+I\+M\+A\+G\+E\+\_\+\+U\+P\+L\+O\+A\+DS\textquotesingle{}, 100))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_ab50573cb53c6a0ee4f6c8c0f5b68f5bd}{utils.\+loggers.\+comet.\+C\+O\+N\+F\+\_\+\+T\+H\+R\+ES}} = float(os.\+getenv(\textquotesingle{}C\+O\+N\+F\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+001))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a33409a1cf00ea8e58f278a3bb6c4d6a5}{utils.\+loggers.\+comet.\+I\+O\+U\+\_\+\+T\+H\+R\+ES}} = float(os.\+getenv(\textquotesingle{}I\+O\+U\+\_\+\+T\+H\+R\+ES\textquotesingle{}, 0.\+6))
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a91d05f20a8313e7eb12a6978601cdcb7}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+E\+T\+R\+I\+CS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_add875288ba9a73552c806a2503744edd}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a1740b5d533991c93d5709f476fc59146}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+D\+I\+C\+T\+I\+O\+N\+\_\+\+L\+O\+G\+G\+I\+N\+G\+\_\+\+I\+N\+T\+E\+R\+V\+AL\textquotesingle{}, 1)
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a44cde377eb27533eec7833b8c3ce7c6f}{utils.\+loggers.\+comet.\+C\+O\+M\+E\+T\+\_\+\+L\+O\+G\+\_\+\+P\+E\+R\+\_\+\+C\+L\+A\+S\+S\+\_\+\+M\+E\+T\+R\+I\+CS}} = \textquotesingle{}true\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a4e2ca557c808a6221762f1783ff888eb}{utils.\+loggers.\+comet.\+R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_a50a3daae7ce19eb3b8f4712b83503e2c}{utils.\+loggers.\+comet.\+to\+\_\+pil}} = T.\+To\+P\+I\+L\+Image()
+\end{DoxyCompactItemize}

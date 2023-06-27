@@ -1,0 +1,62 @@
+\hypertarget{namespaceutils_1_1autoanchor}{}\doxysection{utils.\+autoanchor Namespace Reference}
+\label{namespaceutils_1_1autoanchor}\index{utils.autoanchor@{utils.autoanchor}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1autoanchor_a15257d901a051f4082427b2a0ec6fa37}{check\+\_\+anchor\+\_\+order}} (m)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1autoanchor_a53d89ba3ee2abe5ab80b25c828594a2a}{check\+\_\+anchors}} (dataset, model, thr=4.\+0, imgsz=640)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1autoanchor_a5ca73e523ab2988d96bb531182d8ed2f}{kmean\+\_\+anchors}} (dataset=\textquotesingle{}./data/coco128.\+yaml\textquotesingle{}, n=9, img\+\_\+size=640, thr=4.\+0, gen=1000, verbose=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1autoanchor_af4513d531cc030ada9324d8fe83c7b14}{P\+R\+E\+F\+IX}} = colorstr(\textquotesingle{}Auto\+Anchor\+: \textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1autoanchor_a15257d901a051f4082427b2a0ec6fa37}\label{namespaceutils_1_1autoanchor_a15257d901a051f4082427b2a0ec6fa37}} 
+\index{utils.autoanchor@{utils.autoanchor}!check\_anchor\_order@{check\_anchor\_order}}
+\index{check\_anchor\_order@{check\_anchor\_order}!utils.autoanchor@{utils.autoanchor}}
+\doxysubsubsection{\texorpdfstring{check\_anchor\_order()}{check\_anchor\_order()}}
+{\footnotesize\ttfamily def utils.\+autoanchor.\+check\+\_\+anchor\+\_\+order (\begin{DoxyParamCaption}\item[{}]{m }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1autoanchor_a53d89ba3ee2abe5ab80b25c828594a2a}\label{namespaceutils_1_1autoanchor_a53d89ba3ee2abe5ab80b25c828594a2a}} 
+\index{utils.autoanchor@{utils.autoanchor}!check\_anchors@{check\_anchors}}
+\index{check\_anchors@{check\_anchors}!utils.autoanchor@{utils.autoanchor}}
+\doxysubsubsection{\texorpdfstring{check\_anchors()}{check\_anchors()}}
+{\footnotesize\ttfamily def utils.\+autoanchor.\+check\+\_\+anchors (\begin{DoxyParamCaption}\item[{}]{dataset,  }\item[{}]{model,  }\item[{}]{thr = {\ttfamily 4.0},  }\item[{}]{imgsz = {\ttfamily 640} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1autoanchor_a5ca73e523ab2988d96bb531182d8ed2f}\label{namespaceutils_1_1autoanchor_a5ca73e523ab2988d96bb531182d8ed2f}} 
+\index{utils.autoanchor@{utils.autoanchor}!kmean\_anchors@{kmean\_anchors}}
+\index{kmean\_anchors@{kmean\_anchors}!utils.autoanchor@{utils.autoanchor}}
+\doxysubsubsection{\texorpdfstring{kmean\_anchors()}{kmean\_anchors()}}
+{\footnotesize\ttfamily def utils.\+autoanchor.\+kmean\+\_\+anchors (\begin{DoxyParamCaption}\item[{}]{dataset = {\ttfamily \textquotesingle{}./data/coco128.yaml\textquotesingle{}},  }\item[{}]{n = {\ttfamily 9},  }\item[{}]{img\+\_\+size = {\ttfamily 640},  }\item[{}]{thr = {\ttfamily 4.0},  }\item[{}]{gen = {\ttfamily 1000},  }\item[{}]{verbose = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates kmeans-evolved anchors from training dataset
+
+    Arguments:
+        dataset: path to data.yaml, or a loaded dataset
+        n: number of anchors
+        img_size: image size used for training
+        thr: anchor-label wh ratio threshold hyperparameter hyp['anchor_t'] used for training, default=4.0
+        gen: generations to evolve anchors using genetic algorithm
+        verbose: print all results
+
+    Return:
+        k: kmeans evolved anchors
+
+    Usage:
+        from utils.autoanchor import *; _ = kmean_anchors()
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1autoanchor_af4513d531cc030ada9324d8fe83c7b14}\label{namespaceutils_1_1autoanchor_af4513d531cc030ada9324d8fe83c7b14}} 
+\index{utils.autoanchor@{utils.autoanchor}!PREFIX@{PREFIX}}
+\index{PREFIX@{PREFIX}!utils.autoanchor@{utils.autoanchor}}
+\doxysubsubsection{\texorpdfstring{PREFIX}{PREFIX}}
+{\footnotesize\ttfamily utils.\+autoanchor.\+P\+R\+E\+F\+IX = colorstr(\textquotesingle{}Auto\+Anchor\+: \textquotesingle{})}
+

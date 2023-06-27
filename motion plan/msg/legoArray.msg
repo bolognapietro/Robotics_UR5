@@ -1,0 +1,1 @@
+legoMessage[] lego_array

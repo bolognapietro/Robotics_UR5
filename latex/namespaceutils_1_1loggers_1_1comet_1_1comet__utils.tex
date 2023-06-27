@@ -1,0 +1,115 @@
+\hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils}{}\doxysection{utils.\+loggers.\+comet.\+comet\+\_\+utils Namespace Reference}
+\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils}\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ae150e9eb5b52163e9872fa49a28421c6}{download\+\_\+model\+\_\+checkpoint}} (opt, experiment)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac9c3954e5f84558e2ec386c04efecc89}{set\+\_\+opt\+\_\+parameters}} (opt, experiment)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a153fed720f1db349588b532c56c1afbe}{check\+\_\+comet\+\_\+weights}} (opt)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a5b2d51842c4855c4f96c10aeb8080861}{check\+\_\+comet\+\_\+resume}} (opt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac1de94161fd78ba8a446dd3df12c7091}{comet\+\_\+ml}} = None
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af685ff9ff5520cae991983f07b5b4152}{logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a0252465a7a7d60399a63e79388cb9b6e}{C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+F\+IX}} = \textquotesingle{}comet\+://\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af254ea060c1f3d902046cfac783cd193}{C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME\textquotesingle{}, \textquotesingle{}yolov5\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a1c8563deafe5cfab1a576152c816c968}{C\+O\+M\+E\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+H\+E\+C\+K\+P\+O\+I\+N\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+H\+E\+C\+K\+P\+O\+I\+N\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME\textquotesingle{}, \textquotesingle{}last.\+pt\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a5b2d51842c4855c4f96c10aeb8080861}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a5b2d51842c4855c4f96c10aeb8080861}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!check\_comet\_resume@{check\_comet\_resume}}
+\index{check\_comet\_resume@{check\_comet\_resume}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{check\_comet\_resume()}{check\_comet\_resume()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+comet.\+comet\+\_\+utils.\+check\+\_\+comet\+\_\+resume (\begin{DoxyParamCaption}\item[{}]{opt }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Restores run parameters to its original state based on the model checkpoint
+and logged Experiment parameters.
+
+Args:
+    opt (argparse.Namespace): Command Line arguments passed
+        to YOLOv5 training script
+
+Returns:
+    None/bool: Return True if the run is restored successfully
+        else return None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a153fed720f1db349588b532c56c1afbe}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a153fed720f1db349588b532c56c1afbe}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!check\_comet\_weights@{check\_comet\_weights}}
+\index{check\_comet\_weights@{check\_comet\_weights}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{check\_comet\_weights()}{check\_comet\_weights()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+comet.\+comet\+\_\+utils.\+check\+\_\+comet\+\_\+weights (\begin{DoxyParamCaption}\item[{}]{opt }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Downloads model weights from Comet and updates the
+weights path to point to saved weights location
+
+Args:
+    opt (argparse.Namespace): Command Line arguments passed
+        to YOLOv5 training script
+
+Returns:
+    None/bool: Return True if weights are successfully downloaded
+        else return None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ae150e9eb5b52163e9872fa49a28421c6}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ae150e9eb5b52163e9872fa49a28421c6}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!download\_model\_checkpoint@{download\_model\_checkpoint}}
+\index{download\_model\_checkpoint@{download\_model\_checkpoint}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{download\_model\_checkpoint()}{download\_model\_checkpoint()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+comet.\+comet\+\_\+utils.\+download\+\_\+model\+\_\+checkpoint (\begin{DoxyParamCaption}\item[{}]{opt,  }\item[{}]{experiment }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac9c3954e5f84558e2ec386c04efecc89}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac9c3954e5f84558e2ec386c04efecc89}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!set\_opt\_parameters@{set\_opt\_parameters}}
+\index{set\_opt\_parameters@{set\_opt\_parameters}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{set\_opt\_parameters()}{set\_opt\_parameters()}}
+{\footnotesize\ttfamily def utils.\+loggers.\+comet.\+comet\+\_\+utils.\+set\+\_\+opt\+\_\+parameters (\begin{DoxyParamCaption}\item[{}]{opt,  }\item[{}]{experiment }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Update the opts Namespace with parameters
+from Comet's ExistingExperiment when resuming a run
+
+Args:
+    opt (argparse.Namespace): Namespace of command line options
+    experiment (comet_ml.APIExperiment): Comet API Experiment object
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a1c8563deafe5cfab1a576152c816c968}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a1c8563deafe5cfab1a576152c816c968}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!COMET\_DEFAULT\_CHECKPOINT\_FILENAME@{COMET\_DEFAULT\_CHECKPOINT\_FILENAME}}
+\index{COMET\_DEFAULT\_CHECKPOINT\_FILENAME@{COMET\_DEFAULT\_CHECKPOINT\_FILENAME}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{COMET\_DEFAULT\_CHECKPOINT\_FILENAME}{COMET\_DEFAULT\_CHECKPOINT\_FILENAME}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+comet\+\_\+utils.\+C\+O\+M\+E\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+H\+E\+C\+K\+P\+O\+I\+N\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+H\+E\+C\+K\+P\+O\+I\+N\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME\textquotesingle{}, \textquotesingle{}last.\+pt\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac1de94161fd78ba8a446dd3df12c7091}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_ac1de94161fd78ba8a446dd3df12c7091}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!comet\_ml@{comet\_ml}}
+\index{comet\_ml@{comet\_ml}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{comet\_ml}{comet\_ml}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+comet\+\_\+utils.\+comet\+\_\+ml = None}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af254ea060c1f3d902046cfac783cd193}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af254ea060c1f3d902046cfac783cd193}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!COMET\_MODEL\_NAME@{COMET\_MODEL\_NAME}}
+\index{COMET\_MODEL\_NAME@{COMET\_MODEL\_NAME}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{COMET\_MODEL\_NAME}{COMET\_MODEL\_NAME}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+comet\+\_\+utils.\+C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+M\+O\+D\+E\+L\+\_\+\+N\+A\+ME\textquotesingle{}, \textquotesingle{}yolov5\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a0252465a7a7d60399a63e79388cb9b6e}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_a0252465a7a7d60399a63e79388cb9b6e}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!COMET\_PREFIX@{COMET\_PREFIX}}
+\index{COMET\_PREFIX@{COMET\_PREFIX}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{COMET\_PREFIX}{COMET\_PREFIX}}
+{\footnotesize\ttfamily string utils.\+loggers.\+comet.\+comet\+\_\+utils.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+E\+F\+IX = \textquotesingle{}comet\+://\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af685ff9ff5520cae991983f07b5b4152}\label{namespaceutils_1_1loggers_1_1comet_1_1comet__utils_af685ff9ff5520cae991983f07b5b4152}} 
+\index{utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}!logger@{logger}}
+\index{logger@{logger}!utils.loggers.comet.comet\_utils@{utils.loggers.comet.comet\_utils}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily utils.\+loggers.\+comet.\+comet\+\_\+utils.\+logger = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+

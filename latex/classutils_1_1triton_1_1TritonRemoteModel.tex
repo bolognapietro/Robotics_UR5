@@ -1,0 +1,85 @@
+\hypertarget{classutils_1_1triton_1_1TritonRemoteModel}{}\doxysection{utils.\+triton.\+Triton\+Remote\+Model Class Reference}
+\label{classutils_1_1triton_1_1TritonRemoteModel}\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_a991728f064b1c42986cf16e2224a660a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str url)
+\item 
+def \mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_a8c54787a9554ea5934d26a5ff35751c3}{runtime}} (self)
+\item 
+typing.\+Union\mbox{[}torch.\+Tensor, typing.\+Tuple\mbox{[}torch.\+Tensor,...\mbox{]}\mbox{]} \mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_a47c6aa6c8f8a98225eaf897737ee6afa}{\+\_\+\+\_\+call\+\_\+\+\_\+}} (self, $\ast$args, $\ast$$\ast$kwargs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_ab76f17002b234a4aa1f2a839bf9d0ea8}{client}}
+\item 
+\mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_a96a8ea28f4dfd051ce5dc8868a39c8fd}{model\+\_\+name}}
+\item 
+\mbox{\hyperlink{classutils_1_1triton_1_1TritonRemoteModel_a2514bb0af1898cfb980d47c2e19bde8e}{metadata}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}A wrapper over a model served by the Triton Inference Server. It can
+be configured to communicate over GRPC or HTTP. It accepts Torch Tensors
+as input and returns them as outputs.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_a991728f064b1c42986cf16e2224a660a}\label{classutils_1_1triton_1_1TritonRemoteModel_a991728f064b1c42986cf16e2224a660a}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def utils.\+triton.\+Triton\+Remote\+Model.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{str}]{url }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Keyword arguments:
+url: Fully qualified address of the Triton server - for e.g. grpc://localhost:8000
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_a47c6aa6c8f8a98225eaf897737ee6afa}\label{classutils_1_1triton_1_1TritonRemoteModel_a47c6aa6c8f8a98225eaf897737ee6afa}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!\_\_call\_\_@{\_\_call\_\_}}
+\index{\_\_call\_\_@{\_\_call\_\_}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{\_\_call\_\_()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily  typing.\+Union\mbox{[}torch.\+Tensor, typing.\+Tuple\mbox{[}torch.\+Tensor, ...\mbox{]}\mbox{]} utils.\+triton.\+Triton\+Remote\+Model.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{$\ast$}]{args,  }\item[{$\ast$$\ast$}]{kwargs }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Invokes the model. Parameters can be provided via args or kwargs.
+args, if provided, are assumed to match the order of inputs of the model.
+kwargs are matched with the model input names.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_a8c54787a9554ea5934d26a5ff35751c3}\label{classutils_1_1triton_1_1TritonRemoteModel_a8c54787a9554ea5934d26a5ff35751c3}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!runtime@{runtime}}
+\index{runtime@{runtime}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{runtime()}{runtime()}}
+{\footnotesize\ttfamily def utils.\+triton.\+Triton\+Remote\+Model.\+runtime (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the model runtime\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_ab76f17002b234a4aa1f2a839bf9d0ea8}\label{classutils_1_1triton_1_1TritonRemoteModel_ab76f17002b234a4aa1f2a839bf9d0ea8}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!client@{client}}
+\index{client@{client}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily utils.\+triton.\+Triton\+Remote\+Model.\+client}
+
+\mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_a2514bb0af1898cfb980d47c2e19bde8e}\label{classutils_1_1triton_1_1TritonRemoteModel_a2514bb0af1898cfb980d47c2e19bde8e}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!metadata@{metadata}}
+\index{metadata@{metadata}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{metadata}{metadata}}
+{\footnotesize\ttfamily utils.\+triton.\+Triton\+Remote\+Model.\+metadata}
+
+\mbox{\Hypertarget{classutils_1_1triton_1_1TritonRemoteModel_a96a8ea28f4dfd051ce5dc8868a39c8fd}\label{classutils_1_1triton_1_1TritonRemoteModel_a96a8ea28f4dfd051ce5dc8868a39c8fd}} 
+\index{utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}!model\_name@{model\_name}}
+\index{model\_name@{model\_name}!utils.triton.TritonRemoteModel@{utils.triton.TritonRemoteModel}}
+\doxysubsubsection{\texorpdfstring{model\_name}{model\_name}}
+{\footnotesize\ttfamily utils.\+triton.\+Triton\+Remote\+Model.\+model\+\_\+name}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vision/yolov5/utils/\mbox{\hyperlink{triton_8py}{triton.\+py}}\end{DoxyCompactItemize}

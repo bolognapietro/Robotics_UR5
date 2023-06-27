@@ -1,0 +1,51 @@
+\hypertarget{comet_2hpo_8py}{}\doxysection{vision/yolov5/utils/loggers/comet/hpo.py File Reference}
+\label{comet_2hpo_8py}\index{vision/yolov5/utils/loggers/comet/hpo.py@{vision/yolov5/utils/loggers/comet/hpo.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo}{utils.\+loggers.\+comet.\+hpo}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_abe0a3eb0f9b3ed2c22ad84decaf676d0}{utils.\+loggers.\+comet.\+hpo.\+get\+\_\+args}} (known=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a44caafa788885caddfeb236f0845854a}{utils.\+loggers.\+comet.\+hpo.\+run}} (parameters, opt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_ab44efc9cb8c627118701fea3103d348a}{utils.\+loggers.\+comet.\+hpo.\+logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_abaf41b8fce891cb83cdfd9a816a17594}{utils.\+loggers.\+comet.\+hpo.\+F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_ae65acc551c89f864b4a6ee9f9ef98ffb}{utils.\+loggers.\+comet.\+hpo.\+R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}3\mbox{]}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a2a913cb9964c10e82220ea615750b5b3}{utils.\+loggers.\+comet.\+hpo.\+config}} = comet\+\_\+ml.\+config.\+get\+\_\+config()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a2a733549dcd2199cb134258cd5c3f6bd}{utils.\+loggers.\+comet.\+hpo.\+C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME}} = config.\+get\+\_\+string(os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+P\+R\+O\+J\+E\+C\+T\+\_\+\+N\+A\+ME\textquotesingle{}), \textquotesingle{}comet.\+project\+\_\+name\textquotesingle{}, default=\textquotesingle{}yolov5\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a1290b4a4a5e0fb549d8f25a539825a5b}{utils.\+loggers.\+comet.\+hpo.\+opt}} = get\+\_\+args(known=True)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_ac10d2db6a5e0ce46c6484cff7630ce51}{utils.\+loggers.\+comet.\+hpo.\+weights}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_ab5b8d64ca51137392517ada4d9ff65ce}{utils.\+loggers.\+comet.\+hpo.\+cfg}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a4aae7fed902cce44f02b746f4665141e}{utils.\+loggers.\+comet.\+hpo.\+data}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a9f053a992ea51a2b9ca3c9a465182174}{utils.\+loggers.\+comet.\+hpo.\+project}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a9a554a99ccb843d668dd8deb7c91ffcd}{utils.\+loggers.\+comet.\+hpo.\+optimizer\+\_\+id}} = os.\+getenv(\textquotesingle{}C\+O\+M\+E\+T\+\_\+\+O\+P\+T\+I\+M\+I\+Z\+E\+R\+\_\+\+ID\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_abee8a675f44bce30586ce140a750a05f}{utils.\+loggers.\+comet.\+hpo.\+optimizer\+\_\+config}} = json.\+load(f)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a20f4a9524975beeb98042b9f22eb81fc}{utils.\+loggers.\+comet.\+hpo.\+optimizer}} = comet\+\_\+ml.\+Optimizer(optimizer\+\_\+config)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a2fe2787a292e3ac94805ffa895cfecf0}{utils.\+loggers.\+comet.\+hpo.\+comet\+\_\+optimizer\+\_\+id}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a739c17d2be9b5f4985cf4e07d19485f3}{utils.\+loggers.\+comet.\+hpo.\+status}} = optimizer.\+status()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a3ba67a6658adc729570212b63000b47c}{utils.\+loggers.\+comet.\+hpo.\+comet\+\_\+optimizer\+\_\+objective}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1loggers_1_1comet_1_1hpo_a2fc2176644a382d39891bae06cfd7356}{utils.\+loggers.\+comet.\+hpo.\+comet\+\_\+optimizer\+\_\+metric}}
+\end{DoxyCompactItemize}

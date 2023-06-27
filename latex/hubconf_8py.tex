@@ -1,0 +1,53 @@
+\hypertarget{hubconf_8py}{}\doxysection{vision/yolov5/hubconf.py File Reference}
+\label{hubconf_8py}\index{vision/yolov5/hubconf.py@{vision/yolov5/hubconf.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacehubconf}{hubconf}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacehubconf_a929d46246e28fe232b2a0b62ed197ca7}{hubconf.\+custom}} (path=\textquotesingle{}path/to/model.\+pt\textquotesingle{}, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a1076de6ac4c4526ed21787d8b9ac6fa4}{hubconf.\+yolov5n}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_ae3b1fa1487b6525a5f3be6569f305d61}{hubconf.\+yolov5s}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a5fc1e91b6c00e7eaa40c1fa9f51b10ff}{hubconf.\+yolov5m}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_ac8b4718fc7cc51c023a29fa35a9146d7}{hubconf.\+yolov5l}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a3e411c15dbbb9dc33154da4f154dd80e}{hubconf.\+yolov5x}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a2e39821b1c6527a7537dcc2a6d140257}{hubconf.\+yolov5n6}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a8a883820df714b7d2b9abdf4890eb5a2}{hubconf.\+yolov5s6}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a124b7dcef21a0ec17ce14fb5c5a6ff03}{hubconf.\+yolov5m6}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_a46e6588cc5fc9b8202f74ea81988da04}{hubconf.\+yolov5l6}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\item 
+def \mbox{\hyperlink{namespacehubconf_add7f017b881cc8885cba6d45ace8bee7}{hubconf.\+yolov5x6}} (pretrained=True, channels=3, classes=80, autoshape=True, \+\_\+verbose=True, device=None)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacehubconf_a4bc49af68a6600ac86b67f7d69ec5282}{hubconf.\+parser}} = argparse.\+Argument\+Parser()
+\item 
+\mbox{\hyperlink{namespacehubconf_a424169d5596a42c1eab4ae1d7139a51d}{hubconf.\+type}}
+\item 
+\mbox{\hyperlink{namespacehubconf_a26f9fdf1c00ab7424de305fd1fb7a5c0}{hubconf.\+str}}
+\item 
+\mbox{\hyperlink{namespacehubconf_a695f0a9ddf0d81caf5cc07310bb3c0e5}{hubconf.\+default}}
+\item 
+\mbox{\hyperlink{namespacehubconf_adfcf708de8d493e0f20a49bc5b81784d}{hubconf.\+help}}
+\item 
+\mbox{\hyperlink{namespacehubconf_ad5b15592f4ba74cdc435e06c1785d0a1}{hubconf.\+opt}} = parser.\+parse\+\_\+args()
+\item 
+def \mbox{\hyperlink{namespacehubconf_ab351ecc75a516a358f2a15d55c6b2055}{hubconf.\+model}} = \+\_\+create(name=opt.\+model, pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)
+\item 
+list \mbox{\hyperlink{namespacehubconf_af4d150499d1d02ae1ad95234cdc82a29}{hubconf.\+imgs}}
+\item 
+def \mbox{\hyperlink{namespacehubconf_a7abcd343141851fc674d1084c8ce332a}{hubconf.\+results}} = model(imgs, size=320)
+\end{DoxyCompactItemize}

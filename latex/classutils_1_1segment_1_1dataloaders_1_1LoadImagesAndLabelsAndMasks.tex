@@ -1,0 +1,106 @@
+\hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks}{}\doxysection{utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks Class Reference}
+\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks}\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+
+
+Inheritance diagram for utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a0249da9851e442bef72d8236f6b0d86a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a17f2bcd33b25fbd941e29c83e58ff0c5}{path}}, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_aaf2b9425db6c2fd723025393e181d3e3}{img\+\_\+size}}=640, batch\+\_\+size=16, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_afe3013a59e9113d4007d92d3927c8235}{augment}}=False, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a623dff973188744bac4bd52ef483c0f1}{hyp}}=None, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a8ee5d25bf251c3f9876adb21db5c04d0}{rect}}=False, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a0976f6fc92e7d00617036e125f2baeb8}{image\+\_\+weights}}=False, cache\+\_\+images=False, single\+\_\+cls=False, \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a8f72cc72fe46ce9bbb7f326e40525347}{stride}}=32, pad=0, min\+\_\+items=0, prefix=\textquotesingle{}\textquotesingle{}, \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a3b694bc313d58538bfa905774b995bad}{downsample\+\_\+ratio}}=1, \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a6333ca58ce3c343155418fcc360e3875}{overlap}}=False)
+\item 
+def \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a2bd5f474f4ebdbd0afe9c6f379d5a6b7}{\+\_\+\+\_\+getitem\+\_\+\+\_\+}} (self, index)
+\item 
+def \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a28feec5b4f965d6dcb98400fd9d5ca97}{load\+\_\+mosaic}} (self, index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_acb68e6a95085c30f22aa849dc497b90c}{collate\+\_\+fn}} (\mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_ac094011a6d5fbbd57684856d17ba8fa3}{batch}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a3b694bc313d58538bfa905774b995bad}{downsample\+\_\+ratio}}
+\item 
+\mbox{\hyperlink{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a6333ca58ce3c343155418fcc360e3875}{overlap}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a0249da9851e442bef72d8236f6b0d86a}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a0249da9851e442bef72d8236f6b0d86a}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path,  }\item[{}]{img\+\_\+size = {\ttfamily 640},  }\item[{}]{batch\+\_\+size = {\ttfamily 16},  }\item[{}]{augment = {\ttfamily False},  }\item[{}]{hyp = {\ttfamily None},  }\item[{}]{rect = {\ttfamily False},  }\item[{}]{image\+\_\+weights = {\ttfamily False},  }\item[{}]{cache\+\_\+images = {\ttfamily False},  }\item[{}]{single\+\_\+cls = {\ttfamily False},  }\item[{}]{stride = {\ttfamily 32},  }\item[{}]{pad = {\ttfamily 0},  }\item[{}]{min\+\_\+items = {\ttfamily 0},  }\item[{}]{prefix = {\ttfamily \textquotesingle{}\textquotesingle{}},  }\item[{}]{downsample\+\_\+ratio = {\ttfamily 1},  }\item[{}]{overlap = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a2bd5f474f4ebdbd0afe9c6f379d5a6b7}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a2bd5f474f4ebdbd0afe9c6f379d5a6b7}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!\_\_getitem\_\_@{\_\_getitem\_\_}}
+\index{\_\_getitem\_\_@{\_\_getitem\_\_}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{\_\_getitem\_\_()}{\_\_getitem\_\_()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+\_\+\+\_\+getitem\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a4d9647efab2da48a2dfa613b1a9c8b1e}{utils.\+dataloaders.\+Load\+Images\+And\+Labels}}.
+
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_acb68e6a95085c30f22aa849dc497b90c}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_acb68e6a95085c30f22aa849dc497b90c}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!collate\_fn@{collate\_fn}}
+\index{collate\_fn@{collate\_fn}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{collate\_fn()}{collate\_fn()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+collate\+\_\+fn (\begin{DoxyParamCaption}\item[{}]{batch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a71f7b6870f954627f8a9f8d9b8945309}{utils.\+dataloaders.\+Load\+Images\+And\+Labels}}.
+
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a28feec5b4f965d6dcb98400fd9d5ca97}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a28feec5b4f965d6dcb98400fd9d5ca97}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!load\_mosaic@{load\_mosaic}}
+\index{load\_mosaic@{load\_mosaic}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{load\_mosaic()}{load\_mosaic()}}
+{\footnotesize\ttfamily def utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+load\+\_\+mosaic (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{index }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classutils_1_1dataloaders_1_1LoadImagesAndLabels_a92b499dd64a17213609b35a33f13103c}{utils.\+dataloaders.\+Load\+Images\+And\+Labels}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a3b694bc313d58538bfa905774b995bad}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a3b694bc313d58538bfa905774b995bad}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!downsample\_ratio@{downsample\_ratio}}
+\index{downsample\_ratio@{downsample\_ratio}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{downsample\_ratio}{downsample\_ratio}}
+{\footnotesize\ttfamily utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+downsample\+\_\+ratio}
+
+\mbox{\Hypertarget{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a6333ca58ce3c343155418fcc360e3875}\label{classutils_1_1segment_1_1dataloaders_1_1LoadImagesAndLabelsAndMasks_a6333ca58ce3c343155418fcc360e3875}} 
+\index{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}!overlap@{overlap}}
+\index{overlap@{overlap}!utils.segment.dataloaders.LoadImagesAndLabelsAndMasks@{utils.segment.dataloaders.LoadImagesAndLabelsAndMasks}}
+\doxysubsubsection{\texorpdfstring{overlap}{overlap}}
+{\footnotesize\ttfamily utils.\+segment.\+dataloaders.\+Load\+Images\+And\+Labels\+And\+Masks.\+overlap}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vision/yolov5/utils/segment/\mbox{\hyperlink{segment_2dataloaders_8py}{dataloaders.\+py}}\end{DoxyCompactItemize}

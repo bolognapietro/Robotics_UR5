@@ -1,0 +1,131 @@
+\hypertarget{namespacemodels_1_1tf}{}\doxysection{models.\+tf Namespace Reference}
+\label{namespacemodels_1_1tf}\index{models.tf@{models.tf}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1AgnosticNMS}{Agnostic\+N\+MS}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFBN}{T\+F\+BN}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFBottleneck}{T\+F\+Bottleneck}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFBottleneckCSP}{T\+F\+Bottleneck\+C\+SP}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFC3}{T\+F\+C3}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFC3x}{T\+F\+C3x}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFConcat}{T\+F\+Concat}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFConv}{T\+F\+Conv}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFConv2d}{T\+F\+Conv2d}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFCrossConv}{T\+F\+Cross\+Conv}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFDetect}{T\+F\+Detect}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFDWConv}{T\+F\+D\+W\+Conv}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFDWConvTranspose2d}{T\+F\+D\+W\+Conv\+Transpose2d}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFFocus}{T\+F\+Focus}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFModel}{T\+F\+Model}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFPad}{T\+F\+Pad}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFProto}{T\+F\+Proto}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFSegment}{T\+F\+Segment}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFSPP}{T\+F\+S\+PP}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFSPPF}{T\+F\+S\+P\+PF}}
+\item 
+class \mbox{\hyperlink{classmodels_1_1tf_1_1TFUpsample}{T\+F\+Upsample}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_a1319af10e277293f7dd783f4ffca100d}{parse\+\_\+model}} (d, ch, model, imgsz)
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_ace53a4567f42d3adb773b5beac6bfccc}{activations}} (act=nn.\+Si\+LU)
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_a196fa8d9985538dfcf4e86e2efef8273}{representative\+\_\+dataset\+\_\+gen}} (dataset, ncalib=100)
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_a10ef57dd0603b052b7bf98d1e8b894e2}{run}} (weights=\mbox{\hyperlink{namespacemodels_1_1tf_aae5416adb44a1cec94fc300c37c348d4}{R\+O\+OT}}/ \textquotesingle{}yolov5s.\+pt\textquotesingle{}, imgsz=(640, 640), batch\+\_\+size=1, dynamic=False)
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_aea7aa230d8cf3ba1867728262825487d}{parse\+\_\+opt}} ()
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_a9e50096822ed04562c71da8410912848}{main}} (\mbox{\hyperlink{namespacemodels_1_1tf_ac930d5b649b7c1e605de78bb77509c45}{opt}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1tf_a9db309b059c53d8ea2d5bf9e84872ed9}{F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespacemodels_1_1tf_aae5416adb44a1cec94fc300c37c348d4}{R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}1\mbox{]}
+\item 
+def \mbox{\hyperlink{namespacemodels_1_1tf_ac930d5b649b7c1e605de78bb77509c45}{opt}} = \mbox{\hyperlink{namespacemodels_1_1tf_aea7aa230d8cf3ba1867728262825487d}{parse\+\_\+opt}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacemodels_1_1tf_ace53a4567f42d3adb773b5beac6bfccc}\label{namespacemodels_1_1tf_ace53a4567f42d3adb773b5beac6bfccc}} 
+\index{models.tf@{models.tf}!activations@{activations}}
+\index{activations@{activations}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{activations()}{activations()}}
+{\footnotesize\ttfamily def models.\+tf.\+activations (\begin{DoxyParamCaption}\item[{}]{act = {\ttfamily nn.SiLU} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_a9e50096822ed04562c71da8410912848}\label{namespacemodels_1_1tf_a9e50096822ed04562c71da8410912848}} 
+\index{models.tf@{models.tf}!main@{main}}
+\index{main@{main}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def models.\+tf.\+main (\begin{DoxyParamCaption}\item[{}]{opt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_a1319af10e277293f7dd783f4ffca100d}\label{namespacemodels_1_1tf_a1319af10e277293f7dd783f4ffca100d}} 
+\index{models.tf@{models.tf}!parse\_model@{parse\_model}}
+\index{parse\_model@{parse\_model}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{parse\_model()}{parse\_model()}}
+{\footnotesize\ttfamily def models.\+tf.\+parse\+\_\+model (\begin{DoxyParamCaption}\item[{}]{d,  }\item[{}]{ch,  }\item[{}]{model,  }\item[{}]{imgsz }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_aea7aa230d8cf3ba1867728262825487d}\label{namespacemodels_1_1tf_aea7aa230d8cf3ba1867728262825487d}} 
+\index{models.tf@{models.tf}!parse\_opt@{parse\_opt}}
+\index{parse\_opt@{parse\_opt}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{parse\_opt()}{parse\_opt()}}
+{\footnotesize\ttfamily def models.\+tf.\+parse\+\_\+opt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_a196fa8d9985538dfcf4e86e2efef8273}\label{namespacemodels_1_1tf_a196fa8d9985538dfcf4e86e2efef8273}} 
+\index{models.tf@{models.tf}!representative\_dataset\_gen@{representative\_dataset\_gen}}
+\index{representative\_dataset\_gen@{representative\_dataset\_gen}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{representative\_dataset\_gen()}{representative\_dataset\_gen()}}
+{\footnotesize\ttfamily def models.\+tf.\+representative\+\_\+dataset\+\_\+gen (\begin{DoxyParamCaption}\item[{}]{dataset,  }\item[{}]{ncalib = {\ttfamily 100} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_a10ef57dd0603b052b7bf98d1e8b894e2}\label{namespacemodels_1_1tf_a10ef57dd0603b052b7bf98d1e8b894e2}} 
+\index{models.tf@{models.tf}!run@{run}}
+\index{run@{run}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily def models.\+tf.\+run (\begin{DoxyParamCaption}\item[{}]{weights = {\ttfamily \mbox{\hyperlink{namespacemodels_1_1tf_aae5416adb44a1cec94fc300c37c348d4}{R\+O\+OT}}~/~\textquotesingle{}yolov5s.pt\textquotesingle{}},  }\item[{}]{imgsz = {\ttfamily (640,~640)},  }\item[{}]{batch\+\_\+size = {\ttfamily 1},  }\item[{}]{dynamic = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacemodels_1_1tf_a9db309b059c53d8ea2d5bf9e84872ed9}\label{namespacemodels_1_1tf_a9db309b059c53d8ea2d5bf9e84872ed9}} 
+\index{models.tf@{models.tf}!FILE@{FILE}}
+\index{FILE@{FILE}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{FILE}{FILE}}
+{\footnotesize\ttfamily models.\+tf.\+F\+I\+LE = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_ac930d5b649b7c1e605de78bb77509c45}\label{namespacemodels_1_1tf_ac930d5b649b7c1e605de78bb77509c45}} 
+\index{models.tf@{models.tf}!opt@{opt}}
+\index{opt@{opt}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{opt}{opt}}
+{\footnotesize\ttfamily def models.\+tf.\+opt = \mbox{\hyperlink{namespacemodels_1_1tf_aea7aa230d8cf3ba1867728262825487d}{parse\+\_\+opt}}()}
+
+\mbox{\Hypertarget{namespacemodels_1_1tf_aae5416adb44a1cec94fc300c37c348d4}\label{namespacemodels_1_1tf_aae5416adb44a1cec94fc300c37c348d4}} 
+\index{models.tf@{models.tf}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!models.tf@{models.tf}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily models.\+tf.\+R\+O\+OT = F\+I\+L\+E.\+parents\mbox{[}1\mbox{]}}
+

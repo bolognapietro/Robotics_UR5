@@ -1,0 +1,230 @@
+\hypertarget{motionPlan_8cpp}{}\doxysection{motion plan/motion\+Plan.cpp File Reference}
+\label{motionPlan_8cpp}\index{motion plan/motionPlan.cpp@{motion plan/motionPlan.cpp}}
+{\ttfamily \#include \char`\"{}Eigen/\+Dense\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}kinematics.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+Include dependency graph for motion\+Plan.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motionPlan_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Matrix$<$ double, Dynamic, 6 $>$ \mbox{\hyperlink{motionPlan_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}}
+\item 
+typedef Matrix$<$ double, 1, 6 $>$ \mbox{\hyperlink{motionPlan_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}
+\item 
+typedef Matrix$<$ double, 1, 8 $>$ \mbox{\hyperlink{motionPlan_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}}
+\item 
+typedef Matrix$<$ double, Dynamic, 8 $>$ \mbox{\hyperlink{motionPlan_8cpp_a917dd0dd497fb16e1d719383eb5c01c1}{Matrix8d}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Matrix3d \mbox{\hyperlink{motionPlan_8cpp_a78a812629a3d507b9768995d27d5afdf}{eul2rotm}} (Vector3d angles)
+\begin{DoxyCompactList}\small\item\em converts euler angles to a rotation matrix \end{DoxyCompactList}\item 
+Vector3d \mbox{\hyperlink{motionPlan_8cpp_ae5b3f5e8730ac2b39b0aa7594fe7a7f0}{rotm2eul}} (Matrix3d R)
+\begin{DoxyCompactList}\small\item\em converts a rotation matrix to euler angles \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motionPlan_8cpp_a0a5b3530319c900667a43bd7637c31ba}{close\+Gripper}} (\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th)
+\begin{DoxyCompactList}\small\item\em compute the joints to close the gripper \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motionPlan_8cpp_adba435d0ed64935f450e0d97007d8f01}{open\+Gripper}} (\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th)
+\begin{DoxyCompactList}\small\item\em compute the joints to open the gripper \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{motionPlan_8cpp_ae2929488767daed42dc76ddaf0317a10}{p2p\+Motion\+Plan}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} q\+Es, Vector3d x\+Ef, Vector3d phi\+Ef, double minT, double maxT, \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th, bool slow=false)
+\begin{DoxyCompactList}\small\item\em computes a path of points between a starting point and a final point. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{motionPlan_8cpp_a8241e667cbcb9fa1af2dd56b58515934}{threep2p}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} q\+Es, Vector3d x\+Ef, Vector3d phi\+Ef, double minT, double maxT, \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th)
+\begin{DoxyCompactList}\small\item\em build an entire movement from a starting point to a final point. It joins three different p2p motionplans \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{motionPlan_8cpp_a3b8f2b135e63325a36e258ff6d6e9d7c}{rotate}} (\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} q\+Es, Vector3d x\+Ef, int type\+\_\+rot, double minT, double maxT, \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th, bool recursive1=false, bool recursive2=false)
+\begin{DoxyCompactList}\small\item\em perform a rotation movement \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{motionPlan_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}\label{motionPlan_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!Matrix6d@{Matrix6d}}
+\index{Matrix6d@{Matrix6d}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{Matrix6d}{Matrix6d}}
+{\footnotesize\ttfamily typedef Matrix$<$double,Dynamic,6$>$ \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}}}
+
+\mbox{\Hypertarget{motionPlan_8cpp_a917dd0dd497fb16e1d719383eb5c01c1}\label{motionPlan_8cpp_a917dd0dd497fb16e1d719383eb5c01c1}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!Matrix8d@{Matrix8d}}
+\index{Matrix8d@{Matrix8d}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{Matrix8d}{Matrix8d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, Dynamic, 8$>$ \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}}}
+
+\mbox{\Hypertarget{motionPlan_8cpp_abd0626ccd8aae9d144a8919e2a60571e}\label{motionPlan_8cpp_abd0626ccd8aae9d144a8919e2a60571e}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!RowVector6d@{RowVector6d}}
+\index{RowVector6d@{RowVector6d}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{RowVector6d}{RowVector6d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 1, 6$>$ \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}
+
+\mbox{\Hypertarget{motionPlan_8cpp_ad6c50e50d0dc41db90e6703dbe451516}\label{motionPlan_8cpp_ad6c50e50d0dc41db90e6703dbe451516}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!RowVector8d@{RowVector8d}}
+\index{RowVector8d@{RowVector8d}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{RowVector8d}{RowVector8d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 1, 8$>$ \mbox{\hyperlink{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{motionPlan_8cpp_a0a5b3530319c900667a43bd7637c31ba}\label{motionPlan_8cpp_a0a5b3530319c900667a43bd7637c31ba}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!closeGripper@{closeGripper}}
+\index{closeGripper@{closeGripper}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{closeGripper()}{closeGripper()}}
+{\footnotesize\ttfamily void close\+Gripper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th }\end{DoxyParamCaption})}
+
+
+
+compute the joints to close the gripper 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{motionPlan_8cpp_a78a812629a3d507b9768995d27d5afdf}\label{motionPlan_8cpp_a78a812629a3d507b9768995d27d5afdf}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!eul2rotm@{eul2rotm}}
+\index{eul2rotm@{eul2rotm}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{eul2rotm()}{eul2rotm()}}
+{\footnotesize\ttfamily Matrix3d eul2rotm (\begin{DoxyParamCaption}\item[{Vector3d}]{angles }\end{DoxyParamCaption})}
+
+
+
+converts euler angles to a rotation matrix 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em angles} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix3d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motionPlan_8cpp_adba435d0ed64935f450e0d97007d8f01}\label{motionPlan_8cpp_adba435d0ed64935f450e0d97007d8f01}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!openGripper@{openGripper}}
+\index{openGripper@{openGripper}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{openGripper()}{openGripper()}}
+{\footnotesize\ttfamily void open\+Gripper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th }\end{DoxyParamCaption})}
+
+
+
+compute the joints to open the gripper 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Th} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{motionPlan_8cpp_ae2929488767daed42dc76ddaf0317a10}\label{motionPlan_8cpp_ae2929488767daed42dc76ddaf0317a10}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!p2pMotionPlan@{p2pMotionPlan}}
+\index{p2pMotionPlan@{p2pMotionPlan}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{p2pMotionPlan()}{p2pMotionPlan()}}
+{\footnotesize\ttfamily bool p2p\+Motion\+Plan (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{q\+Es,  }\item[{Vector3d}]{x\+Ef,  }\item[{Vector3d}]{phi\+Ef,  }\item[{double}]{minT,  }\item[{double}]{maxT,  }\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th,  }\item[{bool}]{slow = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+computes a path of points between a starting point and a final point. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em q\+Es} & current joint configuration \\
+\hline
+\mbox{\texttt{ in}}  & {\em x\+Ef} & final position to reach \\
+\hline
+\mbox{\texttt{ in}}  & {\em phi\+Ef} & orientation matrix of the final position \\
+\hline
+\mbox{\texttt{ in}}  & {\em minT} & minimum time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em maxT} & max time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em Th} & joint matrix passed as reference to store the computed joint configurations \\
+\hline
+\mbox{\texttt{ in}}  & {\em slow} & parameter to perform slower moves \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motionPlan_8cpp_a3b8f2b135e63325a36e258ff6d6e9d7c}\label{motionPlan_8cpp_a3b8f2b135e63325a36e258ff6d6e9d7c}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!rotate@{rotate}}
+\index{rotate@{rotate}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily bool rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{q\+Es,  }\item[{Vector3d}]{x\+Ef,  }\item[{int}]{type\+\_\+rot,  }\item[{double}]{minT,  }\item[{double}]{maxT,  }\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th,  }\item[{bool}]{recursive1 = {\ttfamily false},  }\item[{bool}]{recursive2 = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+perform a rotation movement 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em q\+Es} & current joint configuration \\
+\hline
+\mbox{\texttt{ in}}  & {\em x\+Ef} & final position to reach \\
+\hline
+\mbox{\texttt{ in}}  & {\em type\+\_\+rot} & defines the type of the rotation \\
+\hline
+\mbox{\texttt{ in}}  & {\em minT} & minimum time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em maxT} & max time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em Th} & joint matrix passed as reference to store the computed joint configurations \\
+\hline
+\mbox{\texttt{ in}}  & {\em recursive1} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em recursive2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motionPlan_8cpp_ae5b3f5e8730ac2b39b0aa7594fe7a7f0}\label{motionPlan_8cpp_ae5b3f5e8730ac2b39b0aa7594fe7a7f0}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!rotm2eul@{rotm2eul}}
+\index{rotm2eul@{rotm2eul}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{rotm2eul()}{rotm2eul()}}
+{\footnotesize\ttfamily Vector3d rotm2eul (\begin{DoxyParamCaption}\item[{Matrix3d}]{R }\end{DoxyParamCaption})}
+
+
+
+converts a rotation matrix to euler angles 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em R} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector3d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{motionPlan_8cpp_a8241e667cbcb9fa1af2dd56b58515934}\label{motionPlan_8cpp_a8241e667cbcb9fa1af2dd56b58515934}} 
+\index{motionPlan.cpp@{motionPlan.cpp}!threep2p@{threep2p}}
+\index{threep2p@{threep2p}!motionPlan.cpp@{motionPlan.cpp}}
+\doxysubsubsection{\texorpdfstring{threep2p()}{threep2p()}}
+{\footnotesize\ttfamily bool threep2p (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}]{q\+Es,  }\item[{Vector3d}]{x\+Ef,  }\item[{Vector3d}]{phi\+Ef,  }\item[{double}]{minT,  }\item[{double}]{maxT,  }\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th }\end{DoxyParamCaption})}
+
+
+
+build an entire movement from a starting point to a final point. It joins three different p2p motionplans 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em q\+Es} & current joint configuration \\
+\hline
+\mbox{\texttt{ in}}  & {\em x\+Ef} & final position to reach \\
+\hline
+\mbox{\texttt{ in}}  & {\em phi\+Ef} & orientation matrix of the final position \\
+\hline
+\mbox{\texttt{ in}}  & {\em minT} & minimum time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em maxT} & max time of the move \\
+\hline
+\mbox{\texttt{ in}}  & {\em Th} & joint matrix passed as reference to store the computed joint configurations \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}

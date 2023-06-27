@@ -1,0 +1,168 @@
+\hypertarget{main_8cpp}{}\doxysection{motion plan/main.cpp File Reference}
+\label{main_8cpp}\index{motion plan/main.cpp@{motion plan/main.cpp}}
+{\ttfamily \#include \char`\"{}Eigen/\+Dense\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Eigen/\+Geometry\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}kinematics.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}motion\+Plan.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmath\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Float32\+Multi\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Float64\+Multi\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Joint\+State.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}boost/shared\+\_\+ptr.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Pose.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}motion\+\_\+plan\+\_\+pkg/lego\+Message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}motion\+\_\+plan\+\_\+pkg/lego\+Array.\+h\char`\"{}}\newline
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Eigen\+::\+Matrix$<$ double, Eigen\+::\+Dynamic, 6 $>$ \mbox{\hyperlink{main_8cpp_a2f8509d8f146fab27afe50846620cdc9}{Matrix6d}}
+\item 
+typedef Eigen\+::\+Matrix$<$ double, Eigen\+::\+Dynamic, 8 $>$ \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}}
+\item 
+typedef Matrix$<$ double, 1, 6 $>$ \mbox{\hyperlink{main_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}
+\item 
+typedef Matrix$<$ double, 1, 8 $>$ \mbox{\hyperlink{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}} \mbox{\hyperlink{main_8cpp_a4a28374d62e201ab5ef24bbeeee6cc7a}{get\+Joint\+State}} ()
+\begin{DoxyCompactList}\small\item\em get the joint state published by the ur5 generic node on the topic \end{DoxyCompactList}\item 
+\mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} \mbox{\hyperlink{main_8cpp_a2f56f4a81d8b568eb600f546f990ff95}{get\+Joint\+Arm}} ()
+\begin{DoxyCompactList}\small\item\em get the joint state of the arm \end{DoxyCompactList}\item 
+Eigen\+::\+Row\+Vector2d \mbox{\hyperlink{main_8cpp_a92ff44c15f647c246a62ea115bf904c2}{get\+Joint\+Gripper}} ()
+\begin{DoxyCompactList}\small\item\em get the joint state of the gripper \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a143fd341b971a635802d63d8857e961a}{publish}} (\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&Th)
+\begin{DoxyCompactList}\small\item\em publishes the computed joint configurations on the topic \end{DoxyCompactList}\item 
+Row\+Vector3d \mbox{\hyperlink{main_8cpp_abb8f22bfe7015d5b9e4e143c9665ce58}{find\+Pos\+Drop}} (int type\+\_\+block)
+\begin{DoxyCompactList}\small\item\em finds the drop position from the index of the block \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em manages the motion plan node \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{main_8cpp_aa7270f0ca0f39d26268309d1ea08e964}{real\+\_\+robot}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{main_8cpp_a2f8509d8f146fab27afe50846620cdc9}\label{main_8cpp_a2f8509d8f146fab27afe50846620cdc9}} 
+\index{main.cpp@{main.cpp}!Matrix6d@{Matrix6d}}
+\index{Matrix6d@{Matrix6d}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{Matrix6d}{Matrix6d}}
+{\footnotesize\ttfamily typedef Eigen\+::\+Matrix$<$double,Eigen\+::\+Dynamic,6$>$ \mbox{\hyperlink{kinematics_8cpp_aa3b8cbd314b3be7c9168138a3711daf9}{Matrix6d}}}
+
+\mbox{\Hypertarget{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}\label{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}} 
+\index{main.cpp@{main.cpp}!Matrix8d@{Matrix8d}}
+\index{Matrix8d@{Matrix8d}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{Matrix8d}{Matrix8d}}
+{\footnotesize\ttfamily typedef Eigen\+::\+Matrix$<$double,Eigen\+::\+Dynamic,8$>$ \mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}}}
+
+\mbox{\Hypertarget{main_8cpp_abd0626ccd8aae9d144a8919e2a60571e}\label{main_8cpp_abd0626ccd8aae9d144a8919e2a60571e}} 
+\index{main.cpp@{main.cpp}!RowVector6d@{RowVector6d}}
+\index{RowVector6d@{RowVector6d}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{RowVector6d}{RowVector6d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 1, 6$>$ \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}}}
+
+\mbox{\Hypertarget{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}\label{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}} 
+\index{main.cpp@{main.cpp}!RowVector8d@{RowVector8d}}
+\index{RowVector8d@{RowVector8d}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{RowVector8d}{RowVector8d}}
+{\footnotesize\ttfamily typedef Matrix$<$double, 1, 8$>$ \mbox{\hyperlink{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_abb8f22bfe7015d5b9e4e143c9665ce58}\label{main_8cpp_abb8f22bfe7015d5b9e4e143c9665ce58}} 
+\index{main.cpp@{main.cpp}!findPosDrop@{findPosDrop}}
+\index{findPosDrop@{findPosDrop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{findPosDrop()}{findPosDrop()}}
+{\footnotesize\ttfamily Row\+Vector3d find\+Pos\+Drop (\begin{DoxyParamCaption}\item[{int}]{type\+\_\+block }\end{DoxyParamCaption})}
+
+
+
+finds the drop position from the index of the block 
+
+\begin{DoxyReturn}{Returns}
+Row\+Vector3d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a2f56f4a81d8b568eb600f546f990ff95}\label{main_8cpp_a2f56f4a81d8b568eb600f546f990ff95}} 
+\index{main.cpp@{main.cpp}!getJointArm@{getJointArm}}
+\index{getJointArm@{getJointArm}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getJointArm()}{getJointArm()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{kinematics_8cpp_abd0626ccd8aae9d144a8919e2a60571e}{Row\+Vector6d}} get\+Joint\+Arm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the joint state of the arm 
+
+\begin{DoxyReturn}{Returns}
+Row\+Vector6d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a92ff44c15f647c246a62ea115bf904c2}\label{main_8cpp_a92ff44c15f647c246a62ea115bf904c2}} 
+\index{main.cpp@{main.cpp}!getJointGripper@{getJointGripper}}
+\index{getJointGripper@{getJointGripper}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getJointGripper()}{getJointGripper()}}
+{\footnotesize\ttfamily Eigen\+::\+Row\+Vector2d get\+Joint\+Gripper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the joint state of the gripper 
+
+\begin{DoxyReturn}{Returns}
+Row\+Vector2d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a4a28374d62e201ab5ef24bbeeee6cc7a}\label{main_8cpp_a4a28374d62e201ab5ef24bbeeee6cc7a}} 
+\index{main.cpp@{main.cpp}!getJointState@{getJointState}}
+\index{getJointState@{getJointState}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getJointState()}{getJointState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{main_8cpp_ad6c50e50d0dc41db90e6703dbe451516}{Row\+Vector8d}} get\+Joint\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the joint state published by the ur5 generic node on the topic 
+
+\begin{DoxyReturn}{Returns}
+Row\+Vector8d 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+manages the motion plan node 
+
+\mbox{\Hypertarget{main_8cpp_a143fd341b971a635802d63d8857e961a}\label{main_8cpp_a143fd341b971a635802d63d8857e961a}} 
+\index{main.cpp@{main.cpp}!publish@{publish}}
+\index{publish@{publish}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily void publish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8cpp_ae981d8cdfce00d40e5873ee95836bc75}{Matrix8d}} \&}]{Th }\end{DoxyParamCaption})}
+
+
+
+publishes the computed joint configurations on the topic 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_aa7270f0ca0f39d26268309d1ea08e964}\label{main_8cpp_aa7270f0ca0f39d26268309d1ea08e964}} 
+\index{main.cpp@{main.cpp}!real\_robot@{real\_robot}}
+\index{real\_robot@{real\_robot}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{real\_robot}{real\_robot}}
+{\footnotesize\ttfamily bool real\+\_\+robot = false}
+

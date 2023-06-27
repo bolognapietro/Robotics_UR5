@@ -1,0 +1,7 @@
+<map id="models.yolo.BaseModel" name="models.yolo.BaseModel">
+<area shape="rect" id="node1" title=" " alt="" coords="127,80,305,107"/>
+<area shape="rect" id="node3" href="$classmodels_1_1yolo_1_1ClassificationModel.html" title=" " alt="" coords="5,155,200,196"/>
+<area shape="rect" id="node4" href="$classmodels_1_1yolo_1_1DetectionModel.html" title=" " alt="" coords="225,162,434,189"/>
+<area shape="rect" id="node2" title=" " alt="" coords="181,5,251,32"/>
+<area shape="rect" id="node5" href="$classmodels_1_1yolo_1_1SegmentationModel.html" title=" " alt="" coords="231,244,428,285"/>
+</map>

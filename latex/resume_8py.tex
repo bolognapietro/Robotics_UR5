@@ -1,0 +1,32 @@
+\hypertarget{resume_8py}{}\doxysection{vision/yolov5/utils/aws/resume.py File Reference}
+\label{resume_8py}\index{vision/yolov5/utils/aws/resume.py@{vision/yolov5/utils/aws/resume.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume}{utils.\+aws.\+resume}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a93843c2d7133dc4d61320ddfd9d69b66}{utils.\+aws.\+resume.\+F\+I\+LE}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_aaa7200240514de7fcd261e28f4ce14f6}{utils.\+aws.\+resume.\+R\+O\+OT}} = F\+I\+L\+E.\+parents\mbox{[}2\mbox{]}
+\item 
+int \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a09a6f1909eca0838b7c466a1f9db00d8}{utils.\+aws.\+resume.\+port}} = 0
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a8625192782100dfb6ce85dc6600f05cf}{utils.\+aws.\+resume.\+path}} = Path(\textquotesingle{}\textquotesingle{}).resolve()
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_aa61fc4375c57933b4b92a83f02f485b9}{utils.\+aws.\+resume.\+ckpt}} = torch.\+load(last)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a4c50e16182da53a1c946a42c9b133a6e}{utils.\+aws.\+resume.\+errors}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a9a6d1890c7140cc47d2180f21ed8d164}{utils.\+aws.\+resume.\+opt}} = yaml.\+safe\+\_\+load(f)
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_afc173aae6aa494c45768d2efb49591ac}{utils.\+aws.\+resume.\+d}} = opt\mbox{[}\textquotesingle{}device\textquotesingle{}\mbox{]}.split(\textquotesingle{},\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a47daad8f236529f7344f599ea6bfb380}{utils.\+aws.\+resume.\+nd}} = len(d)
+\item 
+int \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a5d8381d92d3d3c4b878b8346ae7fcb14}{utils.\+aws.\+resume.\+ddp}} = nd $>$ 1 or (nd == 0 and torch.\+cuda.\+device\+\_\+count() $>$ 1)
+\item 
+string \mbox{\hyperlink{namespaceutils_1_1aws_1_1resume_a26fa631ddd4ee9e7362118d37f878c44}{utils.\+aws.\+resume.\+cmd}} = f\textquotesingle{}python -\/m torch.\+distributed.\+run -\/-\/nproc\+\_\+per\+\_\+node \{nd\} -\/-\/master\+\_\+port \{port\} train.\+py -\/-\/resume \{last\}\textquotesingle{}
+\end{DoxyCompactItemize}

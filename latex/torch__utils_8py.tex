@@ -1,0 +1,76 @@
+\hypertarget{torch__utils_8py}{}\doxysection{vision/yolov5/utils/torch\+\_\+utils.py File Reference}
+\label{torch__utils_8py}\index{vision/yolov5/utils/torch\_utils.py@{vision/yolov5/utils/torch\_utils.py}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1torch__utils_1_1EarlyStopping}{utils.\+torch\+\_\+utils.\+Early\+Stopping}}
+\item 
+class \mbox{\hyperlink{classutils_1_1torch__utils_1_1ModelEMA}{utils.\+torch\+\_\+utils.\+Model\+E\+MA}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceutils_1_1torch__utils}{utils.\+torch\+\_\+utils}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a5848cc9fb9962d3d38ad204d26ea2883}{utils.\+torch\+\_\+utils.\+smart\+\_\+inference\+\_\+mode}} (torch\+\_\+1\+\_\+9=check\+\_\+version(torch.\+\_\+\+\_\+version\+\_\+\+\_\+, \textquotesingle{}1.\+9.\+0\textquotesingle{}))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_ae4624b510a931b4340f287856b6352cb}{utils.\+torch\+\_\+utils.\+smart\+Cross\+Entropy\+Loss}} (label\+\_\+smoothing=0.\+0)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a526256cf2d477ab172e5c1130407bee5}{utils.\+torch\+\_\+utils.\+smart\+\_\+\+D\+DP}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a95c1f33acdda67d2bc252570a7db849d}{utils.\+torch\+\_\+utils.\+reshape\+\_\+classifier\+\_\+output}} (model, n=1000)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_aabae6d4c55e62ccb2052853e1d526e20}{utils.\+torch\+\_\+utils.\+torch\+\_\+distributed\+\_\+zero\+\_\+first}} (int local\+\_\+rank)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_ae0db91223f70b0a0211f6c196d876e79}{utils.\+torch\+\_\+utils.\+device\+\_\+count}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a1480bbd8c85c64f5f9f70ae566442db9}{utils.\+torch\+\_\+utils.\+select\+\_\+device}} (device=\textquotesingle{}\textquotesingle{}, batch\+\_\+size=0, newline=True)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_aefbbd8afbf525a12eaa35931f8f66e3a}{utils.\+torch\+\_\+utils.\+time\+\_\+sync}} ()
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_af1b557721b7b8f0baae2745d6b805ce1}{utils.\+torch\+\_\+utils.\+profile}} (input, ops, n=10, device=None)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a9fa22d124d9280c688494318d1a7b71d}{utils.\+torch\+\_\+utils.\+is\+\_\+parallel}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_aa3f082bb15017516262f5a0ed6eee682}{utils.\+torch\+\_\+utils.\+de\+\_\+parallel}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_ab501aee2ba009ad93feac326d771c53d}{utils.\+torch\+\_\+utils.\+initialize\+\_\+weights}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a89bae8a6ba4b2501af042395e74aa96b}{utils.\+torch\+\_\+utils.\+find\+\_\+modules}} (model, mclass=nn.\+Conv2d)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_ac206424a6d70788b553d232da34e17ca}{utils.\+torch\+\_\+utils.\+sparsity}} (model)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a95d044cf81e6ec9b0ded974fabbd901a}{utils.\+torch\+\_\+utils.\+prune}} (model, amount=0.\+3)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a88886eb94248df4e2feda226e7d1f3db}{utils.\+torch\+\_\+utils.\+fuse\+\_\+conv\+\_\+and\+\_\+bn}} (conv, bn)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_ad91d058fee74a52c33f4de86adbe19e1}{utils.\+torch\+\_\+utils.\+model\+\_\+info}} (model, verbose=False, imgsz=640)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a94b5682e648bd957db5a9aee9e5d5df5}{utils.\+torch\+\_\+utils.\+scale\+\_\+img}} (img, ratio=1.\+0, same\+\_\+shape=False, gs=32)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a67bb27b96bab5ef71c56bcb09e06f880}{utils.\+torch\+\_\+utils.\+copy\+\_\+attr}} (a, b, include=(), exclude=())
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a6a5fd0f15a62fb82c6788009f50a9291}{utils.\+torch\+\_\+utils.\+smart\+\_\+optimizer}} (model, name=\textquotesingle{}Adam\textquotesingle{}, lr=0.\+001, momentum=0.\+9, decay=1e-\/5)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a49237bf5b89ca96b41b307c161e58f64}{utils.\+torch\+\_\+utils.\+smart\+\_\+hub\+\_\+load}} (repo=\textquotesingle{}ultralytics/yolov5\textquotesingle{}, model=\textquotesingle{}yolov5s\textquotesingle{}, $\ast$$\ast$kwargs)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1torch__utils_a2665758d895dfa6b79f3bb2b07ab5f0d}{utils.\+torch\+\_\+utils.\+smart\+\_\+resume}} (ckpt, optimizer, ema=None, weights=\textquotesingle{}yolov5s.\+pt\textquotesingle{}, epochs=300, resume=True)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_a7fad7e4ebcc9e791aed03e9673b25388}{utils.\+torch\+\_\+utils.\+L\+O\+C\+A\+L\+\_\+\+R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}L\+O\+C\+A\+L\+\_\+\+R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_a249f75ffff26b41b256b209b614a21d9}{utils.\+torch\+\_\+utils.\+R\+A\+NK}} = int(os.\+getenv(\textquotesingle{}R\+A\+NK\textquotesingle{}, -\/1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_a3a4e5258f815f8e98167d46ef9c5b785}{utils.\+torch\+\_\+utils.\+W\+O\+R\+L\+D\+\_\+\+S\+I\+ZE}} = int(os.\+getenv(\textquotesingle{}W\+O\+R\+L\+D\+\_\+\+S\+I\+ZE\textquotesingle{}, 1))
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_ad74401a9fbe9c48fe7152252835f17d6}{utils.\+torch\+\_\+utils.\+thop}} = None
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_a048b0f9ddcba6d65fbded833be3604b9}{utils.\+torch\+\_\+utils.\+message}}
+\item 
+\mbox{\hyperlink{namespaceutils_1_1torch__utils_ad30466b6b72f312cd56544ca02e8a327}{utils.\+torch\+\_\+utils.\+category}}
+\end{DoxyCompactItemize}

@@ -1,0 +1,145 @@
+\hypertarget{namespaceutils_1_1augmentations}{}\doxysection{utils.\+augmentations Namespace Reference}
+\label{namespaceutils_1_1augmentations}\index{utils.augmentations@{utils.augmentations}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1augmentations_1_1Albumentations}{Albumentations}}
+\item 
+class \mbox{\hyperlink{classutils_1_1augmentations_1_1CenterCrop}{Center\+Crop}}
+\item 
+class \mbox{\hyperlink{classutils_1_1augmentations_1_1LetterBox}{Letter\+Box}}
+\item 
+class \mbox{\hyperlink{classutils_1_1augmentations_1_1ToTensor}{To\+Tensor}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a8a242de61fd89343110c2218ef624c49}{normalize}} (x, mean=\mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}, std=\mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}}, inplace=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_ac91eef16f3c08637c7576d79ab07692f}{denormalize}} (x, mean=\mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}, std=\mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a5b03a43c502d5cd26519d4bb6dec5173}{augment\+\_\+hsv}} (im, hgain=0.\+5, sgain=0.\+5, vgain=0.\+5)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_aae95f492e642f97359d27e88516a27e2}{hist\+\_\+equalize}} (im, clahe=True, bgr=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_ac2d0ad4452b8ac477eea17a2c5de8c06}{replicate}} (im, labels)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a8679400a92ee60ac3dc9ca0729afce39}{letterbox}} (im, new\+\_\+shape=(640, 640), color=(114, 114, 114), auto=True, scale\+Fill=False, scaleup=True, stride=32)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_ada4fee23469376e6bc510e8b7efc1b94}{random\+\_\+perspective}} (im, targets=(), segments=(), degrees=10, translate=.\+1, scale=.\+1, shear=10, perspective=0.\+0, border=(0, 0))
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a5c0e51b83c5fd7ba6892d5ceda2e1581}{copy\+\_\+paste}} (im, labels, segments, p=0.\+5)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_ae5b0a0fe35e9125230c84f98f5cc8497}{cutout}} (im, labels, p=0.\+5)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a3627491f80597c1ba11d718dd2436e69}{mixup}} (im, labels, im2, labels2)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a683c8be0e2808ac2c626b0c995648a7b}{box\+\_\+candidates}} (box1, box2, wh\+\_\+thr=2, ar\+\_\+thr=100, area\+\_\+thr=0.\+1, eps=1e-\/16)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a08f4ec41078e322293b3b51c735af732}{classify\+\_\+albumentations}} (augment=True, size=224, scale=(0.\+08, 1.\+0), ratio=(0.\+75, 1.\+0/0.\+75), hflip=0.\+5, vflip=0.\+0, jitter=0.\+4, mean=\mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}, std=\mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}}, auto\+\_\+aug=False)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1augmentations_a5739b1f85728da0cab38aa1093610e84}{classify\+\_\+transforms}} (size=224)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}} = 0.\+485, 0.\+456, 0.\+406
+\item 
+float \mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}} = 0.\+229, 0.\+224, 0.\+225
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a5b03a43c502d5cd26519d4bb6dec5173}\label{namespaceutils_1_1augmentations_a5b03a43c502d5cd26519d4bb6dec5173}} 
+\index{utils.augmentations@{utils.augmentations}!augment\_hsv@{augment\_hsv}}
+\index{augment\_hsv@{augment\_hsv}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{augment\_hsv()}{augment\_hsv()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+augment\+\_\+hsv (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{hgain = {\ttfamily 0.5},  }\item[{}]{sgain = {\ttfamily 0.5},  }\item[{}]{vgain = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a683c8be0e2808ac2c626b0c995648a7b}\label{namespaceutils_1_1augmentations_a683c8be0e2808ac2c626b0c995648a7b}} 
+\index{utils.augmentations@{utils.augmentations}!box\_candidates@{box\_candidates}}
+\index{box\_candidates@{box\_candidates}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{box\_candidates()}{box\_candidates()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+box\+\_\+candidates (\begin{DoxyParamCaption}\item[{}]{box1,  }\item[{}]{box2,  }\item[{}]{wh\+\_\+thr = {\ttfamily 2},  }\item[{}]{ar\+\_\+thr = {\ttfamily 100},  }\item[{}]{area\+\_\+thr = {\ttfamily 0.1},  }\item[{}]{eps = {\ttfamily 1e-\/16} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a08f4ec41078e322293b3b51c735af732}\label{namespaceutils_1_1augmentations_a08f4ec41078e322293b3b51c735af732}} 
+\index{utils.augmentations@{utils.augmentations}!classify\_albumentations@{classify\_albumentations}}
+\index{classify\_albumentations@{classify\_albumentations}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{classify\_albumentations()}{classify\_albumentations()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+classify\+\_\+albumentations (\begin{DoxyParamCaption}\item[{}]{augment = {\ttfamily True},  }\item[{}]{size = {\ttfamily 224},  }\item[{}]{scale = {\ttfamily (0.08,~1.0)},  }\item[{}]{ratio = {\ttfamily (0.75,~1.0~/~0.75)},  }\item[{}]{hflip = {\ttfamily 0.5},  }\item[{}]{vflip = {\ttfamily 0.0},  }\item[{}]{jitter = {\ttfamily 0.4},  }\item[{}]{mean = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}},  }\item[{}]{std = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}}},  }\item[{}]{auto\+\_\+aug = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a5739b1f85728da0cab38aa1093610e84}\label{namespaceutils_1_1augmentations_a5739b1f85728da0cab38aa1093610e84}} 
+\index{utils.augmentations@{utils.augmentations}!classify\_transforms@{classify\_transforms}}
+\index{classify\_transforms@{classify\_transforms}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{classify\_transforms()}{classify\_transforms()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+classify\+\_\+transforms (\begin{DoxyParamCaption}\item[{}]{size = {\ttfamily 224} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a5c0e51b83c5fd7ba6892d5ceda2e1581}\label{namespaceutils_1_1augmentations_a5c0e51b83c5fd7ba6892d5ceda2e1581}} 
+\index{utils.augmentations@{utils.augmentations}!copy\_paste@{copy\_paste}}
+\index{copy\_paste@{copy\_paste}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{copy\_paste()}{copy\_paste()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+copy\+\_\+paste (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{labels,  }\item[{}]{segments,  }\item[{}]{p = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_ae5b0a0fe35e9125230c84f98f5cc8497}\label{namespaceutils_1_1augmentations_ae5b0a0fe35e9125230c84f98f5cc8497}} 
+\index{utils.augmentations@{utils.augmentations}!cutout@{cutout}}
+\index{cutout@{cutout}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{cutout()}{cutout()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+cutout (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{labels,  }\item[{}]{p = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_ac91eef16f3c08637c7576d79ab07692f}\label{namespaceutils_1_1augmentations_ac91eef16f3c08637c7576d79ab07692f}} 
+\index{utils.augmentations@{utils.augmentations}!denormalize@{denormalize}}
+\index{denormalize@{denormalize}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{denormalize()}{denormalize()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+denormalize (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{mean = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}},  }\item[{}]{std = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_aae95f492e642f97359d27e88516a27e2}\label{namespaceutils_1_1augmentations_aae95f492e642f97359d27e88516a27e2}} 
+\index{utils.augmentations@{utils.augmentations}!hist\_equalize@{hist\_equalize}}
+\index{hist\_equalize@{hist\_equalize}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{hist\_equalize()}{hist\_equalize()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+hist\+\_\+equalize (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{clahe = {\ttfamily True},  }\item[{}]{bgr = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a8679400a92ee60ac3dc9ca0729afce39}\label{namespaceutils_1_1augmentations_a8679400a92ee60ac3dc9ca0729afce39}} 
+\index{utils.augmentations@{utils.augmentations}!letterbox@{letterbox}}
+\index{letterbox@{letterbox}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{letterbox()}{letterbox()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+letterbox (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{new\+\_\+shape = {\ttfamily (640,~640)},  }\item[{}]{color = {\ttfamily (114,~114,~114)},  }\item[{}]{auto = {\ttfamily True},  }\item[{}]{scale\+Fill = {\ttfamily False},  }\item[{}]{scaleup = {\ttfamily True},  }\item[{}]{stride = {\ttfamily 32} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a3627491f80597c1ba11d718dd2436e69}\label{namespaceutils_1_1augmentations_a3627491f80597c1ba11d718dd2436e69}} 
+\index{utils.augmentations@{utils.augmentations}!mixup@{mixup}}
+\index{mixup@{mixup}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{mixup()}{mixup()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+mixup (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{labels,  }\item[{}]{im2,  }\item[{}]{labels2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a8a242de61fd89343110c2218ef624c49}\label{namespaceutils_1_1augmentations_a8a242de61fd89343110c2218ef624c49}} 
+\index{utils.augmentations@{utils.augmentations}!normalize@{normalize}}
+\index{normalize@{normalize}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+normalize (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{mean = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN}}},  }\item[{}]{std = {\ttfamily \mbox{\hyperlink{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}{I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD}}},  }\item[{}]{inplace = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_ada4fee23469376e6bc510e8b7efc1b94}\label{namespaceutils_1_1augmentations_ada4fee23469376e6bc510e8b7efc1b94}} 
+\index{utils.augmentations@{utils.augmentations}!random\_perspective@{random\_perspective}}
+\index{random\_perspective@{random\_perspective}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{random\_perspective()}{random\_perspective()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+random\+\_\+perspective (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{targets = {\ttfamily ()},  }\item[{}]{segments = {\ttfamily ()},  }\item[{}]{degrees = {\ttfamily 10},  }\item[{}]{translate = {\ttfamily .1},  }\item[{}]{scale = {\ttfamily .1},  }\item[{}]{shear = {\ttfamily 10},  }\item[{}]{perspective = {\ttfamily 0.0},  }\item[{}]{border = {\ttfamily (0,~0)} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_ac2d0ad4452b8ac477eea17a2c5de8c06}\label{namespaceutils_1_1augmentations_ac2d0ad4452b8ac477eea17a2c5de8c06}} 
+\index{utils.augmentations@{utils.augmentations}!replicate@{replicate}}
+\index{replicate@{replicate}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{replicate()}{replicate()}}
+{\footnotesize\ttfamily def utils.\+augmentations.\+replicate (\begin{DoxyParamCaption}\item[{}]{im,  }\item[{}]{labels }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}\label{namespaceutils_1_1augmentations_a924d425f3ba4bf66f4941f7af1c39c46}} 
+\index{utils.augmentations@{utils.augmentations}!IMAGENET\_MEAN@{IMAGENET\_MEAN}}
+\index{IMAGENET\_MEAN@{IMAGENET\_MEAN}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{IMAGENET\_MEAN}{IMAGENET\_MEAN}}
+{\footnotesize\ttfamily float utils.\+augmentations.\+I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+M\+E\+AN = 0.\+485, 0.\+456, 0.\+406}
+
+\mbox{\Hypertarget{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}\label{namespaceutils_1_1augmentations_a1ef11d5b4ea9708cd6ea1c9029ce5c76}} 
+\index{utils.augmentations@{utils.augmentations}!IMAGENET\_STD@{IMAGENET\_STD}}
+\index{IMAGENET\_STD@{IMAGENET\_STD}!utils.augmentations@{utils.augmentations}}
+\doxysubsubsection{\texorpdfstring{IMAGENET\_STD}{IMAGENET\_STD}}
+{\footnotesize\ttfamily float utils.\+augmentations.\+I\+M\+A\+G\+E\+N\+E\+T\+\_\+\+S\+TD = 0.\+229, 0.\+224, 0.\+225}
+

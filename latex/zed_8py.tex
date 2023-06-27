@@ -1,0 +1,47 @@
+\hypertarget{zed_8py}{}\doxysection{vision/zed.py File Reference}
+\label{zed_8py}\index{vision/zed.py@{vision/zed.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacezed}{zed}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespacezed_a151dca20397aa91f63c143ea86f3b08e}{zed.\+truncate}} (float number, int digits)
+\item 
+None \mbox{\hyperlink{namespacezed_a4a769f36b78d1aa24d8e2896922cda90}{zed.\+send\+\_\+objects}} (dict objects, str topic=\char`\"{}/objects\+\_\+info\char`\"{}, int max\+\_\+queue=10)
+\item 
+list \mbox{\hyperlink{namespacezed_a8413fd85045ecbbcd0b955640a129452}{zed.\+convert\+\_\+to\+\_\+gazebo\+\_\+world\+\_\+frame}} (list points, int precision=5)
+\item 
+tuple \mbox{\hyperlink{namespacezed_a8db05ba49a014210bc8f31f556179910}{zed.\+detect\+\_\+objects}} (np.\+ndarray img, float threshold=0.\+7, bool render=False, str yolo\+\_\+path=\char`\"{}yolov5\char`\"{}, str model\+\_\+path=\char`\"{}best.\+pt\char`\"{})
+\item 
+dict \mbox{\hyperlink{namespacezed_ac44705fda48661c1396e0d77d65f8fa7}{zed.\+process\+\_\+objects}} (np.\+ndarray img, dict objects)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespacezed_a052cb1896ec83a2f0301f167bb5d3930}{zed.\+process\+\_\+image}} (np.\+ndarray img, bool render=False)
+\item 
+None \mbox{\hyperlink{namespacezed_a2400014c962afe3fcaabbb4b020b6b10}{zed.\+background\+\_\+detection}} (Image msg)
+\item 
+None \mbox{\hyperlink{namespacezed_a8d95ea831fb949ad76301be8c370fb87}{zed.\+live\+\_\+detection}} (Image msg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacezed_a92620fc3327272c1e5453628f5d3471c}{zed.\+clear}} = lambda\+: subprocess.\+run(\char`\"{}cls\char`\"{} if os.\+name == \char`\"{}nt\char`\"{} else \char`\"{}clear\char`\"{}, shell=True)
+\item 
+\mbox{\hyperlink{namespacezed_ac1e8093e4ee04e80dafffa77d944d93d}{zed.\+img}}
+\item 
+\mbox{\hyperlink{namespacezed_a53f8b47d7e5b78f47d6290bbcdbf1626}{zed.\+render}}
+\item 
+\mbox{\hyperlink{namespacezed_af812230632ccc54c5123f54f10223e72}{zed.\+anonymous}}
+\item 
+\mbox{\hyperlink{namespacezed_a30ad6868c44c61e992cba47b66301be6}{zed.\+Image}}
+\item 
+\mbox{\hyperlink{namespacezed_a6db989a1e6c7ea9f8e7d3f56b1885e1e}{zed.\+callback}}
+\item 
+\mbox{\hyperlink{namespacezed_a9f5001d251fa29228c2086a2d0827004}{zed.\+live\+\_\+detection}}
+\item 
+\mbox{\hyperlink{namespacezed_a0c6c5e419d48018cb6cae1335c695fae}{zed.\+queue\+\_\+size}}
+\item 
+\mbox{\hyperlink{namespacezed_adbcf80d901045497b0779fd54e0ba0a9}{zed.\+loop\+\_\+rate}} = ros.\+Rate(1.)
+\end{DoxyCompactItemize}

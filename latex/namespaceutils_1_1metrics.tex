@@ -1,0 +1,126 @@
+\hypertarget{namespaceutils_1_1metrics}{}\doxysection{utils.\+metrics Namespace Reference}
+\label{namespaceutils_1_1metrics}\index{utils.metrics@{utils.metrics}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1metrics_1_1ConfusionMatrix}{Confusion\+Matrix}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_a86d13085791b57c31990dc3c45533091}{fitness}} (x)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_aa8e875abfd396ebc7886f6a22686fde4}{smooth}} (y, f=0.\+05)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_a73fdcc82a7fc144175b6858db7f13539}{ap\+\_\+per\+\_\+class}} (tp, conf, pred\+\_\+cls, target\+\_\+cls, plot=False, save\+\_\+dir=\textquotesingle{}.\textquotesingle{}, names=(), eps=1e-\/16, prefix=\textquotesingle{}\textquotesingle{})
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_ac536d8b599af3fe07acbe008f259f8e7}{compute\+\_\+ap}} (recall, precision)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_a72e547ed56bcf2bfbf7770f45c5e69a2}{bbox\+\_\+iou}} (box1, box2, xywh=True, G\+IoU=False, D\+IoU=False, C\+IoU=False, eps=1e-\/7)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_ad045897a3661ea9d5f113569ff7462fc}{box\+\_\+iou}} (box1, box2, eps=1e-\/7)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_aa736f0e0c633fffe4e5f1cce40745060}{bbox\+\_\+ioa}} (box1, box2, eps=1e-\/7)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_a10477e4a9b29d0cbc0ab61f2e1eef620}{wh\+\_\+iou}} (wh1, wh2, eps=1e-\/7)
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_a9a8d2130fda29197573a457bd5c9d255}{plot\+\_\+pr\+\_\+curve}} (px, py, ap, save\+\_\+dir=Path(\textquotesingle{}pr\+\_\+curve.\+png\textquotesingle{}), names=())
+\item 
+def \mbox{\hyperlink{namespaceutils_1_1metrics_aed6f431cf99e0f16d2f5c9e03e94b0a0}{plot\+\_\+mc\+\_\+curve}} (px, py, save\+\_\+dir=Path(\textquotesingle{}mc\+\_\+curve.\+png\textquotesingle{}), names=(), xlabel=\textquotesingle{}Confidence\textquotesingle{}, ylabel=\textquotesingle{}Metric\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_1_1metrics_a73fdcc82a7fc144175b6858db7f13539}\label{namespaceutils_1_1metrics_a73fdcc82a7fc144175b6858db7f13539}} 
+\index{utils.metrics@{utils.metrics}!ap\_per\_class@{ap\_per\_class}}
+\index{ap\_per\_class@{ap\_per\_class}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{ap\_per\_class()}{ap\_per\_class()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+ap\+\_\+per\+\_\+class (\begin{DoxyParamCaption}\item[{}]{tp,  }\item[{}]{conf,  }\item[{}]{pred\+\_\+cls,  }\item[{}]{target\+\_\+cls,  }\item[{}]{plot = {\ttfamily False},  }\item[{}]{save\+\_\+dir = {\ttfamily \textquotesingle{}.\textquotesingle{}},  }\item[{}]{names = {\ttfamily ()},  }\item[{}]{eps = {\ttfamily 1e-\/16},  }\item[{}]{prefix = {\ttfamily \textquotesingle{}\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compute the average precision, given the recall and precision curves.
+Source: https://github.com/rafaelpadilla/Object-Detection-Metrics.
+# Arguments
+    tp:  True positives (nparray, nx1 or nx10).
+    conf:  Objectness value from 0-1 (nparray).
+    pred_cls:  Predicted object classes (nparray).
+    target_cls:  True object classes (nparray).
+    plot:  Plot precision-recall curve at mAP@0.5
+    save_dir:  Plot save directory
+# Returns
+    The average precision as computed in py-faster-rcnn.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1metrics_aa736f0e0c633fffe4e5f1cce40745060}\label{namespaceutils_1_1metrics_aa736f0e0c633fffe4e5f1cce40745060}} 
+\index{utils.metrics@{utils.metrics}!bbox\_ioa@{bbox\_ioa}}
+\index{bbox\_ioa@{bbox\_ioa}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{bbox\_ioa()}{bbox\_ioa()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+bbox\+\_\+ioa (\begin{DoxyParamCaption}\item[{}]{box1,  }\item[{}]{box2,  }\item[{}]{eps = {\ttfamily 1e-\/7} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the intersection over box2 area given box1, box2. Boxes are x1y1x2y2
+box1:       np.array of shape(4)
+box2:       np.array of shape(nx4)
+returns:    np.array of shape(n)
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1metrics_a72e547ed56bcf2bfbf7770f45c5e69a2}\label{namespaceutils_1_1metrics_a72e547ed56bcf2bfbf7770f45c5e69a2}} 
+\index{utils.metrics@{utils.metrics}!bbox\_iou@{bbox\_iou}}
+\index{bbox\_iou@{bbox\_iou}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{bbox\_iou()}{bbox\_iou()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+bbox\+\_\+iou (\begin{DoxyParamCaption}\item[{}]{box1,  }\item[{}]{box2,  }\item[{}]{xywh = {\ttfamily True},  }\item[{}]{G\+IoU = {\ttfamily False},  }\item[{}]{D\+IoU = {\ttfamily False},  }\item[{}]{C\+IoU = {\ttfamily False},  }\item[{}]{eps = {\ttfamily 1e-\/7} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1metrics_ad045897a3661ea9d5f113569ff7462fc}\label{namespaceutils_1_1metrics_ad045897a3661ea9d5f113569ff7462fc}} 
+\index{utils.metrics@{utils.metrics}!box\_iou@{box\_iou}}
+\index{box\_iou@{box\_iou}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{box\_iou()}{box\_iou()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+box\+\_\+iou (\begin{DoxyParamCaption}\item[{}]{box1,  }\item[{}]{box2,  }\item[{}]{eps = {\ttfamily 1e-\/7} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Return intersection-over-union (Jaccard index) of boxes.
+Both sets of boxes are expected to be in (x1, y1, x2, y2) format.
+Arguments:
+    box1 (Tensor[N, 4])
+    box2 (Tensor[M, 4])
+Returns:
+    iou (Tensor[N, M]): the NxM matrix containing the pairwise
+        IoU values for every element in boxes1 and boxes2
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1metrics_ac536d8b599af3fe07acbe008f259f8e7}\label{namespaceutils_1_1metrics_ac536d8b599af3fe07acbe008f259f8e7}} 
+\index{utils.metrics@{utils.metrics}!compute\_ap@{compute\_ap}}
+\index{compute\_ap@{compute\_ap}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{compute\_ap()}{compute\_ap()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+compute\+\_\+ap (\begin{DoxyParamCaption}\item[{}]{recall,  }\item[{}]{precision }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compute the average precision, given the recall and precision curves
+# Arguments
+    recall:    The recall curve (list)
+    precision: The precision curve (list)
+# Returns
+    Average precision, precision curve, recall curve
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespaceutils_1_1metrics_a86d13085791b57c31990dc3c45533091}\label{namespaceutils_1_1metrics_a86d13085791b57c31990dc3c45533091}} 
+\index{utils.metrics@{utils.metrics}!fitness@{fitness}}
+\index{fitness@{fitness}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{fitness()}{fitness()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+fitness (\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1metrics_aed6f431cf99e0f16d2f5c9e03e94b0a0}\label{namespaceutils_1_1metrics_aed6f431cf99e0f16d2f5c9e03e94b0a0}} 
+\index{utils.metrics@{utils.metrics}!plot\_mc\_curve@{plot\_mc\_curve}}
+\index{plot\_mc\_curve@{plot\_mc\_curve}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{plot\_mc\_curve()}{plot\_mc\_curve()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+plot\+\_\+mc\+\_\+curve (\begin{DoxyParamCaption}\item[{}]{px,  }\item[{}]{py,  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}mc\+\_\+curve.png\textquotesingle{})},  }\item[{}]{names = {\ttfamily ()},  }\item[{}]{xlabel = {\ttfamily \textquotesingle{}Confidence\textquotesingle{}},  }\item[{}]{ylabel = {\ttfamily \textquotesingle{}Metric\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1metrics_a9a8d2130fda29197573a457bd5c9d255}\label{namespaceutils_1_1metrics_a9a8d2130fda29197573a457bd5c9d255}} 
+\index{utils.metrics@{utils.metrics}!plot\_pr\_curve@{plot\_pr\_curve}}
+\index{plot\_pr\_curve@{plot\_pr\_curve}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{plot\_pr\_curve()}{plot\_pr\_curve()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+plot\+\_\+pr\+\_\+curve (\begin{DoxyParamCaption}\item[{}]{px,  }\item[{}]{py,  }\item[{}]{ap,  }\item[{}]{save\+\_\+dir = {\ttfamily Path(\textquotesingle{}pr\+\_\+curve.png\textquotesingle{})},  }\item[{}]{names = {\ttfamily ()} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1metrics_aa8e875abfd396ebc7886f6a22686fde4}\label{namespaceutils_1_1metrics_aa8e875abfd396ebc7886f6a22686fde4}} 
+\index{utils.metrics@{utils.metrics}!smooth@{smooth}}
+\index{smooth@{smooth}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{smooth()}{smooth()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+smooth (\begin{DoxyParamCaption}\item[{}]{y,  }\item[{}]{f = {\ttfamily 0.05} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespaceutils_1_1metrics_a10477e4a9b29d0cbc0ab61f2e1eef620}\label{namespaceutils_1_1metrics_a10477e4a9b29d0cbc0ab61f2e1eef620}} 
+\index{utils.metrics@{utils.metrics}!wh\_iou@{wh\_iou}}
+\index{wh\_iou@{wh\_iou}!utils.metrics@{utils.metrics}}
+\doxysubsubsection{\texorpdfstring{wh\_iou()}{wh\_iou()}}
+{\footnotesize\ttfamily def utils.\+metrics.\+wh\+\_\+iou (\begin{DoxyParamCaption}\item[{}]{wh1,  }\item[{}]{wh2,  }\item[{}]{eps = {\ttfamily 1e-\/7} }\end{DoxyParamCaption})}
+
