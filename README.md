@@ -46,7 +46,7 @@ git submodule init
 git submodule update
 ```
 
-Once done, copy the [motion plan](motion plan) folder inside the `ros_ws/src/motion_plan` folder (create the folder if it not exists via `mkdir motion_plan`) and inside the `ros_ws/src/motion_plan` extract the [Eigen](motion plan/Eigen.tar.gz) library:
+Once done, copy the [motion plan](motion%20plan) folder inside the `ros_ws/src/motion_plan` folder (create the folder if it not exists via `mkdir motion_plan`) and inside the `ros_ws/src/motion_plan` extract the [Eigen](motion%20plan/Eigen.tar.gz) library:
 
 ```bash
 tar -xzvf Eigen.tar.gz
