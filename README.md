@@ -1,3 +1,5 @@
+# UR5 Object Handling with ZED camera
+
 <div align="center">
     <p>
         <img width="100%" src="assets/images/splash-logo.png"/>
