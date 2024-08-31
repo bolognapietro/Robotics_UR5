@@ -91,6 +91,10 @@ python3 assignments.py
 
 Once done, you can choose which assignment to execute.
 
+# Video
+
+[UR5 Object Handling with ZED camera - Fundamentals of Robotics Project](https://www.youtube.com/watch?v=-BC08HTQY7I)
+
 # Contributions
 
 Luca Pedercini [218551] - [luca.pedercini@studenti.unitn.it](mailto:luca.pedercini@studenti.unitn.it)
